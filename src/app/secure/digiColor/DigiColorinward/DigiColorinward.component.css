@@ -1,0 +1,75 @@
+
+
+#scrollview {
+  height: calc(100vh - 96px) !important;
+}
+
+::ng-deep #scrollview .dx-scrollable-container {
+  padding-bottom: 10px !important;
+}
+
+.customerDetails-inward {
+  width: 100%;
+}
+
+::ng-deep #tasks .dx-treelist-rowsview td {
+  vertical-align: middle;
+}
+
+.Margin_Top_Inward {
+  margin-top: 12px !important;
+  display: inline-block;
+  width: 100%;
+}
+
+::ng-deep #scrollview-content {
+  white-space: pre-wrap;
+}
+
+.inward-page2 .submitbtn {
+  margin: 0px 20px 30px 15px;
+  float: right;
+  display: table;
+  background: #607d8b !important;
+  border: 1px solid #607d8b;
+  color: #ffff;
+}
+
+.inward-page2 .submitbtn {
+  border: 1px solid #607d8b !important;
+}
+
+.inward-page2 .submitbtn:hover {
+  border: 1px solid #3d667a !important;
+  background: #3d667a !important;
+  transition: 0.3s;
+}
+
+.inward-page2 .cancel-btn {
+  float: right;
+  display: table;
+}
+
+.inward-page2 .cancel-btn:hover {
+  border: 1px solid rgb(149, 149, 149) !important;
+  transition: 0.3s;
+}
+::ng-deep .long-title h3 {
+
+  color: #ffff !important;
+}
+.ipad-pading-cont-details{padding-left: 0px !important;}
+.ipad-pading-cust-requrment{padding-right: 0px !important;}
+
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .ipad-pading-cust-requrment{padding-right: 0px !important;padding-left: 0px !important;}
+  .ipad-pading-cont-details{padding-left: 0px !important; padding-right: 0px !important;}
+  .ipad-btm-mar-12{ margin-bottom: 12px;}
+}
+
+@media (min-width: 1367px) and (max-width: 1440px) {}
+
+@media (min-width: 1441px) and (max-width: 1600px) {}

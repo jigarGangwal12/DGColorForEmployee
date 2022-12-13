@@ -1,0 +1,5 @@
+<ngb-toast
+  *ngFor="let toast of notificationService.toasts"
+  [autohide]="true" [delay]="toast.delay || 115000">
+  {{toast.body}}
+</ngb-toast>

@@ -1,0 +1,247 @@
+<div class="header-dropdown">
+  <span class="headerDropdownMenu col-md-2">
+  </span>
+</div>
+<div class="container-fluid margin-top-none">
+  <div class="bradcrum-link-left-side">
+    <ul>
+      <li>
+        <span href="" class=""> DG Color </span>
+        <i class="fa fa-chevron-right"></i>
+      </li>
+      <li class="bradcrum-link-left-side-nonehover">
+        Inquiry Form
+      </li>
+    </ul>
+  </div>
+  <div class="header_sub_main">
+    <div class="padi-Left-108">
+      <div class="header-sub-menu">
+        <ul>
+          <li [ngClass]="{'active': showR1Grid }" style="cursor: pointer;"><a
+              (click)="onReportValueChange('','R1')">Runner Leader Form</a>
+          </li>
+          <li [ngClass]="{'active': !showR1Grid }"><a (click)="onReportValueChange('','R2')">Inquiry List</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid-container">
+  <div *ngIf="showR1Grid" class="col-md-12 customProductpadinone">
+    <div class="long-title">
+    </div>
+    <div class="shadowbox shadowbox_inquiry">
+      <div id="form-container" style="padding: 10px;">
+        <div id="scrollview-inquiry">
+          <dx-form id="form" [formData]="inquiryForm" labelLocation="top" colCount="auto"
+            [customizeItem]="form_customizeItem" [colCountByScreen]="colCountByScreen" [screenByWidth]="screen">
+            <dxo-col-count-by-screen [xs]="1" [sm]="2" [md]="3" [lg]="4"></dxo-col-count-by-screen>
+            <dxi-item dataField="inquiryType" editorType="dxSelectBox"
+              [editorOptions]="{ items: inquiryTypeData, searchEnabled: true, value: 'Shade Matching' ,style: 'border: 1px solid #9191bf !important' }">
+              <dxi-validation-rule type="required" message="Inquiry type is required"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="scanMode" editorType="dxSelectBox"
+              [editorOptions]="{ items: scanModeData, searchEnabled: true, value: 'On Site' }">
+              <dxi-validation-rule type="required" message="Scan mode is required"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="inquiryBy" editorType="dxSelectBox"
+              [editorOptions]="{ items: inquiryByData, searchEnabled: true, value: inquiryForm.inquiryBy,readOnly:readOnlyAgent }">
+              <dxi-validation-rule type="required" message="Inquiry by is required"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item name="consumerName">
+              <dxo-label text="Consumer Name*"></dxo-label>
+              <div *dxTemplate>
+                <dx-select-box [dataSource]="cosigneeNameCode" displayExpr="name" valueExpr="value"
+                  (onValueChanged)="ConsumerValueChanged($event)" placeholder="Select Consumer" [readOnly]=readOnlyAgent
+                  [(value)]="inquiryForm.cosignee" [showClearButton]="true" [searchEnabled]="true">
+                  <dx-validator>
+                    <dxi-validation-rule type="required" message="Consumer Name is required">
+                    </dxi-validation-rule>
+                  </dx-validator>
+                </dx-select-box>
+              </div>
+            </dxi-item>
+            <dxi-item dataField="agentNameCode" [editorOptions]="{ readOnly: true }" [label]="{text: 'Agent'}">
+            </dxi-item>
+            <dxi-item *ngIf="inquiryForm.inquiryBy == 'Sales Person'" name="salesPersonName">
+              <dxo-label text="Sales Person Name"></dxo-label>
+              <div *dxTemplate>
+              </div>
+            </dxi-item>
+            <dxi-item name="customerRequirement">
+              <dxo-label text="Customer Requirement*"></dxo-label>
+              <div *dxTemplate>
+                <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
+                  [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
+                  (onValueChanged)="customerRequirementValueChange($event)" [value]="[inquiryForm.requirement]"
+                  [showSelectionControls]="true" noDataText="No data found" [maxDisplayedTags]="1"
+                  applyValueMode="instantly" [showClearButton]="true">
+                  <dx-validator>
+                    <dxi-validation-rule type="required" message="Requirement is required">
+                    </dxi-validation-rule>
+                  </dx-validator>
+                </dx-tag-box>
+              </div>
+            </dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item itemType="empty"></dxi-item>
+            <dxi-item [colSpan]="4">
+              <div class="inward_boxs_Div_Width">
+                <div style="padding-left: 0px;">
+                  <div class="long-title long-title1" style="margin-top: 10px;">
+                    <h4>Report Submission</h4>
+                  </div>
+                  <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                    <div id="form-container" style="padding:0 8px;">
+                      <dx-data-grid id="CustomerContacDetailsId" [dataSource]="consigneeAddress"
+                        [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                        [showBorders]="true">
+                        <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                        </dxo-editing>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxi-column caption="Recipient" dataField="recipientName" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false"
+                          [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="recipientName" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <dxi-column dataField="contactPerson" caption="Name">
+                        </dxi-column>
+                        <dxi-column dataField="designation" caption="Designation">
+                        </dxi-column>
+                        <dxi-column dataField="mobileNumber" [width]=150 caption="Mobile No" dataType="number">
+                        </dxi-column>
+                        <dxi-column dataField="emailId" caption="EmailId">
+                        </dxi-column>
+                      </dx-data-grid>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </dxi-item>
+            <dxi-item itemType="group" caption="Consumer Address: (As Per ERP System)">
+              <dxi-item dataField="address" [editorOptions]="{ readOnly: true }"></dxi-item>
+              <dxi-item dataField="address2" [editorOptions]="{ readOnly: true }"></dxi-item>
+              <dxi-item dataField="city" [editorOptions]="{ readOnly: true }"></dxi-item>
+              <dxi-item dataField="stateCode" [editorOptions]="{ readOnly: true }" [label]="{text: 'State'}">
+              </dxi-item>
+              <dxi-item dataField="postCode" [editorOptions]="{ readOnly: true }"></dxi-item>
+            </dxi-item>
+            <dxi-item dataField="sameasSysytemAddress" [label]="{text: 'Same as ERP System*'}"
+              [template]="'sameasSysytemAddressTemplate'">
+            </dxi-item>
+            <div *dxTemplate="let data of 'sameasSysytemAddressTemplate'">
+              <dx-check-box [(value)]="inquiryForm.sameasSysytemAddress"
+                (onValueChanged)="selectBoxValueChanged($event)"></dx-check-box>
+            </div>
+            <dxi-item itemType="group" caption="Address for Visit">
+              <dxi-item dataField="addressForVisit" [label]="{text: 'Address'}">
+                <dxi-validation-rule type="required" message="Address is required"></dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="address2ForVisit" [label]="{text: 'Address 2'}">
+              </dxi-item>
+              <dxi-item dataField="cityForVisit" [label]="{text: 'City'}">
+                <dxi-validation-rule type="required" message="City is required"></dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="stateCodeForVisit" [label]="{text: 'State'}">
+                <dxi-validation-rule type="required" message="State is required"></dxi-validation-rule>
+              </dxi-item>
+              <dxi-item dataField="postCodeForVisit" [label]="{text: 'Post Code'}">
+                <dxi-validation-rule type="required" message="PostCode is required"></dxi-validation-rule>
+              </dxi-item>
+            </dxi-item>
+            <dxi-item itemType="group" caption="">
+              <dxi-item dataField="remarks" editorType="dxTextArea" [editorOptions]="{ height: 85 }" [colSpan]="2">
+              </dxi-item>
+              <dxi-item name="assignToRunner">
+                <dxo-label text="Assign to Runner"></dxo-label>
+                <div *dxTemplate>
+                  <dx-select-box [dataSource]="assignToRunnerList" displayExpr="empName" valueExpr="empName"
+                    placeholder="Select Assign To Runner" [(value)]="inquiryForm.assignToRunner"
+                    [showClearButton]="true" [searchEnabled]="true">
+                    <dx-validator>
+                      <dxi-validation-rule type="required" message="Assign To Runner is required">
+                      </dxi-validation-rule>
+                    </dx-validator>
+                  </dx-select-box>
+                </div>
+              </dxi-item>
+            </dxi-item>
+            <div class="dx-fieldset">
+              <dx-validation-summary id="summary"></dx-validation-summary>
+            </div>
+          </dx-form>
+          <div class="main_pop">
+            <dx-button style="margin-left: 10px !important;" stylingMode="contained" text="Cancel" type="normal"
+              (click)="cancelData()" [width]="120">
+            </dx-button>
+            <dx-button *ngIf="inquiryForm.caseId == '' && !disablesubbtn" class="color_but"
+              style="margin-left: 10px;width: 120px; background: rgb(96, 125, 139) !important;color: #fff;"
+              stylingMode="contained" text="Submit" type="normal" (click)="SaveInquiryDataForm(inquiryForm, 'Submit')"
+              [width]="120">
+            </dx-button>
+            <dx-button *ngIf="inquiryForm.caseId != ''" class="color_but"
+              style="margin-left: 10px;width: 120px;background: rgb(96, 125, 139) !important;color: #fff;"
+              stylingMode="contained" text="Update" type="normal" [width]="120"
+              (click)="UpdateInquiryDataForm(inquiryForm, 'Update')">
+            </dx-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!showR1Grid" class="col-md-12 customProductpadinone">
+    <div id="scrollview-demo" class="inward-page2">
+      <div class="long-title">
+        <h3>Inquiry List </h3>
+      </div>
+      <div class="shadowbox_inquiry">
+        <div class="col-md-12 col-md-padi-left-none">
+          <dx-data-grid id="inquiryLlist" [dataSource]="allInquiryListData" [allowColumnResizing]="true"
+            [wordWrapEnabled]="true" (onCellClick)="getDetail($event)" [allowColumnReordering]="true"
+            [showBorders]="true" style="padding-bottom: 50px;">
+            <dxo-paging [enabled]="false"></dxo-paging>
+            <dxo-group-panel [visible]="true"></dxo-group-panel>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+              [showInfo]="true">
+            </dxo-pager>
+            <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true">
+            </dxo-search-panel>
+            <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+            <dxo-column-chooser [enabled]="true" mode="dragAndDrop">
+              <!-- or "select" -->
+            </dxo-column-chooser>
+            <dxi-column dataField="createdDate" dataType="datetime" [format]="{ type: 'dd/MM/yy hh:mm' }" [width]="110"
+              caption="Inquiry Datetime">
+            </dxi-column>
+            <dxi-column dataField="caseId" dataType="number" [width]="75" caption="Case Id" style="cursor: pointer;">
+            </dxi-column>
+            <dxi-column dataField="consigneeCode" caption="Consumer Code" [width]="92"></dxi-column>
+            <dxi-column dataField="consigneeNameCode" caption="Consumer"></dxi-column>
+            <dxi-column dataField="agentCode" caption="Agent Code" [width]="90"></dxi-column>
+            <dxi-column dataField="agentNameCode" caption="Agent"></dxi-column>
+            <dxi-column dataField="contactPerson" caption="Contact Person"></dxi-column>
+            <dxi-column dataField="contactNo" [width]="90" caption="Contact No"></dxi-column>
+            <dxi-column dataField="assignToEmp" caption="AssignToRunner"></dxi-column>
+            <dxi-column dataField="city" caption="City"></dxi-column>
+            <dxi-column dataField="cosigneeState" [width]="98" caption="State"></dxi-column>
+            <dxi-column dataField="remark" caption="Remarks"></dxi-column>
+            <dxi-column dataField="status" [width]="80" caption="Status"></dxi-column>
+            <dxi-column dataField="inquiryType" [width]="90" [visible]="false" caption="Inquiry by"></dxi-column>
+            <dxi-column dataField="scanMode" [width]="90" [visible]="false" caption="Scan Mode"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

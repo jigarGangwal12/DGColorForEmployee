@@ -1,0 +1,472 @@
+<div class="container-fluid margin-top-none">
+  <div class="bradcrum-link-left-side">
+    <ul>
+      <li>
+        <span href="" class="">DG Color</span>
+        <i class="fa fa-chevron-right"></i>
+      </li>
+      <li class="bradcrum-link-left-side-nonehover">
+        Outward Recipe Prediction
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="grid-container digiInward-cont-rt-padi-none">
+  <div id="outwardmainscroll_height" class="inward-page2" style="padding-bottom: 60px;">
+    <div class="col-md-12 customProductpadinone">
+      <div class="long-title long-title1">
+        <h3 class="outwardh3">Customer Details </h3>
+      </div>
+      <div class="shadowbox outwardRecipePrediction inward_boxs_Div">
+        <div class="row">
+          <div class="col-md-12 mb-4">
+            <div class="col-md-3">
+              <label>Customer Shade Name/No</label>
+              <dx-select-box Id="case" [dataSource]="inwardFormListData" displayExpr="shadeNameId" valueExpr="shadeid"
+                (onValueChanged)="InwardcaseIdValueChanged($event)" placeholder="Select Shade Name/No"
+                [showClearButton]="true" [searchEnabled]="true">
+              </dx-select-box>
+            </div>
+            <div class="col-md-3">
+              <label>CaseId</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.caseId" [readOnly]=true></dx-text-box>
+            </div>
+            <div class="col-md-3">
+              <label>Customer Name</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.customerCodeName" [readOnly]=true></dx-text-box>
+            </div>
+            <div class="col-md-3">
+              <label>Agent Name</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.agentCodeName" [readOnly]=true></dx-text-box>
+            </div>
+          </div>
+          <div class="col-md-12 mb-4">
+            <div class="col-md-3">
+              <label>Customer Type</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.customerType" [readOnly]=true></dx-text-box>
+            </div>
+            <div class="col-md-3">
+              <label>Dye Range</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.dyesRange" [readOnly]=true></dx-text-box>
+            </div>
+            <div class="col-md-3">
+              <label>Inward Date Time</label>
+              <dx-date-box Id="scandateTime" placeholder="Select  Date" [readOnly]=true
+                [value]="outWardModel.inwardDatetime" type="date" displayFormat="dd/MM/yyyy hh:mm">
+              </dx-date-box>
+            </div>
+            <div class="col-md-3">
+              <label>Outward Date Time</label>
+              <dx-date-box Id="scandateTime" placeholder="Select  Date" [readOnly]=true
+                [value]="outWardModel.outwardDatetime" type="date" displayFormat="dd/MM/yyyy hh:mm">
+              </dx-date-box>
+            </div>
+          </div>
+          <div class="col-md-12 mb-4">
+            <div class="col-md-3">
+              <label>Address</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.address1" [readOnly]=true></dx-text-box>
+            </div>
+            <div class="col-md-3">
+              <label>Address 2</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.address2" [readOnly]=true></dx-text-box>
+            </div>
+            <div class="col-md-3">
+              <label>City</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.consigneeCity" [readOnly]=true></dx-text-box>
+            </div>
+            <div class="col-md-3">
+              <label>State</label>
+              <dx-text-box Id="case" [(value)]="outWardModel.consigneeState" [readOnly]=true></dx-text-box>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="inward_boxs_Div_Width">
+            <div class="col-md-6" style="padding-left: 0px;">
+              <div class="long-title long-title1" style="margin-top: 10px">
+                <h3>Contact Details</h3>
+              </div>
+              <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                <div id="form-container" style="padding:0 8px;">
+                  <dx-data-grid id="CustomerContacDetailsId" [dataSource]="customerContactDetails"
+                    [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                    [showBorders]="true">
+                    <dxo-editing mode="cell" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false">
+                    </dxo-editing>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                      [showNavigationButtons]="true" [showInfo]="true">
+                    </dxo-pager>
+                    <dxo-paging [pageSize]="5"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                      [showNavigationButtons]="true" [showInfo]="true">
+                    </dxo-pager>
+                    <dxi-column dataField="contactPerson" caption="Contact Person">
+                    </dxi-column>
+                    <dxi-column dataField="department" caption="Department" [allowFiltering]="false"
+                      [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false"
+                      [allowHeaderFiltering]="false">
+                    </dxi-column>
+                    <dxi-column dataField="designation" caption="Designation" [allowFiltering]="false"
+                      [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false"
+                      [allowHeaderFiltering]="false">
+                    </dxi-column>
+                    <dxi-column dataField="mobileNumber" [width]=100 caption="Mobile No" dataType="number">
+                    </dxi-column>
+                    <dxi-column dataField="emailId" caption="EmailId">
+                    </dxi-column>
+                  </dx-data-grid>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6" style="padding-right: 0px;">
+              <div class="long-title long-title1" style="margin-top: 10px">
+                <h3>Customer Requirement</h3>
+              </div>
+              <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                <div id="form-container" style="padding:0 8px;">
+                  <dx-data-grid id="CustomerSubstrateId" [dataSource]="customerSubStrate" [allowColumnResizing]="true"
+                    [wordWrapEnabled]="true" [allowColumnReordering]="true" [showBorders]="true">
+                    <dxo-editing mode="cell" [allowAdding]="false" [allowUpdating]="false" [allowDeleting]="false">
+                    </dxo-editing>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                      [showNavigationButtons]="true" [showInfo]="true">
+                    </dxo-pager>
+                    <dxo-paging [pageSize]="5"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                      [showNavigationButtons]="true" [showInfo]="true">
+                    </dxo-pager>
+                    <dxi-column dataField="typeOfIndustries" caption="Substrate" [allowFiltering]="false"
+                      [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false"
+                      [allowHeaderFiltering]="false">
+                    </dxi-column>
+                    <dxi-column dataField="uom" caption="Unit of Measurement" [allowFiltering]="false"
+                      [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false"
+                      [allowHeaderFiltering]="false">
+                    </dxi-column>
+                    <dxi-column dataField="ratio" caption="Ratio">
+                    </dxi-column>
+                  </dx-data-grid>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row Margin_Top_Inward">
+        <div class="col-md-12">
+          <div class="shadowbox inward_boxs_Div" style="padding: 10px 0px !important;">
+            <div class="col-md-12" style="padding-left:0px;margin-bottom:5px;padding-right:0px;">
+              <div class="col-md-3">
+                <div class="col-md-12" style="padding-left:0px;">
+                  <label>Process</label>
+                </div>
+                <div class="col-md-12" style="padding-left:0px;">
+                  <span>
+                    <dx-text-box Id="case" [(value)]="outWardModel.process" [readOnly]=true></dx-text-box>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <label>Dischargability *</label>
+                </div>
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <span>
+                    <dx-text-box Id="case" [(value)]="outWardModel.dischargeability" [readOnly]=true></dx-text-box>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <label>Colour Gamut</label>
+                </div>
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <span>
+                    <dx-select-box Id="case" [dataSource]="colourGamutDataSource" displayExpr="colourGamut" valueExpr="colourGamut"
+                      [(value)]="outWardModel.colourGamutData" placeholder="Select Colour Gamut"
+                      [showClearButton]="true" [searchEnabled]="true">
+                    </dx-select-box>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-3">
+              </div>
+            </div>
+            <div class="col-md-12" style="padding-left: 0px;margin-top: 5px; padding-right: 0px;">
+              <div class="col-md-12">
+                <div class="col-md-12" style="padding: 12px 0 10px 0;">
+                  <label style="font-size: 15px;border-bottom: 1px solid #212529;">Light Source:</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12" style="padding-left: 0px; padding-right: 0px;">
+              <div class="col-md-3">
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <label>Primary</label>
+                </div>
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <span>
+                    <dx-text-box Id="case" [(value)]="outWardModel.primarylightSource" [readOnly]=true>
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <label>Secondary</label>
+                </div>
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <span>
+                    <dx-text-box Id="case" [(value)]="outWardModel.secondarylightSource" [readOnly]=true>
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <label>Tertiary</label>
+                </div>
+                <div class="col-md-12" style="padding-left: 0px;">
+                  <span>
+                    <dx-text-box Id="case" [(value)]="outWardModel.tertiarylightSource" [readOnly]=true>
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-12 customProductpadinone">
+        <div class="long-title long-title1">
+          <h3 class="outwardh3 mt-4">Recipe Prediction</h3>
+        </div>
+        <div class="shadowbox outwardRecipePrediction inward_boxs_Div">
+          <div class="row" style="padding:0px 15px 8px">
+            <div class="col-md-12 outward_Recipe_section">
+              <span class="receipePredictionOption">Optoin 1</span>
+              <dx-data-grid id="receipePrediction" [dataSource]="receipePredictionData" [allowColumnResizing]="true"
+                [wordWrapEnabled]="true" [allowColumnReordering]="true" [showBorders]="true"
+                style="padding:5px 13px 5px">
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                  [showNavigationButtons]="true" [showInfo]="true">
+                </dxo-pager>
+                <dxo-paging [pageSize]="50"></dxo-paging>
+                <!-- <dxo-group-panel [visible]="true"></dxo-group-panel> -->
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+                  [showInfo]="true">
+                </dxo-pager>
+                <dxo-editing mode="cell" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false">
+                </dxo-editing>
+                <dxi-column dataField="productName" caption="Product Name" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="recipe" caption="Recipe" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="metameric" caption="Metameric" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="remarks" caption="Remarks"></dxi-column>
+                <dxi-column dataField="productId" caption="Product Code" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="recipe_Name" caption="Recipe Name" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="rgbHexaCode" caption="RGB Hexa Code" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="colorantSet_ID" caption="Dye Set" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+              </dx-data-grid>
+            </div>
+
+            <div *ngIf="showOption2PredictionData" class="col-md-12 outward_Recipe_section">
+              <span class="receipePredictionOption">Optoin 2</span>
+              <dx-data-grid id="receipePrediction" [dataSource]="receipePredictionOptionData2"
+                [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                [showBorders]="true" style="padding:5px 13px 5px">
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                  [showNavigationButtons]="true" [showInfo]="true">
+                </dxo-pager>
+                <dxo-paging [pageSize]="50"></dxo-paging>
+                <!-- <dxo-group-panel [visible]="true"></dxo-group-panel> -->
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+                  [showInfo]="true">
+                </dxo-pager>
+                <dxo-editing mode="cell" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false">
+                </dxo-editing>
+                <dxi-column dataField="productName" caption="Product Name" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="recipe" caption="Recipe" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="metameric" caption="Metameric" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="remarks" caption="Remarks"></dxi-column>
+                <dxi-column dataField="productId" caption="Product Code" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="recipe_Name" caption="Recipe Name" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="rgbHexaCode" caption="RGB Hexa Code" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="colorantSet_ID" caption="Dye Set" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+              </dx-data-grid>
+            </div>
+
+            <div *ngIf="showOption3PredictionData" class="col-md-12 outward_Recipe_section">
+              <span class="receipePredictionOption">Optoin 3</span>
+              <dx-data-grid id="receipePrediction" [dataSource]="receipePredictionOptionData3"
+                [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                [showBorders]="true" style="padding:5px 13px 5px">
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                  [showNavigationButtons]="true" [showInfo]="true">
+                </dxo-pager>
+                <dxo-paging [pageSize]="50"></dxo-paging>
+                <!-- <dxo-group-panel [visible]="true"></dxo-group-panel> -->
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+                  [showInfo]="true">
+                </dxo-pager>
+                <dxo-editing mode="cell" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false">
+                </dxo-editing>
+                <dxi-column dataField="productName" caption="Product Name" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="recipe" caption="Recipe" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="metameric" caption="Metameric" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="remarks" caption="Remarks"></dxi-column>
+                <dxi-column dataField="productId" caption="Product Code" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="recipe_Name" caption="Recipe Name" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="rgbHexaCode" caption="RGB Hexa Code" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="colorantSet_ID" caption="Dye Set" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+              </dx-data-grid>
+            </div>
+
+            <div *ngIf="showOption4PredictionData" class="col-md-12 outward_Recipe_section">
+              <span class="receipePredictionOption">Optoin 4</span>
+              <dx-data-grid id="receipePrediction" [dataSource]="receipePredictionOptionData4"
+                [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                [showBorders]="true" style="padding:5px 13px 5px">
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                  [showNavigationButtons]="true" [showInfo]="true">
+                </dxo-pager>
+                <dxo-paging [pageSize]="50"></dxo-paging>
+                <!-- <dxo-group-panel [visible]="true"></dxo-group-panel> -->
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+                  [showInfo]="true">
+                </dxo-pager>
+                <dxo-editing mode="cell" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false">
+                </dxo-editing>
+                <dxi-column dataField="productName" caption="Product Name" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="recipe" caption="Recipe" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="metameric" caption="Metameric" [allowEditing]="false"></dxi-column>
+                <dxi-column dataField="remarks" caption="Remarks"></dxi-column>
+                <dxi-column dataField="productId" caption="Product Code" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="recipe_Name" caption="Recipe Name" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="rgbHexaCode" caption="RGB Hexa Code" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+                <dxi-column dataField="colorantSet_ID" caption="Dye Set" [allowEditing]="false" [visible]="false">
+                </dxi-column>
+              </dx-data-grid>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="long-title long-title1" style="margin-top: 10px">
+          <h3>Fastness Requirment</h3>
+        </div>
+        <div class="shadowbox inward_boxs_Div" style="height: 120px;">
+          <div id="form-container" class="inward_boxs_without_mar" style="padding: 0 8px;">
+            <dx-data-grid id="CustomerFastnessId" [dataSource]="customerFastnessDataSource" [allowColumnResizing]="true"
+              [wordWrapEnabled]="true" [allowColumnReordering]="true" [showBorders]="true">
+              <dxo-editing mode="cell" [allowAdding]="false" [allowUpdating]="true" [allowDeleting]="false">
+              </dxo-editing>
+              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                [showNavigationButtons]="true" [showInfo]="true">
+              </dxo-pager>
+              <dxo-paging [pageSize]="5"></dxo-paging>
+              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+                [showInfo]="true">
+              </dxo-pager>
+              <dxi-column dataField="nameoffastness" caption="Name of Fastness" [allowFiltering]="false" [width]=260
+                [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false" [allowEditing]="false"
+                [allowHeaderFiltering]="false">
+              </dxi-column>
+              <dxi-column dataField="testMethod" caption="Test Method" [allowFiltering]="false" [width]=220
+                [allowEditing]="false" [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false"
+                [allowHeaderFiltering]="false">
+              </dxi-column>
+              <dxi-column dataField="targetRating" [width]=120 caption="Target Rating" [allowEditing]="false">
+              </dxi-column>
+              <dxi-column caption="Lab Tentative Rating" alignment="center">
+                <dxi-column dataField="tentativeRating" [width]=120 caption="Recipe Option-1">
+                  <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating" displayExpr="targetRating">
+                  </dxo-lookup>
+                </dxi-column>
+                <dxi-column *ngIf="showOption2PredictionData" dataField="tentativeRatingOption2" [width]=120
+                  caption="Recipe Option-2">
+                  <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating" displayExpr="targetRating">
+                  </dxo-lookup>
+                </dxi-column>
+                <dxi-column *ngIf="showOption3PredictionData" dataField="tentativeRatingOption3" [width]=120
+                  caption="Recipe Option-3">
+                  <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating" displayExpr="targetRating">
+                  </dxo-lookup>
+                </dxi-column>
+                <dxi-column *ngIf="receipePredictionOptionData4" dataField="tentativeRatingOption4" [width]=120
+                  caption="Recipe Option-4">
+                  <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating" displayExpr="targetRating">
+                  </dxo-lookup>
+                </dxi-column>
+              </dxi-column>
+              <dxi-column dataField="remark" [allowEditing]="false" caption="Remark">
+              </dxi-column>
+            </dx-data-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 customProductpadinone mt-4 pb-2">
+      <div class="submit_class shadowbox inward_boxs_Div outwardRecipePrediction"
+        style="padding: 10px 14px 20px 14px !important;">
+        <div class="col-md-12 mb-4" style="margin-top: 0px;padding-right: 0px;">
+          <label>Remarks:</label>
+          <dx-text-box Id="case" [(value)]="outWardModel.remarks"></dx-text-box>
+        </div>
+        <div class="col-md-3" style="padding-right: 19px;">
+          <label>Technical Person</label>
+          <dx-select-box Id="case" [dataSource]="marketingPersonDataSource" displayExpr="empCodeName"
+            valueExpr="empCodeName" [(value)]="outWardModel.technicalPerson" placeholder="Select Employee"
+            [showClearButton]="true" [searchEnabled]="true">
+          </dx-select-box>
+        </div>
+        <div class="col-md-3" style="padding-left: 11px;">
+          <label>Approved by</label>
+          <dx-select-box Id="case" [dataSource]="marketingPersonDataSource" displayExpr="empCodeName"
+            valueExpr="empCodeName" [(value)]="outWardModel.approvedBy" placeholder="Select Employee"
+            [showClearButton]="true" [searchEnabled]="true">
+          </dx-select-box>
+        </div>
+      </div>
+    </div>
+
+    <div class="main_pop mb-2">
+      <span>
+        <dx-button class="submitbtn" stylingMode="contained" text="Submit" type="normal" [width]="130"
+          (click)="SaveOutwardData(outWardModel)">
+        </dx-button>
+      </span>
+      <dx-button class="cancel-btn" stylingMode="contained" text="Cancel" type="normal" (click)="cancelData()"
+        [width]="120" style="margin-right: 15px;">
+      </dx-button>
+    </div>
+
+  </div>
+</div>
+<dx-load-panel #loadPanel shadingColor="rgba(0,0,0,0.4)" [(visible)]="loadingVisible" [showIndicator]="true"
+  [showPane]="true" [shading]="true" [closeOnOutsideClick]="false">
+</dx-load-panel>

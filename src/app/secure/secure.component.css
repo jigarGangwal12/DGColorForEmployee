@@ -1,0 +1,54 @@
+.mobile-page-container {
+  width: 100%;
+}
+
+.mobile-page-container .mobile-header {
+  width: 100%;
+  box-shadow: 0 1px 4px #3333333d;
+  display: table;
+  /* background: #fff; */
+  height: 60px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.hdr-logo-left {
+  font-size: 30px;
+  float: left;
+  margin: 15px 0 0 0;
+  color: #333;
+  font-weight: 500;
+  width: 100%;
+}
+
+.hdr-logo-left img {
+  width: 130px;
+  float: left;
+  margin-top: 0px;
+}
+
+.hdr-logo-left h2 {
+  float: left;
+  font-weight: 500;
+  width: calc(100% - 146px);
+  padding-left: 6px;
+  font-size: 11px;
+  margin-top: 0px;
+  border-left: 2px solid #b57937;
+  margin-left: 6px;
+  line-height: 15px;
+  color: #2d2a2b;
+}
+
+.hdr-logo-left h2 i {
+  font-style: normal;
+  width: 100%;
+  display: table;
+  font-weight: 500;
+}
+
+.dgColorLogo {
+  width: 130px !important;
+  padding: 5px 5px !important;
+}

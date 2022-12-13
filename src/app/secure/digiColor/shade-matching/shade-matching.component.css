@@ -1,0 +1,627 @@
+/* Mobile page CSS Start Here */
+.mobile-page-container {
+  width: 100%;
+  display: table;
+}
+
+.mobile-page-container .main-content-section {
+  overflow: auto;
+  height: calc(100vh - 50px);
+  padding: 0px 15px 15px 15px;
+}
+
+.mobile-page-container .mobile-header {
+  width: 100%;
+  box-shadow: 0 1px 4px #3333333d;
+  display: table;
+  background: #fff;
+  height: 60px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.hdr-logo-left {
+  font-size: 30px;
+  float: left;
+  margin: 15px 0 0 0;
+  color: #333;
+  font-weight: 500;
+  width: 100%;
+}
+
+.hdr-logo-left img {
+  width: 130px;
+  float: left;
+  margin-top: 0px;
+}
+
+.hdr-logo-left h2 {
+  float: left;
+  font-weight: 500;
+  width: calc(100% - 146px);
+  padding-left: 6px;
+  font-size: 11px;
+  margin-top: 0px;
+  border-left: 2px solid #b57937;
+  margin-left: 6px;
+  line-height: 15px;
+  color: #2d2a2b;
+  ;
+}
+
+.hdr-logo-left h2 i {
+  font-style: normal;
+  width: 100%;
+  display: table;
+  font-weight: 500;
+}
+::ng-deep #Popup-SubTableLeft .lastThBdr{
+  border-top: 0px !important;
+  border-right: 0px !important;
+}
+::ng-deep #Popup-SubTableLeft .lastTdBdr{
+  border-right: 0px !important;
+}
+#accordion-container {
+  margin-right: 0 !important;
+}
+
+.mobile-page-container em {
+  width: 100%;
+  font-size: 15px;
+  line-height: 25px;
+  float: left;
+}
+
+.mobile-page-container em b {
+  font-weight: 500;
+  margin-right: 2px;
+  letter-spacing: 0.4px;
+  width: 80px;
+  display: inline-block;
+}
+
+
+.mobile-page-container .dgcolour-heading {
+  width: 100%;
+  display: table;
+  margin-bottom: 8px;
+  font-size: 18px;
+  margin-top: 14px;
+  color: #4e7171;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+}
+
+.mobile-page-container .dgcolour-heading label {
+  display: table;
+  width: 100%;
+  color: #394b54;
+  font-size: 18px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 6x;
+}
+
+.mobile-page-container,
+em,
+strong,
+i {
+  font-style: normal;
+  font-weight: normal;
+}
+
+.accourdian-header-text span {
+  float: left;
+  width: 76%;
+  padding: 8px 0 0 10px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.accourdian-header-text strong {
+  float: right;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.accourdian-header-text strong label {
+  font-size: 14px;
+  display: inherit;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.accourdian-header-text strong em {
+  /* background: #b57937; */
+  height: 27px;
+  width: 27px;
+}
+
+.underproce {
+  /* color: #ffa825; */
+  font-weight: 600;
+  position: absolute;
+  font-size: 13px;
+  right: 45px;
+  top: 8px;
+  z-index: 8;
+}
+
+.info-icon {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  left: 0;
+  z-index: 7;
+  font-size: 18px;
+  color: #4e7171;
+  cursor: pointer;
+}
+
+.mobile-page-container #ipad-table-grid h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4e7171;
+  margin-bottom: 4px;
+  margin-top: 0px;
+}
+
+.mobile-page-container #ipad-table-grid .Recipe_width_100 {
+  width: 100px !important;
+}
+
+.mobile-page-container #ipad-table-grid .Metameric_width_140 {
+  width: 140px !important;
+}
+
+.mobile-page-container #ipad-table-grid .Metameric_width_140 .rgb-color-code-width {
+  width: 65px !important;
+}
+
+.mobile-page-container .dx-accordion-item-title {
+  /* border: 1px solid #ddd; */
+  background: #4e7171;
+  color: #fff;
+  width: 100%;
+  float: left;
+  padding: 0px !important;
+}
+
+.mobile-page-container .dx-accordion-item-body {
+  padding: 0px 0 !important;
+  font-size: 14px;
+  width: 100%;
+}
+
+.subtable {
+  margin-bottom: 0px !important;
+  box-shadow: none !important;
+  border-right: 1px solid #ddd !important;
+}
+
+.subtable tr td {
+  border-left: 0px !important;
+}
+
+.subtable-right {
+  box-shadow: none !important;
+  border: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.subtable-right td span {
+  height: 40px;
+  width: 40px;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 auto;
+  /* background: #b57937; */
+  border: 5px solid #f5f5f5;
+}
+
+.mobile-page-container .accourdian-header-text {
+  width: calc(100% - 30px);
+}
+
+::ng-deep .mobile-page-container .dx-accordion-item-title::before {
+  color: #fff !important;
+  line-height: 165px;
+  background: #608787;
+  height: 165px;
+  padding: 0 7px;
+}
+
+::ng-deep .mobile-page-container .dx-accordion-item {
+  margin-bottom: 16px;
+  border: 1px solid #4e7171;
+  border-radius: 5px;
+}
+
+::ng-deep #accordion {
+  height: 700px;
+}
+
+
+::ng-deep #accordion-container {
+  margin-right: 400px;
+}
+
+::ng-deep .dx-theme-material #accordion .dx-accordion-item-title {
+  display: flex;
+}
+
+.mobile-page-container #ipad-table-grid {
+  width: 100%;
+  display: table;
+  padding: 10px 10px 0px 10px !important;
+  box-sizing: border-box;
+
+}
+
+.mobile-page-container #ipad-table-grid table {
+  width: 100%;
+  /* box-shadow: 0 1px 5px #3333333d; */
+  margin-bottom: 10px;
+  border-collapse: collapse;
+  /* border: 1px solid #ddd !important; */
+}
+
+::ng-deep .dx-overlay-shader {
+  background-color: rgb(0 0 0 / 66%) !important;
+}
+
+::ng-deep .dx-popup-wrapper>.dx-overlay-content {
+  border: 0;
+  background: #fff;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+  border-radius: 7px;
+}
+
+.dx-popup-title {
+  padding: 0px 12px !important;
+  min-height: 52px;
+  line-height: 52px;
+}
+
+.costomer-dgcolor-Popup-hdr {
+  background-color: #4e7171 !important;
+  color: #fff !important;
+  width: 100% !important;
+  display: table;
+}
+
+.costomer-dgcolor-Popup-hdr h4 {
+  float: left;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0px;
+  padding: 0px;
+  letter-spacing: 0.5px;
+  line-height: 48px;
+}
+
+.costomer-dgcolor-Popup-hdr button {
+  float: right;
+  margin: 0px;
+  padding: 0px;
+  border: 5px;
+  background-color: transparent;
+}
+
+.costomer-dgcolor-Popup-hdr button i {
+  float: right;
+  cursor: pointer;
+  font-size: 27px;
+  color: #fff;
+  margin-top: 12px;
+}
+
+::ng-deep .dx-popup-content {
+  padding: 12px !important;
+}
+
+::ng-deep .dx-resizable {
+  height: auto !important;
+}
+
+.ctmr-popup-content-sec {
+  padding: 0;
+  width: 100%;
+  display: table;
+}
+
+.costomer-popup-table {
+  margin-bottom: 0px !important;
+  box-shadow: none !important;
+  /* border: 1px solid #ccc !important; */
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 3px;
+}
+
+.costomer-popup-table th {
+  /* border-bottom: 1px solid #ccc !important; */
+  padding: 8px 10px !important;
+  font-size: 15px !important;
+  color: #2e2a2b !important;
+  font-weight: 600 !important;
+  border: 1px solid #d3d3d3 !important;
+}
+
+.costomer-popup-table td {
+  /* border-bottom: 1px solid #ccc !important; */
+  padding: 8px 10px !important;
+  font-size: 15px !important;
+  color: #2e2a2b !important;
+  font-weight: 400 !important;
+  border: 1px solid #d3d3d3 !important;
+}
+
+.costomer-popup-table td span {
+  width: 110px;
+  display: inline-block;
+  font-weight: 600;
+}
+
+.costomer-popup-table td:last-child {
+  border-bottom: 0px;
+}
+
+.mobile-page-container #ipad-table-grid table tr th {
+  /* border-top: 1px solid #dddddd !important; */
+  text-align: left;
+  padding: 9px 10px !important;
+  font-size: 14px !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border: 1px solid #8f8f8f;
+}
+
+.mobile-page-container #ipad-table-grid table tr td {
+  /* border-top: 0px solid #dddddd !important; */
+  text-align: left;
+  padding: 9px 10px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  border: 1px solid #8f8f8f;
+}
+
+/* Mukesh CSS Start Here 26 November */
+
+.tabs-up-info-icon {
+  position: absolute;
+  top: -12px;
+  margin-top: 50px;
+  right: 45px;
+  z-index: 9;
+  font-size: 22px;
+}
+
+/* Lab Testing perameter Popup UI CSS Start */
+.Lab-Testing-perameter-links {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  display: table;
+}
+
+.Lab-Testing-perameter-links a {
+  font-size: 15px;
+  color: #333;
+  margin-right: 15px;
+  text-decoration: none;
+  float: left;
+  cursor: pointer;
+}
+
+.Lab-Testing-perameter-links a:hover {
+  text-decoration: underline;
+  color: #4e7171;
+  font-weight: 500;
+}
+
+.Lab-Testing-perameter-links .active {
+  text-decoration: underline;
+  color: #4e7171 !important;
+  font-weight: 500;
+  background: transparent;
+}
+
+.tabs {
+  width: 100%;
+  float: left;
+  border-bottom: 1px solid #4e7171;
+  margin-bottom: 16px;
+}
+
+.tabs .dx-button {
+  width: 140px;
+  border-radius: 0px !important;
+  border: 1px solid #adbac1;
+  font-size: 15px;
+  margin-right: 4px;
+  border-bottom: 0px;
+}
+
+::ng-deep .tabs .dx-button .dx-button-content {
+  padding: 7px 3px 8px !important;
+}
+
+.tabs .bdr-left-none {
+  /* border-left:0px !important; */
+  margin-left: 5px;
+}
+
+.tabs .active {
+  background: #4e7171 !important;
+  color: #fff;
+  border: 1px solid #4e7171;
+  border-bottom: 0px;
+}
+
+#prediction-popup-main-bx {
+  width: 100%;
+  float: left;
+  margin-bottom: 15px;
+}
+
+#prediction-popup-main-bx .Recipe_Width_95 {
+  width: 95px;
+}
+
+#prediction-popup-main-bx .Metameric_Width_130 {
+  width: 125px;
+}
+
+#prediction-popup-main-bx .color_code_Width_65 {
+  width: 60px !important;
+}
+
+#prediction-popup-main-bx table {
+  width: 100%;
+}
+
+.prediction-popup-option-checkbox {
+  width: 100%;
+  float: left;
+  margin-bottom: 3px;
+}
+
+.prediction-popup-option-checkbox input {
+  float: right;
+  margin-left: 6px;
+  width: 15px;
+  height: 15px;
+  margin-top: 3px;
+}
+
+.prediction-popup-option-checkbox h3 {
+  float: left;
+  font-size: 16px;
+  color: #4e7171;
+}
+
+#prediction-popup-main-bx table tr th {
+  padding: 7px 10px !important;
+  font-size: 15px !important;
+  color: #2e2a2b !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid #d3d3d3 !important;
+  border-right: 1px solid #d3d3d3 !important;
+}
+
+#prediction-popup-main-bx table tr td {
+  padding: 7px 10px !important;
+  font-size: 15px !important;
+  color: #2e2a2b !important;
+  font-weight: 400 !important;
+  border-bottom: 1px solid #d3d3d3 !important;
+  border-right: 1px solid #d3d3d3 !important;
+}
+
+.popup-update-btn {
+  width: 90px;
+  background: #4e7171 !important;
+  color: #fff;
+  padding: 0px 0;
+  border: 1px solid #4e7171;
+  font-size: 15px;
+  float: right;
+}
+
+.popup-update-btn-getfromDataColor {
+  width: auto;
+  background: #4e7171 !important;
+  color: #fff;
+  padding: 0px 0;
+  border: 1px solid #4e7171;
+  font-size: 15px;
+  float: right;
+  margin-bottom: 7px;
+}
+.popup-update-btn-getfromDataColor .dx-button-content{ padding: 7px 12px 8px !important;}
+
+/* Checkbox CSS Start Here */
+.showto-customer-check {
+  float: right;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4e7171;
+}
+.showto-customer-check input[type=checkbox] {
+  background-color: red !important;
+}
+/* Checkbox CSS End Here */
+
+
+
+.padi-left-none{padding-left: 0px !important;}
+#scrollview-popup{
+  height: 70vh;
+  overflow: auto;
+  position: relative;
+  display: inline-block;
+  padding-right: 12px;
+  width: 100%;
+  margin-bottom: 44px;
+}
+
+.update-submit-btns-popup-box{
+    width: 100%;
+    display: table;
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
+    right: 0;
+    background: #fff;
+    padding: 6px 27px;
+    box-shadow: 0 0 7px 0 #00000026;
+}
+/* Lab Testing perameter Popup UI CSS end */
+
+
+
+@media (min-width: 1921px) and (max-width: 4000px) {
+  .mobile-page-container {
+    width: 1024px;
+    display: table;
+    margin: auto;
+    border: 1px solid rgb(219, 219, 219);
+  }
+
+  .mobile-page-container .main-content-section {
+    padding: 0px 15px 27px 15px;
+  }
+}
+
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+  .mobile-page-container {
+    width: 1024px;
+    display: table;
+    margin: auto;
+    border: 1px solid rgb(219, 219, 219);
+    border-top: 0px;
+  }
+
+  .mobile-page-container .main-content-section {
+    padding: 0px 15px 15px 15px;
+  }
+}
+
+
+/* @media (min-width: 767px) and (max-width: 1024px) {
+    .mobile-page-container {
+      width: 1024px;
+      display: table;
+      margin: auto;
+    }
+    .mobile-page-container .main-content-section {
+      padding: 0px 15px 27px 15px;
+    }
+  }  */
+
+

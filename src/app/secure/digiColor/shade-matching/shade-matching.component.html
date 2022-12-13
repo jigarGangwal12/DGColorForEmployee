@@ -1,0 +1,971 @@
+<div class="mobile-page-container">
+  <!-- <div class="mobile-header">
+    <span class="hdr-logo-left">
+      <img src="/assets/images/dg-colour-logo.png">
+      <h2><i>An Initiative by</i> Jay Chemical Industries Pvt. Ltd.</h2>
+    </span>
+  </div> -->
+
+  <div class="main-content-section">
+
+    <h2 class="dgcolour-heading">
+      <label>Lab Prediction Report</label>
+      <div class="col-md-6 padi-left-none">
+        <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
+          [dataSource]="allConsigneeData" displayExpr="consgingeeName" valueExpr="consgingeeName"
+          placeholder="Select Case Id" [showClearButton]="true" [searchEnabled]="true"
+          (onValueChanged)="consigneeValueChanged($event)">
+        </dx-select-box>
+      </div>
+      <div class="col-md-3">
+        <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
+          [dataSource]="StatusData" displayExpr="Name" valueExpr="ID" placeholder="Select Status"
+          [showClearButton]="true" [searchEnabled]="false" (onValueChanged)="onStatusValueChanged($event)">
+        </dx-select-box>
+      </div>
+
+    </h2>
+
+    <!-- [selectedItems]="[dummydata[0]]" -->
+    <dx-accordion #accordion [dataSource]="GetAllLabPredictionData" [collapsible]="false" [multiple]="false"
+      [selectedIndex]="-1" [animationDuration]="300" [collapsible]="true" id="accordion-container">
+      <div *dxTemplate="let data of 'title'" (click)="expandCollapse(data)">
+        <div class="accourdian-header-text">
+          <span>
+            <em><i style="float: left;"><b>Case Id:</b> {{data.caseId}} -</i> <i style="height: 24px;float: left;">
+                <dx-date-box style="top: -3px !important; margin-left: 3px;" Id="scandateTime" [readOnly]=true
+                  [value]="data.createdDate" type="date" displayFormat="dd/MM/yyyy hh:mm">
+                </dx-date-box>
+              </i></em>
+            <em><b>Agent:</b> {{data.agentName}}</em>
+            <em><b>Consumer:</b> {{data.consigneeName}}</em>
+            <em><b>Shade Id:</b> {{data.shadeid}}- <i>{{data.shadeName}}</i></em>
+            <em><b>Dyeset:</b> <i> {{data.dyeSet}}</i></em>
+            <em>
+
+            </em>
+            <em><b>Status:</b> <i> {{data.statusForRecipePrediction}}</i></em>
+          </span>
+          <i [ngStyle]="{'color': data.rbgcode }" class="underproce">{{data.shadeStatus}}</i>
+          <strong>
+            <i class="fa fa-info-circle tabs-up-info-icon" (click)="onClickGetShadeDetails($event,data)"></i>
+            <!-- <em [ngStyle]="{'background-color': data.rbgcode }"></em> -->
+          </strong>
+        </div>
+      </div>
+
+      <div *dxTemplate="let company of 'item'" id="ipad-table-grid">
+        <!-- Start Recipe Prediction  -->
+        <div *ngIf="predictionAvilable">
+          <div>
+            <label style="border-style: groove;">Prediction</label>
+          </div>
+          <!-- Start Recipe Option 1 -->
+          <div *ngIf="showOption1RecipeData">
+            <h3>Option 1</h3>
+            <table cell-spacing="0" border="0">
+              <tr>
+                <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
+                  <table class="subtable" cell-spacing="0" border="0">
+                    <tr>
+                      <th>Product Name</th>
+                      <th class="Recipe_width_100">Recipe</th>
+                    </tr>
+                    <tr *ngFor="let recipe of receipeOptionData1">
+                      <td>{{recipe.productName}}</td>
+                      <td>{{recipe.recipe}} {{recipe.uom}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td
+                  style="width:200px;padding: 0px !important;position: relative;border: 1px solid #8f8f8f !important;border-left: 0px !important;">
+                  <table class="subtable-right" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <i
+                          style="position: absolute;top: 2px;right: 0;left: 0; border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
+                        {{Metameric1}}<br />
+                        {{lightSourceDataColor1}}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="rgb-color-code-width"
+                  style="padding: 0px !important; position: relative; border-left: 0px !important; width: 80px;">
+                  <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <span [ngStyle]="{'background-color': rgbCodeOption1 }"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- End Recipe Option 1 -->
+  
+          <!-- Start Recipe Option 2 -->
+          <div *ngIf="showOption2RecipeData">
+            <h3>Option 2</h3>
+            <table cell-spacing="0" border="0">
+              <tr>
+                <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
+                  <table class="subtable" cell-spacing="0" border="0">
+                    <tr>
+                      <th>Product Name</th>
+                      <th class="Recipe_width_100">Recipe</th>
+                    </tr>
+                    <tr *ngFor="let recipe of receipeOptionData2">
+                      <td>{{recipe.productName}}</td>
+                      <td>{{recipe.recipe}} {{recipe.uom}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td
+                  style="width:200px;padding: 0px !important;position: relative;border: 1px solid #8f8f8f !important;border-left: 0px !important;">
+                  <table class="subtable-right" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <i
+                          style="position: absolute;top:2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
+                        {{Metameric2}}<br />
+                        {{lightSourceDataColor2}}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="rgb-color-code-width" style="padding: 0px !important; position: relative; width: 80px;">
+                  <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <span [ngStyle]="{'background-color': rgbCodeOption2 }"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- End Recipe Option 2 -->
+  
+          <!-- Start Recipe Option 3 -->
+          <div *ngIf="showOption3RecipeData">
+            <h3>Option 3</h3>
+            <table cell-spacing="0" border="0">
+              <tr>
+                <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
+                  <table class="subtable" cell-spacing="0" border="0">
+                    <tr>
+                      <th>Product Name</th>
+                      <th class="Recipe_width_100">Recipe</th>
+                    </tr>
+                    <tr *ngFor="let recipe of receipeOptionData3">
+                      <td>{{recipe.productName}}</td>
+                      <td>{{recipe.recipe}} {{recipe.uom}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td
+                  style="width:200px;padding: 0px !important;position: relative;border: 1px solid #8f8f8f !important;border-left: 0px !important;">
+                  <table class="subtable-right" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <i
+                          style="position: absolute;top: 2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
+                        {{Metameric3}}<br />
+                        {{lightSourceDataColor3}}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="rgb-color-code-width" style="padding: 0px !important; position: relative; width: 80px;">
+                  <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <span [ngStyle]="{'background-color': rgbCodeOption3 }"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- End Recipe Option 3 -->
+  
+          <!-- Start Recipe Option 4 -->
+          <div *ngIf="showOption4RecipeData">
+            <h3>Option 4</h3>
+            <table cell-spacing="0" border="0">
+              <tr>
+                <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
+                  <table class="subtable" cell-spacing="0" border="0">
+                    <tr>
+                      <th>Product Name</th>
+                      <th class="Recipe_width_100">Recipe</th>
+                    </tr>
+                    <tr *ngFor="let recipe of receipeOptionData4">
+                      <td>{{recipe.productName}}</td>
+                      <td>{{recipe.recipe}} {{recipe.uom}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td
+                  style="width:200px;padding: 0px !important;position: relative;border: 1px solid #8f8f8f !important;border-left: 0px !important;">
+                  <table class="subtable-right" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <i
+                          style="position: absolute;top: 2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
+                        {{Metameric4}}<br />
+                        {{lightSourceDataColor4}}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="rgb-color-code-width" style="padding: 0px !important; position: relative; width: 80px;">
+                  <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <span [ngStyle]="{'background-color': rgbCodeOption3 }"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- Start Recipe Option 4 -->
+        </div>
+        <!-- <div *ngIf="!predictionAvilable">
+          <span>
+            <h3>Predciton Data Not Available</h3>
+          </span>
+        </div> -->
+        <!-- End Recipe Prediction  -->
+
+        <!-- Start Shade Matching -->
+        <div *ngIf="shadeMatchingAvilable">
+          <div>
+            <label style="border-style: groove;">Shade Matching</label>
+          </div>
+          <!-- Start Shade Matching Option 1 -->
+          <div *ngIf="showOption1ShadeMatching">
+            <h3>Option 1</h3>
+            <table cell-spacing="0" border="0">
+              <tr>
+                <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
+                  <table class="subtable" cell-spacing="0" border="0">
+                    <tr>
+                      <th>Product Name</th>
+                      <th class="Recipe_width_100">Recipe</th>
+                    </tr>
+                    <tr *ngFor="let shadeMatching of shadeMatchingOption1Data">
+                      <td>{{shadeMatching.productName}}</td>
+                      <td>{{shadeMatching.recipe}} {{shadeMatching.recunit}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="rgb-color-code-width"
+                  style="padding: 0px !important; position: relative; border-left: 0px !important; width: 80px;">
+                  <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <span [ngStyle]="{'background-color': rgbshadeMatchingOption1 }"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- End Shade Matching Option 1 -->
+
+          <!-- Start Shade Matching Option 2 -->
+          <div *ngIf="showOption2ShadeMatching">
+            <h3>Option 2</h3>
+            <table cell-spacing="0" border="0">
+              <tr>
+                <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
+                  <table class="subtable" cell-spacing="0" border="0">
+                    <tr>
+                      <th>Product Name</th>
+                      <th class="Recipe_width_100">Recipe</th>
+                    </tr>
+                    <tr *ngFor="let shadeMatching of shadeMatchingOption2Data">
+                      <td>{{shadeMatching.productName}}</td>
+                      <td>{{shadeMatching.recipe}} {{shadeMatching.recunit}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="rgb-color-code-width"
+                  style="padding: 0px !important; position: relative; border-left: 0px !important; width: 80px;">
+                  <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <span [ngStyle]="{'background-color': rgbshadeMatchingOption2 }"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- End Shade Matching Option 2 -->
+
+          <!-- Start Shade Matching Option 3 -->
+          <div *ngIf="showOption3ShadeMatching">
+            <h3>Option 3</h3>
+            <table cell-spacing="0" border="0">
+              <tr>
+                <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
+                  <table class="subtable" cell-spacing="0" border="0">
+                    <tr>
+                      <th>Product Name</th>
+                      <th class="Recipe_width_100">Recipe</th>
+                    </tr>
+                    <tr *ngFor="let shadeMatching of shadeMatchingOption3Data">
+                      <td>{{shadeMatching.productName}}</td>
+                      <td>{{shadeMatching.recipe}} {{shadeMatching.recunit}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="rgb-color-code-width"
+                  style="padding: 0px !important; position: relative; border-left: 0px !important; width: 80px;">
+                  <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <span [ngStyle]="{'background-color': rgbshadeMatchingOption3 }"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- End Shade Matching Option 3 -->
+
+          <!-- Start Shade Matching Option 4 -->
+          <div *ngIf="showOption4ShadeMatching">
+            <h3>Option 4</h3>
+            <table cell-spacing="0" border="0">
+              <tr>
+                <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
+                  <table class="subtable" cell-spacing="0" border="0">
+                    <tr>
+                      <th>Product Name</th>
+                      <th class="Recipe_width_100">Recipe</th>
+                    </tr>
+                    <tr *ngFor="let shadeMatching of shadeMatchingOption4Data">
+                      <td>{{shadeMatching.productName}}</td>
+                      <td>{{shadeMatching.recipe}} {{shadeMatching.recunit}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td class="rgb-color-code-width"
+                  style="padding: 0px !important; position: relative; border-left: 0px !important; width: 80px;">
+                  <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                    <tr>
+                      <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                        <span [ngStyle]="{'background-color': rgbshadeMatchingOption4 }"></span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- End Shade Matching Option 4 -->
+
+        </div>
+        <!-- <div *ngIf="!shadeMatchingAvilable">
+          <span>
+            <h3>Shade Matching Data Not Available</h3>
+          </span>
+        </div> -->
+        <!-- End Shade Matching -->
+
+      </div>
+
+    </dx-accordion>
+
+    <dx-popup [width]="popUpWidth" [height]="350" [showTitle]="true" [showCloseButton]="false"
+      titleTemplate="titlerapidSearch" [dragEnabled]="true" [closeOnOutsideClick]="false" [(visible)]="PopupVisible">
+      <div *dxTemplate="let data of 'titlerapidSearch'" class="costomer-dgcolor-Popup-hdr">
+        <!-- <h4>Lab Testing Parameters</h4> -->
+        <h4>{{SelectedConsigneeCode}} - {{SelectedConsigneeName}} - {{Selectedshadeid}}</h4>
+        <button type="submit" (click)="PopupClose($event)">
+          <i class="fa fa-window-close"></i>
+        </button>
+      </div>
+      <div class="ctmr-popup-content-sec">
+        <input type="hidden" name="shadeId" value="{{shadeId}}">
+        <div class="tabs">
+          <dx-button [ngClass]="{'active': isActive == '1'}" class="submitbtn" text="Lab Testing" type="normal"
+            (click)="getPoupupPredictionData('1',shadeId)">
+          </dx-button>
+          <dx-button [ngClass]="{'active': isActive == '2'}" class="submitbtn" text="Prediction" type="normal"
+            (click)="getPoupupPredictionData('2',shadeId)">
+          </dx-button>
+          <dx-button [ngClass]="{'active': isActive == '3'}" class="submitbtn" text="Shade Matching" type="normal"
+            (click)="getPoupupPredictionData('3',shadeId)">
+          </dx-button>
+        </div>
+
+        <!-- Start Tab Lab Testing  -->
+        <div *ngIf="tabLabTesting">
+          <div id="scrollview-popup">
+            <div class="Lab-Testing-perameter-links">
+              <a [ngClass]="{'active': isActiveForLabProduct == '1'}" (click)="onLabOrProductInfoClick('1')">Lab Testing
+                Paramter</a>
+              <a [ngClass]="{'active': isActiveForLabProduct == '2'}" (click)="onLabOrProductInfoClick('2')">Product
+                Info</a>
+
+              <div class="body-right-top-search-sec" *ngIf="productInfo">
+                <input type="text" id="filter-text" placeholder="Search here..." (input)="onSearch()" autocomplete="off"
+                  style="margin-top: -23px">
+              </div>
+            </div>
+
+            <div *ngIf="labTestingParameter">
+              <table class="costomer-popup-table">
+                <tr *ngFor="let labData of labPredictionParameter">
+                  <td><span>Substrate:</span> {{labData.typeOfIndustries}}</td>
+                  <td>{{labData.uom}} - {{labData.ratio}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Process:</span> {{process}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Dischargability:</span> {{dischargability}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Primary:</span> {{lightSourcePrimary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Secondary:</span> {{lightSourceSecondary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Tertiary:</span> {{lightSourceTertiary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Remark:</span> {{samplereamark}}</td>
+                </tr>
+              </table>
+
+              <table class="costomer-popup-table" style="margin-top: 12px;">
+                <tr>
+                  <th>Name of Fastness</th>
+                  <th>Test Method</th>
+                  <th>Dry OR Wet</th>
+                  <th>Target Rating</th>
+                  <th style="text-align: center;">Remark</th>
+                </tr>
+                <tr *ngFor="let fastness of fastnessData">
+                  <td>{{fastness.nameoffastness}}</td>
+                  <td>{{fastness.testMethod}}</td>
+                  <td>{{fastness.dryorWet}}</td>
+                  <td>{{fastness.targetRating}}</td>
+                  <td style="text-align: center;"><i style="cursor: pointer;" class="fa fa-info-circle tabs-up"
+                      (click)="onClickGetRemarks(fastness)"></i></td>
+                </tr>
+              </table>
+            </div>
+
+            <div *ngIf="productInfo">
+              <!-- <dx-data-grid id="gridContainer" [dataSource]="ProductPurchaseInfo" [remoteOperations]="false"
+              id=inquiryLlist [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+              <dxo-search-panel [visible]="true" placeholder="Search"></dxo-search-panel>
+               <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter> 
+            <dxo-scrolling mode="virtual" [useNative]="true"></dxo-scrolling> 
+             <dxo-paging [enabled]="false"></dxo-paging>
+              <dxo-group-panel [visible]="true"></dxo-group-panel>
+            </dx-data-grid> -->
+
+              <ag-grid-angular #aggrid class="ag-theme-balham" style="height: 62vh;" [rowData]="ProductPurchaseInfo"
+                [groupDefaultExpanded]="groupDefaultExpanded" [columnDefs]="productPurchaseColDef"
+                [rowGroupPanelShow]="rowGroupPanelShow" [suppressAggFuncInHeader]="true" [defaultColDef]="defaultColDef"
+                [autoGroupColumnDef]="autoGroupPurchase" (gridReady)="onProductInfoGridReady($event,aggrid)"
+                [suppressContextMenu]="true"></ag-grid-angular>
+
+            </div>
+          </div>
+        </div>
+        <!-- End Tab Lab Testing  -->
+
+        <!-- Strat Tab Recipe Prediction -->
+        <div *ngIf="tabRecipePredcition">
+          <div id="scrollview-popup">
+            <!-- <dx-scroll-view> -->
+            <!-- Strat Option Here -->
+            <span *ngIf="predictionDataNotAvailabe">
+              <p>Data Not Available </p>
+            </span>
+            <span *ngIf="showUpdatebtnInrecipePrediction">
+              <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn-getfromDataColor"
+                text="Get Data From DG Color" type="normal" (click)="getDatafromDataColorForUpdatedRecipe(shadeId)">
+              </dx-button>
+            </span>
+            <input type="hidden" name="allData" value="{{popUpPredictionAllData}}">
+            <!-- Option 1 -->
+            <div *ngIf="poupShowPredictionOption1" id="prediction-popup-main-bx">
+              <div class="prediction-popup-option-checkbox">
+                <h3>Option 1</h3>
+                <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
+                  <input type="checkbox" id="chkOption1" [checked]="chkOption1"
+                    (change)="chkChangeOption1($event,chkOption1)" />
+                  Show to Customer
+                </span>
+              </div>
+              <table cell-spacing="0" border="0">
+                <tr>
+                  <td
+                    style="border-bottom: 0px !important;padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
+                    <table id="Popup-SubTableLeft" class="subtable" cell-spacing="0" border="0">
+                      <tr>
+                        <th style="border-top: 0px !important;border-left: 0px !important;">Product Name</th>
+                        <th class="lastThBdr Recipe_Width_95">Recipe</th>
+                      </tr>
+                      <tr *ngFor="let popUpRecipe of popUpPredictionOption1Data">
+                        <td>{{popUpRecipe.productName}}</td>
+                        <td class="lastTdBdr">{{popUpRecipe.recipe}} {{popUpRecipe.recunit}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td
+                    style="width: 230px;padding: 0px !important; position: relative;border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <i
+                            style="position: absolute;top:0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i><br />
+                          {{MetamericPopup1}}<br />
+                          {{lightSourcePoupup1}}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td class="color_code_Width_65"
+                    style="padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <span [ngStyle]="{'background-color': popUpRgbCodeOption1 }"></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </div>
+            <!-- End Option 1 -->
+
+            <!-- Option 2 -->
+            <div *ngIf="poupShowPredictionOption2" id="prediction-popup-main-bx">
+              <div class="prediction-popup-option-checkbox">
+                <h3>Option 2</h3>
+                <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
+                  <input type="checkbox" id="chkOption2" [checked]="chkOption2" (change)="chkChangeOption2($event)" />
+                  Show to Customer
+                </span>
+              </div>
+              <table cell-spacing="0" border="0">
+                <tr>
+                  <td
+                    style="border-bottom: 0px !important;padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
+                    <table class="subtable" cell-spacing="0" border="0">
+                      <tr>
+                        <th style="border-top: 0px !important;border-left: 0px !important;">Product Name</th>
+                        <th style="border-top: 0px !important;" class="Recipe_Width_95">Recipe</th>
+                      </tr>
+                      <tr *ngFor="let popUpRecipe of popUpPredictionOption2Data">
+                        <td>{{popUpRecipe.productName}}</td>
+                        <td>{{popUpRecipe.recipe}} {{popUpRecipe.recunit}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td
+                    style="width: 230px;padding: 0px !important; position: relative;border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <i
+                            style="position: absolute;top: 0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
+                          {{MetamericPopup2}}<br />
+                          {{lightSourcePoupup2}}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td class="color_code_Width_65" style="padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;
+                border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <span [ngStyle]="{'background-color': popUpRgbCodeOption2 }"></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </div>
+            <!-- End Option 2 -->
+
+            <!-- Option 3 -->
+            <div *ngIf="poupShowPredictionOption3" id="prediction-popup-main-bx">
+              <div class="prediction-popup-option-checkbox">
+                <h3>Option 3</h3>
+                <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
+                  <input type="checkbox" id="chkOption3" [checked]="chkOption3" (change)="chkChangeOption3($event)" />
+                  Show to Customer
+                </span>
+              </div>
+
+              <table cell-spacing="0" border="0">
+                <tr>
+                  <td
+                    style="border-bottom: 0px !important;padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
+                    <table class="subtable" cell-spacing="0" border="0">
+                      <tr>
+                        <th style="border-top: 0px !important;border-left: 0px !important;">Product Name</th>
+                        <th style="border-top: 0px !important;" class="Recipe_Width_95">Recipe</th>
+                      </tr>
+                      <tr *ngFor="let popUpRecipe of popUpPredictionOption3Data">
+                        <td>{{popUpRecipe.productName}}</td>
+                        <td>{{popUpRecipe.recipe}} {{popUpRecipe.recunit}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td
+                    style="width: 230px;padding: 0px !important; position: relative;border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <i
+                            style="position: absolute;top: 0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
+                          {{MetamericPopup3}}<br />
+                          {{lightSourcePoupup3}}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td class="color_code_Width_65" style="padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;
+                border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <span [ngStyle]="{'background-color': popUpRgbCodeOption3 }"></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </div>
+            <!-- End Option 3 -->
+
+            <!-- Option 4 -->
+            <div *ngIf="poupShowPredictionOption4" id="prediction-popup-main-bx">
+              <div class="prediction-popup-option-checkbox">
+                <h3>Option 4</h3>
+                <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
+                  <input type="checkbox" id="chkOption4" [checked]="chkOption4" (change)="chkChangeOption4($event)" />
+                  Show to Customer
+                </span>
+              </div>
+              <table cell-spacing="0" border="0">
+                <tr>
+                  <td
+                    style="border-bottom: 0px !important;padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
+                    <table class="subtable" cell-spacing="0" border="0">
+                      <tr>
+                        <th style="border-top: 0px !important;border-left: 0px !important;">Product Name</th>
+                        <th style="border-top: 0px !important;" class="Recipe_Width_95">Recipe</th>
+                      </tr>
+                      <tr *ngFor="let popUpRecipe of popUpPredictionOption4Data">
+                        <td>{{popUpRecipe.productName}}</td>
+                        <td>{{popUpRecipe.recipe}} {{popUpRecipe.recunit}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td
+                    style="width: 230px;padding: 0px !important; position: relative;border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <i
+                            style="position: absolute;top:0px;right: 0;left: 0; border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
+                          {{MetamericPopup4}}<br />
+                          {{lightSourcePoupup4}}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td class="color_code_Width_65" style="padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;
+                border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <span [ngStyle]="{'background-color': popUpRgbCodeOption4 }"></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </div>
+            <!-- End Option 4 -->
+
+            <!-- End Here  -->
+            <div class="update-submit-btns-popup-box">
+              <span *ngIf="!predictionDataNotAvailabe && !showUpdatebtnInrecipePrediction">
+                <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn" text="Submit" type="normal"
+                  (click)="SaveRecipePrecdictionData(popUpPredictionAllData)"> </dx-button>
+              </span>
+              <span *ngIf="!predictionDataNotAvailabe && getUpdatedRecipeFromDataColor">
+                <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn-getfromDataColor"
+                  text="Update Record" type="normal"
+                  (click)="UpdateRecipeAfterUpdatedRecipeFromDataColor(popUpPredictionAllData)">
+                </dx-button>
+              </span>
+              <span
+                *ngIf="!predictionDataNotAvailabe && showUpdatebtnInrecipePrediction &&!getUpdatedRecipeFromDataColor">
+                <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn" text="Update" type="normal"
+                  (click)="UpdateRecipePrecdictionData(popUpPredictionAllData)"> </dx-button>
+              </span>
+            </div>
+            <!-- </dx-scroll-view> -->
+          </div>
+        </div>
+        <!-- End Tab Recipe Prediction -->
+
+        <!-- Strat Tab Shade Matching -->
+        <div *ngIf="tabShadeMatching">
+          <div id="scrollview-popup">
+            <span *ngIf="shadeMatchingDataNotAvailable">
+              <p>Data Not Available </p>
+            </span>
+            <span *ngIf="showUpdatebtnInShadeMatching">
+              <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn-getfromDataColor"
+                text="Get Data From DGCOLOR" type="normal"
+                (click)="getDatafromDataColorForUpdatedShadeMatching(shadeId)">
+              </dx-button>
+            </span>
+            <input type="hidden" name="allData" value="{{popUpShadeMatchingAllData}}">
+            <div class="col-md-3" style=" padding-left: 0px; margin-bottom: 10px;">
+              <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
+                [dataSource]="allColorGamutData" displayExpr="colourGamut" valueExpr="colourGamut"
+                placeholder="Select Color" [showClearButton]="false" [searchEnabled]="false"
+                (onValueChanged)="onColorGamutChnaged($event)" [(value)]="filter.colorGamutSelected">
+              </dx-select-box>
+            </div>
+            <!-- Shade Mataching Option 1 -->
+            <div *ngIf="poupShowShadeMatchingOption1" id="prediction-popup-main-bx">
+              <div class="prediction-popup-option-checkbox">
+                <h3>Option 1</h3>
+                <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
+                  <input type="checkbox" id="chkOption1" [checked]="chkShadeMatchingOption1"
+                    (change)="chkShadeMatchingChangeOption1($event)" />
+                  Show to Customer
+                </span>
+              </div>
+              <table cell-spacing="0" border="0">
+                <tr>
+                  <td
+                    style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
+                    <table class="subtable" cell-spacing="0" border="0">
+                      <tr>
+                        <th style="border-top: 0px !important;border-left: 0px !important;">Product Name</th>
+                        <th style="border-top: 0px !important;" class="Recipe_Width_95">Recipe</th>
+                      </tr>
+                      <tr *ngFor="let popUpShadeMatching of popUpShadeMatchingOption1Data">
+                        <td>{{popUpShadeMatching.productName}}</td>
+                        <td>{{popUpShadeMatching.recipe}} {{popUpShadeMatching.recunit}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td style="width:85px;border: 1px solid #d3d3d3 !important;padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;
+                border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <span [ngStyle]="{'background-color': popUpShadeMatchingRgbCodeOption1 }"></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Shade Mataching Option 1 -->
+
+            <!-- Shade Mataching Option 2 -->
+            <div *ngIf="poupShowShadeMatchingOption2" id="prediction-popup-main-bx">
+
+              <div class="prediction-popup-option-checkbox">
+                <h3>Option 1</h3>
+                <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
+                  <input type="checkbox" id="chkOption2" [checked]="chkShadeMatchingOption2"
+                    (change)="chkShadeMatchingChangeOption2($event)" />
+                  Show to Customer
+                </span>
+              </div>
+              <table cell-spacing="0" border="0">
+                <tr>
+                  <td
+                    style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
+                    <table class="subtable" cell-spacing="0" border="0">
+                      <tr>
+                        <th style="border-top: 0px !important;border-left: 0px !important;">Product Name</th>
+                        <th style="border-top: 0px !important;" class="Recipe_Width_95">Recipe</th>
+                      </tr>
+                      <tr *ngFor="let popUpShadeMatching of popUpShadeMatchingOption2Data">
+                        <td>{{popUpShadeMatching.productName}}</td>
+                        <td>{{popUpShadeMatching.recipe}} {{popUpShadeMatching.recunit}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td style="width:85px;border: 1px solid #d3d3d3 !important;padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;
+                  border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <span [ngStyle]="{'background-color': popUpShadeMatchingRgbCodeOption2 }"></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Shade Mataching Option 2 -->
+
+            <!-- Shade Mataching Option 3 -->
+            <div *ngIf="poupShowShadeMatchingOption3" id="prediction-popup-main-bx">
+              <div class="prediction-popup-option-checkbox">
+                <h3>Option 1</h3>
+                <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
+                  <input type="checkbox" id="chkOption3" [checked]="chkShadeMatchingOption3"
+                    (change)="chkShadeMatchingChangeOption3($event)" />
+                  Show to Customer
+                </span>
+              </div>
+              <table cell-spacing="0" border="0">
+                <tr>
+                  <td
+                    style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
+                    <table class="subtable" cell-spacing="0" border="0">
+                      <tr>
+                        <th style="border-top: 0px !important;border-left: 0px !important;">Product Name</th>
+                        <th style="border-top: 0px !important;" class="Recipe_Width_95">Recipe</th>
+                      </tr>
+                      <tr *ngFor="let popUpShadeMatching of popUpShadeMatchingOption3Data">
+                        <td>{{popUpShadeMatching.productName}}</td>
+                        <td>{{popUpShadeMatching.recipe}} {{popUpShadeMatching.recunit}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td style="width:85px;border: 1px solid #d3d3d3 !important;padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;
+                      border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <span [ngStyle]="{'background-color': popUpShadeMatchingRgbCodeOption3 }"></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Shade Mataching Option 3 -->
+
+            <!-- Shade Mataching Option 4 -->
+            <div *ngIf="poupShowShadeMatchingOption4" id="prediction-popup-main-bx">
+              <div class="prediction-popup-option-checkbox">
+                <h3>Option 1</h3>
+                <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
+                  <input type="checkbox" id="chkOption4" [checked]="chkShadeMatchingOption4"
+                    (change)="chkShadeMatchingChangeOption4($event)" />
+                  Show to Customer
+                </span>
+              </div>
+              <table cell-spacing="0" border="0">
+                <tr>
+                  <td
+                    style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
+                    <table class="subtable" cell-spacing="0" border="0">
+                      <tr>
+                        <th style="border-top: 0px !important;border-left: 0px !important;">Product Name</th>
+                        <th style="border-top: 0px !important;" class="Recipe_Width_95">Recipe</th>
+                      </tr>
+                      <tr *ngFor="let popUpShadeMatching of popUpShadeMatchingOption4Data">
+                        <td>{{popUpShadeMatching.productName}}</td>
+                        <td>{{popUpShadeMatching.recipe}} {{popUpShadeMatching.recunit}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td style="width:85px;padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;
+                      border-top: 1px solid #d3d3d3 !important;">
+                    <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
+                      <tr>
+                        <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
+                          <span [ngStyle]="{'background-color': popUpShadeMatchingRgbCodeOption4 }"></span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- End Shade Mataching Option 4  -->
+            <div class="update-submit-btns-popup-box">
+              <span *ngIf="!shadeMatchingDataNotAvailable && !showUpdatebtnInShadeMatching">
+                <dx-button *ngIf="disableShadeMatchingUpdateButton" class="submitbtn popup-update-btn" text="Submit"
+                  type="normal" (click)="SaveShadeMatching(popUpShadeMatchingAllData,selectedColorGamut)"> </dx-button>
+              </span>
+
+              <span *ngIf="!predictionDataNotAvailabe && getUpdatedShadeMatchingFromDataColor">
+                <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn-getfromDataColor"
+                  text="Update Record" type="normal"
+                  (click)="UpdateShadeMatchingAfterUpdatedRecipeFromDataColor(popUpShadeMatchingAllData)">
+                </dx-button>
+              </span>
+              <span
+                *ngIf="!predictionDataNotAvailabe && showUpdatebtnInShadeMatching &&!getUpdatedShadeMatchingFromDataColor">
+                <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn" text="Update" type="normal"
+                  (click)="UpdateShadeMatchingData(popUpShadeMatchingAllData)"> </dx-button>
+              </span>
+            </div>
+
+          </div>
+        </div>
+        <!-- End Tab Shade Matching -->
+      </div>
+    </dx-popup>
+  </div>
+</div>
+
+
+<dx-load-panel #loadPanel shadingColor="rgba(0,0,0,0.4)" [(visible)]="loadingVisible" [showIndicator]="true"
+  [showPane]="true" [shading]="true" [closeOnOutsideClick]="false">
+</dx-load-panel>
+
+
+<dx-popup [width]="'30%'" [showTitle]="true" [showCloseButton]="false" titleTemplate="titlerapidSearch" id="test"
+  [dragEnabled]="true" [closeOnOutsideClick]="false" [(visible)]="remarkPopupVisible">
+  <div *dxTemplate="let data of 'titlerapidSearch'" class="costomer-dgcolor-Popup-hdr">
+    <h4>Remark</h4>
+    <button type="submit" (click)="remarkPopupClose($event)">
+      <i class="fa fa-window-close"></i>
+    </button>
+  </div>
+  <div>
+    <h3>{{popupRemark}}</h3>
+  </div>
+</dx-popup>

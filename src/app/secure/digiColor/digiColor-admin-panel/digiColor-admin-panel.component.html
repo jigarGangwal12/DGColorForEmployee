@@ -1,0 +1,214 @@
+<!-- <div class="header-dropdown">
+  <span class="headerDropdownMenu col-md-2">
+  </span>
+</div> -->
+<!-- <div class="container-fluid margin-top-none">
+  <div class="bradcrum-link-left-side">
+    <ul>
+      <li>
+        <span href="" class=""> DG Color </span>
+        <i class="fa fa-chevron-right"></i>
+      </li>
+      <li class="bradcrum-link-left-side-nonehover">
+        Admin Panel
+      </li>
+    </ul>
+  </div>
+  <div class="header_sub_main">
+    <div class="padi-Left-108">
+      <div class="header-sub-menu">
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="grid-container digiInward-cont-rt-padi-none">
+  <div id="scrollview-demo" class="inward-page2">
+    <dx-scroll-view #scrollView id="scrollview" [scrollByContent]="true" [scrollByThumb]="true" [height]="windowHeight"
+      [bounceEnabled]="false" [useNative]="true" direction="both" reachBottomText="Updating...">
+      <div class="customerDetails-inward">
+        <div class="">
+          <div class="col-md-12 p-0">
+            <div class="inward_boxs_Div_Width">
+
+              <div class="col-md-3" style="padding-left: 0px;">
+                <div class="" style="margin-top: 10px">
+                  <h3>User List</h3>
+                </div>
+                <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                  <div id="form-container" style="padding:0 8px;">
+                    <dx-data-grid id="inquiryLlist" [dataSource]="digicolorUserDetailsList" [allowColumnResizing]="true"
+                      [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                      (onRowUpdated)="onrowUpdatedForUser($event)" [showBorders]="true">
+                      <dxo-editing mode="cell" [allowUpdating]="true" [allowDeleting]="false">
+                      </dxo-editing>
+                      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 50]"
+                        [showNavigationButtons]="true" [showInfo]="true">
+                      </dxo-pager>
+                      <dxo-paging [pageSize]="10"></dxo-paging>
+                      <dxi-column dataField="digiColorUserId" caption="DG Color User Id" [width]="120">
+                      </dxi-column>
+                      <dxi-column dataField="empCodeName" caption="Employee Name">
+                        <dxo-lookup [dataSource]="assignToRunnerList" valueExpr="empName" displayExpr="empName">
+                        </dxo-lookup>
+                      </dxi-column>
+                    </dx-data-grid>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" style="padding-left: 0px;">
+                <div class="" style="margin-top: 10px">
+                  <h3>Process</h3>
+                </div>
+                <div class="shadowbox inward_boxs_Div inward_boxs_without_mar">
+                  <div id="form-container" style="padding:0 8px;">
+                    <dx-data-grid id="inquiryLlist" [dataSource]="processList" [height]="331"
+                      [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                      (onRowUpdated)="onProcessUpdate($event)" (onRowInserted)="OnProcessInsert($event)"
+                      (onRowRemoved)="OnProcessDeleted($event)" (onEditingStart)="logEvent($event)"
+                      [showBorders]="true">
+                      <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                      </dxo-editing>
+                      <dxo-paging [enabled]="false"></dxo-paging>
+                      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                        [showNavigationButtons]="true" [showInfo]="true">
+                      </dxo-pager>
+                      <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                      <dxi-column dataField="process" caption="Process">
+                      </dxi-column>
+                      <dxi-column dataField="id" caption="Id" [visible]=false>
+                      </dxi-column>
+                      <dxi-column dataField="typeValue" caption="TypeValue" [visible]=false>
+                      </dxi-column>
+                    </dx-data-grid>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" style="padding-left: 0px;">
+                <div class="" style="margin-top: 10px">
+                  <h3>LightSource</h3>
+                </div>
+                <div class="shadowbox inward_boxs_Div inward_boxs_without_mar">
+                  <div id="form-container" style="padding:0 8px;">
+                    <dx-data-grid id="inquiryLlist" [dataSource]="lightSourceData" [allowColumnResizing]="true"
+                      [height]="331" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                      (onRowUpdated)="onProcessUpdate($event)" (onRowInserted)="OnProcessInsert($event)"
+                      (onRowRemoved)="OnProcessDeleted($event)" (onEditingStart)="logEvent($event)"
+                      [showBorders]="true">
+                      <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                      </dxo-editing>
+                      <dxo-paging [enabled]="false"></dxo-paging>
+                      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                        [showNavigationButtons]="true" [showInfo]="true">
+                      </dxo-pager>
+                      <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                      <dxi-column dataField="lightSource" caption="LightSource">
+                      </dxi-column>
+                      <dxi-column dataField="id" caption="Id" [visible]=false>
+                      </dxi-column>
+                      <dxi-column dataField="typeValue" caption="TypeValue" [visible]=false>
+                      </dxi-column>
+                    </dx-data-grid>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" style="padding-left: 0px;">
+                <div class="" style="margin-top: 10px">
+                  <h3>Color Gamut</h3>
+                </div>
+                <div class="shadowbox inward_boxs_Div inward_boxs_without_mar">
+                  <div id="form-container" style="padding:0 8px;">
+                    <dx-data-grid id="inquiryLlist" [dataSource]="colorGamutData" [allowColumnResizing]="true"
+                      [height]="331" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                      (onRowUpdated)="onProcessUpdate($event)" (onRowInserted)="OnProcessInsert($event)"
+                      (onRowRemoved)="OnProcessDeleted($event)" (onEditingStart)="logEvent($event)"
+                      [showBorders]="true">
+                      <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                      </dxo-editing>
+                      <dxo-paging [enabled]="false"></dxo-paging>
+                      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                        [showNavigationButtons]="true" [showInfo]="true">
+                      </dxo-pager>
+                      <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                      <dxi-column dataField="colourGamut" caption="Color Gamut">
+                      </dxi-column>
+                      <dxi-column dataField="id" caption="Id" [visible]=false>
+                      </dxi-column>
+                      <dxi-column dataField="typeValue" caption="TypeValue" [visible]=false>
+                      </dxi-column>
+                    </dx-data-grid>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" style="padding-left: 0px;">
+                <div class="" style="margin-top: 10px">
+                  <h3>Substrate</h3>
+                </div>
+                <div class="shadowbox inward_boxs_Div inward_boxs_without_mar">
+                  <div id="form-container" style="padding:0 8px;">
+                    <dx-data-grid id="inquiryLlist" [dataSource]="customerSubstrateData" [allowColumnResizing]="true"
+                      [wordWrapEnabled]="true" [allowColumnReordering]="true" (onRowUpdated)="onProcessUpdate($event)"
+                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)" [height]="331"
+                      (onEditingStart)="logEvent($event)" [showBorders]="true">
+                      <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                      </dxo-editing>
+                      <dxo-paging [enabled]="false"></dxo-paging>
+                      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                        [showNavigationButtons]="true" [showInfo]="true">
+                      </dxo-pager>
+                      <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                      <dxi-column dataField="typeofIndustries" caption="Substrate">
+                      </dxi-column>
+                      <dxi-column dataField="unitofMeasurement" caption="Fabric Quality">
+                      </dxi-column>
+                      <dxi-column dataField="id" caption="Id" [visible]=false>
+                      </dxi-column>
+                      <dxi-column dataField="typeValue" caption="TypeValue" [visible]=false>
+                      </dxi-column>
+                    </dx-data-grid>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3" style="padding-left: 0px;">
+                <div class="" style="margin-top: 10px">
+                  <h3>Fastness</h3>
+                </div>
+                <div class="shadowbox inward_boxs_Div inward_boxs_without_mar">
+                  <div id="form-container" style="padding:0 8px;">
+                    <dx-data-grid id="inquiryLlist" [dataSource]="fastnessDataSource" [allowColumnResizing]="true"
+                      [wordWrapEnabled]="true" [allowColumnReordering]="true" (onRowUpdated)="onProcessUpdate($event)"
+                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)" [height]="331"
+                      (onEditingStart)="logEvent($event)" [showBorders]="true">
+                      <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                      </dxo-editing>
+                      <dxo-paging [enabled]="false"></dxo-paging>
+                      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                        [showNavigationButtons]="true" [showInfo]="true">
+                      </dxo-pager>
+                      <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                      <dxi-column dataField="nameofFastness" caption="Fastness">
+                      </dxi-column>
+                      <dxi-column dataField="testMethod" caption="Test Method">
+                      </dxi-column>
+                      <dxi-column dataField="id" caption="Id" [visible]=false>
+                      </dxi-column>
+                      <dxi-column dataField="typeValue" caption="TypeValue" [visible]=false>
+                      </dxi-column>
+                    </dx-data-grid>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </dx-scroll-view>
+  </div>
+</div>

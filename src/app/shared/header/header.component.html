@@ -1,0 +1,48 @@
+<div class="header_right_Sec">
+  <ul>
+    <!-- logout -->
+    <li>
+      <a href="javascript:void();" class="login_border" (click)="logout()"><i class="fa fa-sign-out"></i></a>
+    </li>
+    <!-- logout -->
+    <!-- Open Menu -->
+    <li>
+      <a href="javascript:void();" class="login_border" (click)="OnClickViewMenu()"><i class="fa fa-bars"></i></a>
+    </li>
+    <!-- Open Menu -->
+  </ul>
+</div>
+
+<!-- Menu Content   -->
+<div *ngIf="IsViewMenuVisible" class="header-right-open-menu-main-section">
+  <div class="row header-large-device">
+    <div class="col-3" *ngIf="reportlist.length > 0">
+      <h3 class="ruby-list-heading">My Folder</h3>
+      <dx-list [dataSource]="reportlist" [height]="300" [searchEnabled]="true" searchExpr="report_Name"
+        searchMode="contains">
+        <div *dxTemplate="let data of 'item'" (click)="onVisible($event)">
+          <a class="reports" [routerLink]="data.folder_Name" [queryParams]="{reportid:data.id}" style="float: left; width: 85%;">{{
+            data.report_Name }}</a>
+        </div>
+      </dx-list>
+    </div>
+    <div class="col-3" *ngFor="let menuContentItem of menuContent; let index = index">
+      <h3 class="ruby-list-heading">{{menuContentItem?.title}}</h3>
+      <dx-list #list [dataSource]="menuContentItem.subMenu" [height]="300" [searchEnabled]="true" searchExpr="Name"
+        searchMode="contains" pageLoadMode="scrollBottom">
+        <div *dxTemplate="let data of 'item'" (click)="onVisible($event)">
+          <div *ngIf="data.routing">
+            <a href="javascript:void();" (click)="OnClickViewMenu()" [routerLink]="data.routing">
+              {{ data.Name }}
+            </a>
+          </div>
+          <div *ngIf="!data.routing">{{ data.Name }}</div>
+        </div>
+      </dx-list>
+    </div>
+  </div>
+</div>
+<!-- Menu Content   -->
+
+<div (click)="OnClickViewMobileMenu()" *ngIf="IsViewMobileMenuVisible"
+  style="position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 1040;background-color: transparent;"></div>

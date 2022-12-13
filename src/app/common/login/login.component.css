@@ -1,0 +1,450 @@
+.login-form {
+    border-color: #d1d1d1;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    background: #f6f6f6;
+    width: 438px;
+    margin: 0 auto;
+    margin-top: 95px;
+    margin-bottom: 135px;
+  }
+
+  .login-form h3 {
+    background: #ffcc66;
+    margin: 0px 0 20px 0;
+    color: #000000d6;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 10px 10px 0 0px;
+  }
+
+  .field-box {
+    width: 100%;
+    display: table;
+    padding: 0px 55px;
+  }
+
+  .checkbox {
+    width: 100%;
+    float: left;
+    margin-top: 18px;
+    margin-bottom: 15px;
+  }
+
+  .checkbox-input {
+    padding: 0px;
+    margin-left: 0px !important;
+  }
+
+  .rememberme {
+    color: #000;
+    font-style: normal;
+    font-size: 13px;
+    padding-left: 20px;
+    width: 50%;
+  }
+
+  .forgot-text {
+    margin-top: 0px;
+    color: #fff;
+      text-align: right;
+      float: right;
+      width: 100%;
+      padding-right: 20px;
+  }
+
+  .login-btn-mar-top {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+  }
+
+  .error {
+    font-size: 13px;
+    color: #c02916;
+  }
+
+  @media only screen and (min-width: 320px) and (max-width:767px) {
+    .login-form {
+      margin-top: 69px;
+      margin-bottom: 110px;
+      width: 100%;
+      padding-bottom: 10px;
+    }
+    .login-form[_ngcontent-c3] h3[_ngcontent-c3] {
+      padding: 12px 0;
+      font-size: 19px;
+    }
+    .field-box[_ngcontent-c3] {
+      width: 100%;
+      display: table;
+      padding: 0px 20px;
+    }
+    .carousel-inner {height: 140px;}
+    .carousel-inner img {height: 140px;object-fit: cover!important;}
+
+  }
+
+
+  .login-22 .bg-img {
+    background-size: auto;
+    background: rgba(0, 0, 0, 0.04) url("/assets/images/bg-image-8.jpg") top left repeat;
+    background-size: cover;
+    top: 0;
+    bottom: 0;
+    opacity: 1;
+    z-index: 999;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+  }
+
+  .login-22 .info {
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    border: solid 5px #fff;
+    text-align: center;
+  }
+
+  .login-22 .info h1 {
+    font-size: 25px;
+    color: #fff;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+
+  .login-22 .info p {
+    margin-bottom: 0;
+    color: #fff;
+    line-height: 28px;
+  }
+
+  .login-22 .bg-color-13 {
+    min-height: 100vh;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+  }
+
+  .login-22 .form-section {
+    text-align: center;
+    padding: 30px;
+    background: #fff;
+    border-radius: 5px;
+  }
+
+  .login-22 .form-section {
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+  }
+
+  .login-22 .form-section h3 {
+    border-bottom: 1px solid #ccc;
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #505050;
+  }
+
+  .login-22 .btn-section {
+    margin: 0 auto 30px;
+  }
+
+  .login-22 .btn-section {
+    top: 20px;
+    position: absolute;
+    right: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+  }
+
+  .login-22 .btn-section .btn-1 {
+    line-height: 30px;
+    text-align: center;
+    width: 90px;
+    border-radius: 50px 0 0 50px;
+  }
+
+  .login-22 .btn-section .active-bg {
+    background: #0f96f9;
+    color: #fff;
+  }
+
+  .login-22 .btn-section .link-btn {
+    font-size: 12px;
+    float: left;
+    background: transparent;
+    letter-spacing: 1px;
+    text-align: left;
+    font-weight: 600;
+    border-radius: 0;
+    color: #0f96f9;
+    text-decoration: none;
+    text-decoration: blink;
+  }
+
+  .login-22 .login-inner-form {
+    color: #0f96f9;
+    position: relative;
+  }
+
+  .login-22 .forgot-pass:hover {
+    color: #5d96d4 !important;
+    cursor: pointer;
+  }
+
+  .login-22 .login-inner-form {
+    color: #0f96f9;
+  }
+
+  .login-22 .form-section {
+    text-align: center;
+  }
+
+  .login-22 .login-inner-form .form-box {
+    float: left;
+    width: 100%;
+    position: relative;
+  }
+
+  .login-22 .login-inner-form .form-group {
+    margin-bottom: 12px;
+  }
+
+  .login-22 .form-box {
+    width: 100%;
+    text-align: center;
+  }
+
+  .login-22 .login-inner-form .form-box input {
+    float: left;
+    width: 100%;
+    padding: 11px 45px 11px 20px;
+    border-radius: 50px;
+  }
+
+  .login-22 .login-inner-form .input-text {
+    font-size: 14px;
+    outline: none;
+    color: #616161;
+    border-radius: 3px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    background: #f3f3f3;
+    box-shadow: none;
+  }
+
+  .login-22 .login-inner-form .form-box i {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    font-size: 19px;
+    color: #616161;
+  }
+
+  .login-22 .login-inner-form .checkbox {
+    margin-bottom: 25px;
+    font-size: 14px;
+  }
+
+  .login-22 .login-inner-form .form-check {
+    float: left;
+    margin-bottom: 0;
+  }
+
+  .form-check {
+    position: relative;
+    display: block;
+    margin-bottom: .5rem;
+  }
+
+  .login-22 .login-inner-form .form-check-label {
+    padding-left: 25px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #616161;
+  }
+
+  .login-22 .login-inner-form .form-check label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 2px;
+    margin-left: -25px;
+    border: none;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .login-22 .login-inner-form .checkbox a {
+    font-size: 14px;
+    color: #616161;
+    float: right;
+    margin-left: 3px;
+  }
+
+  .login-22 .login-inner-form .btn-theme {
+    background: #0f96f9;
+    border: none;
+    color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .login-22 .login-inner-form .btn-md {
+    cursor: pointer;
+    padding: 10px 30px 9px 30px;
+    height: 45px;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 50px;
+    color: #fff;
+  }
+
+  .input_class_form {
+    width: 100%;
+    padding: 11px 45px 11px 20px;
+    border-radius: 50px !important;
+    border: 0px;
+  }
+
+  .radio_button_class {
+    width: 50%;
+    float: left;
+  }
+
+  .login-inner-form {
+    display: table;
+    width: 100%;
+  }
+
+  .radio_button_class label {
+    font-size: 15px;
+  }
+
+  .btn-md:hover {
+    background-color: #8a0886 !important;
+  }
+
+  .container {
+    width: 96% !important;
+  }
+
+  .content_wrapper {
+    width: 960px !important;
+    margin: 0 auto;
+  }
+
+  .information h2 {
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font: bold 20px 'Open Sans', Arial, sans-serif;
+    font-size: 25px;
+    text-align: center;
+    line-height: 35px;
+    margin-top: 35px;
+    font-weight: 600;
+    color: #444;
+  }
+
+  .slider_class .carousel-indicators li {
+    display: none;
+  }
+
+  .information p {
+    text-align: justify;
+    line-height: 20px;
+    color: #777;
+  }
+
+  .slider_class .carousel-inner>.item>a>img, .carousel-inner>.item>img {
+    line-height: 1;
+    object-fit: cover;
+  }
+
+  .slider_form .form-section {
+    float: right !important;
+    width: 100%;
+    box-shadow: none !important;
+    position: absolute !important;
+    right: 0;
+    top: 125px;
+    background-color: transparent !important;
+  }
+
+  .slider_form .form-section h3 {
+    border-bottom: 1px solid #ccc;
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+  }
+
+  .slider_class .carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next, .carousel-control .icon-prev {
+    opacity: 0 !important;
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    .content_wrapper {
+      width: 100% !important;
+    }
+    .logo img {
+      width: 15%;
+      display: table;
+      text-align: center;
+    }
+    .slider_form .form-section h3 {
+      font-size: 15px;
+      color: #000;
+    }
+    .information h2 {
+      font-size: 14px;
+      line-height: 20px;
+      margin-top: 60px;
+    }
+    .information p {
+      font-size: 14px;
+    }
+    .slider_form .form-section h3 {
+      border-bottom: 1px solid #ccc !important;
+      margin-bottom: 0px;
+    }
+    .input_class_form {
+      padding: 8px 39px 8px 20px;
+    }
+    .information {
+      margin-top: 210px;
+    }
+  }
+.user-error{
+  background-color:red;
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+  margin-left: 5px;
+  padding: 2px 5px;
+  border-radius: 5px
+}

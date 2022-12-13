@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <div class="row">
+    <div class="header">
+      <div class="jay-logo" *ngIf="showHideLogo">
+        <a uiSref="productAnalyser">
+          <img src="/assets/images/logo-jay1.png">
+        </a>
+      </div>
+      <div class="jay-logo" *ngIf="!showHideLogo" >
+        <a uiSref="productAnalyser">
+          <img  class="dgColorLogo"  src="/assets/images/dg-colour-logo.png">
+        </a>
+      </div>
+      <app-header></app-header>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

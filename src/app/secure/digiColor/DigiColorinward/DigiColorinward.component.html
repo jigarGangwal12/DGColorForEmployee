@@ -1,0 +1,1198 @@
+<div class="header-dropdown">
+  <span class="headerDropdownMenu col-md-2">
+  </span>
+</div>
+<div class="container-fluid margin-top-none">
+  <div class="bradcrum-link-left-side">
+    <ul>
+      <li>
+        <span href="" class=""> DG Color </span>
+        <i class="fa fa-chevron-right"></i>
+      </li>
+      <li class="bradcrum-link-left-side-nonehover">
+        Inward Form
+      </li>
+    </ul>
+  </div>
+  <div class="header_sub_main">
+    <div class="padi-Left-108">
+      <div class="header-sub-menu">
+        <ul>
+          <li [ngClass]="{'active': showR1Grid }"><a (click)="onReportValueChange('R1')">Sample Mapping</a>
+          </li>
+          <li [ngClass]="{'active': showR2Grid }"><a (click)="onReportValueChange('R2')">Inward Form</a></li>
+          <li [ngClass]="{'active': showR3Grid }"><a (click)="onReportValueChange('R3')">Inward From List</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="grid-container digiInward-cont-rt-padi-none">
+  <div *ngIf="showR1Grid">
+    <div id="" class="inward-page-width">
+      <div class="col-md-12 customProductpadinone">
+        <div class="long-title long-title1">
+          <h3>Sample Mapping Details </h3>
+        </div>
+        <div class="row shadowbox shadowbox_inquiry inward_form" style="padding: 12px 0px 16px 0px !important;">
+          <div class="col-md-6">
+            <div class="col-md-6" style="padding-left: 2px;">
+              <label>Case Id</label>
+            </div>
+            <div class="col-md-12" style=" padding-left: 4px;">
+              <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="case"
+                [dataSource]="caseIdData" displayExpr="caseIdAndConsignee" valueExpr="caseId"
+                (onValueChanged)="caseIdValueChanged($event)" placeholder="Select Case Id" [showClearButton]="true"
+                [searchEnabled]="true">
+              </dx-select-box>
+            </div>
+          </div>
+          <div class="col-md-6" style="padding-left: 4px;">
+            <div class="col-md-12">
+              <label>Inquiry Datetime</label>
+            </div>
+            <div class="col-md-12">
+              <span style="margin-left:-2px;display:inline-block;">
+                <dx-date-box style="border-bottom:1px solid #ddd !important; padding:0px !important;"
+                  Id="inquirydateTime" placeholder="Select  Date" [readOnly]=true [(value)]="caseIdDatetime" type="date"
+                  displayFormat="dd/MM/yyyy hh:mm">
+                </dx-date-box>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="caseIdDatetime" class="col-md-12 inwardbtm-grid">
+            <dx-tree-list id="sampleidMap" [dataSource]="samppleDataForMaping" keyExpr="shadeId"
+              [columnAutoWidth]="true" (onSelectionChanged)="onSelectionChangedMapping($event)" [wordWrapEnabled]="true"
+              [showBorders]="true">
+              <dxo-scrolling mode="standard">
+                <!-- or "virtual" | "infinite" -->
+              </dxo-scrolling>
+              <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+              <!-- <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter> -->
+              <dxo-selection mode="multiple"></dxo-selection>
+              <dxi-column [allowHeaderFiltering]="false" dataField="shadeId" caption="Shade Id"
+                style="padding-left: 40px !important;"></dxi-column>
+              <dxi-column dataField="shadeName" caption="Shade Name"></dxi-column>
+              <dxi-column dataField="rgbColor" caption="RGB Color" [visible]=false></dxi-column>
+            </dx-tree-list>
+          </div>
+        </div>
+      </div>
+      <div class="main_pop">
+        <dx-button class="inward-cancel-btn" stylingMode="contained" text="Cancel" type="normal" (click)="cancelData()"
+          [width]="120">
+        </dx-button>
+        <dx-button *ngIf="!disablesubbtn" class="take-to-inward-btn" stylingMode="contained" text="Take to Inward"
+          type="normal" [width]="130" (click)="MapSampleDatatoCaseIdDataForm(samppleDataForMaping)">
+        </dx-button>
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="showR2Grid">
+    <div id="scrollview-demo" class="inward-page2">
+      <dx-scroll-view #scrollView id="scrollview" [scrollByContent]="true" [scrollByThumb]="true"
+        [bounceEnabled]="false" [useNative]="true" direction="both" reachBottomText="Updating...">
+        <div *ngIf="!this.editShadeid" class="customerDetails-inward">
+          <div class="">
+            <h3>Customer Details </h3>
+          </div>
+          <div class="shadowbox shadowbox_inquiry inward_form inward_boxs_Div">
+            <div class="">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Case Id</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-select-box Id="case" [dataSource]="mapwithSamplIdCustomerList"
+                          displayExpr="consigneeNameCode" valueExpr="consigneeCode"
+                          (onSelectionChanged)="InwardcaseIdValueChanged($event)" placeholder="Select Case Id"
+                          [showClearButton]="true" [searchEnabled]="true">
+                        </dx-select-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Customer Shade Name/No</label>
+                    </div>
+                    <div class="">
+                      <span *ngIf="shadeNameIddata">
+                        <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Shade No"
+                          [dataSource]="shadeNameIddata" displayExpr="shadeNameId" valueExpr="shadeid"
+                          [showSelectionControls]="true" (onValueChanged)="shadeidValueChanged($event)"
+                          noDataText="No data found" [maxDisplayedTags]="5" applyValueMode="instantly"
+                          [showClearButton]="true"></dx-tag-box>
+
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Customer Name </label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-select-box Id="case" [dataSource]="mapwithSamplIdCustomerList" displayExpr="consigneeName"
+                          [(value)]="InwardDataModel.consigneeCode" [readOnly]=true valueExpr="consigneeCode"
+                          placeholder="Select Customer" [showClearButton]="true" [searchEnabled]="true">
+                        </dx-select-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Agent Name</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.agentNameCode" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class=" Margin_Top_Inward">
+              <div class="col-md-12">
+                <div class="row">
+                  <!-- <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Requirement</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
+                          [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
+                          [value]="[InwardDataModel.requirement]" [showSelectionControls]="true"
+                          (onValueChanged)="RequirementValueChanged($event)" noDataText="No data found"
+                          [maxDisplayedTags]="1" applyValueMode="instantly" [showClearButton]="true"></dx-tag-box>
+                      </span>
+                    </div>
+                  </div> -->
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Substrate</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-select-box Id="case" [dataSource]="uniqueTypeofIndustries" displayExpr="typeofIndustries"
+                          valueExpr="typeofIndustries" [(value)]="InwardDataModel.substrate"
+                          (onSelectionChanged)="typeofIndustriesValueChanged($event)" placeholder="Select Substrate"
+                          [showClearButton]="true" [searchEnabled]="true">
+                        </dx-select-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Fabric Quality</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-select-box Id="case" [dataSource]="uomList" displayExpr="unitofMeasurement"
+                          valueExpr="unitofMeasurement" [(value)]="InwardDataModel.fabricQuality"
+                          placeholder="Select Fabric Quality" [showClearButton]="true" [searchEnabled]="true">
+                        </dx-select-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Ratio</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.ratio"></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class=" Margin_Top_Inward">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Customer Type</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.customerType" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Inquiry Date Time</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-date-box class="inq-date-time-box" Id="scandateTime" placeholder="Select  Date"
+                          [readOnly]=true [value]="InwardDataModel.inquiryDateTime" type="date"
+                          displayFormat="dd/MM/yyyy hh:mm">
+                        </dx-date-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Inward Date Time</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-date-box class="inq-date-time-box" Id="scandateTime" placeholder="Select  Date"
+                          [readOnly]=true [value]="InwardDataModel.inwardDateTime" type="date"
+                          displayFormat="dd/MM/yyyy hh:mm">
+                        </dx-date-box>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class=" Margin_Top_Inward">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Address</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.address1" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Address 2 </label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.address2" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>City</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeCity" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>State</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeState" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="col-md-12 p-0">
+              <div class="inward_boxs_Div_Width">
+                <div class="col-md-12 col-xl-7 ipad-pading-cont-details">
+                  <div class="" style="margin-top: 10px">
+                    <h3>Report Submission</h3>
+                  </div>
+                  <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                    <div id="form-container" style="padding:0 8px;">
+                      <dx-data-grid id="CustomerContacDetailsId" [dataSource]="customerContactDetails"
+                        [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                        [showBorders]="true">
+                        <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                        </dxo-editing>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxi-column caption="Recipient" dataField="recipientName" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false"
+                          [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="recipientName" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <dxi-column dataField="contactPerson" caption="Name">
+                        </dxi-column>
+                        <dxi-column dataField="designation" caption="Designation">
+                        </dxi-column>
+                        <dxi-column dataField="mobileNumber" [width]=80 caption="Mobile No" dataType="number">
+                        </dxi-column>
+                        <dxi-column dataField="emailId" caption="EmailId">
+                        </dxi-column>
+                      </dx-data-grid>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-12 col-xl-6 ipad-pading-cust-requrment">
+                  <div class="" style="margin-top: 10px">
+                    <h3>Customer Requirement</h3>
+                  </div>
+                  <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                    <div id="form-container" style="padding:0 8px;">
+                      <dx-data-grid id="CustomerSubstrateId" [dataSource]="customerSubStrate"
+                        [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                        [showBorders]="true">
+                        <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                        </dxo-editing>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxi-column dataField="typeofIndustries1" caption="Substrate" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="typeofIndustriesCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="uniqueTypeofIndustries" valueExpr="typeofIndustries"
+                            displayExpr="typeofIndustries">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'typeofIndustriesCellTemplate'">
+                          <dx-select-box [dataSource]="uniqueTypeofIndustries" valueExpr="typeofIndustries"
+                            [(value)]="cellInfo.value" (onValueChanged)="cellInfo.setValue($event.value)"
+                            [searchEnabled]="true" (onSelectionChanged)="typeofIndustriesValueChanged($event)"
+                            displayExpr="typeofIndustries" placeholder="Select Product">
+                          </dx-select-box>
+                        </div>
+                        <dxi-column dataField="uom" caption="Fabric Quality" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="uomCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="uomList" valueExpr="unitofMeasurement"
+                            displayExpr="unitofMeasurement">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'uomCellTemplate'">
+                          <dx-select-box [dataSource]="uomList" valueExpr="unitofMeasurement" [(value)]="cellInfo.value"
+                            [searchEnabled]="true" (onValueChanged)="cellInfo.setValue($event.value)"
+                            displayExpr="unitofMeasurement" placeholder="Select UOM">
+                          </dx-select-box>
+                        </div>
+                        <dxi-column dataField="ratio" caption="Ratio">
+                        </dxi-column>
+                      </dx-data-grid>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="">
+            <div class="col-md-12 p-0">
+              <div class="inward_boxs_Div_Width">
+                <div class="col-md-12 col-xl-7 ipad-pading-cont-details">
+                  <div class="" style="margin-top: 10px">
+                    <h3>Competitor Data</h3>
+                  </div>
+                  <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                    <div id="form-container" style="padding:0 8px;">
+                      <dx-data-grid id="CompetitorGridId" [dataSource]="competitorDataSource"
+                        [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                        [showBorders]="true">
+                        <dxo-editing mode="form" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                        </dxo-editing>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxi-column dataField="competitorName" caption="Competitor" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="competitorNameCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="competitorName" valueExpr="cm_name" displayExpr="cm_name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'competitorNameCellTemplate'">
+                          <dx-select-box [dataSource]="competitorName" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
+                            (onSelectionChanged)="typeofIndustriesValueChanged($event)" displayExpr="cm_name"
+                            valueExpr="cm_name" placeholder="Select Competitor">
+                          </dx-select-box>
+                        </div>
+                        <dxi-column dataField="contactPerson" caption="Name">
+                        </dxi-column>
+                        <dxi-column dataField="designation" caption="Designation">
+                        </dxi-column>
+                        <dxi-column dataField="mobileNumber" [width]=80 caption="Mobile No" dataType="number">
+                        </dxi-column>
+                        <dxi-column dataField="emailId" caption="EmailId">
+                        </dxi-column>
+                      </dx-data-grid>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class=" Margin_Top_Inward">
+            <div class="" style="margin-top: 10px">
+              <h3>Lab Testing Parameters</h3>
+            </div>
+            <div class="col-md-12 p-0" style="padding: 0;">
+              <div class="shadowbox inward_boxs_Div" style="padding: 10px 0px !important;">
+                <div class="col-md-12" style="margin-bottom:8px;">
+                  <div class="row">
+                    <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                      <div class="">
+                        <label>Process</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-select-box Id="case" [dataSource]="processList" displayExpr="process" valueExpr="process"
+                            [(value)]="InwardDataModel.process" placeholder="Select Process" [showClearButton]="true"
+                            (onValueChanged)="onProcessValueChanged($event)" [searchEnabled]="true">
+                          </dx-select-box>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                      <div class="">
+                        <label>Dischargability *</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-radio-group [items]="dischargeabilityDataSource"
+                            [(value)]="InwardDataModel.dischargeability"
+                            (onValueChanged)="dischargeValueChanged($event)" layout="horizontal">
+                          </dx-radio-group>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                      <!-- <div class="">
+                      <label>Dyes Range</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-tag-box Id="case" placeholder="Select Dyes Range" [dataSource]="alldyesRange"
+                          displayExpr="dyesRange" valueExpr="dyesRange" [showSelectionControls]="true"
+                          (onValueChanged)="dyesRangeValueChanged($event)" noDataText="No data found"
+                          [maxDisplayedTags]="4" applyValueMode="instantly" [showClearButton]="true"></dx-tag-box>
+                      </span>
+                    </div> -->
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12" style="margin-top: 5px;">
+                  <div class="col-md-12">
+                    <div class="col-md-12" style="padding:0px 0 8px 4px;">
+                      <label style="font-size: 15px;border-bottom: 1px solid #212529;">Light Source:</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                      <div class="">
+                        <label>Primary</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-select-box Id="case" [dataSource]="lightSourceData" displayExpr="lightSource"
+                            valueExpr="lightSource" [(value)]="InwardDataModel.primarylightSource"
+                            placeholder="Select Primary" [showClearButton]="true" [searchEnabled]="true">
+                          </dx-select-box>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                      <div class="">
+                        <label>Secondary</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-select-box Id="case" [dataSource]="lightSourceData" displayExpr="lightSource"
+                            valueExpr="lightSource" [(value)]="InwardDataModel.secondarylightSource"
+                            placeholder="Select Secondary" [showClearButton]="true" [searchEnabled]="true">
+                          </dx-select-box>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                      <div class="">
+                        <label>Tertiary</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-select-box Id="case" [dataSource]="lightSourceData" displayExpr="lightSource"
+                            valueExpr="lightSource" [(value)]="InwardDataModel.tertiarylightSource"
+                            placeholder="Select Tertiary" [showClearButton]="true" [searchEnabled]="true">
+                          </dx-select-box>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="col-md-12 p-0">
+              <div class="" style="margin-top: 10px">
+                <h3>Fastness Requirement</h3>
+              </div>
+              <div class="shadowbox inward_boxs_Div" style="height: 120px;">
+                <div id="form-container" class="inward_boxs_without_mar" style="padding: 0 8px;">
+                  <dx-data-grid id="CustomerFastnessId" [dataSource]="customerFastnessDataSource"
+                    [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                    [showBorders]="true">
+                    <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                    </dxo-editing>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                      [showNavigationButtons]="true" [showInfo]="true">
+                    </dxo-pager>
+                    <dxo-paging [pageSize]="5"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                      [showNavigationButtons]="true" [showInfo]="true">
+                    </dxo-pager>
+                    <dxi-column dataField="nameoffastness" caption="Name of Fastness" [allowFiltering]="false"
+                      [width]=260 [allowSorting]="false" [allowGrouping]="false"
+                      editCellTemplate="nameofFastnessCellTemplate" [cellTemplate]="cellTemplate"
+                      [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                      <dxo-lookup [dataSource]="nameofFastnessDataSource" valueExpr="nameofFastness"
+                        displayExpr="nameofFastness">
+                      </dxo-lookup>
+                    </dxi-column>
+                    <div *dxTemplate="let cellInfo of 'nameofFastnessCellTemplate'">
+                      <dx-select-box [dataSource]="nameofFastnessDataSource" valueExpr="nameofFastness"
+                        displayExpr="nameofFastness" [(value)]="cellInfo.value" [searchEnabled]="true"
+                        (onValueChanged)="cellInfo.setValue($event.value)"
+                        (onSelectionChanged)="nameofFastnessValueChanged($event)" placeholder="Select Fastness">
+                      </dx-select-box>
+                    </div>
+                    <dxi-column dataField="testMethod" caption="Test Method" [allowFiltering]="false" [width]=220
+                      [allowSorting]="false" [allowGrouping]="false" editCellTemplate="testMethodCellTemplate"
+                      [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                      <dxo-lookup [dataSource]="testMethodList" valueExpr="testMethod" displayExpr="testMethod">
+                      </dxo-lookup>
+                    </dxi-column>
+                    <div *dxTemplate="let cellInfo of 'testMethodCellTemplate'">
+                      <dx-select-box [dataSource]="testMethodList" displayExpr="testMethod" valueExpr="testMethod"
+                        [searchEnabled]="true" [(value)]="cellInfo.value"
+                        (onValueChanged)="cellInfo.setValue($event.value)" placeholder="Select Method">
+                      </dx-select-box>
+                    </div>
+                    <dxi-column *ngIf="showRubbingColumninGrid" dataField="dryorWet" [width]=120 caption="">
+                      <dxo-lookup [dataSource]="dyesorWetDataSource" valueExpr="name" displayExpr="name">
+                      </dxo-lookup>
+                    </dxi-column>
+                    <dxi-column dataField="targetRating" [width]=120 caption="Target Rating">
+                      <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating"
+                        displayExpr="targetRating">
+                      </dxo-lookup>
+                    </dxi-column>
+                    <dxi-column dataField="remark" caption="Remarks"></dxi-column>
+                  </dx-data-grid>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" Margin_Top_Inward">
+            <div class="col-md-12 p-0">
+              <div class="submit_class shadowbox inward_boxs_Div" style="height: 110px; margin-bottom: 16px;
+              padding: 10px 14px 20px 14px !important;">
+                <div class="col-md-12" style="margin-top: 0px;padding-right: 0px;">
+                  <label>Remarks:</label>
+                  <span>
+                    <dx-text-area Id="case" [height]="70" [(value)]="InwardDataModel.remarks">
+                    </dx-text-area>
+                  </span>
+                </div>
+                <div class="col-md-6 col-xl-3" style="top: 10px;padding-left: 0px !important;">
+                  <label>Submitted By:</label>
+                  <span>
+                    <dx-text-box Id="case" [(value)]="InwardDataModel.submitedby" [readOnly]=true></dx-text-box>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="this.editShadeid" class="col-md-12 customProductpadinone">
+          <div class="">
+            <h3>Customer Details </h3>
+          </div>
+          <div class="shadowbox shadowbox_inquiry inward_form inward_boxs_Div">
+            <div class="">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>CaseId</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.caseId" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Customer Shade Name/No</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.shadeNameNoForEdit" [readOnly]=true>
+                        </dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Customer Name </label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeCode" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Agent Name</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.agentNameCode" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class=" Margin_Top_Inward">
+              <div class="col-md-12">
+                <div class="row">
+                  <!-- <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Requirement</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
+                          [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
+                          [value]="[InwardDataModel.requirement]" [showSelectionControls]="true"
+                          (onValueChanged)="RequirementValueChanged($event)" noDataText="No data found"
+                          [maxDisplayedTags]="1" applyValueMode="instantly" [showClearButton]="true"></dx-tag-box>
+                      </span>
+                    </div>
+                  </div> -->
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Substrate</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <!-- <dx-text-box Id="case" [(value)]="InwardDataModel.substrate" [readOnly]=true></dx-text-box> -->
+                        <dx-select-box Id="case" [dataSource]="uniqueTypeofIndustries" displayExpr="typeofIndustries"
+                          valueExpr="typeofIndustries" [(value)]="InwardDataModel.substrate"
+                          (onSelectionChanged)="typeofIndustriesValueChanged($event)" placeholder="Select Substrate"
+                          [showClearButton]="true" [searchEnabled]="true">
+                        </dx-select-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Fabric Quality</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <!-- <dx-text-box Id="case" [(value)]="InwardDataModel.fabricQuality" [readOnly]=true></dx-text-box> -->
+                        <dx-select-box Id="case" [dataSource]="uomList" displayExpr="unitofMeasurement"
+                          valueExpr="unitofMeasurement" [(value)]="InwardDataModel.fabricQuality"
+                          placeholder="Select Fabric Quality" [showClearButton]="true" [searchEnabled]="true">
+                        </dx-select-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Ratio</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <!-- <dx-text-box Id="case" [(value)]="InwardDataModel.ratio" [readOnly]=true></dx-text-box> -->
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.ratio"></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class=" Margin_Top_Inward">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Customer Type</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.customerType" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Inquiry Date Time</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-date-box Id="scandateTime" placeholder="Select  Date" [readOnly]=true
+                          [value]="InwardDataModel.inquiryDateTime" type="date" displayFormat="dd/MM/yyyy hh:mm">
+                        </dx-date-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Inward Date Time</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-date-box Id="scandateTime" placeholder="Select  Date" [readOnly]=true
+                          [value]="InwardDataModel.inwardDateTime" type="date" displayFormat="dd/MM/yyyy hh:mm">
+                        </dx-date-box>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class=" Margin_Top_Inward">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Address</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.address1" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Address 2 </label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.address2" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>City</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeCity" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>State</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeState" [readOnly]=true></dx-text-box>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="col-md-12 p-0">
+              <div class="inward_boxs_Div_Width">
+                <div class="col-md-12 col-xl-7 ipad-pading-cont-details">
+                  <div class="" style="margin-top: 10px">
+                    <h3>Report Submission</h3>
+                  </div>
+                  <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                    <div id="form-container" style="padding:0 8px;">
+                      <dx-data-grid id="CustomerContacDetailsId" [dataSource]="customerContactDetails"
+                        [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                        [showBorders]="true">
+                        <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                        </dxo-editing>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxi-column caption="Recipient" dataField="recipientName" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" [showInColumnChooser]="false"
+                          [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="recipientName" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <dxi-column dataField="contactPerson" caption="Name">
+                        </dxi-column>
+                        <dxi-column dataField="designation" caption="Designation">
+                        </dxi-column>
+                        <dxi-column dataField="mobileNumber" [width]=80 caption="Mobile No" dataType="number">
+                        </dxi-column>
+                        <dxi-column dataField="emailId" caption="EmailId">
+                        </dxi-column>
+                      </dx-data-grid>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-12 col-xl-6 ipad-pading-cust-requrment">
+                  <div class="" style="margin-top: 10px">
+                    <h3>Customer Requirement</h3>
+                  </div>
+                  <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                    <div id="form-container" style="padding:0 8px;">
+                      <dx-data-grid id="CustomerSubstrateId" [dataSource]="customerSubStrate"
+                        [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                        [showBorders]="true">
+                        <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                        </dxo-editing>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxi-column dataField="typeofIndustries1" caption="Substrate" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="typeofIndustriesCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="uniqueTypeofIndustries" valueExpr="typeofIndustries"
+                            displayExpr="typeofIndustries">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'typeofIndustriesCellTemplate'">
+                          <dx-select-box [dataSource]="uniqueTypeofIndustries" valueExpr="typeofIndustries"
+                            [(value)]="cellInfo.value" (onValueChanged)="cellInfo.setValue($event.value)"
+                            [searchEnabled]="true" (onSelectionChanged)="typeofIndustriesValueChanged($event)"
+                            displayExpr="typeofIndustries" placeholder="Select Product">
+                          </dx-select-box>
+                        </div>
+                        <dxi-column dataField="uom" caption="Fabric Quality" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="uomCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="uomList" valueExpr="unitofMeasurement"
+                            displayExpr="unitofMeasurement">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'uomCellTemplate'">
+                          <dx-select-box [dataSource]="uomList" valueExpr="unitofMeasurement" [(value)]="cellInfo.value"
+                            [searchEnabled]="true" (onValueChanged)="cellInfo.setValue($event.value)"
+                            displayExpr="unitofMeasurement" placeholder="Select UOM">
+                          </dx-select-box>
+                        </div>
+                        <dxi-column dataField="ratio" caption="Ratio">
+                        </dxi-column>
+                      </dx-data-grid>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class=" Margin_Top_Inward">
+            <div class="" style="margin-top: 10px">
+              <h3>Lab Testing Parameters</h3>
+            </div>
+            <div class="col-md-12 p-0" style="padding: 0;">
+              <div class="shadowbox inward_boxs_Div" style="padding: 10px 0px !important;">
+                <div class="col-md-12" style="margin-bottom:8px;">
+                  <div class="row">
+                    <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                      <div class="">
+                        <label>Process</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-select-box Id="case" [dataSource]="processList" displayExpr="process" valueExpr="process"
+                            [(value)]="InwardDataModel.process" placeholder="Select Process" [showClearButton]="true"
+                            (onValueChanged)="onProcessValueChanged($event)" [searchEnabled]="true">
+                          </dx-select-box>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                      <div class="">
+                        <label>Dischargability *</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-radio-group [items]="dischargeabilityDataSource"
+                            [(value)]="InwardDataModel.dischargeability"
+                            (onValueChanged)="dischargeValueChanged($event)" layout="horizontal">
+                          </dx-radio-group>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                      <!-- <div class="">
+                      <label>Dyes Range</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-tag-box Id="case" placeholder="Select Dyes Range" [dataSource]="alldyesRange"
+                          displayExpr="dyesRange" valueExpr="dyesRange" [showSelectionControls]="true"
+                          (onValueChanged)="dyesRangeValueChanged($event)" noDataText="No data found"
+                          [maxDisplayedTags]="4" applyValueMode="instantly" [showClearButton]="true"></dx-tag-box>
+                      </span>
+                    </div> -->
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12" style="margin-top: 5px;">
+                  <div class="col-md-12">
+                    <div class="col-md-12" style="padding:0px 0 8px 4px;">
+                      <label style="font-size: 15px;border-bottom: 1px solid #212529;">Light Source:</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                      <div class="">
+                        <label>Primary</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-select-box Id="case" [dataSource]="lightSourceData" displayExpr="lightSource"
+                            valueExpr="lightSource" [(value)]="InwardDataModel.primarylightSource"
+                            placeholder="Select Primary" [showClearButton]="true" [searchEnabled]="true">
+                          </dx-select-box>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                      <div class="">
+                        <label>Secondary</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-select-box Id="case" [dataSource]="lightSourceData" displayExpr="lightSource"
+                            valueExpr="lightSource" [(value)]="InwardDataModel.secondarylightSource"
+                            placeholder="Select Secondary" [showClearButton]="true" [searchEnabled]="true">
+                          </dx-select-box>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                      <div class="">
+                        <label>Tertiary</label>
+                      </div>
+                      <div class="">
+                        <span>
+                          <dx-select-box Id="case" [dataSource]="lightSourceData" displayExpr="lightSource"
+                            valueExpr="lightSource" [(value)]="InwardDataModel.tertiarylightSource"
+                            placeholder="Select Tertiary" [showClearButton]="true" [searchEnabled]="true">
+                          </dx-select-box>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="">
+            <div class="col-md-12 p-0">
+              <div class="" style="margin-top: 10px">
+                <h3>Fastness Requirement</h3>
+              </div>
+              <div class="shadowbox inward_boxs_Div" style="height: 120px;">
+                <div id="form-container" class="inward_boxs_without_mar" style="padding: 0 8px;">
+                  <dx-data-grid id="CustomerFastnessId" [dataSource]="customerFastnessDataSource"
+                    [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                    [showBorders]="true">
+                    <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                    </dxo-editing>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                      [showNavigationButtons]="true" [showInfo]="true">
+                    </dxo-pager>
+                    <dxo-paging [pageSize]="5"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
+                      [showNavigationButtons]="true" [showInfo]="true">
+                    </dxo-pager>
+                    <dxi-column dataField="nameoffastness" caption="Name of Fastness" [allowFiltering]="false"
+                      [width]=260 [allowSorting]="false" [allowGrouping]="false"
+                      editCellTemplate="nameofFastnessCellTemplate" [cellTemplate]="cellTemplate"
+                      [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                      <dxo-lookup [dataSource]="nameofFastnessDataSource" valueExpr="nameofFastness"
+                        displayExpr="nameofFastness">
+                      </dxo-lookup>
+                    </dxi-column>
+                    <div *dxTemplate="let cellInfo of 'nameofFastnessCellTemplate'">
+                      <dx-select-box [dataSource]="nameofFastnessDataSource" valueExpr="nameofFastness"
+                        displayExpr="nameofFastness" [(value)]="cellInfo.value" [searchEnabled]="true"
+                        (onValueChanged)="cellInfo.setValue($event.value)"
+                        (onSelectionChanged)="nameofFastnessValueChanged($event)" placeholder="Select Fastness">
+                      </dx-select-box>
+                    </div>
+                    <dxi-column dataField="testMethod" caption="Test Method" [allowFiltering]="false" [width]=220
+                      [allowSorting]="false" [allowGrouping]="false" editCellTemplate="testMethodCellTemplate"
+                      [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                      <dxo-lookup [dataSource]="testMethodList" valueExpr="testMethod" displayExpr="testMethod">
+                      </dxo-lookup>
+                    </dxi-column>
+                    <div *dxTemplate="let cellInfo of 'testMethodCellTemplate'">
+                      <dx-select-box [dataSource]="testMethodList" displayExpr="testMethod" valueExpr="testMethod"
+                        [searchEnabled]="true" [(value)]="cellInfo.value"
+                        (onValueChanged)="cellInfo.setValue($event.value)" placeholder="Select Method">
+                      </dx-select-box>
+                    </div>
+                    <dxi-column dataField="dryorWet" [width]=120 caption="">
+                      <dxo-lookup [dataSource]="dyesorWetDataSource" valueExpr="name" displayExpr="name">
+                      </dxo-lookup>
+                    </dxi-column>
+                    <dxi-column dataField="targetRating" [width]=120 caption="Target Rating">
+                      <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating"
+                        displayExpr="targetRating">
+                      </dxo-lookup>
+                    </dxi-column>
+                    <dxi-column dataField="remark" caption="Remarks"></dxi-column>
+                  </dx-data-grid>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class=" Margin_Top_Inward">
+            <div class="col-md-12 p-0">
+              <div class="submit_class shadowbox inward_boxs_Div" style="height: 110px; margin-bottom: 16px;
+              padding: 10px 14px 20px 14px !important;">
+                <div class="col-md-12" style="margin-top: 0px;padding-right: 0px;">
+                  <label>Remarks:</label>
+                  <span>
+                    <dx-text-area Id="case" [height]="70" [(value)]="InwardDataModel.remarks">
+                    </dx-text-area>
+                  </span>
+                </div>
+                <div class="col-md-6 col-xl-3" style="top: 10px;padding-left: 0px !important;">
+                  <label>Submitted By:</label>
+                  <span>
+                    <dx-text-box Id="case" [(value)]="InwardDataModel.submitedby" [readOnly]=true></dx-text-box>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main_pop mb-2">
+          <span *ngIf="InwardDataModel.saveOrSubmit != 'Update' &&  !disablesubbtn">
+            <dx-button class="submitbtn" stylingMode="contained" text="Submit" type="normal" [width]="130"
+              (click)="SaveInwardData(InwardDataModel)">
+            </dx-button>
+          </span>
+          <span *ngIf="InwardDataModel.saveOrSubmit == 'Update' &&  !disablesubbtn">
+            <dx-button class="submitbtn" stylingMode="contained" text="Update" type="normal" [width]="130"
+              (click)="UpdateInwardData(InwardDataModel)">
+            </dx-button>
+          </span>
+          <dx-button class="cancel-btn" stylingMode="contained" text="Cancel" type="normal" (click)="cancelData()"
+            [width]="120" style="margin-right: 15px;">
+          </dx-button>
+        </div>
+      </dx-scroll-view>
+    </div>
+  </div>
+  <div *ngIf="showR3Grid">
+    <!-- <ag-grid-angular #agGrid style="width: 185vh; height: 85vh;" class="ag-theme-balham" [defaultColDef]="defaultColDef"
+      [columnDefs]="columnDefs" [rowData]="inwardFormListData" [animateRows]="true" [masterDetail]="true"
+      [detailCellRendererParams]="detailCellRendererParams" (firstDataRendered)="onFirstDataRendered($event)"
+      (gridReady)="onInwardDetailsGridReady($event)">
+    </ag-grid-angular> -->
+    <div id="scrollview-demo" class="inward-page2">
+      <dx-scroll-view #scrollView id="scrollview" [scrollByContent]="true" [scrollByThumb]="true"
+        [bounceEnabled]="false" [useNative]="true" direction="both" reachBottomText="Updating...">
+        <div class="col-md-12 customProductpadinone">
+          <div class="long-title long-title1">
+            <h3>Inward Details </h3>
+          </div>
+          <dx-data-grid id="inquiryLlist" [dataSource]="inwardFormListData" [allowColumnResizing]="true"
+            (onCellClick)="getDetailByShadeId($event)" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+            [showBorders]="true" style="padding-right: 13px;">
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]" [showNavigationButtons]="true"
+              [showInfo]="true">
+            </dxo-pager>
+            <dxo-paging [pageSize]="50"></dxo-paging>
+            <dxo-group-panel [visible]="true"></dxo-group-panel>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+              [showInfo]="true">
+            </dxo-pager>
+            <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true">
+            </dxo-search-panel>
+            <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+            <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+            <dxo-column-chooser [enabled]="true" mode="dragAndDrop">
+            </dxo-column-chooser>
+            <dxi-column dataField="inwardDate" dataType="datetime" [format]="{ type: 'dd/MM/yy hh:mm' }" [width]="110"
+              caption="Inward Datetime">
+            </dxi-column>
+            <dxi-column dataField="shadeid" [width]="85" caption="Shade Id"></dxi-column>
+            <dxi-column dataField="caseId" dataType="number" [width]="85" caption="Case Id" style="cursor: pointer;">
+            </dxi-column>
+            <dxi-column dataField="shadeName" caption="Shade Name"></dxi-column>
+            <dxi-column dataField="customerShadeChartName" caption="Cust. Shade Name"></dxi-column>
+            <dxi-column dataField="agentNameCode" caption="Agent Name"></dxi-column>
+            <dxi-column dataField="consigneeCode" caption="Customer Code"></dxi-column>
+            <dxi-column dataField="consigneeName" caption="Customer Name"></dxi-column>
+            <dxi-column dataField="lightSourcePrimary" caption="Primary"></dxi-column>
+            <dxi-column dataField="lightSourceSecondary" caption="Secondary"></dxi-column>
+            <dxi-column dataField="lightSourceTertiary" caption="Tertiary"></dxi-column>
+            <dxi-column dataField="process" caption="Process"></dxi-column>
+            <dxi-column dataField="dischargability" caption="Dischargability"></dxi-column>
+            <dxi-column dataField="inwardcreatedBy" caption="Emp Name"></dxi-column>
+            <dxi-column dataField="sampleRemarks" caption="Remarks"></dxi-column>
+          </dx-data-grid>
+        </div>
+      </dx-scroll-view>
+    </div>
+  </div>
+</div>
+<dx-load-panel #loadPanel shadingColor="rgba(0,0,0,0.4)" [(visible)]="loadingVisible" [showIndicator]="true"
+  [showPane]="true" [shading]="true" [closeOnOutsideClick]="false">
+</dx-load-panel>

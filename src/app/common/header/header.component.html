@@ -1,0 +1,79 @@
+<div class="ruby-menu-demo-header">
+  <div class="ruby-wrapper">
+    <button class="c-hamburger c-hamburger--htx visible-xs">
+      <span>menu</span>
+    </button>
+    <ul class="ruby-menu">
+      <li class="ruby-menu-mega" (click)="OnClickViewMenu($event)"><a><i class="fa fa-bars" aria-hidden="true"></i></a>
+        <div *ngIf="IsViewMenuVisible" class="header-right-open-menu-main-section" (click)="onPrevent($event)">
+          <div class="row">
+            <div class="col-3" *ngFor="let menuContentItem of menuContent; let index = index">
+              <h3 class="ruby-list-heading">{{menuContentItem?.title}}</h3>
+              <dx-list #list [dataSource]="menuContentItem.subMenu" [height]="300" [searchEnabled]="true"
+                searchExpr="Name" searchMode="contains">
+                <div *dxTemplate="let data of 'item'" (click)="onVisible($event)">
+                  <div *ngIf="data.routing"> <a href="javascript:void();" [routerLink]="data.routing">
+                      {{ data.Name }}</a>
+                  </div>
+                  <div *ngIf="!data.routing">{{ data.Name }}</div>
+                </div>
+              </dx-list>
+            </div>
+          </div>
+        </div>
+        <span class="ruby-dropdown-toggle"></span>
+      </li>
+    </ul>
+    <div (click)="logout()" class="notification">
+      <i class="fas fa-sign-out-alt"></i>
+    </div>
+  </div>
+</div>
+<div *ngIf='ScreenSizeWidth <= 767' class="mobile_header_button">
+  <button (click)="OnClickViewMobileMenu()" class="navbar-toggler" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</div>
+<div *ngIf="IsViewMobileMenuVisible" class="mobile_menu">
+  <div class="mobile_menu_data">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h3>Orders</h3>
+      </li>
+      <li class="list-group-item"><a uiSref="priceListState">Price
+          List</a>
+    </ul>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h3>Shipments</h3>
+      </li>
+      <li class="list-group-item"><a uiSref="shipmentDashboardState">Past 30 Days</a>
+      <li class="list-group-item"><a uiSref="customerRegistrationFormState">Manage Consignee</a>
+    </ul>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h3>Accounts</h3>
+      </li>
+      <li class="list-group-item"><a uiSref="accountDashboardState">OutStanding</a>
+    </ul>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h3>COA & Certification</h3>
+      </li>
+      <li class="list-group-item"><a uiSref="certificateofAnalysisState">Certificate of Analysis</a></li>
+      <li class="list-group-item"><a uiSref="downloadSdsandOtherCertiState">Other Certificate</a></li>
+      <li class="list-group-item"><a uiSref="downloadsdsCertificateState">MSDS</a></li>
+    </ul>
+
+  </div>
+</div>
+
+<div class="marquee_class">
+</div>
+
+<!-- The Modal -->
+
+<div (click)="OnClickViewMenu($event)" *ngIf="IsViewMenuVisible"
+  style="position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 1040;background-color: transparent;"></div>
+<div (click)="OnClickViewMobileMenu()" *ngIf="IsViewMobileMenuVisible"
+  style="position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 1040;background-color: transparent;"></div>
