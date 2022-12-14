@@ -1046,6 +1046,7 @@ export class ShadeMatchingComponent implements OnInit {
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.InsertRecipePrediction, this.popUpPredictionAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
+          this.router.navigate(["/digicolor/shadeMatching/"]);
           notify({ message: 'Record Save Successfully', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
         });
     }

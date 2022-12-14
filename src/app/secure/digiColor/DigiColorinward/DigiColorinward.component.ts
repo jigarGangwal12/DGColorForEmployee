@@ -122,6 +122,7 @@ export class DigiColorinwardComponent implements OnInit {
   filterCompetitorByItemCategory: any;
   selecteditemCategory: any;
   addCompetitorpopupVisible: boolean = false;
+  count: any = 0;
 
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.dyesorWetDataSource = [{ name: 'Dry' }, { name: 'Wet' }]
@@ -646,12 +647,59 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   SaveInwardData(data: any) {
+    if(data.caseId == ''){
+      notify({ message: 'Please Select Case Id', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.shadeNoName.length == 0){
+      notify({ message: 'Please Select Shade Id/Name', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.substrate == ''){
+      notify({ message: 'Please Select Substrate', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.fabricQuality == ''){
+      notify({ message: 'Please Select Fabric Quality', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.process == ''){
+      notify({ message: 'Please Select Process', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.dischargeability == ''){
+      notify({ message: 'Please Select Dischargeability', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.primarylightSource == ''){
+      notify({ message: 'Please Select Primary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.secondarylightSource == ''){
+      notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
     this.customerSubStrate[0]['typeofIndustries1'] = this.InwardDataModel.substrate;
     this.customerSubStrate[0]['uom'] = this.InwardDataModel.fabricQuality;
     this.customerSubStrate[0]['ratio'] = this.InwardDataModel.ratio;
     let isreportSendClickorNot = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
     if (isreportSendClickorNot.length == 0) {
       notify({ message: 'Select atlese One Person for Send Report', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    this.customerContactDetails.forEach((element: any) => {
+      if(element.mobileNumber == null || element.mobileNumber == '' ){
+          this.count++;      
+      }
+      else if (element.mobileNumber.length < 10 || element.mobileNumber.length > 10){
+        this.count++;
+      }
+      else {
+        this.count = 0;
+      }
+    });
+    if(this.count > 0){
+      notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
     data.customerContactDetail = this.customerContactDetails;
@@ -675,6 +723,45 @@ export class DigiColorinwardComponent implements OnInit {
     }
   }
   UpdateInwardData(data: any) {
+    if(data.substrate == ''){
+      notify({ message: 'Please Select Substrate', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.fabricQuality == ''){
+      notify({ message: 'Please Select Fabric Quality', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.process == ''){
+      notify({ message: 'Please Select Process', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.dischargeability == ''){
+      notify({ message: 'Please Select Dischargeability', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.primarylightSource == ''){
+      notify({ message: 'Please Select Primary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if(data.secondarylightSource == ''){
+      notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    this.customerContactDetails.forEach((element: any) => {
+      if(element.mobileNumber == null || element.mobileNumber == ''){
+          this.count++;      
+      }
+      else if(element.mobileNumber.length < 10 || element.mobileNumber.length > 10){
+        this.count++;
+      }
+      else {
+        this.count = 0;
+      }
+    });
+    if(this.count > 0){
+      notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
     data.customerContactDetail = this.customerContactDetails;
     this.customerSubStrate[0]['typeofIndustries1'] = this.InwardDataModel.substrate;
     this.customerSubStrate[0]['uom'] = this.InwardDataModel.fabricQuality;

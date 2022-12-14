@@ -48,6 +48,7 @@ export class InquiryComponent implements OnInit {
   customerRequirementType: any;
   selectedRowData: any = [];
   recipientName = [{ name: "Contact Person" }, { name: "Other" }];
+  count: any = 0;
 
   constructor(
     private apiService: ApiService,
@@ -349,6 +350,21 @@ export class InquiryComponent implements OnInit {
       notify({ message: 'Select atlese One Person for Send Report', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
+    this.consigneeContactDetail.forEach((element: any) => {
+      if(element.mobileNumber == null || element.mobileNumber == ''){
+          this.count++;      
+      }
+      else if(element.mobileNumber.length < 10 || element.mobileNumber.length > 10){
+        this.count++;
+      }
+      else {
+        this.count = 0;
+      }
+    });
+    if(this.count > 0){
+      notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
     data.customerContactDetail = this.consigneeContactDetail;
     this.UserId = ((localStorage.getItem("empCode")));
     this.UserId = this.UserId.substring(1, this.UserId.length - 1);
@@ -382,6 +398,27 @@ export class InquiryComponent implements OnInit {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
+    let isreportSendClickorNot = this.consigneeContactDetail.filter((da: any) => da.isReportSend == true);
+    if (isreportSendClickorNot.length == 0) {
+      notify({ message: 'Select atlese One Person for Send Report', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    this.consigneeContactDetail.forEach((element: any) => {
+      if(element.mobileNumber == null || element.mobileNumber == ''){
+          this.count++;      
+      }
+      else if(element.mobileNumber.length < 10 || element.mobileNumber.length > 10){
+        this.count++;
+      }
+      else {
+        this.count = 0;
+      }
+    });
+    if(this.count > 0){
+      notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    data.customerContactDetail = this.consigneeContactDetail;
     data.AssignToRunnerCode = data.assignToRunner.split('-')[0];
     data.assignToRunner = data.assignToRunner.split('-')[1];
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)

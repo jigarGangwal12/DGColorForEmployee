@@ -755,7 +755,7 @@
               </dx-button>
             </span>
             <input type="hidden" name="allData" value="{{popUpShadeMatchingAllData}}">
-            <div class="col-md-3" style=" padding-left: 0px; margin-bottom: 10px;">
+            <div class="col-md-3" style=" padding-left: 0px; margin-bottom: 10px;" *ngIf="showUpdatebtnInShadeMatching">
               <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
                 [dataSource]="allColorGamutData" displayExpr="colourGamut" valueExpr="colourGamut"
                 placeholder="Select Color" [showClearButton]="false" [searchEnabled]="false"
