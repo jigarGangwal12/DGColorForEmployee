@@ -369,7 +369,7 @@ export class InquiryComponent implements OnInit {
     this.UserId = ((localStorage.getItem("empCode")));
     this.UserId = this.UserId.substring(1, this.UserId.length - 1);
     data.createdBy = this.UserId;
-    if (!data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.assignToRunner) {
+    if (!data.inquiryType || !data.scanMode || !data.inquiryBy || !data.requirementValue || !data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.assignToRunner) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }

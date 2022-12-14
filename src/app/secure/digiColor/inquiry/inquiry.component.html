@@ -77,7 +77,7 @@
                   [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
                   (onValueChanged)="customerRequirementValueChange($event)" [value]="[inquiryForm.requirement]"
                   [showSelectionControls]="true" noDataText="No data found" [maxDisplayedTags]="2"
-                  applyValueMode="instantly" [showClearButton]="true">
+                  applyValueMode="instantly" [showClearButton]="false">
                   <dx-validator>
                     <dxi-validation-rule type="required" message="Requirement is required">
                     </dxi-validation-rule>
