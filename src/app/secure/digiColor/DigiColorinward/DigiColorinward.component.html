@@ -69,7 +69,7 @@
               </dxo-scrolling>
               <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
               <!-- <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter> -->
-              <dxo-selection mode="multiple"></dxo-selection>
+              <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
               <dxi-column [allowHeaderFiltering]="false" dataField="shadeId" caption="Shade Id"
                 style="padding-left: 40px !important;"></dxi-column>
               <dxi-column dataField="shadeName" caption="Shade Name"></dxi-column>
@@ -319,9 +319,11 @@
                     <div id="form-container" style="padding:0 8px;">
                       <dx-data-grid id="CustomerContacDetailsId" [dataSource]="customerContactDetails"
                         [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
-                        [showBorders]="true">
+                        [(selectedRowKeys)]="selectedRowDataContactDetail" keyExpr="id"
+                        (onSelectionChanged)="selectionChangedHandler($event)" [showBorders]="true">
                         <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                         </dxo-editing>
+                        <dxo-selection mode="multiple"></dxo-selection>
                         <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
                           [showNavigationButtons]="true" [showInfo]="true">
                         </dxo-pager>
@@ -339,7 +341,7 @@
                         </dxi-column>
                         <dxi-column dataField="designation" caption="Designation">
                         </dxi-column>
-                        <dxi-column dataField="mobileNumber" [width]=80 caption="Mobile No" dataType="number">
+                        <dxi-column dataField="mobileNumber" [width]=90 caption="Mobile No" dataType="number">
                         </dxi-column>
                         <dxi-column dataField="emailId" caption="EmailId">
                         </dxi-column>
@@ -402,53 +404,112 @@
             </div>
           </div>
 
-          <!-- <div class="">
+          <div class="">
             <div class="col-md-12 p-0">
               <div class="inward_boxs_Div_Width">
-                <div class="col-md-12 col-xl-7 ipad-pading-cont-details">
+                <div class="col-md-12 col-xl-12 ipad-pading-cont-details">
                   <div class="" style="margin-top: 10px">
                     <h3>Competitor Data</h3>
                   </div>
                   <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
                     <div id="form-container" style="padding:0 8px;">
+                      <h4 style="color: #607d8b;cursor: pointer;" (click)="addCompetitorandProduct()">Add Competitor &
+                        Product</h4>
                       <dx-data-grid id="CompetitorGridId" [dataSource]="competitorDataSource"
                         [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
                         [showBorders]="true">
-                        <dxo-editing mode="form" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                        <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                         </dxo-editing>
                         <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
                           [showNavigationButtons]="true" [showInfo]="true">
                         </dxo-pager>
                         <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
                         <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxi-column dataField="itemCategory" [width]='180' caption="Segment" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="itemCategoryCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="itemCategoryDataSource" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'itemCategoryCellTemplate'">
+                          <dx-select-box [dataSource]="itemCategoryDataSource" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
+                            (onSelectionChanged)="itemCategoryValueChanged($event)" displayExpr="name" valueExpr="name"
+                            placeholder="Select ItemCategory">
+                          </dx-select-box>
+                        </div>
                         <dxi-column dataField="competitorName" caption="Competitor" [allowFiltering]="false"
                           [allowSorting]="false" [allowGrouping]="false" editCellTemplate="competitorNameCellTemplate"
-                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
-                          <dxo-lookup [dataSource]="competitorName" valueExpr="cm_name" displayExpr="cm_name">
+                          [width]='170' [cellTemplate]="cellTemplate" [showInColumnChooser]="false"
+                          [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="filterCompetitorByItemCategory" valueExpr="cm_name"
+                            displayExpr="cm_name">
                           </dxo-lookup>
                         </dxi-column>
                         <div *dxTemplate="let cellInfo of 'competitorNameCellTemplate'">
-                          <dx-select-box [dataSource]="competitorName" [(value)]="cellInfo.value"
+                          <dx-select-box [dataSource]="filterCompetitorByItemCategory" [(value)]="cellInfo.value"
                             (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
-                            (onSelectionChanged)="typeofIndustriesValueChanged($event)" displayExpr="cm_name"
-                            valueExpr="cm_name" placeholder="Select Competitor">
+                            (onSelectionChanged)="competitorValueChanged($event)" displayExpr="cm_name"
+                            [acceptCustomValue]="true" valueExpr="cm_name" placeholder="Select Competitor">
                           </dx-select-box>
                         </div>
-                        <dxi-column dataField="contactPerson" caption="Name">
+                        <!-- <dxi-column [width]='140' dataField="productRange" caption="Product Range">
+                          <dxo-lookup [dataSource]="ProductRangeModeDataSource" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
                         </dxi-column>
-                        <dxi-column dataField="designation" caption="Designation">
+                        <dxi-column *ngIf="selecteditemCategory == 'AUX'" dataField="productSegment"
+                          caption="Product Segment" [allowFiltering]="false" [allowSorting]="false"
+                          [allowGrouping]="false" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="productSegment" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
                         </dxi-column>
-                        <dxi-column dataField="mobileNumber" [width]=80 caption="Mobile No" dataType="number">
+                        <dxi-column *ngIf="selecteditemCategory == 'AUX'" dataField="productFunction"
+                          caption="Product Function" [allowFiltering]="false" [allowSorting]="false"
+                          [allowGrouping]="false" editCellTemplate="productFunctionCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="productFunction" valueExpr="productFunction"
+                            displayExpr="productFunction">
+                          </dxo-lookup>
                         </dxi-column>
-                        <dxi-column dataField="emailId" caption="EmailId">
+                        <div *dxTemplate="let cellInfo of 'productFunctionCellTemplate'">
+                          <dx-select-box [dataSource]="productFunction" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
+                            (onSelectionChanged)="productFunctionValueChanged($event)" displayExpr="productFunction"
+                            valueExpr="productFunction" placeholder="Select Product Function">
+                          </dx-select-box>
+                        </div> -->
+                        <dxi-column dataField="product" caption="Product" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="productNameCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="filterProductByCompetitor" valueExpr="cm_name"
+                            displayExpr="cm_name">
+                          </dxo-lookup>
                         </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'productNameCellTemplate'">
+                          <!-- <dx-select-box [dataSource]="filterProductByCompetitor" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
+                            (onSelectionChanged)="competitorValueChanged($event)" displayExpr="productName"
+                            valueExpr="productName" placeholder="Select Competitor">
+                          </dx-select-box> -->
+
+                          <dx-tag-box [items]="filterProductByCompetitor" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" displayExpr="productName"
+                            valueExpr="productName" [showSelectionControls]="true" [searchEnabled]="true"
+                            noDataText="No data found" placeholder="Select Product" [maxDisplayedTags]="5"
+                            [showClearButton]="true">
+                          </dx-tag-box>
+                        </div>
+                        <!-- [acceptCustomValue]="true"
+                        (onCustomItemCreating)="addCustomItem($event)" -->
+                        <!-- <dxi-column dataField="year2122ActualQtyPM" caption="21-22 Actual Qty P/M"></dxi-column>
+                        <dxi-column dataField="year2223EstimateQtyPM" caption="22-23 Estimate Qty P/M"></dxi-column> -->
                       </dx-data-grid>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
 
           <div class=" Margin_Top_Inward">
             <div class="" style="margin-top: 10px">
@@ -852,12 +913,14 @@
                     <div id="form-container" style="padding:0 8px;">
                       <dx-data-grid id="CustomerContacDetailsId" [dataSource]="customerContactDetails"
                         [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
-                        [showBorders]="true">
+                        [(selectedRowKeys)]="selectedRowDataContactDetail" keyExpr="id"
+                        (onSelectionChanged)="selectionChangedHandler($event)" [showBorders]="true">
                         <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                         </dxo-editing>
                         <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
                           [showNavigationButtons]="true" [showInfo]="true">
                         </dxo-pager>
+                        <dxo-selection mode="multiple"></dxo-selection>
                         <dxo-paging [pageSize]="5"></dxo-paging>
                         <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
                           [showNavigationButtons]="true" [showInfo]="true">
@@ -872,7 +935,7 @@
                         </dxi-column>
                         <dxi-column dataField="designation" caption="Designation">
                         </dxi-column>
-                        <dxi-column dataField="mobileNumber" [width]=80 caption="Mobile No" dataType="number">
+                        <dxi-column dataField="mobileNumber" [width]=90 caption="Mobile No" dataType="number">
                         </dxi-column>
                         <dxi-column dataField="emailId" caption="EmailId">
                         </dxi-column>
@@ -931,6 +994,109 @@
                     </div>
                   </div>
                 </div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="">
+            <div class="col-md-12 p-0">
+              <div class="inward_boxs_Div_Width">
+                <div class="col-md-12 col-xl-12 ipad-pading-cont-details">
+                  <div class="" style="margin-top: 10px">
+                    <h3>Competitor Data</h3>
+                  </div>
+                  <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
+                    <div id="form-container" style="padding:0 8px;">
+                      <dx-data-grid id="CompetitorGridId" [dataSource]="competitorDataSource"
+                        [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                        [showBorders]="true">
+                        <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+                        </dxo-editing>
+                        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
+                          [showNavigationButtons]="true" [showInfo]="true">
+                        </dxo-pager>
+                        <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                        <dxo-paging [pageSize]="5"></dxo-paging>
+                        <dxi-column dataField="itemCategory" [width]='180' caption="Segment" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="itemCategoryCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="itemCategoryDataSource" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'itemCategoryCellTemplate'">
+                          <dx-select-box [dataSource]="itemCategoryDataSource" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
+                            (onSelectionChanged)="itemCategoryValueChanged($event)" displayExpr="name" valueExpr="name"
+                            placeholder="Select ItemCategory">
+                          </dx-select-box>
+                        </div>
+                        <dxi-column dataField="competitorName" caption="Competitor" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="competitorNameCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="filterCompetitorByItemCategory" valueExpr="cm_name"
+                            displayExpr="cm_name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'competitorNameCellTemplate'">
+                          <dx-select-box [dataSource]="filterCompetitorByItemCategory" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
+                            (onSelectionChanged)="competitorValueChanged($event)" displayExpr="cm_name"
+                            valueExpr="cm_name" placeholder="Select Competitor">
+                          </dx-select-box>
+                        </div>
+                        <!-- <dxi-column [width]='140' dataField="productRange" caption="Product Range">
+                          <dxo-lookup [dataSource]="ProductRangeModeDataSource" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <dxi-column *ngIf="selecteditemCategory == 'AUX'" dataField="productSegment"
+                          caption="Product Segment" [allowFiltering]="false" [allowSorting]="false"
+                          [allowGrouping]="false" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="productSegment" valueExpr="name" displayExpr="name">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <dxi-column *ngIf="selecteditemCategory == 'AUX'" dataField="productFunction"
+                          caption="Product Function" [allowFiltering]="false" [allowSorting]="false"
+                          [allowGrouping]="false" editCellTemplate="productFunctionCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="productFunction" valueExpr="productFunction"
+                            displayExpr="productFunction">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'productFunctionCellTemplate'">
+                          <dx-select-box [dataSource]="productFunction" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
+                            (onSelectionChanged)="productFunctionValueChanged($event)" displayExpr="productFunction"
+                            valueExpr="productFunction" placeholder="Select Product Function">
+                          </dx-select-box>
+                        </div> -->
+                        <dxi-column dataField="product" caption="Product" [allowFiltering]="false"
+                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="productNameCellTemplate"
+                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                          <dxo-lookup [dataSource]="filterProductByCompetitor" valueExpr="productName"
+                            displayExpr="productName">
+                          </dxo-lookup>
+                        </dxi-column>
+                        <div *dxTemplate="let cellInfo of 'productNameCellTemplate'">
+                          <!-- <dx-select-box [dataSource]="filterProductByCompetitor" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
+                            (onSelectionChanged)="competitorValueChanged($event)" displayExpr="productName"
+                            valueExpr="productName" placeholder="Select Competitor">
+                          </dx-select-box> -->
+
+                          <dx-tag-box [items]="filterProductByCompetitor" [(value)]="cellInfo.value"
+                            (onValueChanged)="cellInfo.setValue($event.value)" displayExpr="productName"
+                            valueExpr="productName" [showSelectionControls]="true" [searchEnabled]="true"
+                            noDataText="No data found" placeholder="Select Product" [maxDisplayedTags]="5"
+                            [showClearButton]="true">
+                          </dx-tag-box>
+
+                        </div>
+                        <!-- <dxi-column dataField="year2122ActualQtyPM" caption="21-22 Actual Qty P/M"></dxi-column>
+                        <dxi-column dataField="year2223EstimateQtyPM" caption="22-23 Estimate Qty P/M"></dxi-column> -->
+                      </dx-data-grid>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1187,6 +1353,7 @@
             <dxi-column dataField="dischargability" caption="Dischargability"></dxi-column>
             <dxi-column dataField="inwardcreatedBy" caption="Emp Name"></dxi-column>
             <dxi-column dataField="sampleRemarks" caption="Remarks"></dxi-column>
+            <dxi-column dataField="status" caption="Status"></dxi-column>
           </dx-data-grid>
         </div>
       </dx-scroll-view>
@@ -1196,3 +1363,132 @@
 <dx-load-panel #loadPanel shadingColor="rgba(0,0,0,0.4)" [(visible)]="loadingVisible" [showIndicator]="true"
   [showPane]="true" [shading]="true" [closeOnOutsideClick]="false">
 </dx-load-panel>
+
+<dx-popup [width]="'70%'" [showTitle]="true" [showCloseButton]="false" titleTemplate="titlerapidSearch"
+  id="addCompetitor" [dragEnabled]="true" [closeOnOutsideClick]="false" [(visible)]="addCompetitorpopupVisible">
+  <div *dxTemplate="let data of 'titlerapidSearch'" style="background-color:#e5e5e5; color:#000000;">
+    <div class="row" style="margin-top: 2px; margin-left: 0px; line-height: 30px;font-weight: 500;">
+      Add Competitor & Product
+      <p class="col-lg-2 col-md-2 col-xs-2 col-sm-2"
+        style="text-align-last: right; position: absolute; top: 10px; right: 5px;">
+        <button type="submit" (click)="addCompetitorandProductPopupClose($event)"
+          style="border: 5px; background-color: #e5e5e5;">
+          <i class="popupHeader" class="fa fa-window-close"></i>
+        </button>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- <div class="col-md-8 cashFlowChartData-popup-left-sec">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Add Competitor</h4>
+          <div class="col-md-4">
+          <dx-select-box Id="case" [dataSource]="itemCategoryDataSource" [searchEnabled]="true" displayExpr="name"
+            valueExpr="name" placeholder="Select ItemCategory">
+          </dx-select-box>
+          </div>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+      </div>
+    </div> -->
+    <div class="shadowbox shadowbox_inquiry inward_form inward_boxs_Div">
+      <div class="">
+        <div class="col-md-12">
+          <div class="row">
+            <h4>Add Competitor</h4>
+            <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+              <div class="">
+                <label>Item Category</label>
+              </div>
+              <div class="">
+                <span>
+                  <dx-select-box Id="case" [dataSource]="itemCategoryDataSource" [searchEnabled]="true"
+                    [value]="InwardDataModel.itemCategory" displayExpr="name" valueExpr="name"
+                    placeholder="Select ItemCategory">
+                  </dx-select-box>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+              <div class="">
+                <label>Competitor Name</label>
+              </div>
+              <div class="">
+                <span>
+                  <dx-text-box Id="case" [(value)]="InwardDataModel.competitorName"></dx-text-box>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main_pop mb-2">
+          <span>
+            <dx-button *ngIf="!disablesubbtn" class="submitbtnpopup" stylingMode="contained" text="Submit" type="normal"
+              [width]="130" style="margin:5px 0px 0px 12px" (click)="SaveCompetitorData(InwardDataModel)">
+            </dx-button>
+          </span>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="col-md-12" style="padding: 10px;">
+          <div class="row">
+            <h4>Add Competitor Product</h4>
+            <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+              <div class="">
+                <label>Item Category</label>
+              </div>
+              <div class="">
+                <span>
+                  <dx-select-box Id="case" [dataSource]="itemCategoryDataSource" [searchEnabled]="true"
+                    displayExpr="name" valueExpr="name" placeholder="Select ItemCategory"
+                    (onValueChanged)="itemCategoryValueChangedCompetitor($event)">
+                  </dx-select-box>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+              <div class="">
+                <label>Competitor Name</label>
+              </div>
+              <div class="">
+                <span>
+                  <dx-select-box [dataSource]="filterCompetitorByItemCategory" [searchEnabled]="true"
+                    [(value)]="InwardDataModel.competitorNameForProduct"
+                    (onSelectionChanged)="competitorValueChanged($event)" displayExpr="cm_name" valueExpr="cm_name"
+                    placeholder="Select Competitor">
+                  </dx-select-box>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+              <div class="">
+                <label>Product Name</label>
+              </div>
+              <div class="">
+                <span>
+                  <dx-text-box Id="case" [(value)]="InwardDataModel.productName"></dx-text-box>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main_pop mb-2">
+          <span>
+            <dx-button *ngIf="!disablesubbtn" class="submitbtnpopup" stylingMode="contained" text="Submit" type="normal"
+              [width]="130" style="margin:5px 0px 0px 12px" (click)="SaveCompetitorProductData(InwardDataModel)">
+            </dx-button>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+</dx-popup>

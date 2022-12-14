@@ -76,7 +76,7 @@
                 <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
                   [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
                   (onValueChanged)="customerRequirementValueChange($event)" [value]="[inquiryForm.requirement]"
-                  [showSelectionControls]="true" noDataText="No data found" [maxDisplayedTags]="1"
+                  [showSelectionControls]="true" noDataText="No data found" [maxDisplayedTags]="2"
                   applyValueMode="instantly" [showClearButton]="true">
                   <dx-validator>
                     <dxi-validation-rule type="required" message="Requirement is required">
@@ -95,16 +95,17 @@
                   </div>
                   <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
                     <div id="form-container" style="padding:0 8px;">
-                      <dx-data-grid id="CustomerContacDetailsId" [dataSource]="consigneeAddress"
+                      <dx-data-grid id="CustomerContacDetailsId" [dataSource]="consigneeContactDetail"
                         [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
-                        [showBorders]="true">
+                        [(selectedRowKeys)]="selectedRowData" keyExpr="id"
+                        (onSelectionChanged)="selectionChangedHandler($event)" [showBorders]="true">
                         <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                         </dxo-editing>
                         <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]"
                           [showNavigationButtons]="true" [showInfo]="true">
                         </dxo-pager>
                         <dxo-paging [pageSize]="5"></dxo-paging>
-
+                        <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
                         <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]"
                           [showNavigationButtons]="true" [showInfo]="true">
                         </dxo-pager>
@@ -231,7 +232,7 @@
             <dxi-column dataField="agentCode" caption="Agent Code" [width]="90"></dxi-column>
             <dxi-column dataField="agentNameCode" caption="Agent"></dxi-column>
             <dxi-column dataField="contactPerson" caption="Contact Person"></dxi-column>
-            <dxi-column dataField="contactNo" [width]="90" caption="Contact No"></dxi-column>
+            <dxi-column dataField="mobileNumber" [width]="90" caption="Contact No"></dxi-column>
             <dxi-column dataField="assignToEmp" caption="AssignToRunner"></dxi-column>
             <dxi-column dataField="city" caption="City"></dxi-column>
             <dxi-column dataField="cosigneeState" [width]="98" caption="State"></dxi-column>

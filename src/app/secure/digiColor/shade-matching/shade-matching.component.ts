@@ -554,7 +554,7 @@ export class ShadeMatchingComponent implements OnInit {
         this.lightSourcePrimary = res.table1[0].lightSourcePrimary;
         this.lightSourceSecondary = res.table1[0].lightSourceSecondary;
         this.lightSourceTertiary = res.table1[0].lightSourceTertiary;
-        this.samplereamark = res.table1[0].samplereamark;
+        this.samplereamark = res.table1[0].sampleRemarks;
 
         this.fastnessData = res.table2;
 

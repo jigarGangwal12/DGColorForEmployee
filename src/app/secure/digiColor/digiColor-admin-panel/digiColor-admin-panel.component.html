@@ -2,7 +2,7 @@
   <span class="headerDropdownMenu col-md-2">
   </span>
 </div> -->
-<!-- <div class="container-fluid margin-top-none">
+<div class="container-fluid margin-top-none">
   <div class="bradcrum-link-left-side">
     <ul>
       <li>
@@ -17,10 +17,18 @@
   <div class="header_sub_main">
     <div class="padi-Left-108">
       <div class="header-sub-menu">
+        <ul>
+          <li [ngClass]="{'active': selectedCategory == 'All' }">
+            <a (click)="onCreateUserClick('All')">All Data</a>
+          </li>
+          <li [ngClass]="{'active': selectedCategory == 'Create' }">
+            <a (click)="onCreateUserClick('Create')">Create User</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 
 <div class="grid-container digiInward-cont-rt-padi-none">
@@ -28,7 +36,7 @@
     <dx-scroll-view #scrollView id="scrollview" [scrollByContent]="true" [scrollByThumb]="true" [height]="windowHeight"
       [bounceEnabled]="false" [useNative]="true" direction="both" reachBottomText="Updating...">
       <div class="customerDetails-inward">
-        <div class="">
+        <div class="" *ngIf="allTables">
           <div class="col-md-12 p-0">
             <div class="inward_boxs_Div_Width">
 
@@ -207,6 +215,95 @@
 
             </div>
           </div>
+        </div>
+
+        <div *ngIf="createUser" style="margin-left: 400px;margin-right: 400px; margin-top: 10px;">
+
+          <h1 style="text-align:center;">Create User</h1>
+
+          <form #user="ngForm" (ngSubmit)="submit(user)">
+
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="firstname">UserName</label>
+                <input type="text" class="form-control" placeholder="UserName"  name="username" ngModel required>
+              </div>
+              <div class="form-group col-md-12">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" placeholder="Password"  name="password"  ngModel required>
+              </div>
+            </div>
+            <div class="form-row my-3">
+              <div class="form-group col-md-12">
+                <label for="email">Select Customer Code</label><br>
+                <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;"
+                  Id="shadematching" [dataSource]="cosigneeNameCode" displayExpr="name" valueExpr="value"
+                  placeholder="Select Consumer" [showClearButton]="true" [searchEnabled]="true"
+                  (onValueChanged)="ConsumerValueChanged($event)">
+                </dx-select-box>
+              </div>
+            </div>
+
+            <div class="form-row my-3">
+              <div class="col-md-3 mb-3">
+                <label for="customercode">Customer Code</label><br>
+
+                <input type="text" name="customercode" id="customercode" class="form-control" [(ngModel)]="userDataModel.customercode" readonly>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="customername">Customer Name</label><br>
+
+                <input type="text" name="customername" id="customername" class="form-control" [(ngModel)]="userDataModel.customername" readonly>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="agentcode">Agent Code</label><br>
+
+                <input type="text" name="agentcode" class="form-control" [(ngModel)]="userDataModel.agentcode" readonly>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="password">Agent Name</label><br>
+
+                <input type="text" name="agentname" class="form-control" [(ngModel)]="userDataModel.agentname" readonly>
+              </div>
+            </div>
+
+            <div class="btn-group my-4">
+              <button type="submit" class="btn btn-primary btn-lg" style="margin-left: 300px;">Submit</button>
+            </div>
+          </form>
+
+          <div class="long-title">
+            <h3>User List </h3>
+          </div>
+          <div class="shadowbox_inquiry">
+            <div class="col-md-12 col-md-padi-left-none">
+              <dx-data-grid id="inquiryLlist" [dataSource]="allUserList" [allowColumnResizing]="true"
+                [wordWrapEnabled]="true"  [allowColumnReordering]="true"
+                [showBorders]="true" style="padding-bottom: 50px;"  (onRowRemoved)="OnUserDeleted($event)">
+                <dxo-editing mode="cell" [allowDeleting]="true"></dxo-editing>
+                <dxo-paging [enabled]="false"></dxo-paging>
+                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+                  [showInfo]="true">
+                </dxo-pager>
+                <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true">
+                </dxo-search-panel>
+                <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                <dxo-column-chooser [enabled]="true" mode="dragAndDrop">
+                </dxo-column-chooser>
+                <dxi-column dataField="userName" caption="User Name" [width]="92"></dxi-column>
+                <dxi-column dataField="customerCode" caption="Customer Code"></dxi-column>
+                <dxi-column dataField="customerName" caption="Customer Name"></dxi-column>
+                <dxi-column dataField="agentCode" caption="Agent Code" [width]="90"></dxi-column>
+                <dxi-column dataField="agentName" caption="Agent"></dxi-column>
+                <dxi-column dataField="isActive" caption="Is Active"></dxi-column>
+                <dxi-column dataField="createdDate" dataType="datetime" [format]="{ type: 'dd/MM/yy hh:mm' }" [width]="110"
+                caption="Created Datetime">
+              </dxi-column>
+              </dx-data-grid>
+            </div>
+          </div>
+
         </div>
       </div>
     </dx-scroll-view>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { API_CONSTANTS } from '../../../constants/api-constants';
 import { ApiService } from 'src/app/core/services/api.service';
 import DataSource from 'devextreme/data/data_source';
@@ -7,12 +7,16 @@ import notify from 'devextreme/ui/notify';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ColumnApi, GridApi, ColDef } from 'ag-grid-community';
 import { SecureComponent } from '../../secure.component';
+import { DxDataGridComponent } from 'devextreme-angular/ui/data-grid';
 @Component({
   selector: 'app-inquiry',
   templateUrl: './inquiry.component.html',
   styleUrls: ['./inquiry.component.css']
 })
 export class InquiryComponent implements OnInit {
+  // @ViewChild('CustomerContacDetailsId', { static: false }) dataGrid: DxDataGridComponent;
+
+  // @ViewChild('CustomerContacDetailsId') dataGrid: DxDataGridComponent;
   API_CONSTANTS = API_CONSTANTS;
   inquiryForm: any;
   showR1Grid: boolean = true;
@@ -23,7 +27,7 @@ export class InquiryComponent implements OnInit {
   inquiryByData: string[];
   agentListData: any;
   consigneeList: any;
-  consigneeAddress = [];
+  consigneeContactDetail = [];
   cosigneeNameCodeList: any;
   rowGroupPanelShow = 'always';
   autoGroupRate: any;
@@ -42,14 +46,16 @@ export class InquiryComponent implements OnInit {
   UserId: any;
   disablesubbtn: boolean = false;
   customerRequirementType: any;
+  selectedRowData: any = [];
   recipientName = [{ name: "Contact Person" }, { name: "Other" }];
 
   constructor(
     private apiService: ApiService,
     public router: Router,
     private route: ActivatedRoute,
-    private secure:SecureComponent
+    private secure: SecureComponent
   ) {
+
     this.customerRequirementType = [{ name: 'Recipe Prediction' }, { name: 'Shade Matching Recipe' },]
     this.InquiryInofcolumnDef = [
       {
@@ -197,7 +203,7 @@ export class InquiryComponent implements OnInit {
     this.gridColumnApi = params.columnApi;
   }
   async ngOnInit() {
-    this.secure.showHideLogo=false;
+    this.secure.showHideLogo = false;
     // this.route.queryParams.subscribe(params => {
     //   let val = params.Caseid;
     //   if(val) {
@@ -272,12 +278,17 @@ export class InquiryComponent implements OnInit {
     this.inquiryForm.stateCodeForVisit = '';
     this.inquiryForm.postCodeForVisit = '';
     this.inquiryForm.sameasSysytemAddress = false;
-    this.consigneeAddress = [];
+    this.consigneeContactDetail = [];
 
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetConsigneeAddressDetails, { consigneeCode: event.value })
       .subscribe((res: any) => {
-        this.consigneeAddress = [];
-        this.consigneeAddress = res.table1;
+        this.consigneeContactDetail = [];
+        this.consigneeContactDetail = res.table1;
+        let filterReportTrue = this.consigneeContactDetail.filter((da: any) => da.isReportSend == true);
+        filterReportTrue.forEach((element: any) => {
+          this.selectedRowData.push(element.id);
+        });
+
         if (res.table && res.table.length > 0 && res.table[0].address) {
           this.inquiryForm.address = res.table[0].address;
         } else {
@@ -308,7 +319,7 @@ export class InquiryComponent implements OnInit {
       this.inquiryForm.postCode = '';
       this.inquiryForm.agentName = '';
       this.inquiryForm.sameasSysytemAddress = false;
-      this.consigneeAddress = [];
+      this.consigneeContactDetail = [];
       this.inquiryForm.agentNameCode = '';
     }
   }
@@ -333,7 +344,12 @@ export class InquiryComponent implements OnInit {
 
   SaveInquiryDataForm(data: any, da: any) {
     data.saveOrSubmit = da;
-    data.customerContactDetail = this.consigneeAddress;
+    let isreportSendClickorNot = this.consigneeContactDetail.filter((da: any) => da.isReportSend == true);
+    if (isreportSendClickorNot.length == 0) {
+      notify({ message: 'Select atlese One Person for Send Report', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    data.customerContactDetail = this.consigneeContactDetail;
     this.UserId = ((localStorage.getItem("empCode")));
     this.UserId = this.UserId.substring(1, this.UserId.length - 1);
     data.createdBy = this.UserId;
@@ -351,7 +367,7 @@ export class InquiryComponent implements OnInit {
         this.disablesubbtn = false;
         let caseid = res.table[0].caseId;
         let consumerName = res.table[0].consumerName;
-        notify({ message: 'Inquiry Generate Successfully for Cusumer ' + consumerName + ' Case Id is :' + caseid, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 600 }, 'success', 2000);
+        notify({ message: 'Inquiry Generate Successfully for Cusumer ' + consumerName + ' And Case Id is :' + caseid, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 600 }, 'success', 2000);
         this.redirectTo('/digicolor/inquiry/');
       });
   }
@@ -411,6 +427,7 @@ export class InquiryComponent implements OnInit {
         }
       });
   }
+
   getInqGridDataListbyId(val: any) {
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetDataByCaseIdData, { caseid: val })
       .subscribe((res: any) => {
@@ -431,6 +448,15 @@ export class InquiryComponent implements OnInit {
         }
         this.showR1Grid = true;
       });
+  }
+
+  selectionChangedHandler(data: any) {
+
+    data.selectedRowsData.forEach((element: any) => {
+      element.isReportSend = true;
+    });
+    data.component.refresh(true);
+    // let selectedRowsData = this.dataGrid.instance.getSelectedRowsData();
   }
 
   screen(width: any) {

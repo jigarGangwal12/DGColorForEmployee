@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../../core/services/api.service';
 import { IDetailCellRendererParams } from 'ag-grid-community';
 import { SecureComponent } from '../../secure.component';
-
+import { filter } from 'rxjs/operators';
+import DataSource from 'devextreme/data/data_source';
 
 @Component({
   selector: 'app-DigiColorinward',
@@ -16,7 +17,7 @@ export class DigiColorinwardComponent implements OnInit {
   // @ViewChild('dxTreeListUserPageList') dxTreeListUserPage: DxTreeListComponent;
   API_CONSTANTS = API_CONSTANTS;
   customerSubStrateData: any;
-  customerSubStrate: any = [{ typeofIndustries1: '' }, { uom: '' }, { ratio: '' }];
+  customerSubStrate: any = [{ typeofIndustries1: '' }];
   customerFastnessDataSource = [];
   customerContactDetails = [];
   competitorDataSource = [];
@@ -79,7 +80,11 @@ export class DigiColorinwardComponent implements OnInit {
     substrate: '',
     fabricQuality: '',
     ratio: '',
-    shadeId: ''
+    shadeId: '',
+    competitorName: '',
+    itemCategory: 'DYES',
+    productName: '',
+    competitorNameForProduct: ''
   };
   digiColorUserId: any;
   loadingVisible: boolean = false;
@@ -94,11 +99,29 @@ export class DigiColorinwardComponent implements OnInit {
   dyesorWetDataSource: any;
   disablesubbtn: any;
   customerRequirementType: any;
-
+  selectedRowDataContactDetail: any = [];
   recipientName = [{ name: "Contact Person" }, { name: "Other" }];
-  competitorName: any;
+  itemCategoryDataSource = [{ name: "DYES" }, { name: "AUX" }];
+  ProductRangeModeDataSource = [
+    { name: 'EXHAUST', id: 1 },
+    { name: 'CONTINUOUS', id: 2 },
+    { name: 'PRINTING', id: 3 },
+    { name: 'SIZING', id: 4 }
+  ];
+  productSegment = [
+    { name: 'DYEING', id: 1 },
+    { name: 'FINISHING', id: 2 },
+    { name: 'PRE-TREATMENT', id: 3 },
+    { name: 'PRINTING', id: 4 },
+    { name: 'SIZING', id: 5 }
+  ];
   productByCompetitorName: any;
   productFunction: any;
+  filterProductByCompetitor: any;
+  competitorNameDataSource: any;
+  filterCompetitorByItemCategory: any;
+  selecteditemCategory: any;
+  addCompetitorpopupVisible: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.dyesorWetDataSource = [{ name: 'Dry' }, { name: 'Wet' }]
@@ -384,12 +407,12 @@ export class DigiColorinwardComponent implements OnInit {
         if (res.table && res.table.length > 0 && res.table[0].digiColorUserId) {
           this.digiColorUserId = res.table[0].digiColorUserId.trim();
         }
-        this.competitorName = res.table1;
+        this.competitorNameDataSource = res.table1;
         this.productByCompetitorName = res.table2;
         this.productFunction = res.table3;
 
         this.getallPendingSampleId();
-      
+
       });
   }
   getallPendingSampleId() {
@@ -416,6 +439,7 @@ export class DigiColorinwardComponent implements OnInit {
         this.testMethodDataSource = res.table9;
         this.targetRatingDataSource = res.table10;
         this.inwardFormListData = res.table14;
+
       });
 
   }
@@ -549,7 +573,12 @@ export class DigiColorinwardComponent implements OnInit {
             caseid: this.InwardDataModel.caseId
           })
             .subscribe((res: any) => {
+
               this.customerContactDetails = res.table;
+              let filterReportTrue = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
+              filterReportTrue.forEach((element: any) => {
+                this.selectedRowDataContactDetail.push(element.id);
+              });
             });
         }
       }
@@ -566,52 +595,73 @@ export class DigiColorinwardComponent implements OnInit {
     this.InwardDataModel.consigneeCode = consigneeDetail[0].consigneeCode + ' - ' + consigneeDetail[0].consigneeName;
     this.InwardDataModel.saveOrSubmit = 'Update';
 
-    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit,
-      { caseId: this.InwardDataModel.caseId, shadeId: consigneeDetail[0].shadeid, caseIdSharedIdGroup: consigneeDetail[0].caseIdSharedIdGroup })
-      .subscribe((res: any) => {
-        this.InwardDataModel.address1 = res.table[0].address1;
-        this.InwardDataModel.address2 = res.table[0].address2;
-        this.InwardDataModel.consigneeCity = res.table[0].city;
-        this.InwardDataModel.consigneeState = res.table[0].cosigneeState;
-        this.InwardDataModel.customerType = res.table[0].customerType;
-        this.InwardDataModel.inquiryDateTime = res.table[0].createdDate;
-        this.InwardDataModel.shadeId =res.table1[0].shadeid;
-        this.InwardDataModel.shadeNameNoForEdit = res.table1[0].shadeName + ' - ' + res.table1[0].shadeid;
-        // this.customerSubStrate = res.table3;
-        this.InwardDataModel.substrate = res.table3[0].typeofIndustries1;
-        this.InwardDataModel.fabricQuality = res.table3[0].uom;
-        this.InwardDataModel.ratio = res.table3[0].ratio;
-        this.customerContactDetails = res.table2;
-        this.customerFastnessDataSource = res.table4;
-        this.InwardDataModel.process = res.table5[0].process;
-        this.InwardDataModel.dischargeability = res.table5[0].dischargability;
-        this.InwardDataModel.primarylightSource = res.table5[0].lightSourcePrimary;
-        this.InwardDataModel.secondarylightSource = res.table5[0].lightSourceSecondary;
-        this.InwardDataModel.tertiarylightSource = res.table5[0].lightSourceTertiary;
-        this.InwardDataModel.inwardDateTime = res.table5[0].createdDate;
-        this.InwardDataModel.remarks = res.table5[0].sampleRemarks;
-        this.InwardDataModel.dyesRange = res.table5[0].dyesRange;
-        this.InwardDataModel.submitedby = res.table5[0].submitedBy + ' - ' + res.table5[0].submitedByEmpname;
-      },
-        err => {
-          if (err.status == 500)
-            console.log(err)
-          this.loadingVisible = false;
-          // check error status code is 500, if so, do some action
-        });
-    this.showR2Grid = true;
-    this.showR3Grid = false;
-    this.editShadeid = true;
+    if (da.data.status.trim() == 'Inward') {
+      this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit,
+        { caseId: this.InwardDataModel.caseId, shadeId: consigneeDetail[0].shadeid, caseIdSharedIdGroup: consigneeDetail[0].caseIdSharedIdGroup })
+        .subscribe((res: any) => {
+          this.InwardDataModel.address1 = res.table[0].address1;
+          this.InwardDataModel.address2 = res.table[0].address2;
+          this.InwardDataModel.consigneeCity = res.table[0].city;
+          this.InwardDataModel.consigneeState = res.table[0].cosigneeState;
+          this.InwardDataModel.customerType = res.table[0].customerType;
+          this.InwardDataModel.inquiryDateTime = res.table[0].createdDate;
+          this.InwardDataModel.shadeId = res.table1[0].shadeid;
+          this.InwardDataModel.shadeNameNoForEdit = res.table1[0].shadeName + ' - ' + res.table1[0].shadeid;
+          // this.customerSubStrate = res.table3;
+          this.InwardDataModel.substrate = res.table3[0].typeofIndustries1;
+          this.InwardDataModel.fabricQuality = res.table3[0].uom;
+          this.InwardDataModel.ratio = res.table3[0].ratio;
+          this.customerContactDetails = res.table2;
+          let filterReportTrue = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
+
+          filterReportTrue.forEach((element: any) => {
+            this.selectedRowDataContactDetail.push(element.id);
+          });
+          // res.table6.forEach((element: any) => {
+          //   element.productName = element.productName.split(',');
+          // });
+
+          this.competitorDataSource = res.table6;
+          this.customerFastnessDataSource = res.table4;
+          this.InwardDataModel.process = res.table5[0].process;
+          this.InwardDataModel.dischargeability = res.table5[0].dischargability;
+          this.InwardDataModel.primarylightSource = res.table5[0].lightSourcePrimary;
+          this.InwardDataModel.secondarylightSource = res.table5[0].lightSourceSecondary;
+          this.InwardDataModel.tertiarylightSource = res.table5[0].lightSourceTertiary;
+          this.InwardDataModel.inwardDateTime = res.table5[0].createdDate;
+          this.InwardDataModel.remarks = res.table5[0].sampleRemarks;
+          this.InwardDataModel.dyesRange = res.table5[0].dyesRange;
+          this.InwardDataModel.submitedby = res.table5[0].submitedBy + ' - ' + res.table5[0].submitedByEmpname;
+        },
+          err => {
+            if (err.status == 500)
+              console.log(err)
+            this.loadingVisible = false;
+            // check error status code is 500, if so, do some action
+          });
+      this.showR2Grid = true;
+      this.showR3Grid = false;
+      this.editShadeid = true;
+    }
   }
 
   SaveInwardData(data: any) {
     this.customerSubStrate[0]['typeofIndustries1'] = this.InwardDataModel.substrate;
-    this.customerSubStrate[1]['uom'] = this.InwardDataModel.fabricQuality;
-    this.customerSubStrate[2]['ratio'] = this.InwardDataModel.ratio;
+    this.customerSubStrate[0]['uom'] = this.InwardDataModel.fabricQuality;
+    this.customerSubStrate[0]['ratio'] = this.InwardDataModel.ratio;
+    let isreportSendClickorNot = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
+    if (isreportSendClickorNot.length == 0) {
+      notify({ message: 'Select atlese One Person for Send Report', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
     data.customerContactDetail = this.customerContactDetails;
     data.customerSubstrate = this.customerSubStrate;
     data.fastnessRequirement = this.customerFastnessDataSource;
-    if (this.customerSubStrate.length > 0 && this.customerFastnessDataSource.length > 0 && this.customerContactDetails.length > 0) {
+    this.competitorDataSource.forEach((data: any) => {
+      data.product = data.product.toString();
+    });
+    data.competitorData = this.competitorDataSource;
+    if (this.customerSubStrate.length > 0 && this.customerContactDetails.length > 0) {
       this.disablesubbtn = true;
       this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.PostInwardFormData, data)
         .subscribe((res: any) => {
@@ -627,11 +677,11 @@ export class DigiColorinwardComponent implements OnInit {
   UpdateInwardData(data: any) {
     data.customerContactDetail = this.customerContactDetails;
     this.customerSubStrate[0]['typeofIndustries1'] = this.InwardDataModel.substrate;
-    this.customerSubStrate[1]['uom'] = this.InwardDataModel.fabricQuality;
-    this.customerSubStrate[2]['ratio'] = this.InwardDataModel.ratio;
+    this.customerSubStrate[0]['uom'] = this.InwardDataModel.fabricQuality;
+    this.customerSubStrate[0]['ratio'] = this.InwardDataModel.ratio;
     data.customerSubstrate = this.customerSubStrate;
     data.fastnessRequirement = this.customerFastnessDataSource;
-    if (this.customerSubStrate.length > 0 && this.customerFastnessDataSource.length > 0 && this.customerContactDetails.length > 0) {
+    if (this.customerSubStrate.length > 0 && this.customerContactDetails.length > 0) {
       this.disablesubbtn = true;
       this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.UpdateInwardFormData, data)
         .subscribe((res: any) => {
@@ -654,4 +704,64 @@ export class DigiColorinwardComponent implements OnInit {
       params.api.getDisplayedRowAtIndex(1)!.setExpanded(false);
     }, 0);
   }
+
+  competitorValueChanged(da: any) {
+    if (da && da.selectedItem.cm_name) {
+      this.filterProductByCompetitor = this.productByCompetitorName.filter((data: any) => data.competitor == da.selectedItem.cm_name)
+    }
+  }
+  itemCategoryValueChanged(dat: any) {
+    if (dat && dat.selectedItem.name) {
+      this.selecteditemCategory = dat.selectedItem.name;
+      this.filterCompetitorByItemCategory = this.competitorNameDataSource.filter((data: any) => data.segment == dat.selectedItem.name);
+    }
+
+  }
+  productFunctionValueChanged(dat: any) {
+  }
+
+  selectionChangedHandler(data: any) {
+    // data.selectedRowsData.forEach((element: any) => {
+    //   element.isReportSend = true;
+    // });
+    data.component.refresh(true);
+  }
+  addCompetitorandProduct() {
+    this.addCompetitorpopupVisible = true;
+  }
+
+  addCompetitorandProductPopupClose(event: any) {
+    this.addCompetitorpopupVisible = false;
+  }
+  SaveCompetitorData(data: any) {
+    if (data.competitorName) {
+      this.disablesubbtn = true;
+      data.competitorName = data.competitorName.toUpperCase();
+      data['SubmitedByForCompetitor'] = data.submitedby.split('-')[0].trim();
+      this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.InsertCompetitorName, data)
+        .subscribe((res: any) => {
+          this.disablesubbtn = false;
+          this.getUserList();
+        });
+    }
+  }
+
+  SaveCompetitorProductData(data: any) {
+    if (data.productName) {
+      this.disablesubbtn = true;
+      data.productName = data.productName.toUpperCase();
+      data['SubmitedByForCompetitor'] = data.submitedby.split('-')[0].trim();
+      this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.InsertCompetitorProductName, data)
+        .subscribe((res: any) => {
+          this.disablesubbtn = false;
+          this.getUserList();
+        });
+    }
+  }
+
+  itemCategoryValueChangedCompetitor(aa: any) {
+    this.InwardDataModel.itemCategory = aa.value;
+    this.filterCompetitorByItemCategory = this.competitorNameDataSource.filter((data: any) => data.segment == aa.value);
+  }
+
 }
