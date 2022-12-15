@@ -11,7 +11,7 @@ import { HostListener } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'JAY Mirror BI';
+  title = 'DG Color';
   ROUTING_CONSTANTS = ROUTING_CONSTANTS;
 
   constructor(private router: Router, private userIdle: UserIdleService) {

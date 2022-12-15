@@ -683,7 +683,7 @@ export class DigiColorinwardComponent implements OnInit {
     //   notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
     //   return;
     // }
-    if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.fabricQuality || !data.process || !data.dischargeability || !data.primarylightSource || !data.secondarylightSource) {
+    if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.fabricQuality || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
@@ -768,7 +768,7 @@ export class DigiColorinwardComponent implements OnInit {
     //   notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
     //   return;
     // }
-    if (!data.substrate || !data.fabricQuality || !data.process || !data.dischargeability || !data.primarylightSource || !data.secondarylightSource) {
+    if (!data.substrate || !data.fabricQuality || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
