@@ -13,21 +13,21 @@
       <div class="col-md-12">
         <div class="row">
 
-       
-        <div class="col-md-6  col-xl-6 padi-left-none">
-          <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
-            [dataSource]="allConsigneeData" displayExpr="consgingeeName" valueExpr="consgingeeName"
-            placeholder="Select Case Id" [showClearButton]="true" [searchEnabled]="true"
-            (onValueChanged)="consigneeValueChanged($event)">
-          </dx-select-box>
+
+          <div class="col-md-7  col-xl-6 padi-left-none">
+            <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
+              [dataSource]="allConsigneeData" displayExpr="consgingeeName" valueExpr="consgingeeName"
+              placeholder="Select Case Id" [showClearButton]="true" [searchEnabled]="true"
+              (onValueChanged)="consigneeValueChanged($event)">
+            </dx-select-box>
+          </div>
+          <div class="col-md-3  col-xl-3">
+            <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
+              [dataSource]="StatusData" displayExpr="Name" valueExpr="ID" placeholder="Select Status"
+              [showClearButton]="true" [searchEnabled]="false" (onValueChanged)="onStatusValueChanged($event)">
+            </dx-select-box>
+          </div>
         </div>
-        <div class="col-md-3  col-xl-3">
-          <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
-            [dataSource]="StatusData" displayExpr="Name" valueExpr="ID" placeholder="Select Status"
-            [showClearButton]="true" [searchEnabled]="false" (onValueChanged)="onStatusValueChanged($event)">
-          </dx-select-box>
-        </div>
-      </div>
       </div>
     </h2>
 
@@ -107,7 +107,7 @@
             </table>
           </div>
           <!-- End Recipe Option 1 -->
-  
+
           <!-- Start Recipe Option 2 -->
           <div *ngIf="showOption2RecipeData">
             <h3>Option 2</h3>
@@ -151,7 +151,7 @@
             </table>
           </div>
           <!-- End Recipe Option 2 -->
-  
+
           <!-- Start Recipe Option 3 -->
           <div *ngIf="showOption3RecipeData">
             <h3>Option 3</h3>
@@ -195,7 +195,7 @@
             </table>
           </div>
           <!-- End Recipe Option 3 -->
-  
+
           <!-- Start Recipe Option 4 -->
           <div *ngIf="showOption4RecipeData">
             <h3>Option 4</h3>
@@ -417,20 +417,21 @@
 
         <!-- Start Tab Lab Testing  -->
         <div *ngIf="tabLabTesting">
-          <div id="scrollview-popup">
-            <div class="Lab-Testing-perameter-links">
-              <a [ngClass]="{'active': isActiveForLabProduct == '1'}" (click)="onLabOrProductInfoClick('1')">Lab Testing
-                Paramter</a>
-              <a [ngClass]="{'active': isActiveForLabProduct == '2'}" (click)="onLabOrProductInfoClick('2')">Product
-                Info</a>
 
-              <div class="body-right-top-search-sec" *ngIf="productInfo">
-                <input type="text" id="filter-text" placeholder="Search here..." (input)="onSearch()" autocomplete="off"
-                  style="margin-top: -23px">
-              </div>
+          <div class="Lab-Testing-perameter-links">
+            <a [ngClass]="{'active': isActiveForLabProduct == '1'}" (click)="onLabOrProductInfoClick('1')">Lab Testing
+              Paramter</a>
+            <a [ngClass]="{'active': isActiveForLabProduct == '2'}" (click)="onLabOrProductInfoClick('2')">Product
+              Info</a>
+
+            <div class="body-right-top-search-sec" *ngIf="productInfo">
+              <input type="text" id="filter-text" placeholder="Search here..." (input)="onSearch()" autocomplete="off"
+                style="margin-top: -23px">
             </div>
+          </div>
 
-            <div *ngIf="labTestingParameter">
+          <div *ngIf="labTestingParameter">
+            <div id="scrollview-popup">
               <table class="costomer-popup-table">
                 <tr *ngFor="let labData of labPredictionParameter">
                   <td><span>Substrate:</span> {{labData.typeOfIndustries}}</td>
@@ -474,9 +475,9 @@
                 </tr>
               </table>
             </div>
-
-            <div *ngIf="productInfo">
-              <!-- <dx-data-grid id="gridContainer" [dataSource]="ProductPurchaseInfo" [remoteOperations]="false"
+          </div>
+          <div *ngIf="productInfo">
+            <!-- <dx-data-grid id="gridContainer" [dataSource]="ProductPurchaseInfo" [remoteOperations]="false"
               id=inquiryLlist [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
               <dxo-search-panel [visible]="true" placeholder="Search"></dxo-search-panel>
                <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter> 
@@ -485,14 +486,14 @@
               <dxo-group-panel [visible]="true"></dxo-group-panel>
             </dx-data-grid> -->
 
-              <ag-grid-angular #aggrid class="ag-theme-balham" style="height: 62vh;" [rowData]="ProductPurchaseInfo"
-                [groupDefaultExpanded]="groupDefaultExpanded" [columnDefs]="productPurchaseColDef"
-                [rowGroupPanelShow]="rowGroupPanelShow" [suppressAggFuncInHeader]="true" [defaultColDef]="defaultColDef"
-                [autoGroupColumnDef]="autoGroupPurchase" (gridReady)="onProductInfoGridReady($event,aggrid)"
-                [suppressContextMenu]="true"></ag-grid-angular>
+            <ag-grid-angular #aggrid class="ag-theme-balham" style="height: 62vh;" [rowData]="ProductPurchaseInfo"
+              [groupDefaultExpanded]="groupDefaultExpanded" [columnDefs]="productPurchaseColDef"
+              [rowGroupPanelShow]="rowGroupPanelShow" [suppressAggFuncInHeader]="true" [defaultColDef]="defaultColDef"
+              [autoGroupColumnDef]="autoGroupPurchase" (gridReady)="onProductInfoGridReady($event,aggrid)"
+              [suppressContextMenu]="true"></ag-grid-angular>
 
-            </div>
           </div>
+
         </div>
         <!-- End Tab Lab Testing  -->
 
