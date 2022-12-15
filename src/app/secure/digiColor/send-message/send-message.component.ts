@@ -28,6 +28,11 @@ export class SendMessageComponent implements OnInit {
   viewSMS: boolean = false;
   selectedCategory = 'Send';
   defaultColDefViewSms: any;
+  count: any = 0;
+  recipePredctionSMSGrid: any;
+  shadeMatchingSMSGird: any;
+  recipePredctionColumnDef: any;
+  shadeMatchingColumnDef: any;
 
   constructor(private apiService: ApiService, private commonFunctions: CommonFunctions, private secure: SecureComponent) {
     this.sideBar = this.commonFunctions.sideBar;
@@ -72,6 +77,87 @@ export class SendMessageComponent implements OnInit {
         suppressCount: true,
       },
     }
+
+    this.recipePredctionColumnDef = [
+      {
+        headerName: 'Case ID',
+        field: 'caseId',
+        rowGroup: true,
+        hide: true,
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Consignee Code',
+        field: 'consigneeCode',
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Consignee Name',
+        field: 'consigneeName',
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Agent Code',
+        field: 'agentCode',
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Agent Name',
+        field: 'agentName',
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Recipe Prediction Send SMS',
+        field: 'isMessageSended',
+        valueFormatter: (data: any) => {
+          if (data.value == true)
+            return '✓';
+          else
+            return '';
+        },
+      },
+    ]
+
+    this.shadeMatchingColumnDef = [
+      {
+        headerName: 'Case ID',
+        field: 'caseId',
+        rowGroup: true,
+        hide: true,
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Consignee Code',
+        field: 'consigneeCode',
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Consignee Name',
+        field: 'consigneeName',
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Agent Code',
+        field: 'agentCode',
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Agent Name',
+        field: 'agentName',
+        filterParams: { applyMiniFilterWhileTyping: true }
+      },
+      {
+        headerName: 'Shade Matching Send SMS',
+        field: 'isShadeMatchingMessageSent',
+        valueFormatter: (data: any) => {
+          if (data.value == true)
+            return '✓';
+          else
+            return '';
+        }
+      },
+
+    ]
 
     this.ColumnDef = [
       {
@@ -121,7 +207,6 @@ export class SendMessageComponent implements OnInit {
             return '';
         }
       },
-      
     ]
   }
 
@@ -134,7 +219,9 @@ export class SendMessageComponent implements OnInit {
     this.loadingVisible = true;
     this.InwardDetailsList = [];
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.SendMessage.getDigicolorInwardDetailForSendSMS, '').subscribe((res: any) => {
-      this.InwardDetailsList = res.table;
+      // this.InwardDetailsList = res.table;
+      this.recipePredctionSMSGrid = res.table;
+      this.shadeMatchingSMSGird = res.table1;
       this.loadingVisible = false;
     })
   }
@@ -148,7 +235,7 @@ export class SendMessageComponent implements OnInit {
     })
   }
 
-  SendSMS(isSendPrediction: boolean) {
+  SendSMS(isSendPrediction: any) {
     let shadeIds: any = [];
     var rowCount = this.gridApi.getSelectedNodes();
     rowCount.forEach((element: any) => {
@@ -157,13 +244,18 @@ export class SendMessageComponent implements OnInit {
       }
     });
 
-    // let filterarrayforpassPrediction = [];
-    // let unique = [...new Set(shadeIds.map((item: any) => item.caseId))]
-    // unique.forEach((element: any) => {
-    //   let filteraray = shadeIds.filter((data: any) => data.caseId == element);
-    //   filterarrayforpassPrediction.push(filteraray);
-    // });
-    if (isSendPrediction) {
+    if (isSendPrediction == 'prediction') {
+      this.count = 0;
+      rowCount.forEach((element: any) => {
+        if (element.data.isMessageSended == true) {
+          this.count++;
+        }
+        
+      });
+      if(this.count >  0){
+        notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.disableUpdateButton = true;
       this.apiService.post(API_CONSTANTS.DigiColor.SendMessage.SendSmsToCustomerForPredction, shadeIds)
         .subscribe((res: any) => {
@@ -172,7 +264,17 @@ export class SendMessageComponent implements OnInit {
           this.getDigicolorInwardDetail();
         });
     }
-    else {
+    else if (isSendPrediction == 'shadeMatching') {
+      this.count = 0;
+      rowCount.forEach((element: any) => {
+        if (element.data.isShadeMatchingMessageSent == true) {
+          this.count++;
+        }
+      });
+      if(this.count >  0){
+        notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.disableUpdateButton = true;
       this.apiService.post(API_CONSTANTS.DigiColor.SendMessage.SendSmsToCustomerForShadeMatching, shadeIds)
         .subscribe((res: any) => {
