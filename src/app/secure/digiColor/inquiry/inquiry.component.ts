@@ -351,17 +351,20 @@ export class InquiryComponent implements OnInit {
       return;
     }
     this.consigneeContactDetail.forEach((element: any) => {
-      if(element.mobileNumber == null || element.mobileNumber == ''){
-          this.count++;      
+      if (element.mobileNumber) {
+        element.mobileNumber = element.mobileNumber.toString();
       }
-      else if(element.mobileNumber.length < 10 || element.mobileNumber.length > 10){
+      if (element.mobileNumber == null || element.mobileNumber == '') {
+        this.count++;
+      }
+      else if (element.mobileNumber.length != 10) {
         this.count++;
       }
       else {
         this.count = 0;
       }
     });
-    if(this.count > 0){
+    if (this.count > 0) {
       notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
@@ -369,7 +372,7 @@ export class InquiryComponent implements OnInit {
     this.UserId = ((localStorage.getItem("empCode")));
     this.UserId = this.UserId.substring(1, this.UserId.length - 1);
     data.createdBy = this.UserId;
-    if (!data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.assignToRunner) {
+    if (!data.inquiryType || !data.scanMode || !data.inquiryBy || !data.requirementValue || !data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.assignToRunner) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
@@ -404,17 +407,20 @@ export class InquiryComponent implements OnInit {
       return;
     }
     this.consigneeContactDetail.forEach((element: any) => {
-      if(element.mobileNumber == null || element.mobileNumber == ''){
-          this.count++;      
+      if (element.mobileNumber) {
+        element.mobileNumber = element.mobileNumber.toString();
       }
-      else if(element.mobileNumber.length < 10 || element.mobileNumber.length > 10){
+      if (element.mobileNumber == null || element.mobileNumber == '') {
+        this.count++;
+      }
+      else if (element.mobileNumber.length != 10) {
         this.count++;
       }
       else {
         this.count = 0;
       }
     });
-    if(this.count > 0){
+    if (this.count > 0) {
       notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }

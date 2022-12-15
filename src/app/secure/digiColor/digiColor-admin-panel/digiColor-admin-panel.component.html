@@ -225,11 +225,11 @@
 
             <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="firstname">UserName</label>
+                <label for="firstname">UserName <span style="color:red">*</span></label>
                 <input type="text" class="form-control" placeholder="UserName"  name="username" ngModel required>
               </div>
               <div class="form-group col-md-12">
-                <label for="password">Password</label>
+                <label for="password">Password <span style="color:red">*</span></label>
                 <input type="text" class="form-control" placeholder="Password"  name="password"  ngModel required>
               </div>
             </div>
@@ -239,7 +239,7 @@
                 <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;"
                   Id="shadematching" [dataSource]="cosigneeNameCode" displayExpr="name" valueExpr="value"
                   placeholder="Select Consumer" [showClearButton]="true" [searchEnabled]="true"
-                  (onValueChanged)="ConsumerValueChanged($event)">
+                  (onValueChanged)="ConsumerValueChanged($event)" [value]="">
                 </dx-select-box>
               </div>
             </div>

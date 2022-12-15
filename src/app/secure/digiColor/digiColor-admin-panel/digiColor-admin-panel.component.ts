@@ -140,6 +140,10 @@ export class DigiColorAdminPanelComponent implements OnInit {
   }
 
   submit(user: any) {
+    if(!user.value.username || !user.value.password){
+      notify({ message: 'Please fill all Mandtory field', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
     const data = {
       username: user.value.username,
       password: user.value.password,

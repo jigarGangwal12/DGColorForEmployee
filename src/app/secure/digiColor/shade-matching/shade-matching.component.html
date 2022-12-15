@@ -10,20 +10,25 @@
 
     <h2 class="dgcolour-heading">
       <label>Lab Prediction Report</label>
-      <div class="col-md-6 padi-left-none">
-        <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
-          [dataSource]="allConsigneeData" displayExpr="consgingeeName" valueExpr="consgingeeName"
-          placeholder="Select Case Id" [showClearButton]="true" [searchEnabled]="true"
-          (onValueChanged)="consigneeValueChanged($event)">
-        </dx-select-box>
-      </div>
-      <div class="col-md-3">
-        <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
-          [dataSource]="StatusData" displayExpr="Name" valueExpr="ID" placeholder="Select Status"
-          [showClearButton]="true" [searchEnabled]="false" (onValueChanged)="onStatusValueChanged($event)">
-        </dx-select-box>
-      </div>
+      <div class="col-md-12">
+        <div class="row">
 
+       
+        <div class="col-md-6  col-xl-6 padi-left-none">
+          <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
+            [dataSource]="allConsigneeData" displayExpr="consgingeeName" valueExpr="consgingeeName"
+            placeholder="Select Case Id" [showClearButton]="true" [searchEnabled]="true"
+            (onValueChanged)="consigneeValueChanged($event)">
+          </dx-select-box>
+        </div>
+        <div class="col-md-3  col-xl-3">
+          <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
+            [dataSource]="StatusData" displayExpr="Name" valueExpr="ID" placeholder="Select Status"
+            [showClearButton]="true" [searchEnabled]="false" (onValueChanged)="onStatusValueChanged($event)">
+          </dx-select-box>
+        </div>
+      </div>
+      </div>
     </h2>
 
     <!-- [selectedItems]="[dummydata[0]]" -->

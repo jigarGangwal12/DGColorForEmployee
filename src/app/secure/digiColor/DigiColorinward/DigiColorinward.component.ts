@@ -515,15 +515,16 @@ export class DigiColorinwardComponent implements OnInit {
     this.selectedRowData = e.selectedRowsData;
 
     this.selectMatchIdModules = [];
-    this.selectedRowData.forEach((key: any) => {
-      key.caseId = this.filterdata[0].caseId;
-      key.consigneeCode = this.filterdata[0].consigneeCode;
-      key.consigneeName = this.filterdata[0].consigneeName;
-      key.agentCode = this.filterdata[0].agentCode;
-      key.agentName = this.filterdata[0].agentName;
-      key.taketoInward = true;
-      key.CreatedBy = this.EmpCode
-    });
+    if (this.selectedRowData && this.selectedRowData.length > 0)
+      this.selectedRowData.forEach((key: any) => {
+        key.caseId = this.filterdata[0].caseId;
+        key.consigneeCode = this.filterdata[0].consigneeCode;
+        key.consigneeName = this.filterdata[0].consigneeName;
+        key.agentCode = this.filterdata[0].agentCode;
+        key.agentName = this.filterdata[0].agentName;
+        key.taketoInward = true;
+        key.CreatedBy = this.EmpCode
+      });
   };
 
   shadeidValueChanged(dat: any) {
@@ -546,7 +547,9 @@ export class DigiColorinwardComponent implements OnInit {
   }
   dyesRangeValueChanged(da: any) {
     this.InwardDataModel.dyesRange = '';
-    this.InwardDataModel.dyesRange = da.value.toString();
+    if (da.value) {
+      this.InwardDataModel.dyesRange = da.value.toString();
+    }
   }
   RequirementValueChanged(da: any) {
     this.InwardDataModel.requirement = da.value;
@@ -577,9 +580,10 @@ export class DigiColorinwardComponent implements OnInit {
 
               this.customerContactDetails = res.table;
               let filterReportTrue = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
-              filterReportTrue.forEach((element: any) => {
-                this.selectedRowDataContactDetail.push(element.id);
-              });
+              if (filterReportTrue && filterReportTrue.length > 0)
+                filterReportTrue.forEach((element: any) => {
+                  this.selectedRowDataContactDetail.push(element.id);
+                });
             });
         }
       }
@@ -613,15 +617,15 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.fabricQuality = res.table3[0].uom;
           this.InwardDataModel.ratio = res.table3[0].ratio;
           this.customerContactDetails = res.table2;
-          let filterReportTrue = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
-
-          filterReportTrue.forEach((element: any) => {
-            this.selectedRowDataContactDetail.push(element.id);
-          });
+          if (this.customerContactDetails && this.customerContactDetails.length > 0) {
+            let filterReportTrue = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
+            filterReportTrue.forEach((element: any) => {
+              this.selectedRowDataContactDetail.push(element.id);
+            });
+          }
           // res.table6.forEach((element: any) => {
           //   element.productName = element.productName.split(',');
           // });
-
           this.competitorDataSource = res.table6;
           this.customerFastnessDataSource = res.table4;
           this.InwardDataModel.process = res.table5[0].process;
@@ -647,67 +651,84 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   SaveInwardData(data: any) {
-    if(data.caseId == ''){
-      notify({ message: 'Please Select Case Id', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.shadeNoName.length == 0){
-      notify({ message: 'Please Select Shade Id/Name', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.substrate == ''){
-      notify({ message: 'Please Select Substrate', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.fabricQuality == ''){
-      notify({ message: 'Please Select Fabric Quality', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.process == ''){
-      notify({ message: 'Please Select Process', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.dischargeability == ''){
-      notify({ message: 'Please Select Dischargeability', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.primarylightSource == ''){
-      notify({ message: 'Please Select Primary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.secondarylightSource == ''){
-      notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    // if(data.caseId == ''){
+    //   notify({ message: 'Please Select Case Id', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.shadeNoName.length == 0){
+    //   notify({ message: 'Please Select Shade Id/Name', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.substrate == ''){
+    //   notify({ message: 'Please Select Substrate', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.fabricQuality == ''){
+    //   notify({ message: 'Please Select Fabric Quality', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.process == ''){
+    //   notify({ message: 'Please Select Process', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.dischargeability == ''){
+    //   notify({ message: 'Please Select Dischargeability', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.primarylightSource == ''){
+    //   notify({ message: 'Please Select Primary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.secondarylightSource == ''){
+    //   notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.fabricQuality || !data.process || !data.dischargeability || !data.primarylightSource || !data.secondarylightSource) {
+      notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
     this.customerSubStrate[0]['typeofIndustries1'] = this.InwardDataModel.substrate;
     this.customerSubStrate[0]['uom'] = this.InwardDataModel.fabricQuality;
     this.customerSubStrate[0]['ratio'] = this.InwardDataModel.ratio;
-    let isreportSendClickorNot = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
-    if (isreportSendClickorNot.length == 0) {
-      notify({ message: 'Select atlese One Person for Send Report', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
+    if (this.customerContactDetails) {
+      let isreportSendClickorNot = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
+      if (isreportSendClickorNot.length == 0) {
+        notify({ message: 'Select atlese One Person for Send Report', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+        return;
+      }
+      this.customerContactDetails.forEach((element: any) => {
+        if (element.mobileNumber) {
+          element.mobileNumber = element.mobileNumber.toString();
+        }
+        if (element.mobileNumber == null || element.mobileNumber == '') {
+          this.count++;
+        }
+        else if (element.mobileNumber.length != 10) {
+          this.count++;
+        }
+        else {
+          this.count = 0;
+        }
+      });
+      if (this.count > 0) {
+        notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+        return;
+      }
     }
-    this.customerContactDetails.forEach((element: any) => {
-      if(element.mobileNumber == null || element.mobileNumber == '' ){
-          this.count++;      
-      }
-      else if (element.mobileNumber.length < 10 || element.mobileNumber.length > 10){
-        this.count++;
-      }
-      else {
-        this.count = 0;
-      }
-    });
-    if(this.count > 0){
-      notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    else {
+      notify({ message: 'Please enter One Contact Details', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
     data.customerContactDetail = this.customerContactDetails;
     data.customerSubstrate = this.customerSubStrate;
     data.fastnessRequirement = this.customerFastnessDataSource;
-    this.competitorDataSource.forEach((data: any) => {
-      data.product = data.product.toString();
-    });
+    if (this.competitorDataSource && this.competitorDataSource.length > 0) {
+      this.competitorDataSource.forEach((data: any) => {
+        if (data.product) {
+          data.product = data.product.toString();
+        }
+      });
+    }
     data.competitorData = this.competitorDataSource;
     if (this.customerSubStrate.length > 0 && this.customerContactDetails.length > 0) {
       this.disablesubbtn = true;
@@ -723,42 +744,51 @@ export class DigiColorinwardComponent implements OnInit {
     }
   }
   UpdateInwardData(data: any) {
-    if(data.substrate == ''){
-      notify({ message: 'Please Select Substrate', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    // if(data.substrate == ''){
+    //   notify({ message: 'Please Select Substrate', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.fabricQuality == ''){
+    //   notify({ message: 'Please Select Fabric Quality', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.process == ''){
+    //   notify({ message: 'Please Select Process', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.dischargeability == ''){
+    //   notify({ message: 'Please Select Dischargeability', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.primarylightSource == ''){
+    //   notify({ message: 'Please Select Primary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    // if(data.secondarylightSource == ''){
+    //   notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+    //   return;
+    // }
+    if (!data.substrate || !data.fabricQuality || !data.process || !data.dischargeability || !data.primarylightSource || !data.secondarylightSource) {
+      notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
-    if(data.fabricQuality == ''){
-      notify({ message: 'Please Select Fabric Quality', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
+    if (this.customerContactDetails && this.customerContactDetails.length > 0) {
+      this.customerContactDetails.forEach((element: any) => {
+        if (element.mobileNumber) {
+          element.mobileNumber = element.mobileNumber.toString();
+        }
+        if (element.mobileNumber == null || element.mobileNumber == '') {
+          this.count++;
+        }
+        else if (element.mobileNumber.length != 10) {
+          this.count++;
+        }
+        else {
+          this.count = 0;
+        }
+      });
     }
-    if(data.process == ''){
-      notify({ message: 'Please Select Process', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.dischargeability == ''){
-      notify({ message: 'Please Select Dischargeability', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.primarylightSource == ''){
-      notify({ message: 'Please Select Primary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    if(data.secondarylightSource == ''){
-      notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-      return;
-    }
-    this.customerContactDetails.forEach((element: any) => {
-      if(element.mobileNumber == null || element.mobileNumber == ''){
-          this.count++;      
-      }
-      else if(element.mobileNumber.length < 10 || element.mobileNumber.length > 10){
-        this.count++;
-      }
-      else {
-        this.count = 0;
-      }
-    });
-    if(this.count > 0){
+    if (this.count > 0) {
       notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
