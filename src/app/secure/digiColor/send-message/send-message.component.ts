@@ -33,6 +33,10 @@ export class SendMessageComponent implements OnInit {
   shadeMatchingSMSGird: any;
   recipePredctionColumnDef: any;
   shadeMatchingColumnDef: any;
+  gridApiPrediction: any;
+  gridColumnApiPrediction: any;
+  gridApiMatching: any;
+  gridColumnApiMatching: any;
 
   constructor(private apiService: ApiService, private commonFunctions: CommonFunctions, private secure: SecureComponent) {
     this.sideBar = this.commonFunctions.sideBar;
@@ -237,22 +241,21 @@ export class SendMessageComponent implements OnInit {
 
   SendSMS(isSendPrediction: any) {
     let shadeIds: any = [];
-    var rowCount = this.gridApi.getSelectedNodes();
-    rowCount.forEach((element: any) => {
-      if (element.data) {
-        shadeIds.push(element.data);
-      }
-    });
-
     if (isSendPrediction == 'prediction') {
+      var rowCount = this.gridApiPrediction.getSelectedNodes();
+      rowCount.forEach((element: any) => {
+        if (element.data) {
+          shadeIds.push(element.data);
+        }
+      });
       this.count = 0;
       rowCount.forEach((element: any) => {
         if (element.data.isMessageSended == true) {
           this.count++;
         }
-        
+
       });
-      if(this.count >  0){
+      if (this.count > 0) {
         notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
         return;
       }
@@ -265,13 +268,19 @@ export class SendMessageComponent implements OnInit {
         });
     }
     else if (isSendPrediction == 'shadeMatching') {
+      var rowCount = this.gridApiMatching.getSelectedNodes();
+      rowCount.forEach((element: any) => {
+        if (element.data) {
+          shadeIds.push(element.data);
+        }
+      });
       this.count = 0;
       rowCount.forEach((element: any) => {
         if (element.data.isShadeMatchingMessageSent == true) {
           this.count++;
         }
       });
-      if(this.count >  0){
+      if (this.count > 0) {
         notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
         return;
       }
@@ -298,8 +307,26 @@ export class SendMessageComponent implements OnInit {
     }
   }
 
+  onFilterTextBoxChangedPrediction() {
+    this.commonFunctions.onFilterTextBoxChanged(this.gridApiPrediction, 'filter-text-box');
+  }
+
+  onFilterTextBoxChangedMatching() {
+    this.commonFunctions.onFilterTextBoxChanged(this.gridApiMatching, 'filter-text-box');
+  }
+
   onFilterTextBoxChanged() {
     this.commonFunctions.onFilterTextBoxChanged(this.gridApi, 'filter-text-box');
+  }
+
+  OnGridReadyPredction(event: any) {
+    this.gridApiPrediction = event.api;
+    this.gridColumnApiPrediction = event.columnApi;
+  }
+
+  OnGridReadyMatching(event: any) {
+    this.gridApiMatching = event.api;
+    this.gridColumnApiMatching = event.columnApi;
   }
 
   OnGridReady(event: any) {

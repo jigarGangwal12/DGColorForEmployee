@@ -439,8 +439,8 @@ input#quantity:focus {
 }
 
 .dx-texteditor-input {
-  min-height: 30px !important;
-  color: #fff !important;
+ min-height: 30px !important;
+  /* color: #fff !important;  */
 }
 
 .dx-placeholder {
@@ -457,7 +457,7 @@ input#quantity:focus {
 }
 
 .dx-texteditor-input {
-  padding: 7px 2px 8px !important;
+  padding: 7px  !important;
 }
 
 /* .dx-dropdowneditor-icon:hover{background: #708393 !important;}
@@ -692,7 +692,7 @@ body {
 /* Scrap page Css Start */
 .dx-searchbox .dx-placeholder::before,
 .dx-searchbox .dx-texteditor-input {
-  padding-left: 20px;
+  padding-left: 37px !important;
 }
 
 .col-4-border {
@@ -1845,7 +1845,7 @@ label {
 
 .dx-overlay-content .dx-popup-content {
   box-sizing: content-box;
-  height: auto !important;
+  /* height: auto !important; */
   /* overflow-y: scroll; */
   /* scroll-behavior: smooth; */
 }
@@ -4936,3 +4936,8 @@ th {
 }
 
 /* Send Messgae Grid */
+
+#scandateTime .dx-texteditor-input{
+  color: #fff;
+
+}

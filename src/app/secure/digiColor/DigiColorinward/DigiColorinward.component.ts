@@ -123,6 +123,7 @@ export class DigiColorinwardComponent implements OnInit {
   selecteditemCategory: any;
   addCompetitorpopupVisible: boolean = false;
   count: any = 0;
+  userRole: any;
 
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.dyesorWetDataSource = [{ name: 'Dry' }, { name: 'Wet' }]
@@ -391,6 +392,7 @@ export class DigiColorinwardComponent implements OnInit {
     // UserId = UserId.substring(1, UserId.length - 1);
     this.UserId = localStorage.getItem('empCode');
     this.UserId = this.UserId.substring(1, this.UserId.length - 1);
+    this.userRole = localStorage.getItem('UserRole');
     if (this.UserId) {
       this.EmpCode = this.UserId;
       // this.EmpCode = '70477';
@@ -426,7 +428,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   getCaseIdByEmpCode() {
-    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetCaseIdByEmpCodeData, { empCode: this.EmpCode })
+    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetCaseIdByEmpCodeData, { empCode: this.EmpCode ,userRole: this.userRole })
       .subscribe((res: any) => {
         this.caseIdData = res.table;
         this.shadeNameId = res.table1;
