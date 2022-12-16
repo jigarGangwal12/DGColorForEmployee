@@ -459,7 +459,7 @@ export class ShadeMatchingComponent implements OnInit {
     this.chkShadeMatchingOption3 = false;
     this.chkShadeMatchingOption4 = false;
 
-    this.router.navigate(["/digicolor/shadeMatching/"]);
+    // this.router.navigate(["/digicolor/shadeMatching/"]);
 
   }
 
