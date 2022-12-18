@@ -412,9 +412,8 @@
                     <h3>Competitor Data</h3>
                   </div>
                   <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
-                    <div id="form-container" style="padding:0 8px;">
-                      <h4 style="color: #607d8b;cursor: pointer;text-align: right;padding-right: 63px;" (click)="addCompetitorandProduct()">Add Competitor &
-                        Product</h4>
+                    <div id="form-container" style="padding:0 8px;position: relative;">
+                      <h4 class="inward-add-competiter-text" (click)="addCompetitorandProduct()">Add Competitor & Product</h4>
                       <dx-data-grid id="CompetitorGridId" [dataSource]="competitorDataSource"
                         [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
                         [showBorders]="true">
@@ -1314,13 +1313,13 @@
     <div id="scrollview-demo" class="inward-page2">
       <dx-scroll-view #scrollView id="scrollview" [scrollByContent]="true" [scrollByThumb]="true"
         [bounceEnabled]="false" [useNative]="true" direction="both" reachBottomText="Updating...">
-        <div class="col-md-12 customProductpadinone">
+        <div class="col-md-12 mt-4 customProductpadinone">
           <div class="long-title long-title1">
             <h3>Inward Details </h3>
           </div>
-          <dx-data-grid id="inquiryLlist" [dataSource]="inwardFormListData" [allowColumnResizing]="true"
+          <dx-data-grid class="inwardDetails-grid" id="inquiryLlist" [dataSource]="inwardFormListData" [allowColumnResizing]="true"
             (onCellClick)="getDetailByShadeId($event)" [wordWrapEnabled]="true" [allowColumnReordering]="true"
-            [showBorders]="true" style="padding-right: 13px;">
+            [showBorders]="true">
             <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20, 50]" [showNavigationButtons]="true"
               [showInfo]="true">
             </dxo-pager>
@@ -1367,12 +1366,12 @@
 <dx-popup [width]="'70%'" [showTitle]="true" [showCloseButton]="false" titleTemplate="titlerapidSearch"
   id="addCompetitor" [dragEnabled]="true" [closeOnOutsideClick]="false" [(visible)]="addCompetitorpopupVisible">
   <div *dxTemplate="let data of 'titlerapidSearch'" style="background-color:#e5e5e5; color:#000000;">
-    <div class="row" style="margin-top: 2px; margin-left: 0px; line-height: 30px;font-weight: 500;">
+    <div class="row" style="font-size: 16px;margin-top: 2px; margin-left: 0px; line-height: 30px;font-weight: 500;">
       Add Competitor & Product
       <p class="col-lg-2 col-md-2 col-xs-2 col-sm-2"
-        style="text-align-last: right; position: absolute; top: 10px; right: 5px;">
+        style="text-align-last: right; position: absolute; top: 5px; right: 5px;">
         <button type="submit" (click)="addCompetitorandProductPopupClose($event)"
-          style="border: 5px; background-color: #e5e5e5;">
+          style="border: 0;background-color: #e5e5e5;font-size: 23px;">
           <i class="popupHeader" class="fa fa-window-close"></i>
         </button>
       </p>
@@ -1395,11 +1394,11 @@
         </div>
       </div>
     </div> -->
-    <div class="shadowbox shadowbox_inquiry inward_form inward_boxs_Div">
-      <div class="">
+    <div class="col-lg-12 col-md-12 padding-18-left-rt">
+      <h4>Add Competitor</h4>
+     <div class="shadowbox shadowbox_inquiry inward_form inward_boxs_Div mb-5" style="margin-right: 0%;width: 100% !important;">
         <div class="col-md-12">
           <div class="row">
-            <h4>Add Competitor</h4>
             <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
               <div class="">
                 <label>Item Category</label>
@@ -1419,7 +1418,8 @@
               </div>
               <div class="">
                 <span>
-                  <dx-text-box Id="case" [(value)]="InwardDataModel.competitorName"></dx-text-box>
+                  <dx-text-box Id="case" placeholder="Enter Competitor Name" [(value)]="InwardDataModel.competitorName">
+                  </dx-text-box>
                 </span>
               </div>
             </div>
@@ -1428,16 +1428,16 @@
         <div class="main_pop mb-2">
           <span>
             <dx-button *ngIf="!disablesubbtn" class="submitbtnpopup" stylingMode="contained" text="Submit" type="normal"
-              [width]="130" style="margin:5px 0px 0px 12px" (click)="SaveCompetitorData(InwardDataModel)">
+              [width]="130" style="margin:10px 0px 0px 12px" (click)="SaveCompetitorData(InwardDataModel)">
             </dx-button>
           </span>
         </div>
       </div>
 
-      <div class="">
+      <h4>Add Competitor Product</h4>
+      <div class="shadowbox shadowbox_inquiry inward_form inward_boxs_Div" style="margin-right: 0%;width: 100% !important;">
         <div class="col-md-12" style="padding: 10px;">
           <div class="row">
-            <h4>Add Competitor Product</h4>
             <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
               <div class="">
                 <label>Item Category</label>
@@ -1480,13 +1480,14 @@
         <div class="main_pop mb-2">
           <span>
             <dx-button *ngIf="!disablesubbtn" class="submitbtnpopup" stylingMode="contained" text="Submit" type="normal"
-              [width]="130" style="margin:5px 0px 0px 12px" (click)="SaveCompetitorProductData(InwardDataModel)">
+              [width]="130" style="margin: 0px 0px 0px 17px;" (click)="SaveCompetitorProductData(InwardDataModel)">
             </dx-button>
           </span>
         </div>
-      </div>
+      </div> 
 
-    </div>
+     </div>
+
   </div>
 
 

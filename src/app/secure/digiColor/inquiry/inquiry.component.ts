@@ -54,9 +54,10 @@ export class InquiryComponent implements OnInit {
     private apiService: ApiService,
     public router: Router,
     private route: ActivatedRoute,
-    private secure: SecureComponent
+    private secure: SecureComponent,
   ) {
-
+    this.UserId = ((localStorage.getItem("empCode")));
+    this.UserId = this.UserId.substring(1, this.UserId.length - 1);
     this.customerRequirementType = [{ name: 'Recipe Prediction' }, { name: 'Shade Matching Recipe' },]
     this.InquiryInofcolumnDef = [
       {
@@ -205,12 +206,8 @@ export class InquiryComponent implements OnInit {
   }
   async ngOnInit() {
     this.secure.showHideLogo = false;
-    // this.route.queryParams.subscribe(params => {
-    //   let val = params.Caseid;
-    //   if(val) {
-    //   }
-    // });
     this.getAgentListData();
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
   getDetail(e: any) {
     if (e.columnIndex === 0)
@@ -270,26 +267,29 @@ export class InquiryComponent implements OnInit {
 
   ConsumerValueChanged(event: any) {
     if (event && event.value)
-      this.inquiryForm.contactPersonName = '';
-    this.inquiryForm.contactPersonNo = '';
-    this.inquiryForm.designation = '';
-    this.inquiryForm.addressForVisit = '';
-    this.inquiryForm.address2ForVisit = '';
-    this.inquiryForm.cityForVisit = '';
-    this.inquiryForm.stateCodeForVisit = '';
-    this.inquiryForm.postCodeForVisit = '';
+      if (!this.readOnlyAgent) {
+        this.inquiryForm.contactPersonName = '';
+        this.inquiryForm.contactPersonNo = '';
+        this.inquiryForm.designation = '';
+        this.inquiryForm.addressForVisit = '';
+        this.inquiryForm.address2ForVisit = '';
+        this.inquiryForm.cityForVisit = '';
+        this.inquiryForm.stateCodeForVisit = '';
+        this.inquiryForm.postCodeForVisit = '';
+      }
     this.inquiryForm.sameasSysytemAddress = false;
-    this.consigneeContactDetail = [];
-
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetConsigneeAddressDetails, { consigneeCode: event.value })
       .subscribe((res: any) => {
-        this.consigneeContactDetail = [];
+        debugger
         this.consigneeContactDetail = res.table1;
-        let filterReportTrue = this.consigneeContactDetail.filter((da: any) => da.isReportSend == true);
-        filterReportTrue.forEach((element: any) => {
-          this.selectedRowData.push(element.id);
-        });
-
+        if (this.consigneeContactDetail && this.consigneeContactDetail.length > 0) {
+          this.selectedRowData = [];
+          let filterReportTrue = this.consigneeContactDetail.filter((da: any) => da.isReportSend == true);
+          filterReportTrue.forEach((element: any) => {
+            debugger
+            this.selectedRowData.push(element.id);
+          });
+        }
         if (res.table && res.table.length > 0 && res.table[0].address) {
           this.inquiryForm.address = res.table[0].address;
         } else {
@@ -304,14 +304,17 @@ export class InquiryComponent implements OnInit {
         this.inquiryForm.city = res.table[0].city;
         this.inquiryForm.stateCode = res.table[0].stateCode;
         this.inquiryForm.postCode = res.table[0].postCode;
-        let totalNjCount = this.cosigneeNameCodeList.filter((da: any) => da.value == event.value);
-        this.inquiryForm.agentNameCode = totalNjCount[0].agentnamecode;
-        this.inquiryForm.agentName = totalNjCount[0].agentname;
-        this.inquiryForm.agentCode = totalNjCount[0].agentcode;
-        this.inquiryForm.ConsumerCode = totalNjCount[0].value;
-        this.inquiryForm.ConsumerName = totalNjCount[0].consumerName;
+        if (this.cosigneeNameCodeList && this.cosigneeNameCodeList.length > 0) {
+          let totalNjCount = this.cosigneeNameCodeList.filter((da: any) => da.value == event.value);
+          if (totalNjCount && totalNjCount.length > 0) {
+            this.inquiryForm.agentNameCode = totalNjCount[0].agentnamecode;
+            this.inquiryForm.agentName = totalNjCount[0].agentname;
+            this.inquiryForm.agentCode = totalNjCount[0].agentcode;
+            this.inquiryForm.ConsumerCode = totalNjCount[0].value;
+            this.inquiryForm.ConsumerName = totalNjCount[0].consumerName;
+          }
+        }
       });
-
     if ((!event.value || event.value == null)) {
       this.inquiryForm.address = '';
       this.inquiryForm.address2 = '';
@@ -320,7 +323,8 @@ export class InquiryComponent implements OnInit {
       this.inquiryForm.postCode = '';
       this.inquiryForm.agentName = '';
       this.inquiryForm.sameasSysytemAddress = false;
-      this.consigneeContactDetail = [];
+      debugger
+      // this.consigneeContactDetail = [];
       this.inquiryForm.agentNameCode = '';
     }
   }
@@ -369,8 +373,7 @@ export class InquiryComponent implements OnInit {
       return;
     }
     data.customerContactDetail = this.consigneeContactDetail;
-    this.UserId = ((localStorage.getItem("empCode")));
-    this.UserId = this.UserId.substring(1, this.UserId.length - 1);
+
     data.createdBy = this.UserId;
     if (!data.inquiryType || !data.scanMode || !data.inquiryBy || !data.requirementValue || !data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.assignToRunner) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
@@ -387,16 +390,13 @@ export class InquiryComponent implements OnInit {
         let caseid = res.table[0].caseId;
         let consumerName = res.table[0].consumerName;
         notify({ message: 'Inquiry Generate Successfully for Cusumer ' + consumerName + ' And Case Id is :' + caseid, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 600 }, 'success', 2000);
-        this.redirectTo('/digicolor/inquiry/');
+        this.router.navigate(["/digicolor/inquiry/"]);
       });
   }
-  redirectTo(uri: string) {
-    window.location.reload();
-  }
+
   UpdateInquiryDataForm(data: any, da: any) {
     data.saveOrSubmit = da;
-    const UserId = ((localStorage.getItem("empCode")));
-    data.createdBy = UserId;
+    data.createdBy = this.UserId;
     if (!data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -427,19 +427,17 @@ export class InquiryComponent implements OnInit {
     data.customerContactDetail = this.consigneeContactDetail;
     data.AssignToRunnerCode = data.assignToRunner.split('-')[0];
     data.assignToRunner = data.assignToRunner.split('-')[1];
+    this.disablesubbtn = true;
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)
       .subscribe((res: any) => {
-        let caseid = res.table[0].caseId;
-        let consumerName = res.table[0].consumerName;
-        notify({ message: 'Inquiry Updated Successfully for Cusumer ' + consumerName + ' Case Id is: ' + caseid, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 700 }, 'success', 2000);
+        this.disablesubbtn = false;
+        notify({ message: 'Inquiry Updated Successfully!!', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
         this.GetallInquiryListData();
-
       });
   }
   cancelData() {
-    // this.$state.go('registration.myComplain', {}, { reload: true });
-    window.location.reload();
-    // this.router.navigate(["/digicolor/inquiry/"]);
+    this.router.navigate(["/digicolor/inquiry/"]);
+
   }
   form_customizeItem(item: any) {
 
@@ -454,6 +452,7 @@ export class InquiryComponent implements OnInit {
       this.getAgentListData();
     }
     if (page == 'R2') {
+      this.readOnlyAgent = false;
       this.GetallInquiryListData();
     }
   }
@@ -475,6 +474,7 @@ export class InquiryComponent implements OnInit {
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetDataByCaseIdData, { caseid: val })
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
+
           this.inquiryForm.addressForVisit = res.table[0].address1;
           this.inquiryForm.address2ForVisit = res.table[0].address2;
           this.inquiryForm.cityForVisit = res.table[0].city;
@@ -486,6 +486,7 @@ export class InquiryComponent implements OnInit {
           this.inquiryForm.contactPersonNo = res.table[0].contactNo;
           this.inquiryForm.caseId = res.table[0].caseId;
           this.inquiryForm.remarks = res.table[0].remark;
+          debugger
           this.inquiryForm.assignToRunner = res.table[0].assignedCode + '-' + res.table[0].assignedName;
           this.readOnlyAgent = true;
         }
@@ -494,12 +495,11 @@ export class InquiryComponent implements OnInit {
   }
 
   selectionChangedHandler(data: any) {
-
+    debugger
     data.selectedRowsData.forEach((element: any) => {
       element.isReportSend = true;
     });
     data.component.refresh(true);
-    // let selectedRowsData = this.dataGrid.instance.getSelectedRowsData();
   }
 
   screen(width: any) {
@@ -512,5 +512,14 @@ export class InquiryComponent implements OnInit {
     if (da && da.value) {
       this.inquiryForm.requirementValue = da.value.toString();
     }
+
+  }
+  OnReportSubmissionDeleted(data: any) {
+
+    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.DeleteContactDetailById, { id: data.data.id })
+      .subscribe((res: any) => {
+
+      });
+
   }
 }

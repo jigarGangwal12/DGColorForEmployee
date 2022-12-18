@@ -32,12 +32,15 @@
   <div *ngIf="showR1Grid" class="col-md-12 customProductpadinone">
     <div class="long-title">
     </div>
-    <div class="shadowbox shadowbox_inquiry">
-      <div id="form-container" style="padding: 10px;">
+    <div class="shadowbox shadowbox_inquiry" style="border-radius: 4px;">
+      <div id="form-container">
         <div id="scrollview-inquiry">
           <dx-form id="form" [formData]="inquiryForm" labelLocation="top" colCount="auto"
             [customizeItem]="form_customizeItem" [colCountByScreen]="colCountByScreen" [screenByWidth]="screen">
             <dxo-col-count-by-screen [xs]="1" [sm]="2" [md]="3" [lg]="4"></dxo-col-count-by-screen>
+            <dxi-item *ngIf="readOnlyAgent" dataField="caseId" [editorOptions]="{ readOnly: true }"
+              [label]="{text: 'CaseId'}">
+            </dxi-item>
             <dxi-item dataField="inquiryType" editorType="dxSelectBox"
               [editorOptions]="{ items: inquiryTypeData, searchEnabled: true, value: 'Shade Matching' ,style: 'border: 1px solid #9191bf !important' }">
               <dxi-validation-rule type="required" message="Inquiry type is required"></dxi-validation-rule>
@@ -85,8 +88,9 @@
                 </dx-tag-box>
               </div>
             </dxi-item>
+            <dxi-item *ngIf="!readOnlyAgent" itemType="empty"></dxi-item>
             <dxi-item itemType="empty"></dxi-item>
-            <dxi-item itemType="empty"></dxi-item>
+
             <dxi-item [colSpan]="4">
               <div class="inward_boxs_Div_Width">
                 <div style="padding-left: 0px;">
@@ -98,6 +102,7 @@
                       <dx-data-grid id="CustomerContacDetailsId" [dataSource]="consigneeContactDetail"
                         [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
                         [(selectedRowKeys)]="selectedRowData" keyExpr="id"
+                        (onRowRemoved)="OnReportSubmissionDeleted($event)"
                         (onSelectionChanged)="selectionChangedHandler($event)" [showBorders]="true">
                         <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                         </dxo-editing>
@@ -190,7 +195,7 @@
               stylingMode="contained" text="Submit" type="normal" (click)="SaveInquiryDataForm(inquiryForm, 'Submit')"
               [width]="120">
             </dx-button>
-            <dx-button *ngIf="inquiryForm.caseId != ''" class="color_but"
+            <dx-button *ngIf="inquiryForm.caseId != ''&& !disablesubbtn" class="color_but"
               style="margin-left: 10px;width: 120px;background: rgb(96, 125, 139) !important;color: #fff;"
               stylingMode="contained" text="Update" type="normal" [width]="120"
               (click)="UpdateInquiryDataForm(inquiryForm, 'Update')">
@@ -206,11 +211,11 @@
       <div class="long-title">
         <h3>Inquiry List </h3>
       </div>
-      <div class="shadowbox_inquiry">
+      <div class="shadowbox_inquiry2">
         <div class="col-md-12 col-md-padi-left-none">
           <dx-data-grid id="inquiryLlist" [dataSource]="allInquiryListData" [allowColumnResizing]="true"
             [wordWrapEnabled]="true" (onCellClick)="getDetail($event)" [allowColumnReordering]="true"
-            [showBorders]="true" style="padding-bottom: 50px;">
+            [showBorders]="true">
             <dxo-paging [enabled]="false"></dxo-paging>
             <dxo-group-panel [visible]="true"></dxo-group-panel>
             <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"

@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { API_CONSTANTS } from '../../../constants/api-constants';
 import { ApiService } from '../../../core/services/api.service';
 import { SecureComponent } from '../../secure.component';
-import { Form } from '@angular/forms';
 import notify from 'devextreme/ui/notify';
 import DataSource from 'devextreme/data/data_source';
-import { AmdDependency } from 'typescript';
 import { Router } from '@angular/router';
 
 
@@ -52,8 +50,6 @@ export class DigiColorAdminPanelComponent implements OnInit {
 
   ngOnInit() {
     this.secure.showHideLogo = false;
-    this.windowHeight = (window.innerHeight) - 80;
-    this.windowHeight = this.windowHeight + 'px';
     this.getDigiColorUserList();
     this.getAgentListData();
   }

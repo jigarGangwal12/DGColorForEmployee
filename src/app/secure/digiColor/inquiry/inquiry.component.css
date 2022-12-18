@@ -3,13 +3,24 @@
   } */
   
   ::ng-deep .long-title h3 {
-    font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
-    font-weight: 400;
-    font-size: 22px;
+    /* font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+    font-weight: 400; */
+    font-size: 16px;
     text-align: left;
-    margin-bottom: 10px;
     color: #fff !important;
   }
+  .shadowbox_inquiry2{
+    padding: 10px 10px 10px 10px !important;
+    border-radius: 0px 4px 4px 4px !important;
+    border: 1px solid rgb(201, 201, 201);
+    width: 100%;
+    display: inline-block;
+    height: 82vh !important;
+    overflow: auto;
+    box-sizing: border-box;
+    position: relative;
+  }
+ 
   
   
   ::ng-deep #scrollview {
@@ -48,7 +59,7 @@
     cursor: pointer;
   }
   .inward_boxs_Div_Width h4{
-    font-size: 17px;
+    font-size: 16px;
     background: #607d8b;
     width: max-content;
     color: #fff;

@@ -428,7 +428,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   getCaseIdByEmpCode() {
-    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetCaseIdByEmpCodeData, { empCode: this.EmpCode ,userRole: this.userRole })
+    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetCaseIdByEmpCodeData, { empCode: this.EmpCode, userRole: this.userRole })
       .subscribe((res: any) => {
         this.caseIdData = res.table;
         this.shadeNameId = res.table1;
@@ -442,9 +442,7 @@ export class DigiColorinwardComponent implements OnInit {
         this.testMethodDataSource = res.table9;
         this.targetRatingDataSource = res.table10;
         this.inwardFormListData = res.table14;
-
       });
-
   }
   caseIdValueChanged(da: any) {
     if (da && da.value) {
@@ -515,7 +513,6 @@ export class DigiColorinwardComponent implements OnInit {
   onSelectionChangedMapping(e: any) {
     this.selectedRowData = [];
     this.selectedRowData = e.selectedRowsData;
-
     this.selectMatchIdModules = [];
     if (this.selectedRowData && this.selectedRowData.length > 0)
       this.selectedRowData.forEach((key: any) => {
@@ -579,7 +576,6 @@ export class DigiColorinwardComponent implements OnInit {
             caseid: this.InwardDataModel.caseId
           })
             .subscribe((res: any) => {
-
               this.customerContactDetails = res.table;
               let filterReportTrue = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
               if (filterReportTrue && filterReportTrue.length > 0)
@@ -601,7 +597,6 @@ export class DigiColorinwardComponent implements OnInit {
     this.InwardDataModel.caseId = consigneeDetail[0].caseId;
     this.InwardDataModel.consigneeCode = consigneeDetail[0].consigneeCode + ' - ' + consigneeDetail[0].consigneeName;
     this.InwardDataModel.saveOrSubmit = 'Update';
-
     if (da.data.status.trim() == 'Inward') {
       this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit,
         { caseId: this.InwardDataModel.caseId, shadeId: consigneeDetail[0].shadeid, caseIdSharedIdGroup: consigneeDetail[0].caseIdSharedIdGroup })
@@ -840,6 +835,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   selectionChangedHandler(data: any) {
+    debugger
     // data.selectedRowsData.forEach((element: any) => {
     //   element.isReportSend = true;
     // });

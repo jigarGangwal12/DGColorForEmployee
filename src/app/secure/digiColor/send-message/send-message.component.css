@@ -3,3 +3,17 @@
     color: #fff !important;
     border: none;
 }
+.body-right-top-search-sec label{
+    margin-top: 4px;
+    margin-bottom: 0px !important;
+}
+.main_pop{ float: right; margin-top: 6px;}
+.sendSmsMainSectionScroll{
+    padding-left: 11px;
+    padding-right: 12px;
+    padding-top: 2px;
+    height: calc(100vh - 86px);
+    overflow: auto;
+    padding-bottom: 15px;
+}
+.sendSmsMainSectionScroll .body-right-top-search-sec{margin-top: 14px;}

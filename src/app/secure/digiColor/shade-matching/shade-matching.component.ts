@@ -213,6 +213,10 @@ export class ShadeMatchingComponent implements OnInit {
 
   predictionAvilable: boolean = false;
   shadeMatchingAvilable: boolean = false;
+  selectedfilterCaseId: string = '';
+  selectedStatusValue: string = '';
+
+
 
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.isShowPopOver = false;
@@ -259,7 +263,7 @@ export class ShadeMatchingComponent implements OnInit {
       headerName: "Product Code",
       field: 'item No_',
       minWidth: 120,
-      sort:'desc',
+      sort: 'desc',
       resizable: true,
       menuTabs: ['filterMenuTab', 'columnsMenuTab', 'generalMenuTab'],
       sortable: true,
@@ -543,7 +547,7 @@ export class ShadeMatchingComponent implements OnInit {
             this.showOption4RecipeData = false;
           }
         }
-        else{
+        else {
           this.predictionAvilable = false;
         }
 
@@ -1190,9 +1194,20 @@ export class ShadeMatchingComponent implements OnInit {
   consigneeValueChanged(event: any) {
     if (event && event.value) {
       var eventCaseId = event.value.split('-')[0].trim();
-      this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.caseId == eventCaseId);
+      this.selectedfilterCaseId = eventCaseId;
+      if (this.selectedStatusValue !== "") {
+        this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.caseId == eventCaseId && par.statusForRecipePrediction == this.selectedStatusValue);
+      } else {
+        this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.caseId == eventCaseId);
+      }
     } else {
-      this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter;
+      this.selectedfilterCaseId = '';
+      if (this.selectedStatusValue !== "") {
+        this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == this.selectedStatusValue);
+      }else{
+        this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter;
+      }
+      
     }
   }
 
@@ -1209,14 +1224,33 @@ export class ShadeMatchingComponent implements OnInit {
   }
 
   onStatusValueChanged(event: any) {
-    if (event.value == 1) {
-      this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Approved');
-    }
-    else if (event.value == 2) {
-      this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Pending For Approval');
+    if (event && event.value) {
+      if (event.value == 1) {
+        this.selectedStatusValue = 'Approved';
+        if (this.selectedfilterCaseId !== "") {
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Approved' && par.caseId == this.selectedfilterCaseId);
+        } else {
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Approved');
+        }
+      }
+      else if (event.value == 2) {
+        this.selectedStatusValue = 'Pending For Approval';
+        if (this.selectedfilterCaseId !== "") {
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Pending For Approval' && par.caseId == this.selectedfilterCaseId);
+        } else {
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Pending For Approval');
+        }
+
+      }
     }
     else {
-      this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter;
+      this.selectedStatusValue = '';
+      if(this.selectedfilterCaseId !== "") {
+        this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.caseId == this.selectedfilterCaseId);
+      }
+      else{
+        this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter;
+      }
     }
   }
 }
