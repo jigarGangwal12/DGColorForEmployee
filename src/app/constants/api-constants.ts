@@ -6,6 +6,7 @@ export let API_CONSTANTS = {
             PostInquiryFormData: 'DigiColor/PostInquiryFormData',
             GetDataByCaseIdData: 'DigiColor/GetDataByCaseIdData',
             GetAllInquiryData: 'DigiColor/GetAllInquiryData',
+            DeleteContactDetailById: 'DigiColor/DeleteContactDetailById',
         },
         Inward_Form: {
             GetCaseIdByEmpCodeData: 'DigiColor/GetCaseIdByEmpCodeData',
