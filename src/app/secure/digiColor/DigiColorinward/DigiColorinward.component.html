@@ -213,6 +213,22 @@
                     </div>
                   </div>
 
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Customer Requirement</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
+                        [dataSource]="customerReuirement" displayExpr="" valueExpr="" [value]="customerReuirement"
+                        [showSelectionControls]="true" noDataText="No data found" [maxDisplayedTags]="2"
+                        applyValueMode="instantly" [showClearButton]="false" (onValueChanged)="customerRequirementValueChange($event)">
+                      </dx-tag-box>
+                      </span>
+                    </div>
+                  </div>               
+
                 </div>
               </div>
             </div>
@@ -807,6 +823,21 @@
                       </span>
                     </div>
                   </div>
+
+                  <div class="col-md-6 col-xl-3">
+                    <div class="">
+                      <label>Customer Requirement</label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
+                        [dataSource]="customerReuirement" displayExpr="" valueExpr="" [value]="customerReuirement"
+                        [showSelectionControls]="true" noDataText="No data found" [maxDisplayedTags]="2"
+                        applyValueMode="instantly" [showClearButton]="false" (onValueChanged)="customerRequirementValueChange($event)">
+                      </dx-tag-box>
+                      </span>
+                    </div>
+                  </div>   
 
                 </div>
               </div>

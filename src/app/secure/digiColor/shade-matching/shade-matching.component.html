@@ -521,19 +521,7 @@
                   Show to Customer
                 </span>
               </div>
-              <div class="">
-                <div class="">
-                  <label>Enter Remark Option1 :</label>
-                </div>
-                <div class="">
-                  <span>
-                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkPredictionOp1">
-                    </dx-text-box>
-                  </span>
-                </div>
-              </div>
-              <!-- <input type="text" placeholder="Enter Remarks for Option1" id="remarkPredictionOp1" style="width: 300px;"/> -->
-              <table cell-spacing="0" border="0" style="margin-top: 10px;">
+              <table cell-spacing="0" border="0">
                 <tr>
                   <td
                     style="border-bottom: 0px !important;padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
@@ -573,6 +561,17 @@
                   </td>
                 </tr>
               </table>
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option1 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkPredictionOp1">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
             </div>
             <!-- End Option 1 -->
 
@@ -585,19 +584,7 @@
                   Show to Customer
                 </span>
               </div>
-              <div class="">
-                <div class="">
-                  <label>Enter Remark Option2 :</label>
-                </div>
-                <div class="">
-                  <span>
-                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option2..." [(value)]="remarkPredictionOp2">
-                    </dx-text-box>
-                  </span>
-                </div>
-              </div>
-              <!-- <input type="text" placeholder="Enter Remarks for Option2" id="remarkPredictionOp2" style="width: 300px;"/> -->
-              <table cell-spacing="0" border="0" style="margin-top: 10px;">
+              <table cell-spacing="0" border="0">
                 <tr>
                   <td
                     style="border-bottom: 0px !important;padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
@@ -637,7 +624,17 @@
                   </td>
                 </tr>
               </table>
-
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option2 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option2..." [(value)]="remarkPredictionOp2">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
             </div>
             <!-- End Option 2 -->
 
@@ -650,19 +647,6 @@
                   Show to Customer
                 </span>
               </div>
-              <div class="">
-                <div class="">
-                  <label>Enter Remark Option3 :</label>
-                </div>
-                <div class="">
-                  <span>
-                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option3..." [(value)]="remarkPredictionOp3">
-                    </dx-text-box>
-                  </span>
-                </div>
-              </div>
-              <!-- <input type="text" placeholder="Enter Remarks for Option3" id="remarkPredictionOp3"
-                style="width: 300px;" /> -->
               <table cell-spacing="0" border="0">
                 <tr>
                   <td
@@ -703,7 +687,17 @@
                   </td>
                 </tr>
               </table>
-
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option3 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option3..." [(value)]="remarkPredictionOp3">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
             </div>
             <!-- End Option 3 -->
 
@@ -716,19 +710,6 @@
                   Show to Customer
                 </span>
               </div>
-              <div class="">
-                <div class="">
-                  <label>Enter Remark Option4 :</label>
-                </div>
-                <div class="">
-                  <span>
-                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option4..." [(value)]="remarkPredictionOp4">
-                    </dx-text-box>
-                  </span>
-                </div>
-              </div>
-              <!-- <input type="text" placeholder="Enter Remarks for Option4" id="remarkPredictionOp4"
-                style="width: 300px;" /> -->
               <table cell-spacing="0" border="0">
                 <tr>
                   <td
@@ -769,7 +750,17 @@
                   </td>
                 </tr>
               </table>
-
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option4 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option4..." [(value)]="remarkPredictionOp4">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
             </div>
             <!-- End Option 4 -->
 
@@ -853,6 +844,17 @@
                   </td>
                 </tr>
               </table>
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option1 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkMatchingOp1">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
             </div>
             <!-- End Shade Mataching Option 1 -->
 
@@ -860,7 +862,7 @@
             <div *ngIf="poupShowShadeMatchingOption2" id="prediction-popup-main-bx">
 
               <div class="prediction-popup-option-checkbox">
-                <h3>Option 1</h3>
+                <h3>Option 2</h3>
                 <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                   <input type="checkbox" id="chkOption2" [checked]="chkShadeMatchingOption2"
                     (change)="chkShadeMatchingChangeOption2($event)" />
@@ -894,13 +896,24 @@
                   </td>
                 </tr>
               </table>
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option2 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkMatchingOp2">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
             </div>
             <!-- End Shade Mataching Option 2 -->
 
             <!-- Shade Mataching Option 3 -->
             <div *ngIf="poupShowShadeMatchingOption3" id="prediction-popup-main-bx">
               <div class="prediction-popup-option-checkbox">
-                <h3>Option 1</h3>
+                <h3>Option 3</h3>
                 <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                   <input type="checkbox" id="chkOption3" [checked]="chkShadeMatchingOption3"
                     (change)="chkShadeMatchingChangeOption3($event)" />
@@ -934,13 +947,24 @@
                   </td>
                 </tr>
               </table>
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option3 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkMatchingOp3">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
             </div>
             <!-- End Shade Mataching Option 3 -->
 
             <!-- Shade Mataching Option 4 -->
             <div *ngIf="poupShowShadeMatchingOption4" id="prediction-popup-main-bx">
               <div class="prediction-popup-option-checkbox">
-                <h3>Option 1</h3>
+                <h3>Option 4</h3>
                 <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                   <input type="checkbox" id="chkOption4" [checked]="chkShadeMatchingOption4"
                     (change)="chkShadeMatchingChangeOption4($event)" />
@@ -974,6 +998,17 @@
                   </td>
                 </tr>
               </table>
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option4 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkMatchingOp4">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
             </div>
             <!-- End Shade Mataching Option 4  -->
             <div class="update-submit-btns-popup-box">
@@ -991,7 +1026,7 @@
               <span
                 *ngIf="!predictionDataNotAvailabe && showUpdatebtnInShadeMatching &&!getUpdatedShadeMatchingFromDataColor">
                 <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn" text="Update" type="normal"
-                  (click)="UpdateShadeMatchingData(popUpShadeMatchingAllData)"> </dx-button>
+                  (click)="UpdateShadeMatchingData(popUpShadeMatchingAllData,selectedColorGamut)"> </dx-button>
               </span>
             </div>
 

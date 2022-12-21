@@ -84,7 +84,8 @@ export class DigiColorinwardComponent implements OnInit {
     competitorName: '',
     itemCategory: 'DYES',
     productName: '',
-    competitorNameForProduct: ''
+    competitorNameForProduct: '',
+    customerRequirement: ''    
   };
   digiColorUserId: any;
   loadingVisible: boolean = false;
@@ -124,7 +125,7 @@ export class DigiColorinwardComponent implements OnInit {
   addCompetitorpopupVisible: boolean = false;
   count: any = 0;
   userRole: any;
-
+  customerReuirement: any = [];
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.dyesorWetDataSource = [{ name: 'Dry' }, { name: 'Wet' }]
     this.customerRequirementType = [{ name: 'Recipe prediction' }, { name: 'Shade Matching' },]
@@ -570,6 +571,7 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.consigneeState = consigneeDetail[0].consigneeState;
           this.InwardDataModel.consigneeCity = consigneeDetail[0].city;
           this.InwardDataModel.inquiryDateTime = consigneeDetail[0].createdDate;
+          this.customerReuirement = consigneeDetail[0].customerRequirement.split(',');
           this.InwardDataModel.caseId = consigneeDetail[0].consigneeNameCode.split('-')[0].trim();
           this.InwardDataModel.saveOrSubmit = 'Save';
           this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetContactDetailandTypeofIndData, {
@@ -592,6 +594,7 @@ export class DigiColorinwardComponent implements OnInit {
     this.router.navigate(["/digicolor/inward/"]);
   }
   getDetailByShadeId(da: any) {
+    debugger
     let consigneeDetail = this.inwardFormListData.filter((data: any) => data.shadeid == da.data.shadeid);
     this.InwardDataModel.agentNameCode = consigneeDetail[0].agentNameCode;
     this.InwardDataModel.caseId = consigneeDetail[0].caseId;
@@ -607,6 +610,7 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.consigneeState = res.table[0].cosigneeState;
           this.InwardDataModel.customerType = res.table[0].customerType;
           this.InwardDataModel.inquiryDateTime = res.table[0].createdDate;
+          this.customerReuirement = res.table[0].customerRequirement.split(',');
           this.InwardDataModel.shadeId = res.table1[0].shadeid;
           this.InwardDataModel.shadeNameNoForEdit = res.table1[0].shadeName + ' - ' + res.table1[0].shadeid;
           // this.customerSubStrate = res.table3;
@@ -648,6 +652,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   SaveInwardData(data: any) {
+    debugger
     if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -687,6 +692,7 @@ export class DigiColorinwardComponent implements OnInit {
     data.customerContactDetail = this.customerContactDetails;
     data.customerSubstrate = this.customerSubStrate;
     data.fastnessRequirement = this.customerFastnessDataSource;
+    data.customerRequirement = this.customerReuirement.toString();
     if (this.competitorDataSource && this.competitorDataSource.length > 0) {
       this.competitorDataSource.forEach((data: any) => {
         if (data.product) {
@@ -739,6 +745,7 @@ export class DigiColorinwardComponent implements OnInit {
     this.customerSubStrate[0]['ratio'] = this.InwardDataModel.ratio;
     data.customerSubstrate = this.customerSubStrate;
     data.fastnessRequirement = this.customerFastnessDataSource;
+    data.customerRequirement = this.customerReuirement.toString();
     if (this.customerSubStrate.length > 0 && this.customerContactDetails.length > 0) {
       this.disablesubbtn = true;
       this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.UpdateInwardFormData, data)
@@ -823,4 +830,9 @@ export class DigiColorinwardComponent implements OnInit {
     this.filterCompetitorByItemCategory = this.competitorNameDataSource.filter((data: any) => data.segment == aa.value);
   }
 
+  customerRequirementValueChange(event: any){
+    if(event && event.value){
+      this.customerReuirement = event.value;
+    }
+  }
 }
