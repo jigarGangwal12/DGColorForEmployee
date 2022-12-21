@@ -461,17 +461,17 @@
                 <tr>
                   <th>Name of Fastness</th>
                   <th>Test Method</th>
-                  <th>Dry OR Wet</th>
+                  <!-- <th>Dry OR Wet</th> -->
                   <th>Target Rating</th>
                   <th style="text-align: center;">Remark</th>
                 </tr>
                 <tr *ngFor="let fastness of fastnessData">
                   <td>{{fastness.nameoffastness}}</td>
                   <td>{{fastness.testMethod}}</td>
-                  <td>{{fastness.dryorWet}}</td>
+                  <!-- <td>{{fastness.dryorWet}}</td> -->
                   <td>{{fastness.targetRating}}</td>
-                  <td style="text-align: center;"><i style="cursor: pointer;" class="fa fa-info-circle tabs-up"
-                      (click)="onClickGetRemarks(fastness)"></i></td>
+                  <td style="text-align: center;"><i *ngIf="fastness.remark" style="cursor: pointer;"
+                      class="fa fa-info-circle tabs-up" (click)="onClickGetRemarks(fastness)"></i></td>
                 </tr>
               </table>
             </div>
@@ -521,7 +521,19 @@
                   Show to Customer
                 </span>
               </div>
-              <table cell-spacing="0" border="0">
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option1 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkPredictionOp1">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
+              <!-- <input type="text" placeholder="Enter Remarks for Option1" id="remarkPredictionOp1" style="width: 300px;"/> -->
+              <table cell-spacing="0" border="0" style="margin-top: 10px;">
                 <tr>
                   <td
                     style="border-bottom: 0px !important;padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
@@ -561,7 +573,6 @@
                   </td>
                 </tr>
               </table>
-
             </div>
             <!-- End Option 1 -->
 
@@ -574,7 +585,19 @@
                   Show to Customer
                 </span>
               </div>
-              <table cell-spacing="0" border="0">
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option2 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option2..." [(value)]="remarkPredictionOp2">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
+              <!-- <input type="text" placeholder="Enter Remarks for Option2" id="remarkPredictionOp2" style="width: 300px;"/> -->
+              <table cell-spacing="0" border="0" style="margin-top: 10px;">
                 <tr>
                   <td
                     style="border-bottom: 0px !important;padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;border: 1px solid #d3d3d3;">
@@ -627,7 +650,19 @@
                   Show to Customer
                 </span>
               </div>
-
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option3 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option3..." [(value)]="remarkPredictionOp3">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
+              <!-- <input type="text" placeholder="Enter Remarks for Option3" id="remarkPredictionOp3"
+                style="width: 300px;" /> -->
               <table cell-spacing="0" border="0">
                 <tr>
                   <td
@@ -681,6 +716,19 @@
                   Show to Customer
                 </span>
               </div>
+              <div class="">
+                <div class="">
+                  <label>Enter Remark Option4 :</label>
+                </div>
+                <div class="">
+                  <span>
+                    <dx-text-box Id="case1" placeholder="Enter Remarks for Option4..." [(value)]="remarkPredictionOp4">
+                    </dx-text-box>
+                  </span>
+                </div>
+              </div>
+              <!-- <input type="text" placeholder="Enter Remarks for Option4" id="remarkPredictionOp4"
+                style="width: 300px;" /> -->
               <table cell-spacing="0" border="0">
                 <tr>
                   <td
@@ -761,7 +809,7 @@
               </dx-button>
             </span>
             <input type="hidden" name="allData" value="{{popUpShadeMatchingAllData}}">
-            <div class="col-md-3" style=" padding-left: 0px; margin-bottom: 10px;" *ngIf="showUpdatebtnInShadeMatching">
+            <div class="col-md-3" style=" padding-left: 0px; margin-bottom: 10px;">
               <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="shadematching"
                 [dataSource]="allColorGamutData" displayExpr="colourGamut" valueExpr="colourGamut"
                 placeholder="Select Color" [showClearButton]="false" [searchEnabled]="false"
@@ -969,7 +1017,7 @@
       <i class="fa fa-window-close"></i>
     </button>
   </div>
-  <div>
-    <h3>{{popupRemark}}</h3>
+  <div clas="dx-popup-content" style="height: 100px;">
+    <h4>{{popupRemark}}</h4>
   </div>
 </dx-popup>

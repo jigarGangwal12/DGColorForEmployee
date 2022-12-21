@@ -3943,7 +3943,13 @@ th {
 
 #case .dx-texteditor-input {
   color: black !important;
-  /* border-bottom: 1px solid #ccc !important; */
+  /* border: 1px solid #ccc !important; */
+  border-radius: 0px;
+}
+
+#case1 .dx-texteditor-input {
+  color: black !important;
+  border: 1px solid black !important;
   border-radius: 0px;
 }
 

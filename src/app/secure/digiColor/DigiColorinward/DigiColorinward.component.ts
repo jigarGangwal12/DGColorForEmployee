@@ -648,39 +648,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   SaveInwardData(data: any) {
-    // if(data.caseId == ''){
-    //   notify({ message: 'Please Select Case Id', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.shadeNoName.length == 0){
-    //   notify({ message: 'Please Select Shade Id/Name', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.substrate == ''){
-    //   notify({ message: 'Please Select Substrate', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.fabricQuality == ''){
-    //   notify({ message: 'Please Select Fabric Quality', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.process == ''){
-    //   notify({ message: 'Please Select Process', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.dischargeability == ''){
-    //   notify({ message: 'Please Select Dischargeability', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.primarylightSource == ''){
-    //   notify({ message: 'Please Select Primary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.secondarylightSource == ''){
-    //   notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.fabricQuality || !data.process || !data.dischargeability || !data.primarylightSource) {
+    if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
@@ -741,31 +709,7 @@ export class DigiColorinwardComponent implements OnInit {
     }
   }
   UpdateInwardData(data: any) {
-    // if(data.substrate == ''){
-    //   notify({ message: 'Please Select Substrate', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.fabricQuality == ''){
-    //   notify({ message: 'Please Select Fabric Quality', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.process == ''){
-    //   notify({ message: 'Please Select Process', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.dischargeability == ''){
-    //   notify({ message: 'Please Select Dischargeability', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.primarylightSource == ''){
-    //   notify({ message: 'Please Select Primary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    // if(data.secondarylightSource == ''){
-    //   notify({ message: 'Please Select Secondary LightSource', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
-    //   return;
-    // }
-    if (!data.substrate || !data.fabricQuality || !data.process || !data.dischargeability || !data.primarylightSource) {
+    if (!data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }

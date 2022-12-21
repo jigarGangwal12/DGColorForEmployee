@@ -181,6 +181,10 @@ export class ShadeMatchingComponent implements OnInit {
     {
       ID: 2,
       Name: 'Pending For Approval'
+    },
+    {
+      ID: 3,
+      Name: 'Shade Matching'
     }
   ];
   allColorGamutData: any;
@@ -216,6 +220,11 @@ export class ShadeMatchingComponent implements OnInit {
   selectedfilterCaseId: string = '';
   selectedStatusValue: string = '';
 
+ //remarks for prediction
+  remarkPredictionOp1: any;
+  remarkPredictionOp2: any;
+  remarkPredictionOp3: any;
+  remarkPredictionOp4: any;
 
 
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
@@ -702,7 +711,7 @@ export class ShadeMatchingComponent implements OnInit {
     this.apiService.getAll(API_CONSTANTS.DigiColor.ShadeMatching.GetShadeIdDetailFromJayChemical, dt)
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
-
+          debugger
           this.FilterDataAfterGetRecipe(res.table, 'fromJayChemical');
           this.predictionDataNotAvailabe = false
           this.showUpdatebtnInrecipePrediction = true;
@@ -737,6 +746,7 @@ export class ShadeMatchingComponent implements OnInit {
         element.consigneeCode = this.SelectedConsigneeCode;
         element.isShowToCustomer = 0;
         element.isApprove = 0;
+        element.remark = '';
       });
     }
     if (type == 'fromJayChemical') {
@@ -754,6 +764,7 @@ export class ShadeMatchingComponent implements OnInit {
       this.popUpPredictionOption1Data = res.filter((par: any) => par.trail == 1);
       this.popUpRgbCodeOption1 = this.popUpPredictionOption1Data[0].rgbHexaCode;
       this.chkOption1 = this.popUpPredictionOption1Data[0].isShowToCustomer;
+      this.remarkPredictionOp1 = this.popUpPredictionOption1Data[0].remarks;
       //this.MetamericPopup1 = this.popUpPredictionOption1Data[0].primarymetamerism + "/" + this.popUpPredictionOption1Data[0].secondarymetamerism + "/" + this.popUpPredictionOption1Data[0].thirdmetamerism;
       if (this.popUpPredictionOption1Data && this.popUpPredictionOption1Data[0].matamerism && this.popUpPredictionOption1Data[0].matamerism != null && this.popUpPredictionOption1Data[0].matamerism != undefined) {
         this.MetamericPopup1 = this.popUpPredictionOption1Data[0].matamerism.slice(0, -6);
@@ -770,6 +781,7 @@ export class ShadeMatchingComponent implements OnInit {
       this.popUpPredictionOption2Data = res.filter((par: any) => par.trail == 2);
       this.popUpRgbCodeOption2 = this.popUpPredictionOption2Data[0].rgbHexaCode;
       this.chkOption2 = this.popUpPredictionOption2Data[0].isShowToCustomer;
+      this.remarkPredictionOp2 = this.popUpPredictionOption2Data[0].remarks;
       //this.MetamericPopup2 = this.popUpPredictionOption2Data[0].primarymetamerism + "/" + this.popUpPredictionOption2Data[0].secondarymetamerism + "/" + this.popUpPredictionOption2Data[0].thirdmetamerism;
       if (this.popUpPredictionOption2Data && this.popUpPredictionOption2Data[0].matamerism && this.popUpPredictionOption2Data[0].matamerism != null && this.popUpPredictionOption2Data[0].matamerism != undefined) {
         this.MetamericPopup2 = this.popUpPredictionOption2Data[0].matamerism.slice(0, -6);
@@ -786,6 +798,7 @@ export class ShadeMatchingComponent implements OnInit {
       this.popUpPredictionOption3Data = res.filter((par: any) => par.trail == 3);
       this.popUpRgbCodeOption3 = this.popUpPredictionOption3Data[0].rgbHexaCode;
       this.chkOption3 = this.popUpPredictionOption3Data[0].isShowToCustomer;
+      this.remarkPredictionOp3 = this.popUpPredictionOption3Data[0].remarks;
       //this.MetamericPopup3 = this.popUpPredictionOption3Data[0].primarymetamerism + "/" + this.popUpPredictionOption3Data[0].secondarymetamerism + "/" + this.popUpPredictionOption3Data[0].thirdmetamerism;
       if (this.popUpPredictionOption3Data && this.popUpPredictionOption3Data[0].matamerism && this.popUpPredictionOption3Data[0].matamerism != null && this.popUpPredictionOption3Data[0].matamerism != undefined) {
         this.MetamericPopup3 = this.popUpPredictionOption3Data[0].matamerism.slice(0, -6);
@@ -802,6 +815,7 @@ export class ShadeMatchingComponent implements OnInit {
       this.popUpPredictionOption4Data = res.filter((par: any) => par.trail == 4);
       this.popUpRgbCodeOption4 = this.popUpPredictionOption4Data[0].rgbHexaCode;
       this.chkOption4 = this.popUpPredictionOption4Data[0].isShowToCustomer;
+      this.remarkPredictionOp4 = this.popUpPredictionOption4Data[0].remarks;
       //this.MetamericPopup4 = this.popUpPredictionOption4Data[0].primarymetamerism + "/" + this.popUpPredictionOption4Data[0].secondarymetamerism + "/" + this.popUpPredictionOption4Data[0].thirdmetamerism;
       if (this.popUpPredictionOption4Data && this.popUpPredictionOption4Data[0].matamerism && this.popUpPredictionOption4Data[0].matamerism != null && this.popUpPredictionOption4Data[0].matamerism != undefined) {
         this.MetamericPopup4 = this.popUpPredictionOption4Data[0].matamerism.slice(0, -6);
@@ -891,8 +905,8 @@ export class ShadeMatchingComponent implements OnInit {
         element.shadeName = this.SelectedshadeName;
         element.shadeid = this.Selectedshadeid;
         element.consigneeCode = this.SelectedConsigneeCode;
-        element.isShowToCustomer = 0;
-        element.isApprove = 0;
+        //element.isShowToCustomer = 0;
+        //element.isApprove = 0;
       });
       const maxValueOftrail = Math.max(...res.table.map((o: any) => o.trail), 0);
 
@@ -900,6 +914,8 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption1 = true;
         this.popUpShadeMatchingOption1Data = res.table.filter((par: any) => par.trail == 1);
         this.popUpShadeMatchingRgbCodeOption1 = this.popUpShadeMatchingOption1Data[0].rgbHexaCode;
+        this.chkShadeMatchingOption1 = this.popUpShadeMatchingOption1Data[0].isShowToCustomer;
+
 
       } else {
         this.poupShowShadeMatchingOption1 = false;
@@ -909,6 +925,7 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption2 = true;
         this.popUpShadeMatchingOption2Data = res.table.filter((par: any) => par.trail == 2);
         this.popUpShadeMatchingRgbCodeOption2 = this.popUpShadeMatchingOption2Data[0].rgbHexaCode;
+        this.chkShadeMatchingOption2 = this.popUpShadeMatchingRgbCodeOption2[0].isShowToCustomer;
 
       } else {
         this.poupShowShadeMatchingOption2 = false;
@@ -918,6 +935,7 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption3 = true;
         this.popUpShadeMatchingOption3Data = res.table.filter((par: any) => par.trail == 3);
         this.popUpShadeMatchingRgbCodeOption3 = this.popUpShadeMatchingOption3Data[0].rgbHexaCode;
+        this.chkShadeMatchingOption3 = this.popUpShadeMatchingRgbCodeOption3[0].isShowToCustomer;
 
       } else {
         this.poupShowShadeMatchingOption3 = false;
@@ -927,6 +945,7 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption4 = true;
         this.popUpShadeMatchingOption4Data = res.table.filter((par: any) => par.trail == 4);
         this.popUpShadeMatchingRgbCodeOption4 = this.popUpShadeMatchingOption4Data[0].rgbHexaCode;
+        this.chkShadeMatchingOption4 = this.popUpShadeMatchingRgbCodeOption4[0].isShowToCustomer;
 
       } else {
         this.poupShowShadeMatchingOption4 = false;
@@ -1045,6 +1064,7 @@ export class ShadeMatchingComponent implements OnInit {
   }
 
   SaveRecipePrecdictionData(popUpPredictionAllData: any) {
+    this.getRemarksDataforPrediction(popUpPredictionAllData);
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.InsertRecipePrediction, this.popUpPredictionAllData)
@@ -1056,6 +1076,8 @@ export class ShadeMatchingComponent implements OnInit {
     }
   }
   UpdateRecipePrecdictionData(popUpPredictionAllData: any) {
+    debugger
+    this.getRemarksDataforPrediction(popUpPredictionAllData);
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UpdateRecipePrediction, this.popUpPredictionAllData)
@@ -1065,6 +1087,76 @@ export class ShadeMatchingComponent implements OnInit {
           notify({ message: 'Update Record Successfully', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
         });
     }
+  }
+  getRemarksDataforPrediction(popUpPredictionAllData: any){
+    const maxValueOftrail = Math.max(...popUpPredictionAllData.map((o: any) => o.trail), 0);
+     if(maxValueOftrail >= 1){
+      if(this.remarkPredictionOp1 !== ""){
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 1) {
+            element.remarks = this.remarkPredictionOp1;
+          }
+        });
+      }else{
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 1) {
+            element.remarks = '';
+          }
+        });
+      }
+    }
+    
+    // For Option 2
+    if(maxValueOftrail >= 2){
+      if(this.remarkPredictionOp2 !== ""){
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 2) {
+            element.remarks = this.remarkPredictionOp2;
+          }
+        });
+      }else{
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 2) {
+            element.remarks = '';
+          }
+        });
+      }
+    }
+  
+     // For Option 3
+     if(maxValueOftrail >= 3){
+      if(this.remarkPredictionOp3 !== ""){
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 3) {
+            element.remarks = this.remarkPredictionOp3;
+          }
+        });
+      }else{
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 3) {
+            element.remarks = '';
+          }
+        });
+      }
+     }
+  
+     // For Option 4
+     if(maxValueOftrail >= 4){
+      if(this.remarkPredictionOp4 !== ""){
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 4) {
+            element.remarks = this.remarkPredictionOp4;
+          }
+        });
+      }else{
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 4) {
+            element.remarks = '';
+          }
+        });
+      }
+     }
+     
   }
   UpdateRecipeAfterUpdatedRecipeFromDataColor(popUpPredictionAllData: any) {
     if (popUpPredictionAllData) {
@@ -1240,7 +1332,14 @@ export class ShadeMatchingComponent implements OnInit {
         } else {
           this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Pending For Approval');
         }
-
+      }
+      else if(event.value == 3){
+        this.selectedStatusValue = 'Shade Matching';
+        if(this.selectedfilterCaseId !== ""){
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Shade Matching' && par.caseId == this.selectedfilterCaseId);
+        }else{
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Shade Matching');
+        }
       }
     }
     else {
