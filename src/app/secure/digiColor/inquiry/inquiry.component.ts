@@ -280,13 +280,13 @@ export class InquiryComponent implements OnInit {
     this.inquiryForm.sameasSysytemAddress = false;
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetConsigneeAddressDetails, { consigneeCode: event.value })
       .subscribe((res: any) => {
-        debugger
+        
         this.consigneeContactDetail = res.table1;
         if (this.consigneeContactDetail && this.consigneeContactDetail.length > 0) {
           this.selectedRowData = [];
           let filterReportTrue = this.consigneeContactDetail.filter((da: any) => da.isReportSend == true);
           filterReportTrue.forEach((element: any) => {
-            debugger
+            
             this.selectedRowData.push(element.id);
           });
         }
@@ -323,7 +323,7 @@ export class InquiryComponent implements OnInit {
       this.inquiryForm.postCode = '';
       this.inquiryForm.agentName = '';
       this.inquiryForm.sameasSysytemAddress = false;
-      debugger
+      
       // this.consigneeContactDetail = [];
       this.inquiryForm.agentNameCode = '';
     }
@@ -486,7 +486,7 @@ export class InquiryComponent implements OnInit {
           this.inquiryForm.contactPersonNo = res.table[0].contactNo;
           this.inquiryForm.caseId = res.table[0].caseId;
           this.inquiryForm.remarks = res.table[0].remark;
-          debugger
+          
           this.inquiryForm.assignToRunner = res.table[0].assignedCode + '-' + res.table[0].assignedName;
           this.readOnlyAgent = true;
         }
@@ -495,7 +495,7 @@ export class InquiryComponent implements OnInit {
   }
 
   selectionChangedHandler(data: any) {
-    debugger
+    
     data.selectedRowsData.forEach((element: any) => {
       element.isReportSend = true;
     });

@@ -786,7 +786,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   selectionChangedHandler(data: any) {
-    debugger
+    
     // data.selectedRowsData.forEach((element: any) => {
     //   element.isReportSend = true;
     // });

@@ -716,6 +716,7 @@ export class ShadeMatchingComponent implements OnInit {
     this.apiService.getAll(API_CONSTANTS.DigiColor.ShadeMatching.GetShadeIdDetailFromJayChemical, dt)
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
+          
           this.FilterDataAfterGetRecipe(res.table, 'fromJayChemical');
           this.predictionDataNotAvailabe = false
           this.showUpdatebtnInrecipePrediction = true;
@@ -1080,6 +1081,7 @@ export class ShadeMatchingComponent implements OnInit {
     }
   }
   UpdateRecipePrecdictionData(popUpPredictionAllData: any) {
+    
     this.getRemarksDataforPrediction(popUpPredictionAllData);
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
