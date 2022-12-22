@@ -435,7 +435,7 @@
               <table class="costomer-popup-table">
                 <tr *ngFor="let labData of labPredictionParameter">
                   <td><span>Substrate:</span> {{labData.typeOfIndustries}}</td>
-                  <td>{{labData.uom}} - {{labData.ratio}}</td>
+                  <td>{{labData.uom}} <p *ngIf="labData.ratio"> - </p>{{labData.ratio}}</td>
                 </tr>
                 <tr>
                   <td colspan="2"><span>Process:</span> {{process}}</td>

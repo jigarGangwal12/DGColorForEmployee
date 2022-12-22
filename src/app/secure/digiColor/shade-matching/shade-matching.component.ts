@@ -1081,7 +1081,7 @@ export class ShadeMatchingComponent implements OnInit {
     }
   }
   UpdateRecipePrecdictionData(popUpPredictionAllData: any) {
-    
+    debugger
     this.getRemarksDataforPrediction(popUpPredictionAllData);
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
@@ -1323,11 +1323,12 @@ export class ShadeMatchingComponent implements OnInit {
   }
 
   SaveShadeMatching(popUpShadeMatchingAllData: any, selectedColorGamut: any) {
+    debugger
     this.getRemarksDataforMatching(popUpShadeMatchingAllData);
     if (popUpShadeMatchingAllData) {
       this.disableShadeMatchingUpdateButton = true;
       popUpShadeMatchingAllData.forEach((element: any) => {
-        element.colorGamut = selectedColorGamut;
+        element.colourGamut = selectedColorGamut;
       });
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.Insert_Shade_Matching, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
@@ -1337,11 +1338,14 @@ export class ShadeMatchingComponent implements OnInit {
         });
     }
   }
-  UpdateShadeMatchingData(popUpShadeMatchingAllData: any,selectedColorGamut: any) {
+  UpdateShadeMatchingData(popUpShadeMatchingAllData: any,selectedColorGamut: any) { 
     debugger
     this.getRemarksDataforMatching(popUpShadeMatchingAllData);
     if (popUpShadeMatchingAllData) {
-      this.disableUpdateButton = true;    
+      this.disableUpdateButton = true; 
+      popUpShadeMatchingAllData.forEach((element: any) => {
+        element.colourGamut = selectedColorGamut;
+      });   
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UpdateShadeMatchingRecipe, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;

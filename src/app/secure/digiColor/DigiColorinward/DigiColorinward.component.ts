@@ -572,6 +572,7 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.consigneeCity = consigneeDetail[0].city;
           this.InwardDataModel.inquiryDateTime = consigneeDetail[0].createdDate;
           this.customerReuirement = consigneeDetail[0].customerRequirement.split(',');
+          this.customerRequirementType.name = this.customerReuirement;
           this.InwardDataModel.caseId = consigneeDetail[0].consigneeNameCode.split('-')[0].trim();
           this.InwardDataModel.saveOrSubmit = 'Save';
           this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetContactDetailandTypeofIndData, {
@@ -610,7 +611,7 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.consigneeState = res.table[0].cosigneeState;
           this.InwardDataModel.customerType = res.table[0].customerType;
           this.InwardDataModel.inquiryDateTime = res.table[0].createdDate;
-          this.customerReuirement = res.table[0].customerRequirement.split(',');
+          this.customerRequirementType = res.table[0].customerRequirement.split(',');
           this.InwardDataModel.shadeId = res.table1[0].shadeid;
           this.InwardDataModel.shadeNameNoForEdit = res.table1[0].shadeName + ' - ' + res.table1[0].shadeid;
           // this.customerSubStrate = res.table3;
@@ -657,9 +658,7 @@ export class DigiColorinwardComponent implements OnInit {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
-    this.customerSubStrate[0]['typeofIndustries1'] = this.InwardDataModel.substrate;
-    this.customerSubStrate[0]['uom'] = this.InwardDataModel.fabricQuality;
-    this.customerSubStrate[0]['ratio'] = this.InwardDataModel.ratio;
+    data.customerContactDetail = this.customerContactDetails;
     if (this.customerContactDetails) {
       let isreportSendClickorNot = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
       if (isreportSendClickorNot.length == 0) {
@@ -689,7 +688,9 @@ export class DigiColorinwardComponent implements OnInit {
       notify({ message: 'Please enter One Contact Details', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
-    data.customerContactDetail = this.customerContactDetails;
+    this.customerSubStrate[0]['typeofIndustries1'] = this.InwardDataModel.substrate;
+    this.customerSubStrate[0]['uom'] = this.InwardDataModel.fabricQuality;
+    this.customerSubStrate[0]['ratio'] = this.InwardDataModel.ratio;
     data.customerSubstrate = this.customerSubStrate;
     data.fastnessRequirement = this.customerFastnessDataSource;
     data.customerRequirement = this.customerReuirement.toString();
