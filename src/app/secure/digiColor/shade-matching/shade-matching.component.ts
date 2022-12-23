@@ -176,11 +176,11 @@ export class ShadeMatchingComponent implements OnInit {
   StatusData = [
     {
       ID: 1,
-      Name: 'Approved'
+      Name: 'Under Process'
     },
     {
       ID: 2,
-      Name: 'Pending For Approval'
+      Name: 'Prediction'
     },
     {
       ID: 3,
@@ -231,6 +231,9 @@ export class ShadeMatchingComponent implements OnInit {
   remarkMatchingOp2: any
   remarkMatchingOp3: any
   remarkMatchingOp4: any
+
+
+  shadeMatchingBtn: boolean = true;
 
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.isShowPopOver = false;
@@ -410,6 +413,10 @@ export class ShadeMatchingComponent implements OnInit {
     this.SelectedConsigneeCode = shadeDetail.consigneeCode;
     this.SelectedConsigneeName = shadeDetail.consigneeName;
     this.getPoupupPredictionData(1, shadeDetail.shadeid);
+    if(shadeDetail.customerRequirement == 'Recipe Prediction')
+      this.shadeMatchingBtn = false;
+    else
+      this.shadeMatchingBtn = true;
   }
 
   PopupClose(event: any) {
@@ -749,8 +756,8 @@ export class ShadeMatchingComponent implements OnInit {
         element.shadeName = this.SelectedshadeName;
         element.shadeid = this.Selectedshadeid;
         element.consigneeCode = this.SelectedConsigneeCode;
-        element.isShowToCustomer = 0;
-        element.isApprove = 0;
+        // element.isShowToCustomer = 0;
+        // element.isApprove = 0;
         element.remark = '';
       });
     }
@@ -777,6 +784,19 @@ export class ShadeMatchingComponent implements OnInit {
       if (this.popUpPredictionOption1Data && this.popUpPredictionOption1Data[0].lightsource && this.popUpPredictionOption1Data[0].lightsource != null && this.popUpPredictionOption1Data[0].lightsource != undefined) {
         this.lightSourcePoupup1 = this.popUpPredictionOption1Data[0].lightsource.slice(0, -5);
       }
+      if(this.popUpPredictionOption1Data[0].isShowToCustomer == true){
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 1) {
+            element.isShowToCustomer = 1;
+          }
+        });
+      }else{
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 1) {
+            element.isShowToCustomer = 0;
+          }
+        });
+      }
     } else {
       this.poupShowPredictionOption1 = false;
     }
@@ -793,6 +813,19 @@ export class ShadeMatchingComponent implements OnInit {
       }
       if (this.popUpPredictionOption2Data && this.popUpPredictionOption2Data[0].lightsource && this.popUpPredictionOption2Data[0].lightsource != null && this.popUpPredictionOption2Data[0].lightsource != undefined) {
         this.lightSourcePoupup2 = this.popUpPredictionOption2Data[0].lightsource.slice(0, -5);
+      }
+      if(this.popUpPredictionOption2Data[0].isShowToCustomer == true){
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 2) {
+            element.isShowToCustomer = 1;
+          }
+        });
+      }else{
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 2) {
+            element.isShowToCustomer = 0;
+          }
+        });
       }
     } else {
       this.poupShowPredictionOption2 = false;
@@ -811,6 +844,19 @@ export class ShadeMatchingComponent implements OnInit {
       if (this.popUpPredictionOption3Data && this.popUpPredictionOption3Data[0].lightsource && this.popUpPredictionOption3Data[0].lightsource != null && this.popUpPredictionOption3Data[0].lightsource != undefined) {
         this.lightSourcePoupup3 = this.popUpPredictionOption3Data[0].lightsource.slice(0, -5);
       }
+      if(this.popUpPredictionOption3Data[0].isShowToCustomer == true){
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 3) {
+            element.isShowToCustomer = 1;
+          }
+        });
+      }else{
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 3) {
+            element.isShowToCustomer = 0;
+          }
+        });
+      }
     } else {
       this.poupShowPredictionOption3 = false;
     }
@@ -827,6 +873,19 @@ export class ShadeMatchingComponent implements OnInit {
       }
       if (this.popUpPredictionOption4Data && this.popUpPredictionOption4Data[0].lightsource && this.popUpPredictionOption4Data[0].lightsource != null && this.popUpPredictionOption4Data[0].lightsource != undefined) {
         this.lightSourcePoupup4 = this.popUpPredictionOption4Data[0].lightsource.slice(0, -5);
+      }
+      if(this.popUpPredictionOption4Data[0].isShowToCustomer == true){
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 4) {
+            element.isShowToCustomer = 1;
+          }
+        });
+      }else{
+        this.popUpPredictionAllData.forEach((element: any) => {
+          if (element.trail == 4) {
+            element.isShowToCustomer = 0;
+          }
+        });
       }
     } else {
       this.poupShowPredictionOption4 = false;
@@ -921,7 +980,19 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption1 = this.popUpShadeMatchingOption1Data[0].rgbHexaCode;
         this.chkShadeMatchingOption1 = this.popUpShadeMatchingOption1Data[0].isShowToCustomer;
         this.remarkMatchingOp1 = this.popUpShadeMatchingOption1Data[0].remarks;
-
+        if(this.popUpShadeMatchingOption1Data[0].isShowToCustomer == true){
+          this.popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 1) {
+              element.isShowToCustomer = 1;
+            }
+          });
+        }else{
+          this.popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 1) {
+              element.isShowToCustomer = 0;
+            }
+          });
+        }
       } else {
         this.poupShowShadeMatchingOption1 = false;
       }
@@ -932,6 +1003,19 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption2 = this.popUpShadeMatchingOption2Data[0].rgbHexaCode;
         this.chkShadeMatchingOption2 = this.popUpShadeMatchingRgbCodeOption2[0].isShowToCustomer;
         this.remarkMatchingOp2 = this.popUpShadeMatchingOption2Data[0].remarks;
+        if(this.popUpShadeMatchingRgbCodeOption2[0].isShowToCustomer == true){
+          this.popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 2) {
+              element.isShowToCustomer = 1;
+            }
+          });
+        }else{
+          this.popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 2) {
+              element.isShowToCustomer = 0;
+            }
+          });
+        }
       } else {
         this.poupShowShadeMatchingOption2 = false;
       }
@@ -942,6 +1026,19 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption3 = this.popUpShadeMatchingOption3Data[0].rgbHexaCode;
         this.chkShadeMatchingOption3 = this.popUpShadeMatchingRgbCodeOption3[0].isShowToCustomer;
         this.remarkMatchingOp3 = this.popUpShadeMatchingOption3Data[0].remarks;
+        if(this.popUpShadeMatchingRgbCodeOption3[0].isShowToCustomer == true){
+          this.popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 3) {
+              element.isShowToCustomer = 1;
+            }
+          });
+        }else{
+          this.popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 3) {
+              element.isShowToCustomer = 0;
+            }
+          });
+        }
       } else {
         this.poupShowShadeMatchingOption3 = false;
       }
@@ -952,6 +1049,19 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption4 = this.popUpShadeMatchingOption4Data[0].rgbHexaCode;
         this.chkShadeMatchingOption4 = this.popUpShadeMatchingRgbCodeOption4[0].isShowToCustomer;
         this.remarkMatchingOp4 = this.popUpShadeMatchingOption4Data[0].remarks;
+        if(this.popUpShadeMatchingRgbCodeOption4[0].isShowToCustomer == true){
+          this.popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 4) {
+              element.isShowToCustomer = 1;
+            }
+          });
+        }else{
+          this.popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 4) {
+              element.isShowToCustomer = 0;
+            }
+          });
+        }
       } else {
         this.poupShowShadeMatchingOption4 = false;
       }
@@ -1160,8 +1270,7 @@ export class ShadeMatchingComponent implements OnInit {
           }
         });
       }
-     }
-     
+     } 
   }
   getRemarksDataforMatching(popUpShadeMatchingAllData: any){
     const maxValueOftrail = Math.max(...popUpShadeMatchingAllData.map((o: any) => o.trail), 0);
@@ -1400,27 +1509,27 @@ export class ShadeMatchingComponent implements OnInit {
   onStatusValueChanged(event: any) {
     if (event && event.value) {
       if (event.value == 1) {
-        this.selectedStatusValue = 'Approved';
+        this.selectedStatusValue = 'Under Process';
         if (this.selectedfilterCaseId !== "") {
-          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Approved' && par.caseId == this.selectedfilterCaseId);
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus == 'Under Process' && par.caseId == this.selectedfilterCaseId);
         } else {
-          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Approved');
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus == 'Under Process');
         }
       }
       else if (event.value == 2) {
-        this.selectedStatusValue = 'Pending For Approval';
+        this.selectedStatusValue = 'Prediction';
         if (this.selectedfilterCaseId !== "") {
-          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Pending For Approval' && par.caseId == this.selectedfilterCaseId);
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus == 'Prediction' && par.caseId == this.selectedfilterCaseId);
         } else {
-          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Pending For Approval');
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus == 'Prediction');
         }
       }
       else if(event.value == 3){
-        this.selectedStatusValue = 'Shade Matching';
+        this.selectedStatusValue = 'Matching';
         if(this.selectedfilterCaseId !== ""){
-          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Shade Matching' && par.caseId == this.selectedfilterCaseId);
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus.trim() == 'Matching' && par.caseId == this.selectedfilterCaseId);
         }else{
-          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == 'Shade Matching');
+          this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus.trim() == 'Matching');
         }
       }
     }

@@ -47,7 +47,8 @@
             <em><b>Shade Id:</b> {{data.shadeid}}- <i>{{data.shadeName}}</i></em>
             <em><b>Dyeset:</b> <i> {{data.dyeSet}}</i></em>
             <em><b>Req:</b> <i> {{data.customerRequirement}}</i></em>
-            <em><b>Status:</b> <i> {{data.statusForRecipePrediction}}</i></em>
+            <em><b>Prediction Status:</b> <i> {{data.statusForRecipePrediction}}</i></em>
+            <em><b>Matching Status:</b> <i> {{data.statusForShadeMatching}}</i></em>
           </span>
           <i [ngStyle]="{'color': data.rbgcode }" class="underproce">{{data.shadeStatus}}</i>
           <strong>
@@ -411,7 +412,7 @@
             (click)="getPoupupPredictionData('2',shadeId)">
           </dx-button>
           <dx-button [ngClass]="{'active': isActive == '3'}" class="submitbtn" text="Shade Matching" type="normal"
-            (click)="getPoupupPredictionData('3',shadeId)">
+            (click)="getPoupupPredictionData('3',shadeId)" *ngIf="shadeMatchingBtn">
           </dx-button>
         </div>
 
