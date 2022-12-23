@@ -44,6 +44,7 @@ export class InquiryComponent implements OnInit {
   recipientName = [{ name: "Contact Person" }, { name: "Other" }];
   count: any = 0;
   consigneeContactDetail: any;
+  dataforSMS: any = [];
 
   constructor(
     private apiService: ApiService,
@@ -254,7 +255,7 @@ export class InquiryComponent implements OnInit {
     data.AssignToRunnerCode = tempassignToRunner;
     data.assignToRunner = tempassignToRunnerCode;
     this.disablesubbtn = true;
-    
+
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)
       .subscribe((res: any) => {
         this.disablesubbtn = false;
@@ -262,9 +263,16 @@ export class InquiryComponent implements OnInit {
         let consumerName = res.table[0].consumerName;
         notify({ message: 'Inquiry Generate Successfully for Cusumer ' + consumerName + ' And Case Id is :' + caseid, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 600 }, 'success', 2000);
         this.router.navigate(["/digicolor/inquiry/"]);
+        this.dataforSMS = data;
+        this.dataforSMS.caseId = caseid;
+        this.SendSMS(this.dataforSMS);
       });
   }
-
+  SendSMS(data: any) {
+    this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.SMSSendForPostInquiryFormData, data)
+      .subscribe((res: any) => {
+      });
+  }
   UpdateInquiryDataForm(data: any, da: any) {
     data.saveOrSubmit = da;
     data.createdBy = this.UserId;
@@ -375,7 +383,7 @@ export class InquiryComponent implements OnInit {
         let unselectedid = data.currentDeselectedRowKeys
         this.consigneeContactDetail.forEach((element1: any) => {
           if (element1.id == unselectedid) {
-            
+
             element1.isReportSend = false;
           }
         });
