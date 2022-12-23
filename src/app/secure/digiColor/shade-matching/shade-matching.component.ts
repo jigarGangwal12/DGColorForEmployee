@@ -1081,7 +1081,7 @@ export class ShadeMatchingComponent implements OnInit {
     }
   }
   UpdateRecipePrecdictionData(popUpPredictionAllData: any) {
-    debugger
+    
     this.getRemarksDataforPrediction(popUpPredictionAllData);
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
@@ -1323,7 +1323,7 @@ export class ShadeMatchingComponent implements OnInit {
   }
 
   SaveShadeMatching(popUpShadeMatchingAllData: any, selectedColorGamut: any) {
-    debugger
+    
     this.getRemarksDataforMatching(popUpShadeMatchingAllData);
     if (popUpShadeMatchingAllData) {
       this.disableShadeMatchingUpdateButton = true;
@@ -1339,7 +1339,7 @@ export class ShadeMatchingComponent implements OnInit {
     }
   }
   UpdateShadeMatchingData(popUpShadeMatchingAllData: any,selectedColorGamut: any) { 
-    debugger
+    
     this.getRemarksDataforMatching(popUpShadeMatchingAllData);
     if (popUpShadeMatchingAllData) {
       this.disableUpdateButton = true; 

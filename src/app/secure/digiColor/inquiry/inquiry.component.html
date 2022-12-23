@@ -68,11 +68,13 @@
             </dxi-item>
             <dxi-item dataField="agentNameCode" [editorOptions]="{ readOnly: true }" [label]="{text: 'Agent'}">
             </dxi-item>
+
             <dxi-item *ngIf="inquiryForm.inquiryBy == 'Sales Person'" name="salesPersonName">
               <dxo-label text="Sales Person Name"></dxo-label>
               <div *dxTemplate>
               </div>
             </dxi-item>
+
             <dxi-item name="customerRequirement">
               <dxo-label text="Customer Requirement*"></dxo-label>
               <div *dxTemplate>
@@ -88,6 +90,7 @@
                 </dx-tag-box>
               </div>
             </dxi-item>
+
             <dxi-item *ngIf="!readOnlyAgent" itemType="empty"></dxi-item>
             <dxi-item itemType="empty"></dxi-item>
 

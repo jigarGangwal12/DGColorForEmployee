@@ -1,22 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { API_CONSTANTS } from '../../../constants/api-constants';
 import { ApiService } from 'src/app/core/services/api.service';
 import DataSource from 'devextreme/data/data_source';
-import { filter } from 'rxjs/operators';
 import notify from 'devextreme/ui/notify';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ColumnApi, GridApi, ColDef } from 'ag-grid-community';
 import { SecureComponent } from '../../secure.component';
-import { DxDataGridComponent } from 'devextreme-angular/ui/data-grid';
 @Component({
   selector: 'app-inquiry',
   templateUrl: './inquiry.component.html',
   styleUrls: ['./inquiry.component.css']
 })
 export class InquiryComponent implements OnInit {
-  // @ViewChild('CustomerContacDetailsId', { static: false }) dataGrid: DxDataGridComponent;
-
-  // @ViewChild('CustomerContacDetailsId') dataGrid: DxDataGridComponent;
   API_CONSTANTS = API_CONSTANTS;
   inquiryForm: any;
   showR1Grid: boolean = true;
@@ -27,7 +21,7 @@ export class InquiryComponent implements OnInit {
   inquiryByData: string[];
   agentListData: any;
   consigneeList: any;
-  consigneeContactDetail = [];
+
   cosigneeNameCodeList: any;
   rowGroupPanelShow = 'always';
   autoGroupRate: any;
@@ -49,149 +43,18 @@ export class InquiryComponent implements OnInit {
   selectedRowData: any = [];
   recipientName = [{ name: "Contact Person" }, { name: "Other" }];
   count: any = 0;
+  consigneeContactDetail: any;
 
   constructor(
     private apiService: ApiService,
     public router: Router,
     private route: ActivatedRoute,
     private secure: SecureComponent,
+    private cdRef: ChangeDetectorRef
   ) {
     this.UserId = ((localStorage.getItem("empCode")));
     this.UserId = this.UserId.substring(1, this.UserId.length - 1);
     this.customerRequirementType = [{ name: 'Recipe Prediction' }, { name: 'Shade Matching Recipe' },]
-    this.InquiryInofcolumnDef = [
-      {
-        headerName: 'Case Id',
-        field: 'caseId',
-        maxWidth: 80,
-        cellStyle: (params: any) => {
-          return { cursor: 'pointer' }
-        },
-      },
-      {
-        headerName: 'Inquiry Type',
-        field: 'inquiryType',
-        resizable: true,
-        maxWidth: 120
-      },
-      {
-        headerName: 'ScanMode',
-        field: 'scanMode',
-        resizable: true
-        , maxWidth: 90
-      },
-      {
-        headerName: 'Inquiry By',
-        field: 'inquiryBY',
-        resizable: true
-        , maxWidth: 90
-      },
-      {
-        headerName: 'Consumer',
-        field: 'consigneeNameCode',
-        resizable: true
-      },
-      {
-        headerName: 'Agent',
-        field: 'agentNameCode',
-        resizable: true
-
-      },
-      {
-        headerName: 'Contact Person',
-        field: 'contactPerson',
-        resizable: true
-
-      },
-      {
-        headerName: 'Contact No',
-        field: 'contactNo',
-        resizable: true
-        , maxWidth: 90
-
-      },
-      {
-        headerName: 'Address',
-        field: 'address1',
-        resizable: true
-
-      },
-      {
-        headerName: 'Address 2',
-        field: 'address1',
-        resizable: true
-
-      },
-      {
-        headerName: 'Address 2',
-        field: 'address2',
-        resizable: true
-
-      },
-      {
-        headerName: 'City',
-        field: 'city',
-        resizable: true
-
-      },
-      {
-        headerName: 'State',
-        field: 'cosigneeState',
-        resizable: true,
-        maxWidth: 100
-      },
-      {
-        headerName: 'Remarks',
-        field: 'remark',
-        resizable: true
-
-      },
-    ]
-    this.sideBar = {
-      toolPanels: [
-        {
-          id: 'filters',
-          labelDefault: 'Filters',
-          labelKey: 'filters',
-          iconKey: 'filter',
-          toolPanel: 'agFiltersToolPanel',
-          minWidth: 180,
-          maxWidth: 400,
-          width: 250,
-        },
-        {
-          id: 'columns',
-          labelDefault: 'Columns',
-          labelKey: 'columns',
-          iconKey: 'columns',
-          toolPanel: 'agColumnsToolPanel',
-          minWidth: 225,
-          width: 225,
-          maxWidth: 225,
-        },
-      ],
-    };
-
-    this.autoGroupRate = {
-      cellRenderer: 'agGroupCellRenderer',
-      cellRendererParams: {
-        suppressCount: true,
-      },
-    }
-    this.defaultColDef = {
-      enableRowGroup: true,
-      enablePivot: true,
-      flex: 1,
-      minWidth: 20,
-      getQuickFilterText: (params: any) => {
-        return params.colDef.hide ? params.value : params.value;
-      },
-      sortable: true,
-      filter: true,
-      resizable: true,
-      menuTabs: ['filterMenuTab', 'columnsMenuTab', 'generalMenuTab'],
-    }
-
     this.colCountByScreen = {
       md: 4,
       sm: 2,
@@ -204,17 +67,20 @@ export class InquiryComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
   }
+
   async ngOnInit() {
     this.secure.showHideLogo = false;
     this.getAgentListData();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
+
   getDetail(e: any) {
     if (e.columnIndex === 0)
       if (e && e.row && e.row.data && e.row.data.caseId) {
         this.onReportValueChange(e.row.data.caseId, 'R1');
       }
   }
+
   getAgentListData() {
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.Getconsigneecustomer_DetailData, '')
       .subscribe((res: any) => {
@@ -261,8 +127,8 @@ export class InquiryComponent implements OnInit {
       requirementValue: 'Recipe Prediction'
     };
   }
-  agentValueChanged(event: any) {
 
+  agentValueChanged(event: any) {
   }
 
   ConsumerValueChanged(event: any) {
@@ -278,15 +144,30 @@ export class InquiryComponent implements OnInit {
         this.inquiryForm.postCodeForVisit = '';
       }
     this.inquiryForm.sameasSysytemAddress = false;
-    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetConsigneeAddressDetails, { consigneeCode: event.value })
+
+    this.GetConsigneeDetails(event.value);
+
+    if ((!event.value || event.value == null)) {
+      this.inquiryForm.address = '';
+      this.inquiryForm.address2 = '';
+      this.inquiryForm.city = '';
+      this.inquiryForm.stateCode = '';
+      this.inquiryForm.postCode = '';
+      this.inquiryForm.agentName = '';
+      this.inquiryForm.sameasSysytemAddress = false;
+      this.consigneeContactDetail = [];
+      this.inquiryForm.agentNameCode = '';
+    }
+  }
+
+  GetConsigneeDetails(data: any) {
+    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetConsigneeAddressDetails, { consigneeCode: data })
       .subscribe((res: any) => {
-        
         this.consigneeContactDetail = res.table1;
         if (this.consigneeContactDetail && this.consigneeContactDetail.length > 0) {
           this.selectedRowData = [];
           let filterReportTrue = this.consigneeContactDetail.filter((da: any) => da.isReportSend == true);
           filterReportTrue.forEach((element: any) => {
-            
             this.selectedRowData.push(element.id);
           });
         }
@@ -300,12 +181,13 @@ export class InquiryComponent implements OnInit {
           this.inquiryForm.postCode = '';
           return;
         }
+        this.showR1Grid = true;
         this.inquiryForm.address2 = res.table[0].address2;
         this.inquiryForm.city = res.table[0].city;
         this.inquiryForm.stateCode = res.table[0].stateCode;
         this.inquiryForm.postCode = res.table[0].postCode;
         if (this.cosigneeNameCodeList && this.cosigneeNameCodeList.length > 0) {
-          let totalNjCount = this.cosigneeNameCodeList.filter((da: any) => da.value == event.value);
+          let totalNjCount = this.cosigneeNameCodeList.filter((da: any) => da.value == data);
           if (totalNjCount && totalNjCount.length > 0) {
             this.inquiryForm.agentNameCode = totalNjCount[0].agentnamecode;
             this.inquiryForm.agentName = totalNjCount[0].agentname;
@@ -315,18 +197,6 @@ export class InquiryComponent implements OnInit {
           }
         }
       });
-    if ((!event.value || event.value == null)) {
-      this.inquiryForm.address = '';
-      this.inquiryForm.address2 = '';
-      this.inquiryForm.city = '';
-      this.inquiryForm.stateCode = '';
-      this.inquiryForm.postCode = '';
-      this.inquiryForm.agentName = '';
-      this.inquiryForm.sameasSysytemAddress = false;
-      
-      // this.consigneeContactDetail = [];
-      this.inquiryForm.agentNameCode = '';
-    }
   }
   selectBoxValueChanged(da: any) {
     if (da && da.value) {
@@ -384,6 +254,7 @@ export class InquiryComponent implements OnInit {
     data.AssignToRunnerCode = tempassignToRunner;
     data.assignToRunner = tempassignToRunnerCode;
     this.disablesubbtn = true;
+    
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)
       .subscribe((res: any) => {
         this.disablesubbtn = false;
@@ -435,17 +306,18 @@ export class InquiryComponent implements OnInit {
         this.GetallInquiryListData();
       });
   }
+
   cancelData() {
     this.router.navigate(["/digicolor/inquiry/"]);
-
   }
+
   form_customizeItem(item: any) {
-
   }
+
   onReportValueChange(data: string, page: string) {
 
     if (page == 'R1' && data != '') {
-      this.showR1Grid = true;
+
       this.getInqGridDataListbyId(data);
     } else {
       this.showR1Grid = true;
@@ -456,6 +328,7 @@ export class InquiryComponent implements OnInit {
       this.GetallInquiryListData();
     }
   }
+
   GetallInquiryListData() {
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetAllInquiryData, '')
       .subscribe((res: any) => {
@@ -474,7 +347,6 @@ export class InquiryComponent implements OnInit {
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetDataByCaseIdData, { caseid: val })
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
-
           this.inquiryForm.addressForVisit = res.table[0].address1;
           this.inquiryForm.address2ForVisit = res.table[0].address2;
           this.inquiryForm.cityForVisit = res.table[0].city;
@@ -486,20 +358,30 @@ export class InquiryComponent implements OnInit {
           this.inquiryForm.contactPersonNo = res.table[0].contactNo;
           this.inquiryForm.caseId = res.table[0].caseId;
           this.inquiryForm.remarks = res.table[0].remark;
-          
           this.inquiryForm.assignToRunner = res.table[0].assignedCode + '-' + res.table[0].assignedName;
           this.readOnlyAgent = true;
         }
-        this.showR1Grid = true;
+        this.GetConsigneeDetails(this.inquiryForm.cosignee);
       });
   }
 
   selectionChangedHandler(data: any) {
-    
-    data.selectedRowsData.forEach((element: any) => {
-      element.isReportSend = true;
-    });
-    data.component.refresh(true);
+    if (data) {
+      data.selectedRowsData.forEach((element: any) => {
+        element.isReportSend = true;
+      });
+
+      if (data.currentDeselectedRowKeys && data.currentDeselectedRowKeys.length > 0) {
+        let unselectedid = data.currentDeselectedRowKeys
+        this.consigneeContactDetail.forEach((element1: any) => {
+          if (element1.id == unselectedid) {
+            
+            element1.isReportSend = false;
+          }
+        });
+      }
+      data.component.refresh(true);
+    }
   }
 
   screen(width: any) {

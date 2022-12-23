@@ -595,7 +595,7 @@ export class DigiColorinwardComponent implements OnInit {
     this.router.navigate(["/digicolor/inward/"]);
   }
   getDetailByShadeId(da: any) {
-    debugger
+    
     let consigneeDetail = this.inwardFormListData.filter((data: any) => data.shadeid == da.data.shadeid);
     this.InwardDataModel.agentNameCode = consigneeDetail[0].agentNameCode;
     this.InwardDataModel.caseId = consigneeDetail[0].caseId;
@@ -653,7 +653,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   SaveInwardData(data: any) {
-    debugger
+    
     if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -788,10 +788,21 @@ export class DigiColorinwardComponent implements OnInit {
 
   selectionChangedHandler(data: any) {
     
-    // data.selectedRowsData.forEach((element: any) => {
-    //   element.isReportSend = true;
-    // });
-    data.component.refresh(true);
+    if (data) {
+      data.selectedRowsData.forEach((element: any) => {
+        element.isReportSend = true;
+      });
+
+      if (data.currentDeselectedRowKeys && data.currentDeselectedRowKeys.length > 0) {
+        let unselectedid = data.currentDeselectedRowKeys
+        this.customerContactDetails.forEach((element1: any) => {
+          if (element1.id == unselectedid) {
+            element1.isReportSend = false;
+          }
+        });
+      }
+      data.component.refresh(true);
+    }
   }
   addCompetitorandProduct() {
     this.addCompetitorpopupVisible = true;
