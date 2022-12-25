@@ -276,7 +276,7 @@ export class InquiryComponent implements OnInit {
   UpdateInquiryDataForm(data: any, da: any) {
     data.saveOrSubmit = da;
     data.createdBy = this.UserId;
-    if (!data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit) {
+    if (!data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.requirementValue) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
@@ -307,6 +307,7 @@ export class InquiryComponent implements OnInit {
     data.AssignToRunnerCode = data.assignToRunner.split('-')[0];
     data.assignToRunner = data.assignToRunner.split('-')[1];
     this.disablesubbtn = true;
+    debugger
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)
       .subscribe((res: any) => {
         this.disablesubbtn = false;
@@ -323,9 +324,7 @@ export class InquiryComponent implements OnInit {
   }
 
   onReportValueChange(data: string, page: string) {
-
     if (page == 'R1' && data != '') {
-
       this.getInqGridDataListbyId(data);
     } else {
       this.showR1Grid = true;
@@ -366,6 +365,13 @@ export class InquiryComponent implements OnInit {
           this.inquiryForm.contactPersonNo = res.table[0].contactNo;
           this.inquiryForm.caseId = res.table[0].caseId;
           this.inquiryForm.remarks = res.table[0].remark;
+          debugger
+          // this.inquiryForm.requirement = [];
+          // var array = res.table[0].customerRequirement.split(',');
+          // for (let i = 0; i < array.length; i++) {
+          //   this.inquiryForm.requirement.push({ name: array[i].trim() });
+          // }
+          // this.inquiryForm.requirement = res.table[0].customerRequirement
           this.inquiryForm.assignToRunner = res.table[0].assignedCode + '-' + res.table[0].assignedName;
           this.readOnlyAgent = true;
         }
@@ -400,6 +406,7 @@ export class InquiryComponent implements OnInit {
   }
   customerRequirementValueChange(da: any) {
     if (da && da.value) {
+      debugger
       this.inquiryForm.requirementValue = da.value.toString();
     }
 

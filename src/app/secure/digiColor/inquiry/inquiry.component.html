@@ -78,6 +78,8 @@
             <dxi-item name="customerRequirement">
               <dxo-label text="Customer Requirement*"></dxo-label>
               <div *dxTemplate>
+                <!-- {{customerRequirementType | json}}
+                {{inquiryForm.requirement}} -->
                 <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
                   [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
                   (onValueChanged)="customerRequirementValueChange($event)" [value]="[inquiryForm.requirement]"
@@ -95,7 +97,7 @@
             <dxi-item itemType="empty"></dxi-item>
 
             <dxi-item [colSpan]="4">
-              <div class="inward_boxs_Div_Width">
+              <div class="DigiColor-Inquiry_boxs_width">
                 <div style="padding-left: 0px;">
                   <div class="long-title long-title1" style="margin-top: 10px;">
                     <h4>Report Submission</h4>
@@ -210,7 +212,7 @@
   </div>
 
   <div *ngIf="!showR1Grid" class="col-md-12 customProductpadinone">
-    <div id="scrollview-demo" class="inward-page2">
+    <div id="scroll-digi-Inquiry-page" class="inward-page2">
       <div class="long-title">
         <h3>Inquiry List </h3>
       </div>
@@ -240,7 +242,7 @@
             <dxi-column dataField="agentCode" caption="Agent Code" [width]="90"></dxi-column>
             <dxi-column dataField="agentNameCode" caption="Agent"></dxi-column>
             <dxi-column dataField="contactPerson" caption="Contact Person"></dxi-column>
-            <dxi-column dataField="mobileNumber" [width]="90" caption="Contact No"></dxi-column>
+            <dxi-column dataField="mobileNumber" [width]="95" caption="Contact No"></dxi-column>
             <dxi-column dataField="assignToEmp" caption="AssignToRunner"></dxi-column>
             <dxi-column dataField="city" caption="City"></dxi-column>
             <dxi-column dataField="cosigneeState" [width]="98" caption="State"></dxi-column>

@@ -507,7 +507,7 @@ export class DigiColorinwardComponent implements OnInit {
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.MapSampleIdWithCaseId, this.selectedRowData)
       .subscribe((res: any) => {
         this.disablesubbtn = false;
-        notify({ message: 'Sample Id Map with Case Id SuccessFully ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
+        notify({ message: 'Sample Id Map with Case Id SuccessFully ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'success', 2000);
         this.router.navigate(["/digicolor/inward/"]);
       });
   }
@@ -572,6 +572,7 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.consigneeCity = consigneeDetail[0].city;
           this.InwardDataModel.inquiryDateTime = consigneeDetail[0].createdDate;
           this.customerReuirement = consigneeDetail[0].customerRequirement.split(',');
+          debugger
           this.customerRequirementType.name = this.customerReuirement;
           this.InwardDataModel.caseId = consigneeDetail[0].consigneeNameCode.split('-')[0].trim();
           this.InwardDataModel.saveOrSubmit = 'Save';
@@ -847,4 +848,11 @@ export class DigiColorinwardComponent implements OnInit {
       this.customerReuirement = event.value;
     }
   }
+  OnReportSubmissionDeleted(data: any) {
+    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.DeleteContactDetailById, { id: data.data.id })
+      .subscribe((res: any) => {
+
+      });
+  }
+  
 }

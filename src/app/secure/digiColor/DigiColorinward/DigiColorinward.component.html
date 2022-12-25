@@ -40,7 +40,7 @@
               <label>Case Id</label>
             </div>
             <div class="col-md-12" style=" padding-left: 4px;">
-              <dx-select-box style="border-bottom:1px solid #ddd !important; padding:0px !important;" Id="case"
+              <dx-select-box style="padding:0px !important;border-style: solid;" Id="case"
                 [dataSource]="caseIdData" displayExpr="caseIdAndConsignee" valueExpr="caseId"
                 (onValueChanged)="caseIdValueChanged($event)" placeholder="Select Case Id" [showClearButton]="true"
                 [searchEnabled]="true">
@@ -53,7 +53,7 @@
             </div>
             <div class="col-md-12">
               <span style="margin-left:-2px;display:inline-block;">
-                <dx-date-box style="border-bottom:1px solid #ddd !important; padding:0px !important;"
+                <dx-date-box style=" padding:0px !important;border-style: solid;"
                   Id="inquirydateTime" placeholder="Select  Date" [readOnly]=true [(value)]="caseIdDatetime" type="date"
                   displayFormat="dd/MM/yyyy hh:mm">
                 </dx-date-box>
@@ -89,7 +89,7 @@
 
   </div>
   <div *ngIf="showR2Grid">
-    <div id="scrollview-demo" class="inward-page2">
+    <div id="scroll-digi-inward-page" class="inward-page2">
       <dx-scroll-view #scrollView id="scrollview" [scrollByContent]="true" [scrollByThumb]="true"
         [bounceEnabled]="false" [useNative]="true" direction="both" reachBottomText="Updating...">
         <div *ngIf="!this.editShadeid" class="customerDetails-inward">
@@ -331,7 +331,6 @@
                   <div class="" style="margin-top: 10px">
                     <h3>Report Submission</h3>
                   </div>
-                  {{customerContactDetails | json}}
                   <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
                     <div id="form-container" style="padding:0 8px;">
                       <dx-data-grid id="CustomerContacDetailsId" [dataSource]="customerContactDetails"
@@ -424,7 +423,7 @@
           <div class="">
             <div class="col-md-12 p-0">
               <div class="inward_boxs_Div_Width">
-                <div class="col-md-12 col-xl-12 ipad-pading-cont-details">
+                <div class="col-md-12 col-xl-12 pading-Competitor-Data">
                   <div class="" style="margin-top: 10px">
                     <h3>Competitor Data</h3>
                   </div>
@@ -945,6 +944,7 @@
                   <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
                     <div id="form-container" style="padding:0 8px;">
                       <dx-data-grid id="CustomerContacDetailsId" [dataSource]="customerContactDetails"
+                      (onRowRemoved)="OnReportSubmissionDeleted($event)"
                         [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
                         [(selectedRowKeys)]="selectedRowDataContactDetail" keyExpr="id"
                         (onSelectionChanged)="selectionChangedHandler($event)" [showBorders]="true">
@@ -1284,10 +1284,6 @@
                         (onValueChanged)="cellInfo.setValue($event.value)" placeholder="Select Method">
                       </dx-select-box>
                     </div>
-                    <dxi-column dataField="dryorWet" [width]=120 caption="">
-                      <dxo-lookup [dataSource]="dyesorWetDataSource" valueExpr="name" displayExpr="name">
-                      </dxo-lookup>
-                    </dxi-column>
                     <dxi-column dataField="targetRating" [width]=120 caption="Target Rating">
                       <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating"
                         displayExpr="targetRating">
@@ -1344,10 +1340,10 @@
       [detailCellRendererParams]="detailCellRendererParams" (firstDataRendered)="onFirstDataRendered($event)"
       (gridReady)="onInwardDetailsGridReady($event)">
     </ag-grid-angular> -->
-    <div id="scrollview-demo" class="inward-page2">
+    <div id="scroll-digi-inward-page" class="inward-page2">
       <dx-scroll-view #scrollView id="scrollview" [scrollByContent]="true" [scrollByThumb]="true"
         [bounceEnabled]="false" [useNative]="true" direction="both" reachBottomText="Updating...">
-        <div class="col-md-12 mt-4 customProductpadinone">
+        <div class="col-md-12 mt-4 digi-inward-padinone">
           <div class="long-title long-title1">
             <h3>Inward Details </h3>
           </div>

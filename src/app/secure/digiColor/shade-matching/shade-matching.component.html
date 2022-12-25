@@ -37,8 +37,8 @@
       <div *dxTemplate="let data of 'title'" (click)="expandCollapse(data)">
         <div class="accourdian-header-text">
           <span>
-            <em><i style="float: left;"><b>Case Id:</b> {{data.caseId}} -</i> <i style="height: 24px;float: left;">
-                <dx-date-box style="top: -3px !important; margin-left: 3px;" Id="scandateTime" [readOnly]=true
+            <em><i style="float: left;"><b>Case Id:</b> {{data.caseId}} -</i> <i style="height: 22px;float: left;">
+                <dx-date-box Id="caseId_Date" [readOnly]=true
                   [value]="data.createdDate" type="date" displayFormat="dd/MM/yyyy hh:mm">
                 </dx-date-box>
               </i></em>
@@ -393,7 +393,7 @@
 
     </dx-accordion>
 
-    <dx-popup [width]="popUpWidth" [height]="350" [showTitle]="true" [showCloseButton]="false"
+    <dx-popup id="shade-maching-popup" class="shade-maching-popup-width" [width]="popUpWidth" [height]="750" [showTitle]="true" [showCloseButton]="false"
       titleTemplate="titlerapidSearch" [dragEnabled]="true" [closeOnOutsideClick]="false" [(visible)]="PopupVisible">
       <div *dxTemplate="let data of 'titlerapidSearch'" class="costomer-dgcolor-Popup-hdr">
         <!-- <h4>Lab Testing Parameters</h4> -->
@@ -425,20 +425,55 @@
             <a [ngClass]="{'active': isActiveForLabProduct == '2'}" (click)="onLabOrProductInfoClick('2')">Product
               Info</a>
 
-            <div class="body-right-top-search-sec" *ngIf="productInfo">
-              <input type="text" id="filter-text" placeholder="Search here..." (input)="onSearch()" autocomplete="off"
-                style="margin-top: -23px">
+            <div class="product-info-rt-search-sec" *ngIf="productInfo">
+              <input type="text" id="filter-text" placeholder="Search here..." (input)="onSearch()" autocomplete="off">
             </div>
           </div>
 
           <div *ngIf="labTestingParameter">
-            <div id="scrollview-popup">
+            <div id="Shade-maching-scroll-popup">
               <table class="costomer-popup-table">
                 <tr *ngFor="let labData of labPredictionParameter">
                   <td><span>Substrate:</span> {{labData.typeOfIndustries}}</td>
-                  <td>{{labData.uom}} <p *ngIf="labData.ratio"> - </p>{{labData.ratio}}</td>
+                  <td>{{labData.uom}} <p style="display: inline-block;margin: 0px;" *ngIf="labData.ratio"> - </p>{{labData.ratio}}</td>
                 </tr>
                 <tr>
+                  <td colspan="2"><span>Process:</span> {{process}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Dischargability:</span> {{dischargability}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Primary:</span> {{lightSourcePrimary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Secondary:</span> {{lightSourceSecondary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Tertiary:</span> {{lightSourceTertiary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Remark:</span> {{samplereamark}}</td>
+                </tr>
+                <!-- real data end -->
+                <tr>
+                  <td colspan="2"><span>Process:</span> {{process}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Dischargability:</span> {{dischargability}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Primary:</span> {{lightSourcePrimary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Secondary:</span> {{lightSourceSecondary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Tertiary:</span> {{lightSourceTertiary}}</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><span>Remark:</span> {{samplereamark}}</td>
+                </tr><tr>
                   <td colspan="2"><span>Process:</span> {{process}}</td>
                 </tr>
                 <tr>
@@ -500,7 +535,7 @@
 
         <!-- Strat Tab Recipe Prediction -->
         <div *ngIf="tabRecipePredcition">
-          <div id="scrollview-popup">
+          <div id="Shade-maching-scroll-popup">
             <!-- <dx-scroll-view> -->
             <!-- Strat Option Here -->
             <span *ngIf="predictionDataNotAvailabe">
@@ -563,8 +598,8 @@
                 </tr>
               </table>
               <div class="">
-                <div class="">
-                  <label>Enter Remark Option1 :</label>
+                <div class="shade-maching-popup-enter-remark-text">
+                  <label>Enter Remark Option1:</label>
                 </div>
                 <div class="">
                   <span>
@@ -626,8 +661,8 @@
                 </tr>
               </table>
               <div class="">
-                <div class="">
-                  <label>Enter Remark Option2 :</label>
+                <div class="shade-maching-popup-enter-remark-text">
+                  <label>Enter Remark Option2:</label>
                 </div>
                 <div class="">
                   <span>
@@ -790,7 +825,7 @@
 
         <!-- Strat Tab Shade Matching -->
         <div *ngIf="tabShadeMatching">
-          <div id="scrollview-popup">
+          <div id="Shade-maching-scroll-popup">
             <span *ngIf="shadeMatchingDataNotAvailable">
               <p>Data Not Available </p>
             </span>
@@ -846,7 +881,7 @@
                 </tr>
               </table>
               <div class="">
-                <div class="">
+                <div class="shade-maching-popup-enter-remark-text">
                   <label>Enter Remark Option1 :</label>
                 </div>
                 <div class="">
@@ -898,8 +933,8 @@
                 </tr>
               </table>
               <div class="">
-                <div class="">
-                  <label>Enter Remark Option2 :</label>
+                <div class="shade-maching-popup-enter-remark-text">
+                  <label>Enter Remark Option2:</label>
                 </div>
                 <div class="">
                   <span>
@@ -1045,7 +1080,7 @@
 </dx-load-panel>
 
 
-<dx-popup [width]="'30%'" [showTitle]="true" [showCloseButton]="false" titleTemplate="titlerapidSearch" id="test"
+<dx-popup [width]="'500'" [height]="400" [showTitle]="true" [showCloseButton]="false" titleTemplate="titlerapidSearch" id="test"
   [dragEnabled]="true" [closeOnOutsideClick]="false" [(visible)]="remarkPopupVisible">
   <div *dxTemplate="let data of 'titlerapidSearch'" class="costomer-dgcolor-Popup-hdr">
     <h4>Remark</h4>

@@ -44,7 +44,7 @@
         <input type="text" id="filter-text-box" placeholder="Search" (input)="onFilterTextBoxChangedPrediction()"
           autocomplete="off" />
       </div>
-      <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 226px); margin-bottom: 58px;"
+      <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 226px); margin-bottom: 50px;"
         [columnDefs]="recipePredctionColumnDef" [rowData]="recipePredctionSMSGrid" [defaultColDef]="defaultColDef"
         [rowSelection]="rowSelection" [autoGroupColumnDef]="AutoGroupColumnDef" [rowMultiSelectWithClick]="true"
         [groupDefaultExpanded]="groupDefaultExpanded" (gridReady)="OnGridReadyPredction($event)" [suppressContextMenu]="true"
@@ -63,7 +63,7 @@
         <input type="text" id="filter-text-box" placeholder="Search" (input)="onFilterTextBoxChangedMatching()"
           autocomplete="off" />
       </div>
-      <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 226px); margin-bottom: 58px;"
+      <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 226px); margin-bottom: 50px;"
         [columnDefs]="shadeMatchingColumnDef" [rowData]="shadeMatchingSMSGird" [defaultColDef]="defaultColDef"
         [rowSelection]="rowSelection" [autoGroupColumnDef]="AutoGroupColumnDef" [rowMultiSelectWithClick]="true"
         [groupDefaultExpanded]="groupDefaultExpanded" (gridReady)="OnGridReadyMatching($event)" [suppressContextMenu]="true"
@@ -83,7 +83,7 @@
       <input type="text" id="filter-text-box" placeholder="Search" (input)="onFilterTextBoxChanged()"
         autocomplete="off" />
     </div>
-    <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 145px); margin-bottom: 50px;"
+    <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 154px); margin-bottom: 50px;"
       [columnDefs]="ColumnDef" [rowData]="InwardDetailsList" [defaultColDef]="defaultColDefViewSms"
       [rowSelection]="rowSelection" [autoGroupColumnDef]="AutoGroupColumnDef"
       [groupDefaultExpanded]="groupDefaultExpanded" (gridReady)="OnGridReady($event)" [suppressContextMenu]="true"

@@ -21,7 +21,19 @@
     position: relative;
   }
  
-  
+  /* Mukesh CSS 24 Dec 2022 Start Here */
+  .DigiColor-Inquiry_boxs_width{
+    width: 100%; margin-right: 0px;
+  }
+  #scroll-digi-Inquiry-page {
+    height: calc(100vh - 100px) !important;
+    position: relative;
+    overflow: scroll;
+    display: inline-block;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+  /* Mukesh CSS 24 Dec 2022 End Here */
   
   ::ng-deep #scrollview {
     height: auto;

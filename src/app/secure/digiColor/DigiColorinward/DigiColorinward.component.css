@@ -1,27 +1,7 @@
-#scrollview {
-  height: calc(100vh - 96px) !important;
-}
-
-::ng-deep #scrollview .dx-scrollable-container {
-  padding-bottom: 10px !important;
-}
-
-.customerDetails-inward {
-  width: 100%;padding-top: 15px;
-}
-
-::ng-deep #tasks .dx-treelist-rowsview td {
-  vertical-align: middle;
-}
-
 .Margin_Top_Inward {
   margin-top: 12px !important;
   display: inline-block;
   width: 100%;
-}
-
-::ng-deep #scrollview-content {
-  white-space: pre-wrap;
 }
 
 .inward-page2 .submitbtn {
@@ -44,8 +24,6 @@
 }
 
 .submitbtnpopup {
-  /* float: right;
-  display: table; */
   background: #607d8b !important;
   border: 1px solid #607d8b;
   color: #ffff;
@@ -69,7 +47,6 @@
 }
 
 ::ng-deep .long-title h3 {
-
   color: #ffff !important;
 }
 
@@ -80,16 +57,23 @@
 .ipad-pading-cust-requrment {
   padding-right: 0px !important;
 }
-.inward-add-competiter-text{
-    color: #607d8b;
-    cursor: pointer;
-    text-align: right;
-    position: absolute;
-    right: 55px;
-    top: 8px;
-    z-index: 9;
+
+.inward-add-competiter-text {
+  color: #607d8b;
+  cursor: pointer;
+  text-align: right;
+  position: absolute;
+  right: 55px;
+  top: 8px;
+  z-index: 9;
 }
-.padding-18-left-rt{padding-left: 18px; padding-right: 18px; padding-top: 8px;}
+
+.padding-18-left-rt {
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 8px;
+}
+
 .padding-18-left-rt h4 {
   font-size: 16px;
   background: #607d8b;
@@ -99,10 +83,11 @@
   margin-bottom: 0px;
   border-radius: 6px 6px 0 0;
 }
-.inwardDetails-grid{
-    padding: 10px 10px 12px 10px !important;
-    border-radius: 0px 4px 4px 4px !important;
-    border: 1px solid rgb(201, 201, 201);
+
+.inwardDetails-grid {
+  padding: 10px 10px 12px 10px !important;
+  border-radius: 0px 4px 4px 4px !important;
+  border: 1px solid rgb(201, 201, 201);
 }
 
 
@@ -126,3 +111,48 @@
 @media (min-width: 1367px) and (max-width: 1440px) {}
 
 @media (min-width: 1441px) and (max-width: 1600px) {}
+
+
+/* Dx Css Start here */
+/* .customerDetails-inward {
+  width: 100%;
+  padding-top: 15px;
+}
+
+::ng-deep #tasks .dx-treelist-rowsview td {
+  vertical-align: middle;
+}
+
+::ng-deep #scrollview .dx-scrollable-container {
+  padding-bottom: 10px !important;
+}
+::ng-deep #scrollview-content {
+  white-space: pre-wrap;
+} */
+/* #scrollview {
+  height: calc(100vh - 96px) !important;
+} */
+/* Dx Css End here */
+
+
+/* Mukesh CSS 24 Dec 2022 */
+.customerDetails-inward {
+  width: 100%;
+  padding-top: 14px;
+}
+#scroll-digi-inward-page{
+  height: calc(100vh - 90px) !important;
+  position: relative;
+  overflow: scroll;
+  display: inline-block;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.digi-inward-padinone {
+  padding-left: 0px;
+  padding-right: 12px;
+}
+.pading-Competitor-Data{
+  padding-left: 0px !important;
+  padding-right: 0px;
+}

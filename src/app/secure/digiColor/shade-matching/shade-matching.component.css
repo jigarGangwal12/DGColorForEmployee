@@ -56,13 +56,16 @@
   display: table;
   font-weight: 500;
 }
-::ng-deep #Popup-SubTableLeft .lastThBdr{
+
+::ng-deep #Popup-SubTableLeft .lastThBdr {
   border-top: 0px !important;
   border-right: 0px !important;
 }
-::ng-deep #Popup-SubTableLeft .lastTdBdr{
+
+::ng-deep #Popup-SubTableLeft .lastTdBdr {
   border-right: 0px !important;
 }
+
 #accordion-container {
   margin-right: 0 !important;
 }
@@ -78,10 +81,9 @@
   font-weight: 500;
   margin-right: 2px;
   letter-spacing: 0.4px;
-  width: 80px;
+  width: 130px;
   display: inline-block;
 }
-
 
 .mobile-page-container .dgcolour-heading {
   width: 100%;
@@ -93,6 +95,7 @@
   letter-spacing: 0.3px;
   font-weight: 500;
 }
+
 
 .mobile-page-container .dgcolour-heading label {
   display: table;
@@ -180,20 +183,7 @@ i {
   width: 65px !important;
 }
 
-.mobile-page-container .dx-accordion-item-title {
-  /* border: 1px solid #ddd; */
-  background: #4e7171;
-  color: #fff;
-  width: 100%;
-  float: left;
-  padding: 0px !important;
-}
 
-.mobile-page-container .dx-accordion-item-body {
-  padding: 0px 0 !important;
-  font-size: 14px;
-  width: 100%;
-}
 
 .subtable {
   margin-bottom: 0px !important;
@@ -217,7 +207,6 @@ i {
   border-radius: 3px;
   display: inline-block;
   margin: 0 auto;
-  /* background: #b57937; */
   border: 5px solid #f5f5f5;
 }
 
@@ -225,32 +214,6 @@ i {
   width: calc(100% - 30px);
 }
 
-::ng-deep .mobile-page-container .dx-accordion-item-title::before {
-  color: #fff !important;
-  line-height: 206px;
-  background: #608787;
-  height: 207px;
-  padding: 0 7px;
-}
-
-::ng-deep .mobile-page-container .dx-accordion-item {
-  margin-bottom: 16px;
-  border: 1px solid #4e7171;
-  border-radius: 5px;
-}
-
-::ng-deep #accordion {
-  height: 700px;
-}
-
-
-::ng-deep #accordion-container {
-  margin-right: 400px;
-}
-
-::ng-deep .dx-theme-material #accordion .dx-accordion-item-title {
-  display: flex;
-}
 
 .mobile-page-container #ipad-table-grid {
   width: 100%;
@@ -262,28 +225,10 @@ i {
 
 .mobile-page-container #ipad-table-grid table {
   width: 100%;
-  /* box-shadow: 0 1px 5px #3333333d; */
   margin-bottom: 10px;
   border-collapse: collapse;
-  /* border: 1px solid #ddd !important; */
 }
 
-::ng-deep .dx-overlay-shader {
-  background-color: rgb(0 0 0 / 66%) !important;
-}
-
-::ng-deep .dx-popup-wrapper>.dx-overlay-content {
-  border: 0;
-  background: #fff;
-  box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
-  border-radius: 7px;
-}
-
-.dx-popup-title {
-  padding: 0px 12px !important;
-  min-height: 52px;
-  line-height: 52px;
-}
 
 .costomer-dgcolor-Popup-hdr {
   background-color: #4e7171 !important;
@@ -318,13 +263,7 @@ i {
   margin-top: 12px;
 }
 
-::ng-deep .dx-popup-content {
-  padding: 12px !important;
-}
 
-::ng-deep .dx-resizable {
-  height: auto !important;
-}
 
 .ctmr-popup-content-sec {
   padding: 0;
@@ -370,7 +309,6 @@ i {
 }
 
 .mobile-page-container #ipad-table-grid table tr th {
-  /* border-top: 1px solid #dddddd !important; */
   text-align: left;
   padding: 9px 10px !important;
   font-size: 14px !important;
@@ -380,15 +318,12 @@ i {
 }
 
 .mobile-page-container #ipad-table-grid table tr td {
-  /* border-top: 0px solid #dddddd !important; */
   text-align: left;
   padding: 9px 10px !important;
   font-size: 14px !important;
   font-weight: 400 !important;
   border: 1px solid #8f8f8f;
 }
-
-/* Mukesh CSS Start Here 26 November */
 
 .tabs-up-info-icon {
   position: absolute;
@@ -436,21 +371,7 @@ i {
   margin-bottom: 16px;
 }
 
-.tabs .dx-button {
-  width: 140px;
-  border-radius: 0px !important;
-  border: 1px solid #adbac1;
-  font-size: 15px;
-  margin-right: 4px;
-  border-bottom: 0px;
-}
-
-::ng-deep .tabs .dx-button .dx-button-content {
-  padding: 7px 3px 8px !important;
-}
-
 .tabs .bdr-left-none {
-  /* border-left:0px !important; */
   margin-left: 5px;
 }
 
@@ -541,9 +462,149 @@ i {
   float: right;
   margin-bottom: 7px;
 }
-.popup-update-btn-getfromDataColor .dx-button-content{ padding: 7px 12px 8px !important;}
 
-/* Checkbox CSS Start Here */
+.padi-left-none {
+  padding-left: 0px !important;
+}
+
+#scrollview-popup {
+  /* height: 70vh;
+  overflow: auto;
+  position: relative;
+  display: inline-block;
+  padding-right: 12px;
+  width: 100%;
+  margin-bottom: 44px; */
+}
+
+.update-submit-btns-popup-box {
+  width: 100%;
+  display: table;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  right: 0;
+  background: #fff;
+  padding: 6px 14px;
+  box-shadow: 0 0 7px 0 #00000026;
+}
+
+/* Lab Testing perameter Popup UI CSS end */
+
+
+/* Dx Css Start here */
+
+.mobile-page-container .dx-accordion-item-title {
+  background: #4e7171;
+  color: #fff;
+  width: 100%;
+  float: left;
+  padding: 0px !important;
+}
+
+.mobile-page-container .dx-accordion-item-body {
+  padding: 0px 0 !important;
+  font-size: 14px;
+  width: 100%;
+}
+
+::ng-deep .mobile-page-container .dx-accordion-item-title::before {
+  color: #fff !important;
+  line-height: 206px;
+  background: #608787;
+  height: 214px;
+  padding: 0 7px;
+}
+
+::ng-deep .mobile-page-container .dx-accordion-item {
+  margin-bottom: 16px;
+  border: 1px solid #4e7171;
+  border-radius: 5px;
+}
+
+::ng-deep #accordion {
+  height: 700px;
+}
+
+
+::ng-deep #accordion-container {
+  margin-right: 400px;
+}
+
+::ng-deep .dx-theme-material #accordion .dx-accordion-item-title {
+  display: flex;
+}
+
+::ng-deep .dx-overlay-shader {
+  background-color: rgb(0 0 0 / 66%) !important;
+}
+
+::ng-deep .dx-popup-wrapper>.dx-overlay-content {
+  border: 0 !important;
+  background: #fff;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 18%);
+  border-radius: 7px;
+}
+
+.dx-popup-title {
+  padding: 0px 12px !important;
+  min-height: 52px;
+  line-height: 52px;
+}
+
+::ng-deep .dx-popup-content {
+  padding: 12px !important;
+}
+
+/* ::ng-deep .dx-resizable {
+  height: auto !important;
+} */
+
+.tabs .dx-button {
+  width: 140px;
+  border-radius: 0px !important;
+  border: 1px solid #adbac1;
+  font-size: 15px;
+  margin-right: 4px;
+  border-bottom: 0px;
+}
+
+::ng-deep .tabs .dx-button .dx-button-content {
+  padding: 7px 3px 8px !important;
+}
+
+.popup-update-btn-getfromDataColor .dx-button-content {
+  padding: 7px 12px 8px !important;
+}
+
+/* Dx Css End here */
+
+
+
+/* mukesh change the css date 24 Dec 2022 Start Here */
+
+/* ::ng-deep .dx-resizable {
+  height: auto !important;
+  height: 780px !important;
+} */
+#Shade-maching-scroll-popup {
+  height: 580px;
+  overflow: auto;
+  position: relative;
+  z-index: 99;
+  display: inline-block;
+  width: 100%;
+  padding-right: 6px;
+}
+.shade-maching-popup-enter-remark-text{
+  padding-top: 12px;
+  width: 100%;
+}
+.shade-maching-popup-enter-remark-text label{
+  font-size: 16px;
+  color: #4e7171;
+}
+
 .showto-customer-check {
   float: right;
   text-align: right;
@@ -551,37 +612,36 @@ i {
   font-weight: 500;
   color: #4e7171;
 }
-.showto-customer-check input[type=checkbox] {
-  background-color: red !important;
+
+.showto-customer-check input:checked ~ .checkmark {
+  background-color: red;
 }
-/* Checkbox CSS End Here */
-
-
-
-.padi-left-none{padding-left: 0px !important;}
-#scrollview-popup{
-  height: 70vh;
-  overflow: auto;
-  position: relative;
-  display: inline-block;
-  padding-right: 12px;
-  width: 100%;
-  margin-bottom: 44px;
+.showto-customer-check :hover input ~ .checkmark {
+  background-color: green;
+}
+.product-info-rt-search-sec{
+  float: right;margin-top: -7px;
+}
+.product-info-rt-search-sec input{
+  float: right;
+  border: 1px solid #ccc;
+  outline: none;
+  box-shadow: none;
+  padding: 4px 10px;
+  border-radius: 3px;
 }
 
-.update-submit-btns-popup-box{
-    width: 100%;
-    display: table;
-    position: fixed;
-    bottom: 0;
-    z-index: 99;
-    right: 0;
-    background: #fff;
-    padding: 6px 27px;
-    box-shadow: 0 0 7px 0 #00000026;
-}
-/* Lab Testing perameter Popup UI CSS end */
+/* mukesh change the css date 24 Dec 2022 End Here */
 
+
+/* @media screen and (max-width: 1024px) {
+
+}
+
+
+@media only screen and (max-width: 1024px) {
+
+} */
 
 
 @media (min-width: 1921px) and (max-width: 4000px) {
@@ -597,7 +657,6 @@ i {
   }
 }
 
-
 @media (min-width: 1025px) and (max-width: 1920px) {
   .mobile-page-container {
     width: 1024px;
@@ -611,17 +670,3 @@ i {
     padding: 0px 15px 15px 15px;
   }
 }
-
-
-/* @media (min-width: 767px) and (max-width: 1024px) {
-    .mobile-page-container {
-      width: 1024px;
-      display: table;
-      margin: auto;
-    }
-    .mobile-page-container .main-content-section {
-      padding: 0px 15px 27px 15px;
-    }
-  }  */
-
-

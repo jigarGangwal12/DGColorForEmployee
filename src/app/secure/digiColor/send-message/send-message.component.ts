@@ -256,14 +256,15 @@ export class SendMessageComponent implements OnInit {
 
       });
       if (this.count > 0) {
-        notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
         return;
       }
+      
       this.disableUpdateButton = true;
       this.apiService.post(API_CONSTANTS.DigiColor.SendMessage.SendSmsToCustomerForPredction, shadeIds)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
-          notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
+          notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'success', 2000);
           this.getDigicolorInwardDetail();
         });
     }
@@ -281,14 +282,14 @@ export class SendMessageComponent implements OnInit {
         }
       });
       if (this.count > 0) {
-        notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
         return;
       }
       this.disableUpdateButton = true;
       this.apiService.post(API_CONSTANTS.DigiColor.SendMessage.SendSmsToCustomerForShadeMatching, shadeIds)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
-          notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
+          notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'success', 2000);
           this.getDigicolorInwardDetail();
         });
     }

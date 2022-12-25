@@ -26,11 +26,11 @@
         </div>
       </dx-list>
     </div>
-    <div class="col-3" *ngFor="let menuContentItem of menuContent; let index = index">
+    <div class="col-3 DigiColor_Menu_Only" *ngFor="let menuContentItem of menuContent; let index = index">
       <h3 class="ruby-list-heading">{{menuContentItem?.title}}</h3>
       <dx-list #list [dataSource]="menuContentItem.subMenu" [height]="300" [searchEnabled]="true" searchExpr="Name"
         searchMode="contains" pageLoadMode="scrollBottom">
-        <div *dxTemplate="let data of 'item'" (click)="onVisible($event)">
+        <div *dxTemplate="let data of 'item'" (click)="onVisible($event)" class="DigiColor_Menu_Bdr">
           <div *ngIf="data.routing">
             <a href="javascript:void();" (click)="OnClickViewMenu()" [routerLink]="data.routing">
               {{ data.Name }}
@@ -38,6 +38,7 @@
           </div>
           <div *ngIf="!data.routing">{{ data.Name }}</div>
         </div>
+
       </dx-list>
     </div>
   </div>

@@ -1,65 +1,84 @@
-.createUserPage{
-    margin: 0 auto;
-    width: 96%;
-    height: calc(100vh - 85px);
+.createUserPage {
+  margin: 0 auto;
+  width: 98%;
+  height: calc(100vh - 100px);
 }
-.createUserPage h1{
-    text-align: left;
-    padding: 16px 0 12px 0;
-    font-size: 20px;
+
+.createUserPage h1 {
+  text-align: left;
+  padding: 16px 0 12px 0;
+  font-size: 20px;
 }
-::ng-deep .dx-scrollable-native.dx-scrollable-native-ios .dx-scrollable-content {
-    min-height: 100% !important;
-}
+
+
 .digicreateuser-rt-left-padi-none {
-    padding-right: 0px !important;
-    padding-top: 24px !important;
-    padding-left: 0px !important;
+  padding-right: 0px !important;
+  padding-top: 24px !important;
+  padding-left: 0px !important;
 }
-.createUserPage .shadowbox_inquiry{
-    border: 1px solid #ccc;
-    padding: 14px;
-    display: inline-block;
+
+.createUserPage .shadowbox_inquiry {
+  border: 1px solid #ccc;
+  padding: 14px;
+  display: inline-block;
 }
-.dx-overlay-content{
-    overflow: auto !important;
+
+
+.inward_boxs_Div_Width {
+  margin-right: 0;
+  width: 98% !important;
+  margin: 0 auto;
+  padding-bottom: 15px;
 }
-.inward_boxs_Div_Width{
-    margin-right: 0;
-    width: 98% !important;
-    margin: 0 auto;
-    padding-bottom: 15px;
+
+.inward_boxs_Div_Width h1 {
+  font-size: 20px;
+  padding: 16px 0 2px 0;
 }
-.inward_boxs_Div_Width h1{
-    font-size: 20px;
-    padding: 16px 0 2px 0;
+
+.AdminUserList-height {
+  height: 355px;
+  overflow: auto;
+  display: inline-block;
 }
-.AdminUserList-height{
-    height: 355px;
-    overflow: auto;
-    display: inline-block;
-}
+
 .form-control[readonly] {
-    background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
-.createUserPage .form-control{font-size: 14px !important;}
+
+.createUserPage .form-control {
+  font-size: 14px !important;
+}
+
 .createUserPage .btn-primary {
-    color: #fff !important;
-    background-color: #607d8b !important;
-    border-color: #607d8b !important;
-    font-size: 14px !important;
+  color: #fff !important;
+  background-color: #607d8b !important;
+  border-color: #607d8b !important;
+  font-size: 14px !important;
 }
+
 .createUserPage .btn-primary:hover {
-    color: #fff !important;
-    background-color: #506c7a !important;
-    border-color: #506c7a !important;
-    font-size: 14px !important;
+  color: #fff !important;
+  background-color: #506c7a !important;
+  border-color: #506c7a !important;
+  font-size: 14px !important;
 }
+
 #Admin-AllData-scrollview {
-    height: 90vh !important;
-    position: relative;
-    overflow: scroll;
-    display: inline-block;
+  height: 90vh !important;
+  position: relative;
+  overflow: scroll;
+  display: inline-block;
 }
 
+/* Dx Css Start here */
 
+/* ::ng-deep .dx-scrollable-native.dx-scrollable-native-ios .dx-scrollable-content {
+  min-height: 100% !important;
+}
+
+.dx-overlay-content {
+  overflow: auto !important;
+} */
+
+/* Dx Css End here */
