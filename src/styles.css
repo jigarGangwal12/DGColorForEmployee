@@ -216,7 +216,7 @@ img {
 }
 
 .customerDetails-inward h3 {
-  font-size: 16px;
+  font-size: 17px;
   background: #607d8b;
   width: max-content;
   color: #fff;
@@ -1254,20 +1254,16 @@ dxc-title {
   color: #fff;
 } */
 
-.shade-maching-popup-width{
+
+
+/* .shade-maching-popup-width{
   width: 1026px !important;
-}
-
-
+} */
 @media (min-width: 320px) and (max-width: 767px) {}
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .dx-overlay-content{width: 94% !important;}
-}
+@media (min-width: 768px) and (max-width: 991px) {}
 
-@media (min-width: 992px) and (max-width: 1024px) {
-  /* .dx-overlay-content{width: 94% !important;} */
-}
+@media (min-width: 992px) and (max-width: 1024px) {}
 
 @media (min-width: 1025px) and (max-width: 1366px) {}
 

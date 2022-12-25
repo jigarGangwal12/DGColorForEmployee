@@ -363,12 +363,12 @@ i {
   font-weight: 500;
   background: transparent;
 }
-
+.scroll-mar-btm-45{margin-bottom: 45px;}
 .tabs {
   width: 100%;
   float: left;
   border-bottom: 1px solid #4e7171;
-  margin-bottom: 16px;
+  margin-bottom:8px;
 }
 
 .tabs .bdr-left-none {
@@ -587,14 +587,17 @@ i {
   height: auto !important;
   height: 780px !important;
 } */
+.shade-maching-dx-scroll{
+  height: 628px; margin-top: 38px;
+}
 #Shade-maching-scroll-popup {
-  height: 580px;
+  /* height: 580px;
   overflow: auto;
   position: relative;
-  z-index: 99;
+  z-index: 99; */
   display: inline-block;
   width: 100%;
-  padding-right: 6px;
+  /* padding-right: 6px; */
 }
 .shade-maching-popup-enter-remark-text{
   padding-top: 12px;
@@ -605,20 +608,6 @@ i {
   color: #4e7171;
 }
 
-.showto-customer-check {
-  float: right;
-  text-align: right;
-  font-size: 14px;
-  font-weight: 500;
-  color: #4e7171;
-}
-
-.showto-customer-check input:checked ~ .checkmark {
-  background-color: red;
-}
-.showto-customer-check :hover input ~ .checkmark {
-  background-color: green;
-}
 .product-info-rt-search-sec{
   float: right;margin-top: -7px;
 }
@@ -634,19 +623,19 @@ i {
 /* mukesh change the css date 24 Dec 2022 End Here */
 
 
-/* @media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
 
 }
 
 
 @media only screen and (max-width: 1024px) {
 
-} */
+}
 
 
 @media (min-width: 1921px) and (max-width: 4000px) {
   .mobile-page-container {
-    width: 1024px;
+    width: 882px;
     display: table;
     margin: auto;
     border: 1px solid rgb(219, 219, 219);
@@ -659,7 +648,7 @@ i {
 
 @media (min-width: 1025px) and (max-width: 1920px) {
   .mobile-page-container {
-    width: 1024px;
+    width: 882px;
     display: table;
     margin: auto;
     border: 1px solid rgb(219, 219, 219);
@@ -670,3 +659,83 @@ i {
     padding: 0px 15px 15px 15px;
   }
 }
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+.shade-maching-dx-scroll{
+  height: 592px;
+  margin-top: 38px;
+  width: 100%;
+  overflow: auto;
+}
+.scroll-mar-btm-45 {
+  margin-bottom: 10px;
+}
+}
+
+/* Custom checkbox CSS Start Here */
+.showto-customer-check{
+  float: right;
+}
+.showto-customer-check .shade-check-label {
+  display: block;
+    position: relative;
+    padding-right: 30px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Hide the browser's default checkbox */
+.showto-customer-check .shade-check-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border-radius: 3px;
+  border: 1px solid #a7a7a7;
+}
+/* On mouse-over, add a grey background color */
+.showto-customer-check .shade-check-label:hover input ~ .checkmark {
+  background-color: #fff; border: 1px solid #4e7171;border-radius: 3px;
+}
+/* When the checkbox is checked, add a blue background */
+.showto-customer-check .shade-check-label input:checked ~ .checkmark {
+  background-color: #4e7171; border-radius: 3px; border: 1px solid #4e7171;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+/* Show the checkmark when checked */
+.showto-customer-check .shade-check-label input:checked ~ .checkmark:after {
+  display: block;
+}
+/* Style the checkmark/indicator */
+.showto-customer-check .shade-check-label .checkmark:after {
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* Custom checkbox CSS End Here */

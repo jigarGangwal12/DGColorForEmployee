@@ -82,6 +82,10 @@
   .header-right-open-menu-main-section .col-3 {
     width: 33%;
   }
+  .header-right-open-menu-main-section .DigiColor_Menu_Only {
+    width: 33%;
+    margin: 0 auto !important;
+  }
 
   .header-right-open-menu-main-section {
     padding-left: 20px;
