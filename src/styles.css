@@ -1284,3 +1284,13 @@ dxc-title {
     width: 75% !important;
   }
 }
+.inward_boxs_without_mar .dx-toolbar-text-auto-hide .dx-button .dx-button-content {
+  padding: 5px;
+  background: #607d8b;
+  border: 1px solid #607d8b;
+  color: #fff;
+  border-radius: 4px;
+}
+.inward_boxs_without_mar .dx-toolbar-text-auto-hide .dx-button .dx-icon {
+  color: #fff!important;
+}

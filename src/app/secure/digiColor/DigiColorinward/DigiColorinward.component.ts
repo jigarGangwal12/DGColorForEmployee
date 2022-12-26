@@ -102,7 +102,7 @@ export class DigiColorinwardComponent implements OnInit {
   customerRequirementType: any;
   selectedRowDataContactDetail: any = [];
   recipientName = [{ name: "Contact Person" }, { name: "Other" }];
-  itemCategoryDataSource = [{ name: "DYES" }, { name: "AUX" }];
+  itemCategoryDataSource = [{ name: "DYES" }];
   ProductRangeModeDataSource = [
     { name: 'EXHAUST', id: 1 },
     { name: 'CONTINUOUS', id: 2 },
