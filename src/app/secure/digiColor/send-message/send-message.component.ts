@@ -88,7 +88,7 @@ export class SendMessageComponent implements OnInit {
         field: 'caseId',
         rowGroup: true,
         hide: true,
-        filterParams: { applyMiniFilterWhileTyping: true }
+        filterParams: { applyMiniFilterWhileTyping: true },
       },
       {
         headerName: 'Consignee Code',
@@ -110,16 +110,16 @@ export class SendMessageComponent implements OnInit {
         field: 'agentName',
         filterParams: { applyMiniFilterWhileTyping: true }
       },
-      {
-        headerName: 'Recipe Prediction Send SMS',
-        field: 'isMessageSended',
-        valueFormatter: (data: any) => {
-          if (data.value == true)
-            return '✓';
-          else
-            return '';
-        },
-      },
+      // {
+      //   headerName: 'Recipe Prediction Send SMS',
+      //   field: 'isMessageSended',
+      //   valueFormatter: (data: any) => {
+      //     if (data.value == true)
+      //       return '✓';
+      //     else
+      //       return '';
+      //   },
+      // },
     ]
 
     this.shadeMatchingColumnDef = [
@@ -128,7 +128,7 @@ export class SendMessageComponent implements OnInit {
         field: 'caseId',
         rowGroup: true,
         hide: true,
-        filterParams: { applyMiniFilterWhileTyping: true }
+        filterParams: { applyMiniFilterWhileTyping: true },
       },
       {
         headerName: 'Consignee Code',
@@ -150,16 +150,16 @@ export class SendMessageComponent implements OnInit {
         field: 'agentName',
         filterParams: { applyMiniFilterWhileTyping: true }
       },
-      {
-        headerName: 'Shade Matching Send SMS',
-        field: 'isShadeMatchingMessageSent',
-        valueFormatter: (data: any) => {
-          if (data.value == true)
-            return '✓';
-          else
-            return '';
-        }
-      },
+      // {
+      //   headerName: 'Shade Matching Send SMS',
+      //   field: 'isShadeMatchingMessageSent',
+      //   valueFormatter: (data: any) => {
+      //     if (data.value == true)
+      //       return '✓';
+      //     else
+      //       return '';
+      //   }
+      // },
 
     ]
 
@@ -240,6 +240,7 @@ export class SendMessageComponent implements OnInit {
   }
 
   SendSMS(isSendPrediction: any) {
+    this.loadingVisible = true;
     let shadeIds: any = [];
     if (isSendPrediction == 'prediction') {
       var rowCount = this.gridApiPrediction.getSelectedNodes();
@@ -267,6 +268,7 @@ export class SendMessageComponent implements OnInit {
           notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'success', 2000);
           this.getDigicolorInwardDetail();
         });
+        this.loadingVisible = false;
     }
     else if (isSendPrediction == 'shadeMatching') {
       var rowCount = this.gridApiMatching.getSelectedNodes();
@@ -292,6 +294,7 @@ export class SendMessageComponent implements OnInit {
           notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'success', 2000);
           this.getDigicolorInwardDetail();
         });
+        this.loadingVisible = false;
     }
   }
 
