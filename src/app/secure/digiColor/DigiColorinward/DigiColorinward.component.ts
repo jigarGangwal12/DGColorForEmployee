@@ -573,7 +573,7 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.inquiryDateTime = consigneeDetail[0].createdDate;
           this.customerReuirement = consigneeDetail[0].customerRequirement.split(',');
           debugger
-          this.customerRequirementType.name = this.customerReuirement;
+          //this.customerRequirementType.name = this.customerReuirement;
           this.InwardDataModel.caseId = consigneeDetail[0].consigneeNameCode.split('-')[0].trim();
           this.InwardDataModel.saveOrSubmit = 'Save';
           this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetContactDetailandTypeofIndData, {
@@ -612,7 +612,7 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.consigneeState = res.table[0].cosigneeState;
           this.InwardDataModel.customerType = res.table[0].customerType;
           this.InwardDataModel.inquiryDateTime = res.table[0].createdDate;
-          this.customerRequirementType = res.table[0].customerRequirement.split(',');
+          this.customerReuirement = res.table[0].customerRequirement.split(',');
           this.InwardDataModel.shadeId = res.table1[0].shadeid;
           this.InwardDataModel.shadeNameNoForEdit = res.table1[0].shadeName + ' - ' + res.table1[0].shadeid;
           // this.customerSubStrate = res.table3;
