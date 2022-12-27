@@ -307,7 +307,7 @@ export class InquiryComponent implements OnInit {
       else if (element.mobileNumber.length != 10) {
         this.count++;
       }
-      else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && !element.emailIdNotProvided) {
+      else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && element.emailIdNotProvided) {
         this.countForEmailIdCheck++;
       }
       else {
