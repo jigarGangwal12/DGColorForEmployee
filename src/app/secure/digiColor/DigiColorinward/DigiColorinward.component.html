@@ -40,10 +40,9 @@
               <label>Case Id</label>
             </div>
             <div class="col-md-12" style=" padding-left: 4px;">
-              <dx-select-box style="padding:0px !important;border-style: solid;" Id="case"
-                [dataSource]="caseIdData" displayExpr="caseIdAndConsignee" valueExpr="caseId"
-                (onValueChanged)="caseIdValueChanged($event)" placeholder="Select Case Id" [showClearButton]="true"
-                [searchEnabled]="true">
+              <dx-select-box style="padding:0px !important;border-style: solid;" Id="case" [dataSource]="caseIdData"
+                displayExpr="caseIdAndConsignee" valueExpr="caseId" (onValueChanged)="caseIdValueChanged($event)"
+                placeholder="Select Case Id" [showClearButton]="true" [searchEnabled]="true">
               </dx-select-box>
             </div>
           </div>
@@ -53,8 +52,8 @@
             </div>
             <div class="col-md-12">
               <span style="margin-left:-2px;display:inline-block;">
-                <dx-date-box style=" padding:0px !important;border-style: solid; width: 200px;"
-                  Id="inquirydateTime" placeholder="Select  Date" [readOnly]=true [(value)]="caseIdDatetime" type="date"
+                <dx-date-box style=" padding:0px !important;border-style: solid; width: 200px;" Id="inquirydateTime"
+                  placeholder="Select  Date" [readOnly]=true [(value)]="caseIdDatetime" type="date"
                   displayFormat="dd/MM/yyyy hh:mm">
                 </dx-date-box>
               </span>
@@ -62,8 +61,8 @@
           </div>
           <div *ngIf="caseIdDatetime" class="col-md-12 inwardbtm-grid">
             <dx-tree-list id="sampleidMap" [dataSource]="samppleDataForMaping" keyExpr="shadeId"
-              [columnAutoWidth]="true" (onSelectionChanged)="onSelectionChangedMapping($event)" [wordWrapEnabled]="true"
-              [showBorders]="true">
+              style="height: 400px !important;" [columnAutoWidth]="true"
+              (onSelectionChanged)="onSelectionChangedMapping($event)" [wordWrapEnabled]="true" [showBorders]="true">
               <dxo-scrolling mode="standard">
                 <!-- or "virtual" | "infinite" -->
               </dxo-scrolling>
@@ -220,10 +219,10 @@
                     <div class="">
                       <span>
                         <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
-                          [items]="customerRequirementType" [value]="this.customerRequirementType.name"
-                          [showSelectionControls]="true" noDataText="No data found" [maxDisplayedTags]="2"
-                          applyValueMode="instantly" [showClearButton]="false"
-                          (onValueChanged)="customerRequirementValueChange($event)">
+                          [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
+                          [value]="this.customerRequirementType.name" [showSelectionControls]="true"
+                          noDataText="No data found" [maxDisplayedTags]="2" applyValueMode="instantly"
+                          [showClearButton]="false" (onValueChanged)="customerRequirementValueChange($event)">
                         </dx-tag-box>
                       </span>
                     </div>
@@ -944,8 +943,8 @@
                   <div class="shadowbox inward_boxs_Div inward_boxs_without_mar" style="height: 214px;">
                     <div id="form-container" style="padding:0 8px;">
                       <dx-data-grid id="CustomerContacDetailsId" [dataSource]="customerContactDetails"
-                      (onRowRemoved)="OnReportSubmissionDeleted($event)"
-                        [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
+                        (onRowRemoved)="OnReportSubmissionDeleted($event)" [allowColumnResizing]="true"
+                        [wordWrapEnabled]="true" [allowColumnReordering]="true"
                         [(selectedRowKeys)]="selectedRowDataContactDetail" keyExpr="id"
                         (onSelectionChanged)="selectionChangedHandler($event)" [showBorders]="true">
                         <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">

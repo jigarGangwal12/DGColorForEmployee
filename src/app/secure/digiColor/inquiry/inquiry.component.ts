@@ -60,7 +60,8 @@ export class InquiryComponent implements OnInit {
       md: 4,
       sm: 2,
     };
-    this.inquiryByData = ['Agent', 'Direct Customer', 'Sales Person'];
+    // , 'Sales Person'
+    this.inquiryByData = ['Agent', 'Direct Customer'];
     this.scanModeData = ['Off Site', 'On Site'];
   }
 

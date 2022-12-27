@@ -255,8 +255,8 @@ export class ShadeMatchingComponent implements OnInit {
       {
         headerName: 'Range',
         field: 'product Sub Category',
-        rowGroup: true,
-        hide: true,
+        // rowGroup: true,
+        // hide: true,
       },
       {
         headerName: 'Product Name',
@@ -300,7 +300,7 @@ export class ShadeMatchingComponent implements OnInit {
       minWidth: 90,
       sortable: true,
       filter: true,
-      suppressMenu: true,
+      // suppressMenu: true,
       menuTabs: ['filterMenuTab', 'columnsMenuTab', 'generalMenuTab'],
       resizable: true,
       headerComponentParams: {

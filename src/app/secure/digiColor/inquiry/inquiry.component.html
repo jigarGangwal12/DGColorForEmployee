@@ -21,7 +21,8 @@
           <li [ngClass]="{'active': showR1Grid }" style="cursor: pointer;"><a
               (click)="onReportValueChange('','R1')">Runner Leader Form</a>
           </li>
-          <li [ngClass]="{'active': !showR1Grid }"><a (click)="onReportValueChange('','R2')">Inquiry List</a></li>
+          <li style="cursor: pointer;" [ngClass]="{'active': !showR1Grid }"><a
+              (click)="onReportValueChange('','R2')">Inquiry List</a></li>
         </ul>
       </div>
     </div>
@@ -69,11 +70,11 @@
             <dxi-item dataField="agentNameCode" [editorOptions]="{ readOnly: true }" [label]="{text: 'Agent'}">
             </dxi-item>
 
-            <dxi-item *ngIf="inquiryForm.inquiryBy == 'Sales Person'" name="salesPersonName">
+            <!-- <dxi-item *ngIf="inquiryForm.inquiryBy == 'Sales Person'" name="salesPersonName">
               <dxo-label text="Sales Person Name"></dxo-label>
               <div *dxTemplate>
               </div>
-            </dxi-item>
+            </dxi-item> -->
 
             <dxi-item name="customerRequirement">
               <dxo-label text="Customer Requirement*"></dxo-label>
@@ -154,7 +155,7 @@
               <dx-check-box [(value)]="inquiryForm.sameasSysytemAddress"
                 (onValueChanged)="selectBoxValueChanged($event)"></dx-check-box>
             </div>
-            <dxi-item itemType="group" caption="Address for Visit">
+            <dxi-item itemType="group" caption="Address for Visit:">
               <dxi-item dataField="addressForVisit" [label]="{text: 'Address'}">
                 <dxi-validation-rule type="required" message="Address is required"></dxi-validation-rule>
               </dxi-item>

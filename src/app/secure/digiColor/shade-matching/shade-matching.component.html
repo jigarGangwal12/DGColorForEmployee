@@ -48,7 +48,8 @@
             <em><b>Dyeset:</b> <i> {{data.dyeSet}}</i></em>
             <em><b>Req:</b> <i> {{data.customerRequirement}}</i></em>
             <em><b>Prediction Status:</b> <i> {{data.statusForRecipePrediction}}</i></em>
-            <em><b>Matching Status:</b> <i> {{data.statusForShadeMatching}}</i></em>
+            <em *ngIf="data.customerRequirement !== 'Recipe Prediction'"><b>Matching Status:</b> <i>
+                {{data.statusForShadeMatching}}</i></em>
           </span>
           <i [ngStyle]="{'color': data.rbgcode }" class="underproce">{{data.shadeStatus}}</i>
           <strong>
@@ -88,8 +89,8 @@
                       <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                         <i
                           style="position: absolute;top: 2px;right: 0;left: 0; border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
-                        {{Metameric1}}<br />
-                        {{lightSourceDataColor1}}
+                        {{lightSourceDataColor1}}<br />
+                        {{Metameric1}}
                       </td>
                     </tr>
                   </table>
@@ -133,8 +134,9 @@
                       <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                         <i
                           style="position: absolute;top:2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
-                        {{Metameric2}}<br />
-                        {{lightSourceDataColor2}}
+                        {{lightSourceDataColor2}}<br />
+                        {{Metameric2}}
+
                       </td>
                     </tr>
                   </table>
@@ -177,8 +179,8 @@
                       <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                         <i
                           style="position: absolute;top: 2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
-                        {{Metameric3}}<br />
-                        {{lightSourceDataColor3}}
+                        {{lightSourceDataColor3}}<br />
+                        {{Metameric3}}
                       </td>
                     </tr>
                   </table>
@@ -221,8 +223,8 @@
                       <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                         <i
                           style="position: absolute;top: 2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
-                        {{Metameric4}}<br />
-                        {{lightSourceDataColor4}}
+                        {{lightSourceDataColor4}}<br />
+                        {{Metameric4}}
                       </td>
                     </tr>
                   </table>
@@ -255,7 +257,7 @@
           </div> -->
           <!-- Start Shade Matching Option 1 -->
           <div *ngIf="showOption1ShadeMatching">
-            <h3>Option 1</h3>
+            <!-- <h3>Option 1</h3> -->
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -403,21 +405,21 @@
           <i class="fa fa-window-close"></i>
         </button>
       </div>
-      
-        <div class="ctmr-popup-content-sec">
-          <input type="hidden" name="shadeId" value="{{shadeId}}">
-          <div class="tabs">
-            <dx-button [ngClass]="{'active': isActive == '1'}" class="submitbtn" text="Lab Testing" type="normal"
-              (click)="getPoupupPredictionData('1',shadeId)">
-            </dx-button>
-            <dx-button [ngClass]="{'active': isActive == '2'}" class="submitbtn" text="Prediction" type="normal"
-              (click)="getPoupupPredictionData('2',shadeId)">
-            </dx-button>
-            <dx-button [ngClass]="{'active': isActive == '3'}" class="submitbtn" text="Shade Matching" type="normal"
-              (click)="getPoupupPredictionData('3',shadeId)" *ngIf="shadeMatchingBtn">
-            </dx-button>
-          </div>
-          <dx-scroll-view class="shade-maching-dx-scroll">
+
+      <div class="ctmr-popup-content-sec">
+        <input type="hidden" name="shadeId" value="{{shadeId}}">
+        <div class="tabs">
+          <dx-button [ngClass]="{'active': isActive == '1'}" class="submitbtn" text="Lab Testing" type="normal"
+            (click)="getPoupupPredictionData('1',shadeId)">
+          </dx-button>
+          <dx-button [ngClass]="{'active': isActive == '2'}" class="submitbtn" text="Prediction" type="normal"
+            (click)="getPoupupPredictionData('2',shadeId)">
+          </dx-button>
+          <dx-button [ngClass]="{'active': isActive == '3'}" class="submitbtn" text="Shade Matching" type="normal"
+            (click)="getPoupupPredictionData('3',shadeId)" *ngIf="shadeMatchingBtn">
+          </dx-button>
+        </div>
+        <dx-scroll-view class="shade-maching-dx-scroll">
           <!-- Start Tab Lab Testing  -->
           <div *ngIf="tabLabTesting">
 
@@ -459,7 +461,7 @@
                   <tr>
                     <td colspan="2"><span>Remark:</span> {{samplereamark}}</td>
                   </tr>
-                 
+
                 </table>
 
                 <table class="costomer-popup-table" style="margin-top: 12px;">
@@ -523,7 +525,7 @@
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
                       <input type="checkbox" id="chkOption1" [checked]="chkOption1"
-                      (change)="chkChangeOption1($event,chkOption1)" />
+                        (change)="chkChangeOption1($event,chkOption1)" />
                       <span class="checkmark"></span>
                       <em>Show to Customer</em>
                     </label>
@@ -553,8 +555,8 @@
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                             <i
                               style="position: absolute;top:0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i><br />
-                            {{MetamericPopup1}}<br />
-                            {{lightSourcePoupup1}}
+                            {{lightSourcePoupup1}}<br />
+                            {{MetamericPopup1}}
                           </td>
                         </tr>
                       </table>
@@ -592,7 +594,8 @@
                   <h3>Option 2</h3>
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
-                      <input type="checkbox" id="chkOption2" [checked]="chkOption2" (change)="chkChangeOption2($event)" />
+                      <input type="checkbox" id="chkOption2" [checked]="chkOption2"
+                        (change)="chkChangeOption2($event)" />
                       <span class="checkmark"></span>
                       <em>Show to Customer</em>
                     </label>
@@ -621,8 +624,9 @@
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                             <i
                               style="position: absolute;top: 0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
-                            {{MetamericPopup2}}<br />
-                            {{lightSourcePoupup2}}
+
+                            {{lightSourcePoupup2}}<br />
+                            {{MetamericPopup2}}
                           </td>
                         </tr>
                       </table>
@@ -660,7 +664,8 @@
                   <h3>Option 3</h3>
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
-                      <input type="checkbox" id="chkOption3" [checked]="chkOption3" (change)="chkChangeOption3($event)" />
+                      <input type="checkbox" id="chkOption3" [checked]="chkOption3"
+                        (change)="chkChangeOption3($event)" />
                       <span class="checkmark"></span>
                       <em>Show to Customer</em>
                     </label>
@@ -689,8 +694,9 @@
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                             <i
                               style="position: absolute;top: 0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
-                            {{MetamericPopup3}}<br />
-                            {{lightSourcePoupup3}}
+
+                            {{lightSourcePoupup3}}<br />
+                            {{MetamericPopup3}}
                           </td>
                         </tr>
                       </table>
@@ -728,7 +734,8 @@
                   <h3>Option 4</h3>
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
-                      <input type="checkbox" id="chkOption4" [checked]="chkOption4" (change)="chkChangeOption4($event)" />
+                      <input type="checkbox" id="chkOption4" [checked]="chkOption4"
+                        (change)="chkChangeOption4($event)" />
                       <span class="checkmark"></span>
                       <em>Show to Customer</em>
                     </label>
@@ -757,8 +764,9 @@
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                             <i
                               style="position: absolute;top:0px;right: 0;left: 0; border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
-                            {{MetamericPopup4}}<br />
-                            {{lightSourcePoupup4}}
+
+                            {{lightSourcePoupup4}}<br />
+                            {{MetamericPopup4}}
                           </td>
                         </tr>
                       </table>
@@ -827,20 +835,20 @@
               </span>
               <input type="hidden" name="allData" value="{{popUpShadeMatchingAllData}}">
               <div class="col-md-3" style=" padding-left: 0px; margin-bottom: 10px;">
-                <dx-select-box style="padding:0px !important;"
-                  Id="shadematching" [dataSource]="allColorGamutData" displayExpr="colourGamut" valueExpr="colourGamut"
-                  placeholder="Select Color" [showClearButton]="false" [searchEnabled]="false"
-                  (onValueChanged)="onColorGamutChnaged($event)" [(value)]="filter.colorGamutSelected">
+                <dx-select-box style="padding:0px !important;" Id="shadematching" [dataSource]="allColorGamutData"
+                  displayExpr="colourGamut" valueExpr="colourGamut" placeholder="Select Color" [showClearButton]="false"
+                  [searchEnabled]="false" (onValueChanged)="onColorGamutChnaged($event)"
+                  [(value)]="filter.colorGamutSelected">
                 </dx-select-box>
               </div>
               <!-- Shade Mataching Option 1 -->
               <div *ngIf="poupShowShadeMatchingOption1" id="prediction-popup-main-bx">
                 <div class="prediction-popup-option-checkbox">
-                  <h3>Option 1</h3>
+                  <!-- <h3>Option 1</h3> -->
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
                       <input type="checkbox" id="chkOption1" [checked]="chkShadeMatchingOption1"
-                      (change)="chkShadeMatchingChangeOption1($event)" />
+                        (change)="chkShadeMatchingChangeOption1($event)" />
                       <span class="checkmark"></span>
                       <em>Show to Customer</em>
                     </label>
@@ -897,7 +905,7 @@
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
                       <input type="checkbox" id="chkOption2" [checked]="chkShadeMatchingOption2"
-                      (change)="chkShadeMatchingChangeOption2($event)" />
+                        (change)="chkShadeMatchingChangeOption2($event)" />
                       <span class="checkmark"></span>
                       <em>Show to Customer</em>
                     </label>
@@ -953,7 +961,7 @@
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
                       <input type="checkbox" id="chkOption3" [checked]="chkShadeMatchingOption3"
-                      (change)="chkShadeMatchingChangeOption3($event)" />
+                        (change)="chkShadeMatchingChangeOption3($event)" />
                       <span class="checkmark"></span>
                       <em>Show to Customer</em>
                     </label>
@@ -1009,7 +1017,7 @@
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
                       <input type="checkbox" id="chkOption4" [checked]="chkShadeMatchingOption4"
-                      (change)="chkShadeMatchingChangeOption4($event)" />
+                        (change)="chkShadeMatchingChangeOption4($event)" />
                       <span class="checkmark"></span>
                       <em>Show to Customer</em>
                     </label>
@@ -1081,8 +1089,8 @@
           </div>
           <!-- End Tab Shade Matching -->
         </dx-scroll-view>
-        </div>
-     
+      </div>
+
     </dx-popup>
   </div>
 </div>
