@@ -27,7 +27,7 @@ img {
   width: 100%;
 }
 
-
+/* DX Css Start here */
 
 #shadematching .dx-placeholder {
   color: black !important;
@@ -47,11 +47,12 @@ img {
 }
 
 
-.dx-form-group-caption {
-  font-size: 17px !important;
+#form .dx-form-group-caption {
+  font-size: 15px !important;
+  font-weight: 500;
 }
 
-.dx-form-group-with-caption>.dx-form-group-content {
+#form .dx-form-group-with-caption>.dx-form-group-content {
   padding-top: 19px;
   margin-top: 6px;
   border-top: 1px solid #787878 !important;
@@ -120,6 +121,38 @@ img {
   max-height: 940px !important;
 }
 
+#CustomerContacDetailsId .dx-checkbox-checked .dx-checkbox-icon {
+  width: 19px;
+  height: 19px;
+}
+
+#CustomerContacDetailsId .dx-checkbox-checked .dx-checkbox-icon {
+  font: 12px/1em DXIcons;
+}
+
+.inward_boxs_without_mar .dx-toolbar-text-auto-hide .dx-button .dx-button-content {
+  padding: 5px;
+  background: #607d8b;
+  border: 1px solid #607d8b;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.inward_boxs_without_mar .dx-toolbar-text-auto-hide .dx-button .dx-icon {
+  color: #fff !important;
+  cursor: pointer;
+}
+#CustomerContacDetailsId .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td{
+  background-color: #ffffff;
+}
+.dx-datagrid .dx-header-row {
+  background-color: #e4e6e7;
+  color: #212529;
+}
+.dx-header-row>td>.dx-datagrid-text-content {
+  color: #333!important;
+  font-weight: 500;
+}
 /* DX Css End here */
 
 
@@ -790,24 +823,28 @@ span.stars span {
 }
 
 /* Mukesh CSS 24 Dec 2022 Start Here */
-#caseId_Date{
-  top:-5px !important;
+#caseId_Date {
+  top: -5px !important;
   margin-left: 0px;
   background: transparent;
   border: 0px;
 }
+
 #caseId_Date input {
-    font-size: 15px;
-    padding-bottom: 0px !important;
-    margin-bottom: 0px !important;
-    padding-top: 0px !important;
+  font-size: 15px;
+  padding-bottom: 0px !important;
+  margin-bottom: 0px !important;
+  padding-top: 0px !important;
 }
-#caseId_Date .dx-texteditor-input{
+
+#caseId_Date .dx-texteditor-input {
   color: #fff !important;
 }
+
 .dx-texteditor.dx-state-readonly {
   border-style: solid !important;
 }
+
 #scrollview-inquiry {
   height: 85vh !important;
   position: relative;
@@ -815,7 +852,11 @@ span.stars span {
   display: inline-block;
   padding: 12px 12px 5px 12px;
 }
-.form-control{height: 36px !important;}
+
+.form-control {
+  height: 36px !important;
+}
+
 /* Mukesh CSS 24 Dec 2022 End Here */
 
 
@@ -1283,14 +1324,4 @@ dxc-title {
   .inward-page-width {
     width: 75% !important;
   }
-}
-.inward_boxs_without_mar .dx-toolbar-text-auto-hide .dx-button .dx-button-content {
-  padding: 5px;
-  background: #607d8b;
-  border: 1px solid #607d8b;
-  color: #fff;
-  border-radius: 4px;
-}
-.inward_boxs_without_mar .dx-toolbar-text-auto-hide .dx-button .dx-icon {
-  color: #fff!important;
 }

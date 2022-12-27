@@ -85,7 +85,7 @@ export class DigiColorinwardComponent implements OnInit {
     itemCategory: 'DYES',
     productName: '',
     competitorNameForProduct: '',
-    customerRequirement: ''    
+    customerRequirement: ''
   };
   digiColorUserId: any;
   loadingVisible: boolean = false;
@@ -126,6 +126,7 @@ export class DigiColorinwardComponent implements OnInit {
   count: any = 0;
   userRole: any;
   customerReuirement: any = [];
+  countForEmailIdCheck: any = 0;
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.dyesorWetDataSource = [{ name: 'Dry' }, { name: 'Wet' }]
     this.customerRequirementType = [{ name: 'Recipe prediction' }, { name: 'Shade Matching' },]
@@ -503,6 +504,7 @@ export class DigiColorinwardComponent implements OnInit {
     }
   }
   MapSampleDatatoCaseIdDataForm(da: any) {
+    debugger
     this.disablesubbtn = true;
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.MapSampleIdWithCaseId, this.selectedRowData)
       .subscribe((res: any) => {
@@ -596,7 +598,6 @@ export class DigiColorinwardComponent implements OnInit {
     this.router.navigate(["/digicolor/inward/"]);
   }
   getDetailByShadeId(da: any) {
-    
     let consigneeDetail = this.inwardFormListData.filter((data: any) => data.shadeid == da.data.shadeid);
     this.InwardDataModel.agentNameCode = consigneeDetail[0].agentNameCode;
     this.InwardDataModel.caseId = consigneeDetail[0].caseId;
@@ -654,7 +655,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   SaveInwardData(data: any) {
-    
+
     if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -676,12 +677,19 @@ export class DigiColorinwardComponent implements OnInit {
         else if (element.mobileNumber.length != 10) {
           this.count++;
         }
+        else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && !element.emailIdNotProvided) {
+          this.countForEmailIdCheck++;
+        }
         else {
           this.count = 0;
         }
       });
       if (this.count > 0) {
         notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+        return;
+      }
+      if (this.countForEmailIdCheck > 0) {
+        notify({ message: 'Please enter EmailId Or Select Email Not Provided', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
         return;
       }
     }
@@ -732,6 +740,9 @@ export class DigiColorinwardComponent implements OnInit {
         else if (element.mobileNumber.length != 10) {
           this.count++;
         }
+        else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && !element.emailIdNotProvided) {
+          this.countForEmailIdCheck++;
+        }
         else {
           this.count = 0;
         }
@@ -739,6 +750,10 @@ export class DigiColorinwardComponent implements OnInit {
     }
     if (this.count > 0) {
       notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if (this.countForEmailIdCheck > 0) {
+      notify({ message: 'Please enter EmailId Or Select Email Not Provided', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
     data.customerContactDetail = this.customerContactDetails;
@@ -788,7 +803,7 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   selectionChangedHandler(data: any) {
-    
+
     if (data) {
       data.selectedRowsData.forEach((element: any) => {
         element.isReportSend = true;
@@ -843,8 +858,8 @@ export class DigiColorinwardComponent implements OnInit {
     this.filterCompetitorByItemCategory = this.competitorNameDataSource.filter((data: any) => data.segment == aa.value);
   }
 
-  customerRequirementValueChange(event: any){
-    if(event && event.value){
+  customerRequirementValueChange(event: any) {
+    if (event && event.value) {
       this.customerReuirement = event.value;
     }
   }
@@ -854,5 +869,5 @@ export class DigiColorinwardComponent implements OnInit {
 
       });
   }
-  
+
 }

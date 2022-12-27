@@ -43,8 +43,10 @@ export class InquiryComponent implements OnInit {
   selectedRowData: any = [];
   recipientName = [{ name: "Contact Person" }, { name: "Other" }];
   count: any = 0;
+  countForEmailIdCheck: any = 0;
   consigneeContactDetail: any;
   dataforSMS: any = [];
+  uniqueTypeofIndustries: any;
 
   constructor(
     private apiService: ApiService,
@@ -53,6 +55,7 @@ export class InquiryComponent implements OnInit {
     private secure: SecureComponent,
     private cdRef: ChangeDetectorRef
   ) {
+    this.uniqueTypeofIndustries = [{ name: 'tres' }]
     this.UserId = ((localStorage.getItem("empCode")));
     this.UserId = this.UserId.substring(1, this.UserId.length - 1);
     this.customerRequirementType = [{ name: 'Recipe Prediction' }, { name: 'Shade Matching Recipe' },]
@@ -236,12 +239,19 @@ export class InquiryComponent implements OnInit {
       else if (element.mobileNumber.length != 10) {
         this.count++;
       }
+      else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && !element.emailIdNotProvided) {
+        this.countForEmailIdCheck++;
+      }
       else {
         this.count = 0;
       }
     });
     if (this.count > 0) {
       notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if (this.countForEmailIdCheck > 0) {
+      notify({ message: 'Please enter EmailId Or Select Email Not Provided', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
     data.customerContactDetail = this.consigneeContactDetail;
@@ -251,6 +261,7 @@ export class InquiryComponent implements OnInit {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
+
     let tempassignToRunner = data.assignToRunner.split('-')[0];
     let tempassignToRunnerCode = data.assignToRunner.split('-')[1];
     data.AssignToRunnerCode = tempassignToRunner;
@@ -296,12 +307,19 @@ export class InquiryComponent implements OnInit {
       else if (element.mobileNumber.length != 10) {
         this.count++;
       }
+      else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && !element.emailIdNotProvided) {
+        this.countForEmailIdCheck++;
+      }
       else {
         this.count = 0;
       }
     });
     if (this.count > 0) {
       notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      return;
+    }
+    if (this.countForEmailIdCheck > 0) {
+      notify({ message: 'Please enter EmailId Or Select Email Not Provided', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
     data.customerContactDetail = this.consigneeContactDetail;
@@ -413,11 +431,16 @@ export class InquiryComponent implements OnInit {
 
   }
   OnReportSubmissionDeleted(data: any) {
-
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.DeleteContactDetailById, { id: data.data.id })
       .subscribe((res: any) => {
-
       });
+  }
 
+  cellTemplate(container: any, options: any) {
+    const noBreakSpace = '\u00A0';
+    debugger
+    // const text = (options.value || []).map((element: any) => options.column.lookup.calculateCellValue(element)).join(', ');
+    container.textContent = options.value || noBreakSpace;
+    container.title = options.value;
   }
 }
