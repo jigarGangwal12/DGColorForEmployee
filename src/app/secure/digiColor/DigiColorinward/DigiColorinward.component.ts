@@ -129,7 +129,7 @@ export class DigiColorinwardComponent implements OnInit {
   countForEmailIdCheck: any = 0;
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.dyesorWetDataSource = [{ name: 'Dry' }, { name: 'Wet' }]
-    this.customerRequirementType = [{ name: 'Recipe prediction' }, { name: 'Shade Matching' },]
+    this.customerRequirementType = [{ name: 'Recipe Prediction' }, { name: 'Shade Matching Recipe' },]
     this.dischargeabilityDataSource = ['Yes', 'No'];
     this.defaultColDef = {
       editable: false,
@@ -718,11 +718,18 @@ export class DigiColorinwardComponent implements OnInit {
           this.disablesubbtn = false;
           notify({ message: 'Inward Entry SuccessFully ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
           this.router.navigate(["/digicolor/inward/"]);
+          this.sendSMS(data);
         });
     }
     else {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
     }
+  }
+  sendSMS(data: any){
+    this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.SMSSendForPostInwardFormData,data)
+      .subscribe((res: any) => {
+      });
+
   }
   UpdateInwardData(data: any) {
     if (!data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {

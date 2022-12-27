@@ -48,8 +48,7 @@
             <em><b>Dyeset:</b> <i> {{data.dyeSet}}</i></em>
             <em><b>Req:</b> <i> {{data.customerRequirement}}</i></em>
             <em><b>Prediction Status:</b> <i> {{data.statusForRecipePrediction}}</i></em>
-            <em *ngIf="data.customerRequirement !== 'Recipe Prediction'"><b>Matching Status:</b> <i>
-                {{data.statusForShadeMatching}}</i></em>
+            <em *ngIf="data.customerRequirement !== 'Recipe Prediction'"><b>Matching Status:</b> <i> {{data.statusForShadeMatching}}</i></em>
           </span>
           <i [ngStyle]="{'color': data.rbgcode }" class="underproce">{{data.shadeStatus}}</i>
           <strong>
@@ -67,7 +66,7 @@
           </div> -->
           <!-- Start Recipe Option 1 -->
           <div *ngIf="showOption1RecipeData">
-            <h3>Option 1</h3>
+            <h3 *ngIf="moreThanOnePredctionOption">Option 1</h3>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -89,8 +88,8 @@
                       <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                         <i
                           style="position: absolute;top: 2px;right: 0;left: 0; border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
-                        {{lightSourceDataColor1}}<br />
-                        {{Metameric1}}
+                        {{Metameric1}}<br />
+                        {{lightSourceDataColor1}}
                       </td>
                     </tr>
                   </table>
@@ -134,9 +133,8 @@
                       <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                         <i
                           style="position: absolute;top:2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
-                        {{lightSourceDataColor2}}<br />
-                        {{Metameric2}}
-
+                        {{Metameric2}}<br />
+                        {{lightSourceDataColor2}}
                       </td>
                     </tr>
                   </table>
@@ -179,8 +177,8 @@
                       <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                         <i
                           style="position: absolute;top: 2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
-                        {{lightSourceDataColor3}}<br />
-                        {{Metameric3}}
+                        {{Metameric3}}<br />
+                        {{lightSourceDataColor3}}
                       </td>
                     </tr>
                   </table>
@@ -223,8 +221,8 @@
                       <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                         <i
                           style="position: absolute;top: 2px;right: 0;left: 0;border-bottom: 1px solid #8f8f8f; padding: 8px 10px; font-weight: 600;">Metameric</i>
-                        {{lightSourceDataColor4}}<br />
-                        {{Metameric4}}
+                        {{Metameric4}}<br />
+                        {{lightSourceDataColor4}}
                       </td>
                     </tr>
                   </table>
@@ -257,7 +255,7 @@
           </div> -->
           <!-- Start Shade Matching Option 1 -->
           <div *ngIf="showOption1ShadeMatching">
-            <!-- <h3>Option 1</h3> -->
+            <h3 *ngIf="moreThanOneMatchingOption">Option 1</h3>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -521,7 +519,7 @@
               <!-- Option 1 -->
               <div *ngIf="poupShowPredictionOption1" id="prediction-popup-main-bx">
                 <div class="prediction-popup-option-checkbox">
-                  <h3>Option 1</h3>
+                  <h3 *ngIf="popupMoreThanOneOptionPrediction">Option 1</h3>
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
                       <input type="checkbox" id="chkOption1" [checked]="chkOption1"
@@ -555,8 +553,8 @@
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                             <i
                               style="position: absolute;top:0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i><br />
-                            {{lightSourcePoupup1}}<br />
-                            {{MetamericPopup1}}
+                            {{MetamericPopup1}}<br />
+                            {{lightSourcePoupup1}}
                           </td>
                         </tr>
                       </table>
@@ -575,11 +573,11 @@
                 </table>
                 <div class="">
                   <div class="shade-maching-popup-enter-remark-text">
-                    <label>Enter Remark Option1:</label>
+                    <label>Enter Remark <p style="display: inline-block;margin: 0px;" *ngIf="popupMoreThanOneOptionPrediction">Option1:</p></label>
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..."
+                      <dx-text-box Id="case1" placeholder="Enter Remark"
                         [(value)]="remarkPredictionOp1">
                       </dx-text-box>
                     </span>
@@ -624,9 +622,8 @@
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                             <i
                               style="position: absolute;top: 0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
-
-                            {{lightSourcePoupup2}}<br />
-                            {{MetamericPopup2}}
+                            {{MetamericPopup2}}<br />
+                            {{lightSourcePoupup2}}
                           </td>
                         </tr>
                       </table>
@@ -649,7 +646,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remarks for Option2..."
+                      <dx-text-box Id="case1" placeholder="Enter Remark"
                         [(value)]="remarkPredictionOp2">
                       </dx-text-box>
                     </span>
@@ -694,9 +691,8 @@
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                             <i
                               style="position: absolute;top: 0px;right: 0;left: 0;border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
-
-                            {{lightSourcePoupup3}}<br />
-                            {{MetamericPopup3}}
+                            {{MetamericPopup3}}<br />
+                            {{lightSourcePoupup3}}
                           </td>
                         </tr>
                       </table>
@@ -719,7 +715,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remarks for Option3..."
+                      <dx-text-box Id="case1" placeholder="Enter Remark"
                         [(value)]="remarkPredictionOp3">
                       </dx-text-box>
                     </span>
@@ -764,9 +760,8 @@
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">
                             <i
                               style="position: absolute;top:0px;right: 0;left: 0; border-bottom: 1px solid #d3d3d3; padding: 7px 10px; font-weight: 600;">Metameric</i>
-
-                            {{lightSourcePoupup4}}<br />
-                            {{MetamericPopup4}}
+                            {{MetamericPopup4}}<br />
+                            {{lightSourcePoupup4}}
                           </td>
                         </tr>
                       </table>
@@ -789,7 +784,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remarks for Option4..."
+                      <dx-text-box Id="case1" placeholder="Enter Remark"
                         [(value)]="remarkPredictionOp4">
                       </dx-text-box>
                     </span>
@@ -844,7 +839,7 @@
               <!-- Shade Mataching Option 1 -->
               <div *ngIf="poupShowShadeMatchingOption1" id="prediction-popup-main-bx">
                 <div class="prediction-popup-option-checkbox">
-                  <!-- <h3>Option 1</h3> -->
+                  <h3 *ngIf="popupMoreThanOneOptionMatching">Option 1</h3>
                   <span *ngIf="UserRole == 'DG Color HOD'" class="showto-customer-check">
                     <label class="shade-check-label">
                       <input type="checkbox" id="chkOption1" [checked]="chkShadeMatchingOption1"
@@ -885,11 +880,11 @@
                 </table>
                 <div class="">
                   <div class="shade-maching-popup-enter-remark-text">
-                    <label>Enter Remark Option1 :</label>
+                    <label>Enter Remark <p style="display: inline-block;margin: 0px;" *ngIf="popupMoreThanOneOptionMatching">Option1:</p></label>
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkMatchingOp1">
+                      <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkMatchingOp1">
                       </dx-text-box>
                     </span>
                   </div>
@@ -946,7 +941,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkMatchingOp2">
+                      <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkMatchingOp2">
                       </dx-text-box>
                     </span>
                   </div>
@@ -1002,7 +997,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkMatchingOp3">
+                      <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkMatchingOp3">
                       </dx-text-box>
                     </span>
                   </div>
@@ -1058,7 +1053,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remarks for Option1..." [(value)]="remarkMatchingOp4">
+                      <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkMatchingOp4">
                       </dx-text-box>
                     </span>
                   </div>

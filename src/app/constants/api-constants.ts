@@ -21,6 +21,7 @@ export let API_CONSTANTS = {
             UpdateInwardFormData: 'DigiColor/UpdateInwardFormData',
             InsertCompetitorName: 'DigiColor/InsertCompetitorName',
             InsertCompetitorProductName: 'DigiColor/InsertCompetitorProductName',
+            SMSSendForPostInwardFormData: 'DigiColor/SMSSendForPostInwardFormData'
         },
         OutWardPrediction_Form: {
             GetShadeIdDetailForOutwardPrediction: 'DigiColor/GetShadeIdDetailForOutwardPrediction',

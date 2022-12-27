@@ -234,6 +234,10 @@ export class ShadeMatchingComponent implements OnInit {
 
 
   shadeMatchingBtn: boolean = true;
+  popupMoreThanOneOptionPrediction: boolean = false;
+  popupMoreThanOneOptionMatching: boolean = false;
+  moreThanOnePredctionOption: boolean = false;
+  moreThanOneMatchingOption: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.isShowPopOver = false;
@@ -484,6 +488,8 @@ export class ShadeMatchingComponent implements OnInit {
     this.chkShadeMatchingOption3 = false;
     this.chkShadeMatchingOption4 = false;
 
+    this.popupMoreThanOneOptionPrediction = false;
+    this.popupMoreThanOneOptionMatching  = false;
     // this.router.navigate(["/digicolor/shadeMatching/"]);
 
   }
@@ -506,6 +512,7 @@ export class ShadeMatchingComponent implements OnInit {
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GerRecipeANDLabTesingParamter, dt)
       .subscribe((res: any) => {
         if (res.table.length > 0) {
+          this.moreThanOnePredctionOption = false;
           this.predictionAvilable = true;
           this.shadeMatchigDataAvialvble = false;
           this.recipeAllData = res.table;
@@ -526,6 +533,7 @@ export class ShadeMatchingComponent implements OnInit {
             this.showOption1RecipeData = false;
           }
           if (maxValueOftrail >= 2) {
+            this.moreThanOnePredctionOption = true;
             this.showOption2RecipeData = true;
             this.receipeOptionData2 = res.table.filter((par: any) => par.predictionOption == 2);
             this.rgbCodeOption2 = this.receipeOptionData2[0].rgbCode;
@@ -584,6 +592,7 @@ export class ShadeMatchingComponent implements OnInit {
         this.fastnessData = res.table2;
 
         if (res.table3.length > 0) {
+          this.moreThanOneMatchingOption = false;
           this.shadeMatchingAvilable = true;
           this.predictionAvilable = false;
           this.shadeMatchingAllData = res.table3;
@@ -597,6 +606,7 @@ export class ShadeMatchingComponent implements OnInit {
             this.showOption1ShadeMatching = false;
           }
           if (maxValueOftrail >= 2) {
+            this.moreThanOneMatchingOption = true;
             this.showOption2ShadeMatching = true;
             this.shadeMatchingOption2Data = res.table3.filter((par: any) => par.trail == 2);
             this.rgbshadeMatchingOption2 = this.shadeMatchingOption2Data[0].rgbHexaCode;
@@ -699,7 +709,7 @@ export class ShadeMatchingComponent implements OnInit {
         this.lightSourcePrimary = res.table1[0].lightSourcePrimary;
         this.lightSourceSecondary = res.table1[0].lightSourceSecondary;
         this.lightSourceTertiary = res.table1[0].lightSourceTertiary;
-        this.samplereamark = res.table1[0].samplereamark;
+        this.samplereamark = res.table1[0].sampleRemarks;
 
         this.fastnessData = res.table2;
         this.loadingVisible = false;
@@ -802,6 +812,7 @@ export class ShadeMatchingComponent implements OnInit {
     }
 
     if (maxValueOftrail >= 2) {
+      this.popupMoreThanOneOptionPrediction = true;
       this.poupShowPredictionOption2 = true;
       this.popUpPredictionOption2Data = res.filter((par: any) => par.trail == 2);
       this.popUpRgbCodeOption2 = this.popUpPredictionOption2Data[0].rgbHexaCode;
@@ -998,6 +1009,7 @@ export class ShadeMatchingComponent implements OnInit {
       }
 
       if (maxValueOftrail >= 2) {
+        this.popupMoreThanOneOptionMatching = true;
         this.poupShowShadeMatchingOption2 = true;
         this.popUpShadeMatchingOption2Data = res.table.filter((par: any) => par.trail == 2);
         this.popUpShadeMatchingRgbCodeOption2 = this.popUpShadeMatchingOption2Data[0].rgbHexaCode;
