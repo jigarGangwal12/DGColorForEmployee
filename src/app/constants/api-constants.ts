@@ -58,7 +58,9 @@ export let API_CONSTANTS = {
             getDigicolorInwardDetailForViewAll: 'DigiColor/getDigicolorInwardDetailForViewAll',
             SendSmsToCustomer: 'DigiColor/SendSmsToCustomer',
             SendSmsToCustomerForPredction: 'DigiColor/SendSmsToCustomerForPredction',
-            SendSmsToCustomerForShadeMatching: 'DigiColor/SendSmsToCustomerForShadeMatching'
+            SendSmsToCustomerForShadeMatching: 'DigiColor/SendSmsToCustomerForShadeMatching',
+            SendMailToCustomerForPredction: 'DigiColor/SendMailToCustomerForPredction',
+            SendMailToCustomerForShadeMatching: 'DigiColor/SendMailToCustomerForShadeMatching'
         }
     }
 };
