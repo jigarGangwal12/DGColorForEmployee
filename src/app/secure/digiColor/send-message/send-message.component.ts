@@ -80,6 +80,8 @@ export class SendMessageComponent implements OnInit {
       cellRendererParams: {
         suppressCount: true,
       },
+      minWidth: 135,
+      maxWidth: 135
     }
 
     this.recipePredctionColumnDef = [
@@ -93,7 +95,9 @@ export class SendMessageComponent implements OnInit {
       {
         headerName: 'Consignee Code',
         field: 'consigneeCode',
-        filterParams: { applyMiniFilterWhileTyping: true }
+        filterParams: { applyMiniFilterWhileTyping: true },
+        minWidth: 125,
+        maxWidth: 125
       },
       {
         headerName: 'Consignee Name',
@@ -133,7 +137,9 @@ export class SendMessageComponent implements OnInit {
       {
         headerName: 'Consignee Code',
         field: 'consigneeCode',
-        filterParams: { applyMiniFilterWhileTyping: true }
+        filterParams: { applyMiniFilterWhileTyping: true },
+        minWidth: 125,
+        maxWidth: 125
       },
       {
         headerName: 'Consignee Name',
@@ -239,7 +245,7 @@ export class SendMessageComponent implements OnInit {
     })
   }
 
-  SendSMS(isSendPrediction: any) {  
+  SendSMS(isSendPrediction: any) {
     this.loadingVisible = true;
     let shadeIds: any = [];
     if (isSendPrediction == 'prediction') {
@@ -260,15 +266,15 @@ export class SendMessageComponent implements OnInit {
         notify({ message: 'Something went wrong. please try again.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
         return;
       }
-      
+
       this.disableUpdateButton = true;
       this.apiService.post(API_CONSTANTS.DigiColor.SendMessage.SendSmsToCustomerForPredction, shadeIds)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
           notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'success', 2000);
           this.getDigicolorInwardDetail();
-          this.SendMail(isSendPrediction,shadeIds);
-          
+          this.SendMail(isSendPrediction, shadeIds);
+
         });
     }
     else if (isSendPrediction == 'shadeMatching') {
@@ -294,21 +300,21 @@ export class SendMessageComponent implements OnInit {
           this.disableUpdateButton = false;
           notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'success', 2000);
           this.getDigicolorInwardDetail();
-          this.SendMail(isSendPrediction,shadeIds);
+          this.SendMail(isSendPrediction, shadeIds);
         });
     }
   }
 
 
-  SendMail(isSendPrediction: any,shadeIds :any){
+  SendMail(isSendPrediction: any, shadeIds: any) {
     if (isSendPrediction == 'prediction') {
-      this.apiService.post(this.API_CONSTANTS.DigiColor.SendMessage.SendMailToCustomerForPredction,shadeIds)
+      this.apiService.post(this.API_CONSTANTS.DigiColor.SendMessage.SendMailToCustomerForPredction, shadeIds)
         .subscribe((res: any) => {
           this.loadingVisible = false;
         });
     }
-    else if(isSendPrediction == 'shadeMatching'){
-      this.apiService.post(this.API_CONSTANTS.DigiColor.SendMessage.SendMailToCustomerForShadeMatching,shadeIds)
+    else if (isSendPrediction == 'shadeMatching') {
+      this.apiService.post(this.API_CONSTANTS.DigiColor.SendMessage.SendMailToCustomerForShadeMatching, shadeIds)
         .subscribe((res: any) => {
           this.loadingVisible = false;
         });

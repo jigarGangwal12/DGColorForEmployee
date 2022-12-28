@@ -48,7 +48,8 @@
             <em><b>Dyeset:</b> <i> {{data.dyeSet}}</i></em>
             <em><b>Req:</b> <i> {{data.customerRequirement}}</i></em>
             <em><b>Prediction Status:</b> <i> {{data.statusForRecipePrediction}}</i></em>
-            <em *ngIf="data.customerRequirement !== 'Recipe Prediction'"><b>Matching Status:</b> <i> {{data.statusForShadeMatching}}</i></em>
+            <em *ngIf="data.customerRequirement !== 'Recipe Prediction'"><b>Matching Status:</b> <i>
+                {{data.statusForShadeMatching}}</i></em>
           </span>
           <i [ngStyle]="{'color': data.rbgcode }" class="underproce">{{data.shadeStatus}}</i>
           <strong>
@@ -66,7 +67,13 @@
           </div> -->
           <!-- Start Recipe Option 1 -->
           <div *ngIf="showOption1RecipeData">
-            <h3 *ngIf="moreThanOnePredctionOption">Option 1</h3>
+            <div class="option-right-side-info-bx">
+              <h3 *ngIf="moreThanOnePredctionOption">Option 1</h3>
+              <span>
+                <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp1"
+                  (click)="remarkPopoUpOpen1(PredictionRemarkOp1)"></i>
+              </span>
+            </div>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -111,7 +118,13 @@
 
           <!-- Start Recipe Option 2 -->
           <div *ngIf="showOption2RecipeData">
-            <h3>Option 2</h3>
+            <div class="option-right-side-info-bx">
+              <h3>Option 2</h3>
+              <span>
+                <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp2"
+                  (click)="remarkPopoUpOpen1(PredictionRemarkOp2)"></i>
+              </span>
+            </div>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -155,7 +168,13 @@
 
           <!-- Start Recipe Option 3 -->
           <div *ngIf="showOption3RecipeData">
-            <h3>Option 3</h3>
+            <div class="option-right-side-info-bx">
+              <h3>Option 3</h3>
+              <span>
+                <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp3"
+                  (click)="remarkPopoUpOpen1(PredictionRemarkOp3)"></i>
+              </span>
+            </div>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -199,7 +218,13 @@
 
           <!-- Start Recipe Option 4 -->
           <div *ngIf="showOption4RecipeData">
-            <h3>Option 4</h3>
+            <div class="option-right-side-info-bx">
+              <h3>Option 4</h3>
+              <span>
+                <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp4"
+                  (click)="remarkPopoUpOpen1(PredictionRemarkOp4)"></i>
+              </span>
+            </div>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -255,7 +280,13 @@
           </div> -->
           <!-- Start Shade Matching Option 1 -->
           <div *ngIf="showOption1ShadeMatching">
-            <h3 *ngIf="moreThanOneMatchingOption">Option 1</h3>
+            <div class="option-right-side-info-bx">
+              <h3 *ngIf="moreThanOneMatchingOption">Option 1</h3>
+              <span>
+                <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp1"
+                  (click)="remarkPopoUpOpen1(MatchingRemarkOp1)"></i>
+              </span>
+            </div>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -287,7 +318,13 @@
 
           <!-- Start Shade Matching Option 2 -->
           <div *ngIf="showOption2ShadeMatching">
-            <h3>Option 2</h3>
+            <div class="option-right-side-info-bx">
+              <h3>Option 2</h3>
+              <span>
+                <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp2"
+                  (click)="remarkPopoUpOpen1(MatchingRemarkOp2)"></i>
+              </span>
+            </div>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -319,7 +356,13 @@
 
           <!-- Start Shade Matching Option 3 -->
           <div *ngIf="showOption3ShadeMatching">
-            <h3>Option 3</h3>
+            <div class="option-right-side-info-bx">
+              <h3>Option 3</h3>
+              <span>
+                <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp3"
+                  (click)="remarkPopoUpOpen1(MatchingRemarkOp3)"></i>
+              </span>
+            </div>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -351,7 +394,13 @@
 
           <!-- Start Shade Matching Option 4 -->
           <div *ngIf="showOption4ShadeMatching">
-            <h3>Option 4</h3>
+            <div class="option-right-side-info-bx">
+              <h3>Option 4</h3>
+              <span>
+                <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp4"
+                  (click)="remarkPopoUpOpen1(MatchingRemarkOp4)"></i>
+              </span>
+            </div>
             <table cell-spacing="0" border="0">
               <tr>
                 <td style="padding: 0px !important;border-bottom: 0px !important;border-right: 0px !important;">
@@ -573,12 +622,12 @@
                 </table>
                 <div class="">
                   <div class="shade-maching-popup-enter-remark-text">
-                    <label>Enter Remark <p style="display: inline-block;margin: 0px;" *ngIf="popupMoreThanOneOptionPrediction">Option1:</p></label>
+                    <label>Enter Remark <p style="display: inline-block;margin: 0px;"
+                        *ngIf="popupMoreThanOneOptionPrediction">Option1:</p></label>
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remark"
-                        [(value)]="remarkPredictionOp1">
+                      <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkPredictionOp1">
                       </dx-text-box>
                     </span>
                   </div>
@@ -646,8 +695,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remark"
-                        [(value)]="remarkPredictionOp2">
+                      <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkPredictionOp2">
                       </dx-text-box>
                     </span>
                   </div>
@@ -715,8 +763,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remark"
-                        [(value)]="remarkPredictionOp3">
+                      <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkPredictionOp3">
                       </dx-text-box>
                     </span>
                   </div>
@@ -784,8 +831,7 @@
                   </div>
                   <div class="">
                     <span>
-                      <dx-text-box Id="case1" placeholder="Enter Remark"
-                        [(value)]="remarkPredictionOp4">
+                      <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkPredictionOp4">
                       </dx-text-box>
                     </span>
                   </div>
@@ -880,7 +926,8 @@
                 </table>
                 <div class="">
                   <div class="shade-maching-popup-enter-remark-text">
-                    <label>Enter Remark <p style="display: inline-block;margin: 0px;" *ngIf="popupMoreThanOneOptionMatching">Option1:</p></label>
+                    <label>Enter Remark <p style="display: inline-block;margin: 0px;"
+                        *ngIf="popupMoreThanOneOptionMatching">Option1:</p></label>
                   </div>
                   <div class="">
                     <span>
@@ -1085,7 +1132,6 @@
           <!-- End Tab Shade Matching -->
         </dx-scroll-view>
       </div>
-
     </dx-popup>
   </div>
 </div>
@@ -1106,5 +1152,18 @@
   </div>
   <div clas="dx-popup-content" style="height: 100px;">
     <h4>{{popupRemark}}</h4>
+  </div>
+</dx-popup>
+
+<dx-popup [width]="'500'" [height]="400" [showTitle]="true" [showCloseButton]="false" titleTemplate="titlerapidSearch"
+  id="test" [dragEnabled]="true" [closeOnOutsideClick]="false" [(visible)]="remarkPopupVisible1">
+  <div *dxTemplate="let data of 'titlerapidSearch'" class="costomer-dgcolor-Popup-hdr">
+    <h4>Remark</h4>
+    <button type="submit" (click)="remarkPopupClose1($event)">
+      <i class="fa fa-window-close"></i>
+    </button>
+  </div>
+  <div clas="dx-popup-content" style="height: 100px;">
+    <h4 style="font-weight: 500;">{{Remarks}}</h4>
   </div>
 </dx-popup>

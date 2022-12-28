@@ -239,6 +239,18 @@ export class ShadeMatchingComponent implements OnInit {
   moreThanOnePredctionOption: boolean = false;
   moreThanOneMatchingOption: boolean = false;
 
+  PredictionRemarkOp1: boolean = false;
+  PredictionRemarkOp2: boolean = false;
+  PredictionRemarkOp3: boolean = false;
+  PredictionRemarkOp4: boolean = false;
+  
+  remarkPopupVisible1: boolean = false;
+  Remarks: any;
+  MatchingRemarkOp1: any;
+  MatchingRemarkOp2: any;
+  MatchingRemarkOp3: any;
+  MatchingRemarkOp4: any;
+
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.isShowPopOver = false;
     this.ScreenSizeWidth = window.innerWidth;
@@ -529,6 +541,7 @@ export class ShadeMatchingComponent implements OnInit {
             if (this.receipeOptionData1 && this.receipeOptionData1[0].lightsourceByDataColor && this.receipeOptionData1[0].lightsourceByDataColor != null && this.receipeOptionData1[0].lightsourceByDataColor != undefined) {
               this.lightSourceDataColor1 = this.receipeOptionData1[0].lightsourceByDataColor.slice(0, -5);
             }
+            this.PredictionRemarkOp1 = this.receipeOptionData1[0].remarks;
           } else {
             this.showOption1RecipeData = false;
           }
@@ -544,6 +557,7 @@ export class ShadeMatchingComponent implements OnInit {
             if (this.receipeOptionData2 && this.receipeOptionData2[0].lightsourceByDataColor && this.receipeOptionData2[0].lightsourceByDataColor != null && this.receipeOptionData2[0].lightsourceByDataColor != undefined) {
               this.lightSourceDataColor2 = this.receipeOptionData2[0].lightsourceByDataColor.slice(0, -5);
             }
+            this.PredictionRemarkOp2 = this.receipeOptionData2[0].remarks;
           } else {
             this.showOption2RecipeData = false;
           }
@@ -558,6 +572,7 @@ export class ShadeMatchingComponent implements OnInit {
             if (this.receipeOptionData3 && this.receipeOptionData3[0].lightsourceByDataColor && this.receipeOptionData3[0].lightsourceByDataColor != null && this.receipeOptionData3[0].lightsourceByDataColor != undefined) {
               this.lightSourceDataColor3 = this.receipeOptionData3[0].lightsourceByDataColor.slice(0, -5);
             }
+            this.PredictionRemarkOp3 = this.receipeOptionData3[0].remarks;
           } else {
             this.showOption3RecipeData = false;
           }
@@ -572,6 +587,7 @@ export class ShadeMatchingComponent implements OnInit {
             if (this.receipeOptionData4 && this.receipeOptionData4[0].lightsourceByDataColor && this.receipeOptionData4[0].lightsourceByDataColor != null && this.receipeOptionData4[0].lightsourceByDataColor != undefined) {
               this.lightSourceDataColor4 = this.receipeOptionData4[0].lightsourceByDataColor.slice(0, -5);
             }
+            this.PredictionRemarkOp4 = this.receipeOptionData4[0].remarks;
           } else {
             this.showOption4RecipeData = false;
           }
@@ -602,6 +618,7 @@ export class ShadeMatchingComponent implements OnInit {
             this.showOption1ShadeMatching = true;
             this.shadeMatchingOption1Data = res.table3.filter((par: any) => par.trail == 1);
             this.rgbshadeMatchingOption1 = this.shadeMatchingOption1Data[0].rgbHexaCode;
+            this.MatchingRemarkOp1 = this.shadeMatchingOption1Data[0].remarks;
           } else {
             this.showOption1ShadeMatching = false;
           }
@@ -610,6 +627,7 @@ export class ShadeMatchingComponent implements OnInit {
             this.showOption2ShadeMatching = true;
             this.shadeMatchingOption2Data = res.table3.filter((par: any) => par.trail == 2);
             this.rgbshadeMatchingOption2 = this.shadeMatchingOption2Data[0].rgbHexaCode;
+            this.MatchingRemarkOp2 = this.shadeMatchingOption2Data[0].remarks;
           } else {
             this.showOption2ShadeMatching = false;
           }
@@ -617,6 +635,7 @@ export class ShadeMatchingComponent implements OnInit {
             this.showOption3ShadeMatching = true;
             this.shadeMatchingOption3Data = res.table3.filter((par: any) => par.trail == 3);
             this.rgbshadeMatchingOption3 = this.shadeMatchingOption3Data[0].rgbHexaCode;
+            this.MatchingRemarkOp3 = this.shadeMatchingOption3Data[0].remarks;
           } else {
             this.showOption3ShadeMatching = false;
           }
@@ -624,6 +643,7 @@ export class ShadeMatchingComponent implements OnInit {
             this.showOption4ShadeMatching = true;
             this.shadeMatchingOption4Data = res.table3.filter((par: any) => par.trail == 4);
             this.rgbshadeMatchingOption4 = this.shadeMatchingOption4Data[0].rgbHexaCode;
+            this.MatchingRemarkOp4 = this.shadeMatchingOption4Data[0].remarks;
           } else {
             this.showOption4ShadeMatching = false;
           }
@@ -1554,5 +1574,16 @@ export class ShadeMatchingComponent implements OnInit {
         this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter;
       }
     }
+  }
+  remarkPopoUpOpen1(remark: any){
+    this.remarkPopupVisible1 = true;
+    if(remark){
+      this.Remarks = remark;
+    }
+
+  }
+  remarkPopupClose1(event: any){
+    this.Remarks = '';
+    this.remarkPopupVisible1 = false;
   }
 }

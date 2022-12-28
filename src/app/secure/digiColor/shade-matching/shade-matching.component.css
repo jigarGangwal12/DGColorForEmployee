@@ -739,3 +739,27 @@ i {
   transform: rotate(45deg);
 }
 /* Custom checkbox CSS End Here */
+
+
+.option-right-side-info-bx {
+  position: relative;
+  width: 100%;
+  float: left;
+}
+
+.option-right-side-info-bx h3 {
+  float: left;
+}
+
+.option-right-side-info-bx span {
+  float: right;
+  text-align: right;
+}
+
+.option-right-side-info-bx span i {
+  margin-top: 4px;
+  margin-right: 10px;
+  float: left;
+  font-size: 20px;
+  color: #446868;
+}
