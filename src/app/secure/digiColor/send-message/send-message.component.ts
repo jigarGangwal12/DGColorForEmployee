@@ -268,8 +268,8 @@ export class SendMessageComponent implements OnInit {
           notify({ message: res.message, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'success', 2000);
           this.getDigicolorInwardDetail();
           this.SendMail(isSendPrediction,shadeIds);
+          
         });
-        this.loadingVisible = false;
     }
     else if (isSendPrediction == 'shadeMatching') {
       var rowCount = this.gridApiMatching.getSelectedNodes();
@@ -296,7 +296,6 @@ export class SendMessageComponent implements OnInit {
           this.getDigicolorInwardDetail();
           this.SendMail(isSendPrediction,shadeIds);
         });
-        this.loadingVisible = false;
     }
   }
 
@@ -305,11 +304,13 @@ export class SendMessageComponent implements OnInit {
     if (isSendPrediction == 'prediction') {
       this.apiService.post(this.API_CONSTANTS.DigiColor.SendMessage.SendMailToCustomerForPredction,shadeIds)
         .subscribe((res: any) => {
+          this.loadingVisible = false;
         });
     }
     else if(isSendPrediction == 'shadeMatching'){
       this.apiService.post(this.API_CONSTANTS.DigiColor.SendMessage.SendMailToCustomerForShadeMatching,shadeIds)
         .subscribe((res: any) => {
+          this.loadingVisible = false;
         });
     }
   }
