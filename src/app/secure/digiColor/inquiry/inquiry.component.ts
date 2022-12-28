@@ -326,7 +326,7 @@ export class InquiryComponent implements OnInit {
     data.AssignToRunnerCode = data.assignToRunner.split('-')[0];
     data.assignToRunner = data.assignToRunner.split('-')[1];
     this.disablesubbtn = true;
-    debugger
+    
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)
       .subscribe((res: any) => {
         this.disablesubbtn = false;
@@ -384,7 +384,7 @@ export class InquiryComponent implements OnInit {
           this.inquiryForm.contactPersonNo = res.table[0].contactNo;
           this.inquiryForm.caseId = res.table[0].caseId;
           this.inquiryForm.remarks = res.table[0].remark;
-          debugger
+          
           // this.inquiryForm.requirement = [];
           // var array = res.table[0].customerRequirement.split(',');
           // for (let i = 0; i < array.length; i++) {
@@ -425,7 +425,7 @@ export class InquiryComponent implements OnInit {
   }
   customerRequirementValueChange(da: any) {
     if (da && da.value) {
-      debugger
+      
       this.inquiryForm.requirementValue = da.value.toString();
     }
 
@@ -438,7 +438,7 @@ export class InquiryComponent implements OnInit {
 
   cellTemplate(container: any, options: any) {
     const noBreakSpace = '\u00A0';
-    debugger
+    
     // const text = (options.value || []).map((element: any) => options.column.lookup.calculateCellValue(element)).join(', ');
     container.textContent = options.value || noBreakSpace;
     container.title = options.value;

@@ -674,18 +674,32 @@
                     <div *dxTemplate="let cellInfo of 'testMethodCellTemplate'">
                       <dx-select-box [dataSource]="testMethodList" displayExpr="testMethod" valueExpr="testMethod"
                         [searchEnabled]="true" [(value)]="cellInfo.value"
-                        (onValueChanged)="cellInfo.setValue($event.value)" placeholder="Select Method">
+                        (onValueChanged)="cellInfo.setValue($event.value)"
+                        (onSelectionChanged)="nameofMethodValueChanged($event)" placeholder="Select Method">
                       </dx-select-box>
                     </div>
-                    <dxi-column *ngIf="showRubbingColumninGrid" dataField="dryorWet" [width]=120 caption="">
-                      <dxo-lookup [dataSource]="dyesorWetDataSource" valueExpr="name" displayExpr="name">
-                      </dxo-lookup>
-                    </dxi-column>
-                    <dxi-column dataField="targetRating" [width]=120 caption="Target Rating">
+
+                    <dxi-column dataField="targetRating" caption="Target Rating" [allowFiltering]="false" [width]=120
+                      [allowSorting]="false" [allowGrouping]="false" editCellTemplate="targetRatingCellTemplate"
+                      [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
                       <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating"
                         displayExpr="targetRating">
                       </dxo-lookup>
                     </dxi-column>
+
+                    <div *dxTemplate="let cellInfo of 'targetRatingCellTemplate'">
+                      <dx-select-box [dataSource]="targetRatingDataSource" displayExpr="targetRating"
+                        valueExpr="targetRating" [searchEnabled]="true" [(value)]="cellInfo.value"
+                        (onValueChanged)="cellInfo.setValue($event.value)" placeholder="Select Target Rating">
+                      </dx-select-box>
+                    </div>
+
+                    <!-- <dxi-column dataField="targetRating" [width]=120 caption="Target Rating">
+                      <dxo-lookup [dataSource]="targetRatingDataSource" valueExpr="targetRating"
+                        displayExpr="targetRating">
+                      </dxo-lookup>
+                    </dxi-column> -->
+
                     <dxi-column dataField="remark" caption="Remarks"></dxi-column>
                   </dx-data-grid>
                 </div>
@@ -1291,7 +1305,8 @@
                     <div *dxTemplate="let cellInfo of 'testMethodCellTemplate'">
                       <dx-select-box [dataSource]="testMethodList" displayExpr="testMethod" valueExpr="testMethod"
                         [searchEnabled]="true" [(value)]="cellInfo.value"
-                        (onValueChanged)="cellInfo.setValue($event.value)" placeholder="Select Method">
+                        (onValueChanged)="cellInfo.setValue($event.value)"
+                        (onSelectionChanged)="nameofMethodValueChanged($event)" placeholder="Select Method">
                       </dx-select-box>
                     </div>
                     <dxi-column dataField="targetRating" [width]=120 caption="Target Rating">

@@ -467,14 +467,18 @@ export class DigiColorinwardComponent implements OnInit {
       this.uomList = this.customerSubStrateData.filter((da: any) => da.typeofIndustries == data.selectedItem.typeofIndustries);
   }
   nameofFastnessValueChanged(data: any) {
-    if (data && data.selectedItem.nameofFastness)
-      this.testMethodList = this.testMethodDataSource.filter((da: any) => da.nameofFastness == data.selectedItem.nameofFastness);
-    if (data.selectedItem.nameofFastness == 'Rubbing Fastness') {
-      this.showRubbingColumninGrid = true;
+    if (data && data.selectedItem.nameofFastness) {
+      const filterTestMethoList = this.testMethodDataSource.filter((da: any) => da.nameofFastness == data.selectedItem.nameofFastness);
+      const ids = filterTestMethoList.map((o: any) => o.testMethod)
+      this.testMethodList = filterTestMethoList.filter(({ testMethod }: any, index: any) => !ids.includes(testMethod, index + 1))
     }
-    //  else {
-    //   this.showRubbingColumninGrid = false;
-    // }
+  }
+  nameofMethodValueChanged(data: any) {
+    if (data && data.selectedItem.testMethod) {
+      const filterTestMethoList = this.testMethodDataSource.filter((da: any) => da.testMethod == data.selectedItem.testMethod);
+      const ids = filterTestMethoList.map((o: any) => o.targetRating)
+      this.targetRatingDataSource = filterTestMethoList.filter(({ targetRating }: any, index: any) => !ids.includes(targetRating, index + 1))
+    }
   }
   departmentValueChanged(data: any) {
     if (data && data.selectedItem.department)
@@ -504,7 +508,7 @@ export class DigiColorinwardComponent implements OnInit {
     }
   }
   MapSampleDatatoCaseIdDataForm(da: any) {
-    debugger
+
     this.disablesubbtn = true;
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.MapSampleIdWithCaseId, this.selectedRowData)
       .subscribe((res: any) => {
@@ -574,7 +578,7 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.consigneeCity = consigneeDetail[0].city;
           this.InwardDataModel.inquiryDateTime = consigneeDetail[0].createdDate;
           this.customerReuirement = consigneeDetail[0].customerRequirement.split(',');
-          debugger
+
           //this.customerRequirementType.name = this.customerReuirement;
           this.InwardDataModel.caseId = consigneeDetail[0].consigneeNameCode.split('-')[0].trim();
           this.InwardDataModel.saveOrSubmit = 'Save';
@@ -677,7 +681,7 @@ export class DigiColorinwardComponent implements OnInit {
         else if (element.mobileNumber.length != 10) {
           this.count++;
         }
-        else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && !element.emailIdNotProvided) {
+        else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && !element.emailIdNotProvided) {
           this.countForEmailIdCheck++;
         }
         else {
@@ -725,8 +729,8 @@ export class DigiColorinwardComponent implements OnInit {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
     }
   }
-  sendSMS(data: any){
-    this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.SMSSendForPostInwardFormData,data)
+  sendSMS(data: any) {
+    this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.SMSSendForPostInwardFormData, data)
       .subscribe((res: any) => {
       });
 
@@ -747,7 +751,7 @@ export class DigiColorinwardComponent implements OnInit {
         else if (element.mobileNumber.length != 10) {
           this.count++;
         }
-        else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && element.emailIdNotProvided) {
+        else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && element.emailIdNotProvided) {
           this.countForEmailIdCheck++;
         }
         else {

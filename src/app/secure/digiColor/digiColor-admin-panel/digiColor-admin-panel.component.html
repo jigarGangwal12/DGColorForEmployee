@@ -39,7 +39,7 @@
         <div class="" *ngIf="allTables">
           <div class="inward_boxs_Div_Width">
             <h1>All Data</h1>
-          <div class="row">
+            <div class="row">
 
               <div class="col-lg-3 col-md-12">
                 <div class="" style="margin-top: 10px">
@@ -47,7 +47,7 @@
                 </div>
                 <div class="shadowbox inward_boxs_Div inward_boxs_without_mar AdminUserList-height">
                   <div id="form-container" style="padding:0 8px;">
-                    <dx-data-grid  [dataSource]="digicolorUserDetailsList" [allowColumnResizing]="true"
+                    <dx-data-grid [dataSource]="digicolorUserDetailsList" [allowColumnResizing]="true"
                       [wordWrapEnabled]="true" [allowColumnReordering]="true"
                       (onRowUpdated)="onrowUpdatedForUser($event)" [showBorders]="true">
                       <dxo-editing mode="cell" [allowUpdating]="true" [allowDeleting]="false">
@@ -73,11 +73,10 @@
                 </div>
                 <div class="shadowbox inward_boxs_Div inward_boxs_without_mar">
                   <div id="form-container" style="padding:0 8px;">
-                    <dx-data-grid [dataSource]="processList" [height]="331"
-                      [allowColumnResizing]="true" [wordWrapEnabled]="true" [allowColumnReordering]="true"
-                      (onRowUpdated)="onProcessUpdate($event)" (onRowInserted)="OnProcessInsert($event)"
-                      (onRowRemoved)="OnProcessDeleted($event)" (onEditingStart)="logEvent($event)"
-                      [showBorders]="true">
+                    <dx-data-grid [dataSource]="processList" [height]="331" [allowColumnResizing]="true"
+                      [wordWrapEnabled]="true" [allowColumnReordering]="true" (onRowUpdated)="onProcessUpdate($event)"
+                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)"
+                      (onEditingStart)="logEvent($event)" [showBorders]="true">
                       <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                       </dxo-editing>
                       <dxo-paging [enabled]="false"></dxo-paging>
@@ -102,11 +101,10 @@
                 </div>
                 <div class="shadowbox inward_boxs_Div inward_boxs_without_mar">
                   <div id="form-container" style="padding:0 8px;">
-                    <dx-data-grid [dataSource]="lightSourceData" [allowColumnResizing]="true"
-                      [height]="331" [wordWrapEnabled]="true" [allowColumnReordering]="true"
-                      (onRowUpdated)="onProcessUpdate($event)" (onRowInserted)="OnProcessInsert($event)"
-                      (onRowRemoved)="OnProcessDeleted($event)" (onEditingStart)="logEvent($event)"
-                      [showBorders]="true">
+                    <dx-data-grid [dataSource]="lightSourceData" [allowColumnResizing]="true" [height]="331"
+                      [wordWrapEnabled]="true" [allowColumnReordering]="true" (onRowUpdated)="onProcessUpdate($event)"
+                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)"
+                      (onEditingStart)="logEvent($event)" [showBorders]="true">
                       <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                       </dxo-editing>
                       <dxo-paging [enabled]="false"></dxo-paging>
@@ -131,11 +129,10 @@
                 </div>
                 <div class="shadowbox inward_boxs_Div inward_boxs_without_mar">
                   <div id="form-container" style="padding:0 8px;">
-                    <dx-data-grid [dataSource]="colorGamutData" [allowColumnResizing]="true"
-                      [height]="331" [wordWrapEnabled]="true" [allowColumnReordering]="true"
-                      (onRowUpdated)="onProcessUpdate($event)" (onRowInserted)="OnProcessInsert($event)"
-                      (onRowRemoved)="OnProcessDeleted($event)" (onEditingStart)="logEvent($event)"
-                      [showBorders]="true">
+                    <dx-data-grid [dataSource]="colorGamutData" [allowColumnResizing]="true" [height]="331"
+                      [wordWrapEnabled]="true" [allowColumnReordering]="true" (onRowUpdated)="onProcessUpdate($event)"
+                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)"
+                      (onEditingStart)="logEvent($event)" [showBorders]="true">
                       <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                       </dxo-editing>
                       <dxo-paging [enabled]="false"></dxo-paging>
@@ -162,7 +159,7 @@
                   <div id="form-container" style="padding:0 8px;">
                     <dx-data-grid [dataSource]="customerSubstrateData" [allowColumnResizing]="true"
                       [wordWrapEnabled]="true" [allowColumnReordering]="true" (onRowUpdated)="onProcessUpdate($event)"
-                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)" [height]="331"
+                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)" [height]="500"
                       (onEditingStart)="logEvent($event)" [showBorders]="true">
                       <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                       </dxo-editing>
@@ -184,7 +181,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-3 col-md-12">
+              <div class="col-lg-6 col-md-12">
                 <div class="" style="margin-top: 10px">
                   <h3>Fastness</h3>
                 </div>
@@ -192,7 +189,7 @@
                   <div id="form-container" style="padding:0 8px;">
                     <dx-data-grid [dataSource]="fastnessDataSource" [allowColumnResizing]="true"
                       [wordWrapEnabled]="true" [allowColumnReordering]="true" (onRowUpdated)="onProcessUpdate($event)"
-                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)" [height]="331"
+                      (onRowInserted)="OnProcessInsert($event)" (onRowRemoved)="OnProcessDeleted($event)" [height]="500"
                       (onEditingStart)="logEvent($event)" [showBorders]="true">
                       <dxo-editing mode="cell" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
                       </dxo-editing>
@@ -204,6 +201,8 @@
                       <dxi-column dataField="nameofFastness" caption="Fastness">
                       </dxi-column>
                       <dxi-column dataField="testMethod" caption="Test Method">
+                      </dxi-column>
+                      <dxi-column dataField="targetRating" caption="Target Rating">
                       </dxi-column>
                       <dxi-column dataField="id" caption="Id" [visible]=false>
                       </dxi-column>
@@ -227,11 +226,11 @@
             <div class="form-row row">
               <div class="form-group col-lg-4 col-md-6">
                 <label for="firstname">UserName <span style="color:red">*</span></label>
-                <input type="text" class="form-control" placeholder="UserName"  name="username" ngModel required>
+                <input type="text" class="form-control" placeholder="UserName" name="username" ngModel required>
               </div>
               <div class="form-group col-lg-4 col-md-6">
                 <label for="password">Password <span style="color:red">*</span></label>
-                <input type="password" class="form-control" placeholder="Password"  name="password"  ngModel required>
+                <input type="password" class="form-control" placeholder="Password" name="password" ngModel required>
               </div>
               <div class="form-group col-lg-4 col-md-12">
                 <label for="email">Select Customer Code</label><br>
@@ -246,11 +245,13 @@
             <div class="form-row row my-3">
               <div class="col-lg-3 col-md-6 mb-3">
                 <label for="customercode">Customer Code</label><br>
-                <input type="text" name="customercode" id="customercode" class="form-control" [(ngModel)]="userDataModel.customercode" readonly>
+                <input type="text" name="customercode" id="customercode" class="form-control"
+                  [(ngModel)]="userDataModel.customercode" readonly>
               </div>
               <div class="col-lg-3 col-md-6 mb-3">
                 <label for="customername">Customer Name</label><br>
-                <input type="text" name="customername" id="customername" class="form-control" [(ngModel)]="userDataModel.customername" readonly>
+                <input type="text" name="customername" id="customername" class="form-control"
+                  [(ngModel)]="userDataModel.customername" readonly>
               </div>
               <div class="col-lg-3 col-md-6 mb-3">
                 <label for="agentcode">Agent Code</label><br>
@@ -261,10 +262,11 @@
                 <input type="text" name="agentname" class="form-control" [(ngModel)]="userDataModel.agentname" readonly>
               </div>
               <div class="col-lg-12 col-md-12 mb-3">
-                <button type="submit" class="btn btn-primary btn-lg" style="float: right; text-align: right;">Submit</button>
+                <button type="submit" class="btn btn-primary btn-lg"
+                  style="float: right; text-align: right;">Submit</button>
               </div>
             </div>
-<!-- 
+            <!-- 
             <div class="btn-group my-4">
               <button type="submit" class="btn btn-primary btn-lg" style="margin-left: 300px;">Submit</button>
             </div> -->
@@ -275,9 +277,8 @@
           </div>
           <div class="shadowbox_inquiry">
             <div class="col-md-12 col-md-padi-left-none">
-              <dx-data-grid [dataSource]="allUserList" [allowColumnResizing]="true"
-                [wordWrapEnabled]="true"  [allowColumnReordering]="true"
-                [showBorders]="true"  (onRowRemoved)="OnUserDeleted($event)">
+              <dx-data-grid [dataSource]="allUserList" [allowColumnResizing]="true" [wordWrapEnabled]="true"
+                [allowColumnReordering]="true" [showBorders]="true" (onRowRemoved)="OnUserDeleted($event)">
                 <dxo-editing mode="cell" [allowDeleting]="true"></dxo-editing>
                 <dxo-paging [enabled]="false"></dxo-paging>
                 <dxo-group-panel [visible]="true"></dxo-group-panel>
@@ -295,9 +296,9 @@
                 <dxi-column dataField="agentCode" caption="Agent Code" [width]="90"></dxi-column>
                 <dxi-column dataField="agentName" caption="Agent"></dxi-column>
                 <dxi-column dataField="isActive" caption="Is Active"></dxi-column>
-                <dxi-column dataField="createdDate" dataType="datetime" [format]="{ type: 'dd/MM/yy hh:mm' }" [width]="110"
-                caption="Created Datetime">
-              </dxi-column>
+                <dxi-column dataField="createdDate" dataType="datetime" [format]="{ type: 'dd/MM/yy hh:mm' }"
+                  [width]="110" caption="Created Datetime">
+                </dxi-column>
               </dx-data-grid>
             </div>
           </div>
