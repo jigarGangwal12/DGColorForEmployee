@@ -659,7 +659,6 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   SaveInwardData(data: any) {
-
     if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -681,9 +680,9 @@ export class DigiColorinwardComponent implements OnInit {
         else if (element.mobileNumber.length != 10) {
           this.count++;
         }
-        else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && !element.emailIdNotProvided) {
-          this.countForEmailIdCheck++;
-        }
+        // else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && !element.emailIdNotProvided) {
+        //   this.countForEmailIdCheck++;
+        // }
         else {
           this.count = 0;
         }
@@ -808,18 +807,15 @@ export class DigiColorinwardComponent implements OnInit {
       this.selecteditemCategory = dat.selectedItem.name;
       this.filterCompetitorByItemCategory = this.competitorNameDataSource.filter((data: any) => data.segment == dat.selectedItem.name);
     }
-
   }
   productFunctionValueChanged(dat: any) {
   }
 
   selectionChangedHandler(data: any) {
-
     if (data) {
       data.selectedRowsData.forEach((element: any) => {
         element.isReportSend = true;
       });
-
       if (data.currentDeselectedRowKeys && data.currentDeselectedRowKeys.length > 0) {
         let unselectedid = data.currentDeselectedRowKeys
         this.customerContactDetails.forEach((element1: any) => {

@@ -37,45 +37,45 @@
   </div> -->
   <div *ngIf="sendSMS">
     <div class="row">
-    <div class="col-md-12 col-xl-6">
-      
-      <div class="body-right-top-search-sec">
-        <label>Recipe Prediction</label>
-        <input type="text" id="filter-text-box" placeholder="Search" (input)="onFilterTextBoxChangedPrediction()"
-          autocomplete="off" />
+      <div class="col-md-12 col-xl-6">
+
+        <div class="body-right-top-search-sec">
+          <label>Recipe Prediction</label>
+          <input type="text" id="filter-text-box" placeholder="Search" (input)="onFilterTextBoxChangedPrediction()"
+            autocomplete="off" />
+        </div>
+        <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 226px); margin-bottom: 50px;"
+          [columnDefs]="recipePredctionColumnDef" [rowData]="recipePredctionSMSGrid" [defaultColDef]="defaultColDef"
+          [rowSelection]="rowSelection" [autoGroupColumnDef]="AutoGroupColumnDef" [rowMultiSelectWithClick]="true"
+          [groupDefaultExpanded]="groupDefaultExpanded" (gridReady)="OnGridReadyPredction($event)"
+          [suppressContextMenu]="true" [sideBar]="sideBar">
+        </ag-grid-angular>
+        <div class="main_pop">
+          <dx-button class="button" *ngIf="!disableUpdateButton" stylingMode="contained" text="Prediction" type="normal"
+            [width]="150" (click)="SendSMS('prediction')" style="margin-left: 5px;">
+          </dx-button>
+        </div>
       </div>
-      <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 226px); margin-bottom: 50px;"
-        [columnDefs]="recipePredctionColumnDef" [rowData]="recipePredctionSMSGrid" [defaultColDef]="defaultColDef"
-        [rowSelection]="rowSelection" [autoGroupColumnDef]="AutoGroupColumnDef" [rowMultiSelectWithClick]="true"
-        [groupDefaultExpanded]="groupDefaultExpanded" (gridReady)="OnGridReadyPredction($event)" [suppressContextMenu]="true"
-        [sideBar]="sideBar">
-      </ag-grid-angular>
-      <div class="main_pop">
-        <dx-button class="button" *ngIf="!disableUpdateButton" stylingMode="contained" text="Prediction" type="normal"
-          [width]="150" (click)="SendSMS('prediction')" style="margin-left: 5px;">
-        </dx-button>
+      <div class="col-md-12 col-xl-6">
+
+        <div class="body-right-top-search-sec">
+          <label>Shade Matching</label>
+          <input type="text" id="filter-text-box" placeholder="Search" (input)="onFilterTextBoxChangedMatching()"
+            autocomplete="off" />
+        </div>
+        <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 226px); margin-bottom: 50px;"
+          [columnDefs]="shadeMatchingColumnDef" [rowData]="shadeMatchingSMSGird" [defaultColDef]="defaultColDef"
+          [rowSelection]="rowSelection" [autoGroupColumnDef]="AutoGroupColumnDef" [rowMultiSelectWithClick]="true"
+          [groupDefaultExpanded]="groupDefaultExpanded" (gridReady)="OnGridReadyMatching($event)"
+          [suppressContextMenu]="true" [sideBar]="sideBar">
+        </ag-grid-angular>
+        <div class="main_pop">
+          <dx-button class="button" *ngIf="!disableUpdateButton" stylingMode="contained" text="Shade Matching"
+            type="normal" [width]="150" (click)="SendSMS('shadeMatching')">
+          </dx-button>
+        </div>
       </div>
     </div>
-    <div class="col-md-12 col-xl-6">
-      
-      <div class="body-right-top-search-sec">
-        <label>Shade Matching</label>
-        <input type="text" id="filter-text-box" placeholder="Search" (input)="onFilterTextBoxChangedMatching()"
-          autocomplete="off" />
-      </div>
-      <ag-grid-angular class="ag-theme-balham" id="divList" style="height: calc(100vh - 226px); margin-bottom: 50px;"
-        [columnDefs]="shadeMatchingColumnDef" [rowData]="shadeMatchingSMSGird" [defaultColDef]="defaultColDef"
-        [rowSelection]="rowSelection" [autoGroupColumnDef]="AutoGroupColumnDef" [rowMultiSelectWithClick]="true"
-        [groupDefaultExpanded]="groupDefaultExpanded" (gridReady)="OnGridReadyMatching($event)" [suppressContextMenu]="true"
-        [sideBar]="sideBar">
-      </ag-grid-angular>
-      <div class="main_pop">
-        <dx-button class="button" *ngIf="!disableUpdateButton" stylingMode="contained" text="Shade Matching"
-          type="normal" [width]="150" (click)="SendSMS('shadeMatching')">
-        </dx-button>
-      </div>
-    </div>
-  </div>
   </div>
 
   <div *ngIf="viewSMS">
