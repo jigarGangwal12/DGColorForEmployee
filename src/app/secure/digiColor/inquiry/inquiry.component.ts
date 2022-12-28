@@ -229,23 +229,26 @@ export class InquiryComponent implements OnInit {
       notify({ message: 'Select atlese One Person for Send Report', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
     }
-    this.consigneeContactDetail.forEach((element: any) => {
-      if (element.mobileNumber) {
-        element.mobileNumber = element.mobileNumber.toString();
-      }
-      if (element.mobileNumber == null || element.mobileNumber == '') {
-        this.count++;
-      }
-      else if (element.mobileNumber.length != 10) {
-        this.count++;
-      }
-      // else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && !element.emailIdNotProvided) {
-      //   this.countForEmailIdCheck++;
-      // }
-      else {
-        this.count = 0;
-      }
-    });
+    if (this.consigneeContactDetail) {
+      this.consigneeContactDetail.forEach((element: any) => {
+        if (element.mobileNumber) {
+          element.mobileNumber = element.mobileNumber.toString();
+        }
+        if (element.mobileNumber == null || element.mobileNumber == '') {
+          this.count++;
+        }
+        else if (element.mobileNumber.length != 10) {
+          this.count++;
+        }
+        else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && !element.emailIdNotProvided) {
+          this.countForEmailIdCheck++;
+        }
+        else {
+          this.count = 0;
+          this.countForEmailIdCheck = 0;
+        }
+      });
+    }
     if (this.count > 0) {
       notify({ message: 'Please enter valid 10 digit mobile number', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
       return;
@@ -257,27 +260,30 @@ export class InquiryComponent implements OnInit {
     data.customerContactDetail = this.consigneeContactDetail;
 
     data.createdBy = this.UserId;
-    if (!data.inquiryType || !data.scanMode || !data.inquiryBy || !data.requirementValue || !data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.assignToRunner) {
+    if (!data.inquiryType || !data.scanMode || !data.inquiryBy || !data.requirementValue || !data.ConsumerName
+      || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.assignToRunner) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
-
-    let tempassignToRunner = data.assignToRunner.split('-')[0];
-    let tempassignToRunnerCode = data.assignToRunner.split('-')[1];
-    data.AssignToRunnerCode = tempassignToRunner;
-    data.assignToRunner = tempassignToRunnerCode;
-    this.disablesubbtn = true;
-
+    if (data && data.assignToRunner) {
+      let tempassignToRunner = data.assignToRunner.split('-')[0];
+      let tempassignToRunnerCode = data.assignToRunner.split('-')[1];
+      data.AssignToRunnerCode = tempassignToRunner;
+      data.assignToRunner = tempassignToRunnerCode;
+      this.disablesubbtn = true;
+    }
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)
       .subscribe((res: any) => {
         this.disablesubbtn = false;
-        let caseid = res.table[0].caseId;
-        let consumerName = res.table[0].consumerName;
-        notify({ message: 'Inquiry Generate Successfully for Cusumer ' + consumerName + ' And Case Id is :' + caseid, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 600 }, 'success', 2000);
-        this.router.navigate(["/digicolor/inquiry/"]);
-        this.dataforSMS = data;
-        this.dataforSMS.caseId = caseid;
-        this.SendSMS(this.dataforSMS);
+        if (res && res.table && res.table.length > 0) {
+          let caseid = res.table[0].caseId;
+          let consumerName = res.table[0].consumerName;
+          notify({ message: 'Inquiry Generate Successfully for Consumer ' + consumerName + ' And Case Id is :' + caseid, position: { at: 'center', my: 'center', offset: '0 -25' }, width: 600 }, 'success', 2000);
+          this.router.navigate(["/digicolor/inquiry/"]);
+          this.dataforSMS = data;
+          this.dataforSMS.caseId = caseid;
+          this.SendSMS(this.dataforSMS);
+        }
       });
   }
   SendSMS(data: any) {
@@ -307,7 +313,7 @@ export class InquiryComponent implements OnInit {
       else if (element.mobileNumber.length != 10) {
         this.count++;
       }
-      else if ((element.emailId == null || element.emailId == ''|| element.emailId == undefined) && element.emailIdNotProvided) {
+      else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && !element.emailIdNotProvided) {
         this.countForEmailIdCheck++;
       }
       else {
@@ -326,7 +332,7 @@ export class InquiryComponent implements OnInit {
     data.AssignToRunnerCode = data.assignToRunner.split('-')[0];
     data.assignToRunner = data.assignToRunner.split('-')[1];
     this.disablesubbtn = true;
-    
+
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)
       .subscribe((res: any) => {
         this.disablesubbtn = false;
@@ -384,7 +390,7 @@ export class InquiryComponent implements OnInit {
           this.inquiryForm.contactPersonNo = res.table[0].contactNo;
           this.inquiryForm.caseId = res.table[0].caseId;
           this.inquiryForm.remarks = res.table[0].remark;
-          
+
           // this.inquiryForm.requirement = [];
           // var array = res.table[0].customerRequirement.split(',');
           // for (let i = 0; i < array.length; i++) {
@@ -425,7 +431,7 @@ export class InquiryComponent implements OnInit {
   }
   customerRequirementValueChange(da: any) {
     if (da && da.value) {
-      
+
       this.inquiryForm.requirementValue = da.value.toString();
     }
 
@@ -438,7 +444,7 @@ export class InquiryComponent implements OnInit {
 
   cellTemplate(container: any, options: any) {
     const noBreakSpace = '\u00A0';
-    
+
     // const text = (options.value || []).map((element: any) => options.column.lookup.calculateCellValue(element)).join(', ');
     container.textContent = options.value || noBreakSpace;
     container.title = options.value;

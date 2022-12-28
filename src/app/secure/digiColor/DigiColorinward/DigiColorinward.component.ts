@@ -680,11 +680,12 @@ export class DigiColorinwardComponent implements OnInit {
         else if (element.mobileNumber.length != 10) {
           this.count++;
         }
-        // else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && !element.emailIdNotProvided) {
-        //   this.countForEmailIdCheck++;
-        // }
+        else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && !element.emailIdNotProvided) {
+          this.countForEmailIdCheck++;
+        }
         else {
           this.count = 0;
+          this.countForEmailIdCheck = 0;
         }
       });
       if (this.count > 0) {

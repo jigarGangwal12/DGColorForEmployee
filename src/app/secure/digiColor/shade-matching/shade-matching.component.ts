@@ -581,16 +581,16 @@ export class ShadeMatchingComponent implements OnInit {
         }
 
         this.labPredictionParameter = res.table1;
-        this.process = res.table1[0].process;
-        this.dyesRange = res.table1[0].dyesRange;
-        this.dischargability = res.table1[0].dischargability;
-        this.lightSourcePrimary = res.table1[0].lightSourcePrimary;
-        this.lightSourceSecondary = res.table1[0].lightSourceSecondary;
-        this.lightSourceTertiary = res.table1[0].lightSourceTertiary;
-        this.samplereamark = res.table1[0].sampleRemarks;
-
+        if(res && res.table1.length > 0) {
+          this.process = res.table1[0].process;
+          this.dyesRange = res.table1[0].dyesRange;
+          this.dischargability = res.table1[0].dischargability;
+          this.lightSourcePrimary = res.table1[0].lightSourcePrimary;
+          this.lightSourceSecondary = res.table1[0].lightSourceSecondary;
+          this.lightSourceTertiary = res.table1[0].lightSourceTertiary;
+          this.samplereamark = res.table1[0].sampleRemarks;
+        }
         this.fastnessData = res.table2;
-
         if (res.table3.length > 0) {
           this.moreThanOneMatchingOption = false;
           this.shadeMatchingAvilable = true;
