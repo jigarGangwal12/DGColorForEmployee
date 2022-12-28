@@ -7,11 +7,13 @@ import { IDetailCellRendererParams } from 'ag-grid-community';
 import { SecureComponent } from '../../secure.component';
 import { filter } from 'rxjs/operators';
 import DataSource from 'devextreme/data/data_source';
+import { InwardDataModel } from '../../../core/model/inward-model';
 
 @Component({
   selector: 'app-DigiColorinward',
   templateUrl: './DigiColorinward.component.html',
-  styleUrls: ['./DigiColorinward.component.css']
+  styleUrls: ['./DigiColorinward.component.css'],
+  providers: [InwardDataModel]
 })
 export class DigiColorinwardComponent implements OnInit {
   // @ViewChild('dxTreeListUserPageList') dxTreeListUserPage: DxTreeListComponent;
@@ -52,41 +54,41 @@ export class DigiColorinwardComponent implements OnInit {
   allSampleidForMapping: any;
   alldyesRange: any;
   editShadeid: boolean = false;
-  InwardDataModel = {
-    caseId: '',
-    shadeNameNoForEdit: '',
-    shadeNoName: [],
-    customerName: '',
-    consigneeCode: '',
-    inwardDateTime: new Date(),
-    inquiryDateTime: '',
-    consigneeState: '',
-    agentNameCode: '',
-    process: '',
-    primarylightSource: '',
-    secondarylightSource: '',
-    tertiarylightSource: '',
-    remarks: '',
-    submitedby: '',
-    customerType: '',
-    dischargeability: '',
-    saveOrSubmit: '',
-    address1: '',
-    address2: '',
-    consigneeCity: '',
-    dyesRange: '',
-    sampleScanDateTime: '',
-    requirement: 'Shade Matching',
-    substrate: '',
-    fabricQuality: '',
-    ratio: '',
-    shadeId: '',
-    competitorName: '',
-    itemCategory: 'DYES',
-    productName: '',
-    competitorNameForProduct: '',
-    customerRequirement: ''
-  };
+  // InwardDataModel = {
+  //   caseId: '',
+  //   shadeNameNoForEdit: '',
+  //   shadeNoName: [],
+  //   customerName: '',
+  //   consigneeCode: '',
+  //   inwardDateTime: new Date(),
+  //   inquiryDateTime: '',
+  //   consigneeState: '',
+  //   agentNameCode: '',
+  //   process: '',
+  //   primarylightSource: '',
+  //   secondarylightSource: '',
+  //   tertiarylightSource: '',
+  //   remarks: '',
+  //   submitedby: '',
+  //   customerType: '',
+  //   dischargeability: '',
+  //   saveOrSubmit: '',
+  //   address1: '',
+  //   address2: '',
+  //   consigneeCity: '',
+  //   dyesRange: '',
+  //   sampleScanDateTime: '',
+  //   requirement: 'Shade Matching',
+  //   substrate: '',
+  //   fabricQuality: '',
+  //   ratio: '',
+  //   shadeId: '',
+  //   competitorName: '',
+  //   itemCategory: 'DYES',
+  //   productName: '',
+  //   competitorNameForProduct: '',
+  //   customerRequirement: ''
+  // };
   digiColorUserId: any;
   loadingVisible: boolean = false;
   UserId: any;
@@ -127,7 +129,10 @@ export class DigiColorinwardComponent implements OnInit {
   userRole: any;
   customerReuirement: any = [];
   countForEmailIdCheck: any = 0;
-  constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
+  RemainingshadeNameIddata: any;
+  constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent
+    , public InwardDataModel: InwardDataModel,
+  ) {
     this.dyesorWetDataSource = [{ name: 'Dry' }, { name: 'Wet' }]
     this.customerRequirementType = [{ name: 'Recipe Prediction' }, { name: 'Shade Matching Recipe' },]
     this.dischargeabilityDataSource = ['Yes', 'No'];
@@ -534,7 +539,18 @@ export class DigiColorinwardComponent implements OnInit {
   };
 
   shadeidValueChanged(dat: any) {
-    this.InwardDataModel.shadeNoName = dat.value;
+    if (dat && dat.value) {
+      const tempForShadeId = this.InwardDataModel.shadeNoName + ',' + dat.value.toString();
+      const tempForShadeNoName = tempForShadeId.split(',');
+      this.InwardDataModel.shadeNoName = tempForShadeNoName;
+    }
+  }
+  FirstShadeIdValueChanged(dat: any) {
+    if (dat && dat.selectedItem.shadeid) {
+      const shadeid = (dat.selectedItem.shadeid);
+      this.InwardDataModel.shadeNoName = shadeid.split();
+      this.RemainingshadeNameIddata = this.shadeNameIddata.filter((da: any) => da.shadeid != dat.selectedItem.shadeid);
+    }
   }
   onProcessValueChanged(da: any) {
     this.InwardDataModel.process = da.value;
@@ -655,6 +671,8 @@ export class DigiColorinwardComponent implements OnInit {
       this.showR2Grid = true;
       this.showR3Grid = false;
       this.editShadeid = true;
+    } else {
+      notify({ message: 'Prediction alredy done now data can not be change.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
     }
   }
 
@@ -877,5 +895,4 @@ export class DigiColorinwardComponent implements OnInit {
 
       });
   }
-
 }

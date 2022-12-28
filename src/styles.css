@@ -154,6 +154,9 @@ img {
   font-weight: 500;
   font-size: 13px;
 }
+#inquiryLlist .dx-datagrid-content .dx-datagrid-table .dx-row > td:first-child {
+  cursor: pointer;
+}
 /* DX Css End here */
 
 

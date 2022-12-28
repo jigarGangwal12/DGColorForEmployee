@@ -120,12 +120,15 @@
                     </div>
                     <div class="">
                       <span *ngIf="shadeNameIddata">
-                        <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Shade No"
+                        <dx-select-box Id="case" [dataSource]="shadeNameIddata" displayExpr="shadeNameId"
+                          valueExpr="shadeid" placeholder="Select Shade Id" [showClearButton]="true"
+                          (onSelectionChanged)="FirstShadeIdValueChanged($event)" [searchEnabled]="true">
+                        </dx-select-box>
+                        <!-- <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Shade No"
                           [dataSource]="shadeNameIddata" displayExpr="shadeNameId" valueExpr="shadeid"
                           [showSelectionControls]="true" (onValueChanged)="shadeidValueChanged($event)"
                           noDataText="No data found" [maxDisplayedTags]="5" applyValueMode="instantly"
-                          [showClearButton]="true"></dx-tag-box>
-
+                          [showClearButton]="true"></dx-tag-box> -->
                       </span>
                     </div>
                   </div>
@@ -158,20 +161,6 @@
             <div class=" Margin_Top_Inward">
               <div class="col-md-12">
                 <div class="row">
-                  <!-- <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
-                    <div class="">
-                      <label>Requirement</label>
-                    </div>
-                    <div class="">
-                      <span>
-                        <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
-                          [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
-                          [value]="[InwardDataModel.requirement]" [showSelectionControls]="true"
-                          (onValueChanged)="RequirementValueChanged($event)" noDataText="No data found"
-                          [maxDisplayedTags]="1" applyValueMode="instantly" [showClearButton]="true"></dx-tag-box>
-                      </span>
-                    </div>
-                  </div> -->
                   <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
                     <div class="">
                       <label>Substrate <span style="color:red">*</span></label>
@@ -212,7 +201,6 @@
                     </div>
                   </div>
 
-
                   <div class="col-md-6 col-xl-3">
                     <div class="">
                       <label>Customer Requirement</label>
@@ -228,7 +216,6 @@
                       </span>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -327,7 +314,7 @@
           <div class="">
             <div class="col-md-12 p-0">
               <div class="inward_boxs_Div_Width">
-                <div class="col-md-12 col-xl-7 ipad-pading-cont-details">
+                <div class="col-md-12 col-xl-9 ipad-pading-cont-details">
                   <div class="" style="margin-top: 10px">
                     <h3>Report Submission</h3>
                   </div>
@@ -709,6 +696,74 @@
               </div>
             </div>
           </div>
+
+          <div class="">
+            <div class="col-md-12 p-0">
+              <div class="" style="margin-top: 10px">
+                <h3>Remaining Shade Id</h3>
+              </div>
+              <div class="shadowbox inward_boxs_Div" style="height: 120px;">
+                <div id="form-container" class="inward_boxs_without_mar" style="padding: 0 8px;">
+                  <div class="">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-12 col-xl-12 ipad-btm-mar-12">
+                          <div class="">
+                            <label>Select Remaining Shade Id </label>
+                          </div>
+                          <div class="">
+                            <span>
+                              <!-- <dx-select-box Id="case" [dataSource]="mapwithSamplIdCustomerList"
+                                displayExpr="consigneeNameCode" valueExpr="consigneeCode"
+                                (onSelectionChanged)="InwardcaseIdValueChanged($event)" placeholder="Select Case Id"
+                                [showClearButton]="true" [searchEnabled]="true">
+                              </dx-select-box> -->
+
+                              <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Shade No"
+                                [dataSource]="RemainingshadeNameIddata" displayExpr="shadeNameId" valueExpr="shadeid"
+                                [showSelectionControls]="true" (onValueChanged)="shadeidValueChanged($event)"
+                                noDataText="No data found" [maxDisplayedTags]="5" applyValueMode="instantly"
+                                [showClearButton]="true"></dx-tag-box>
+
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="">
+            <h3>Customer Details </h3>
+          </div>
+          <div class="shadowbox shadowbox_inquiry inward_form inward_boxs_Div">
+            <div class="">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6 col-xl-3 ipad-btm-mar-12">
+                    <div class="">
+                      <label>Case Id <span style="color:red">*</span></label>
+                    </div>
+                    <div class="">
+                      <span>
+                        <dx-select-box Id="case" [dataSource]="mapwithSamplIdCustomerList"
+                          displayExpr="consigneeNameCode" valueExpr="consigneeCode"
+                          (onSelectionChanged)="InwardcaseIdValueChanged($event)" placeholder="Select Case Id"
+                          [showClearButton]="true" [searchEnabled]="true">
+                        </dx-select-box>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div> -->
+
           <div class=" Margin_Top_Inward">
             <div class="col-md-12 p-0">
               <div class="submit_class shadowbox inward_boxs_Div" style="height: 110px; margin-bottom: 16px;
@@ -765,7 +820,8 @@
                     </div>
                     <div class="">
                       <span>
-                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeCode" [readOnly]=true></dx-text-box>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeCode" [readOnly]=true>
+                        </dx-text-box>
                       </span>
                     </div>
                   </div>
@@ -775,7 +831,8 @@
                     </div>
                     <div class="">
                       <span>
-                        <dx-text-box Id="case" [(value)]="InwardDataModel.agentNameCode" [readOnly]=true></dx-text-box>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.agentNameCode" [readOnly]=true>
+                        </dx-text-box>
                       </span>
                     </div>
                   </div>
@@ -870,7 +927,8 @@
                     </div>
                     <div class="">
                       <span>
-                        <dx-text-box Id="case" [(value)]="InwardDataModel.customerType" [readOnly]=true></dx-text-box>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.customerType" [readOnly]=true>
+                        </dx-text-box>
                       </span>
                     </div>
                   </div>
@@ -932,7 +990,8 @@
                     </div>
                     <div class="">
                       <span>
-                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeCity" [readOnly]=true></dx-text-box>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeCity" [readOnly]=true>
+                        </dx-text-box>
                       </span>
                     </div>
                   </div>
@@ -943,7 +1002,8 @@
                     </div>
                     <div class="">
                       <span>
-                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeState" [readOnly]=true></dx-text-box>
+                        <dx-text-box Id="case" [(value)]="InwardDataModel.consigneeState" [readOnly]=true>
+                        </dx-text-box>
                       </span>
                     </div>
                   </div>
@@ -954,7 +1014,7 @@
           <div class="">
             <div class="col-md-12 p-0">
               <div class="inward_boxs_Div_Width">
-                <div class="col-md-12 col-xl-7 ipad-pading-cont-details">
+                <div class="col-md-12 col-xl-9 ipad-pading-cont-details">
                   <div class="" style="margin-top: 10px">
                     <h3>Report Submission</h3>
                   </div>
@@ -985,7 +1045,7 @@
                         </dxi-column>
                         <dxi-column dataField="designation" caption="Designation">
                         </dxi-column>
-                        <dxi-column dataField="mobileNumber" [width]=90 caption="Mobile No" dataType="number">
+                        <dxi-column dataField="mobileNumber" [width]=100 caption="Mobile No" dataType="number">
                         </dxi-column>
                         <dxi-column dataField="emailId" caption="EmailId">
                         </dxi-column>

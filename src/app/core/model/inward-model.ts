@@ -1,0 +1,35 @@
+export class InwardDataModel {
+    public caseId = '';
+    public shadeNameNoForEdit = '';
+    public shadeNoName: any=[];
+    public customerName = '';
+    public consigneeCode = '';
+    public inwardDateTime = new Date();
+    public inquiryDateTime = '';
+    public consigneeState = '';
+    public agentNameCode = '';
+    public process = '';
+    public primarylightSource = '';
+    public secondarylightSource = '';
+    public tertiarylightSource = '';
+    public remarks = '';
+    public submitedby = '';
+    public customerType = '';
+    public dischargeability = '';
+    public saveOrSubmit = '';
+    public address1 = '';
+    public address2 = '';
+    public consigneeCity = '';
+    public dyesRange = '';
+    public sampleScanDateTime = '';
+    public requirement = 'Shade Matching';
+    public substrate = '';
+    public fabricQuality = '';
+    public ratio = '';
+    public shadeId= '';
+    public competitorName= '';
+    public itemCategory= 'DYES';
+    public productName= '';
+    public competitorNameForProduct= '';
+    public customerRequirement= ''
+};
