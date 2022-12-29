@@ -209,10 +209,18 @@
                       <span>
                         <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
                           [dataSource]="customerRequirementType" displayExpr="name" valueExpr="name"
-                          [value]="this.customerRequirementType.name" [showSelectionControls]="true"
-                          noDataText="No data found" [maxDisplayedTags]="2" applyValueMode="instantly"
-                          [showClearButton]="false" (onValueChanged)="customerRequirementValueChange($event)">
+                          [value]="customerReuirement" [showSelectionControls]="true" noDataText="No data found"
+                          [maxDisplayedTags]="2" applyValueMode="instantly" [showClearButton]="false"
+                          (onValueChanged)="customerRequirementValueChange($event)">
                         </dx-tag-box>
+
+                        <!-- <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Requirement"
+                        [dataSource]="customerReuirement" displayExpr="" valueExpr="" [value]="customerReuirement"
+                        [showSelectionControls]="true" noDataText="No data found" [maxDisplayedTags]="2"
+                        applyValueMode="instantly" [showClearButton]="false"
+                        (onValueChanged)="customerRequirementValueChange($event)">
+                      </dx-tag-box> -->
+
                       </span>
                     </div>
                   </div>
@@ -350,10 +358,17 @@
                         </dxi-column>
                         <dxi-column dataField="emailIdNotProvided" [width]=135 caption="Email Not Provided"
                           [allowFiltering]="false" [allowSorting]="false" [allowGrouping]="false"
-                          editCellTemplate="emailIdNotProvidedCellTemplate" [allowHeaderFiltering]="false">
+                          cellTemplate="cellTemplateforCheckBox" editCellTemplate="emailIdNotProvidedCellTemplate"
+                          [allowHeaderFiltering]="false">
                         </dxi-column>
+                        <div *dxTemplate="let data of 'cellTemplateforCheckBox'">
+                          <div class="dx-field-value" style="display: flex;">
+                            <dx-check-box [(value)]="data.value" (onValueChanged)="data.setValue($event.value)">
+                            </dx-check-box>
+                          </div>
+                        </div>
                         <div *dxTemplate="let cellInfo of 'emailIdNotProvidedCellTemplate'">
-                          <div class="dx-field-value">
+                          <div class="dx-field-value" style="display: flex;">
                             <dx-check-box [(value)]="cellInfo.value" (onValueChanged)="cellInfo.setValue($event.value)">
                             </dx-check-box>
                           </div>
@@ -871,7 +886,6 @@
                       </span>
                     </div>
                   </div>
-
                   <div class="col-md-6 col-xl-3">
                     <div class="">
                       <label>Fabric Quality </label>
@@ -886,7 +900,6 @@
                       </span>
                     </div>
                   </div>
-
                   <div class="col-md-6 col-xl-3">
                     <div class="">
                       <label>Ratio</label>
@@ -898,7 +911,6 @@
                       </span>
                     </div>
                   </div>
-
                   <div class="col-md-6 col-xl-3">
                     <div class="">
                       <label>Customer Requirement</label>
@@ -914,7 +926,6 @@
                       </span>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -1054,7 +1065,7 @@
                           editCellTemplate="emailIdNotProvidedCellTemplate" [allowHeaderFiltering]="false">
                         </dxi-column>
                         <div *dxTemplate="let cellInfo of 'emailIdNotProvidedCellTemplate'">
-                          <div class="dx-field-value">
+                          <div class="dx-field-value" style="display: flex;">
                             <dx-check-box [(value)]="cellInfo.value" (onValueChanged)="cellInfo.setValue($event.value)">
                             </dx-check-box>
                           </div>

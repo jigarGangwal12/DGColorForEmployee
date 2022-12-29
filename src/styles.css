@@ -121,12 +121,12 @@ img {
   max-height: 940px !important;
 }
 
-#CustomerContacDetailsId .dx-checkbox-checked .dx-checkbox-icon {
+#CustomerContacDetailsId .dx-checkbox-icon {
   width: 19px;
   height: 19px;
 }
 
-#CustomerContacDetailsId .dx-checkbox-checked .dx-checkbox-icon {
+#CustomerContacDetailsId .dx-checkbox-icon {
   font: 12px/1em DXIcons;
 }
 
@@ -138,25 +138,30 @@ img {
   border-radius: 4px;
 }
 
+#CustomerContacDetailsId .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused)>td {
+  background-color: #ffffff;
+}
+
 .inward_boxs_without_mar .dx-toolbar-text-auto-hide .dx-button .dx-icon {
   color: #fff !important;
   cursor: pointer;
 }
-#CustomerContacDetailsId .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused) > td{
-  background-color: #ffffff;
-}
+
 .dx-datagrid .dx-header-row {
   background-color: #e4e6e7;
   color: #212529;
 }
+
 .dx-header-row>td>.dx-datagrid-text-content {
-  color: #333!important;
+  color: #333 !important;
   font-weight: 500;
   font-size: 13px;
 }
-#inquiryLlist .dx-datagrid-content .dx-datagrid-table .dx-row > td:first-child {
+
+#inquiryLlist .dx-datagrid-content .dx-datagrid-table .dx-row>td:first-child {
   cursor: pointer;
 }
+
 /* DX Css End here */
 
 

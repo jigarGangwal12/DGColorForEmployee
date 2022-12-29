@@ -136,10 +136,17 @@
                         </dxi-column>
                         <dxi-column dataField="emailIdNotProvided" [width]=135 caption="Email Not Provided"
                           [allowFiltering]="false" [allowSorting]="false" [allowGrouping]="false"
-                          editCellTemplate="emailIdNotProvidedCellTemplate" [allowHeaderFiltering]="false">
+                          cellTemplate="cellTemplateforCheckBox" editCellTemplate="emailIdNotProvidedCellTemplate"
+                          [allowHeaderFiltering]="false">
                         </dxi-column>
+                        <div *dxTemplate="let data of 'cellTemplateforCheckBox'">
+                          <div class="dx-field-value" style="display: flex;">
+                            <dx-check-box [(value)]="data.value" (onValueChanged)="data.setValue($event.value)">
+                            </dx-check-box>
+                          </div>
+                        </div>
                         <div *dxTemplate="let cellInfo of 'emailIdNotProvidedCellTemplate'">
-                          <div class="dx-field-value">
+                          <div class="dx-field-value" style="display: flex;">
                             <dx-check-box [(value)]="cellInfo.value" (onValueChanged)="cellInfo.setValue($event.value)">
                             </dx-check-box>
                           </div>

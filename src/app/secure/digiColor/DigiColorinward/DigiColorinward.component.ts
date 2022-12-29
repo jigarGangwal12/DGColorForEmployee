@@ -594,7 +594,6 @@ export class DigiColorinwardComponent implements OnInit {
           this.InwardDataModel.consigneeCity = consigneeDetail[0].city;
           this.InwardDataModel.inquiryDateTime = consigneeDetail[0].createdDate;
           this.customerReuirement = consigneeDetail[0].customerRequirement.split(',');
-
           //this.customerRequirementType.name = this.customerReuirement;
           this.InwardDataModel.caseId = consigneeDetail[0].consigneeNameCode.split('-')[0].trim();
           this.InwardDataModel.saveOrSubmit = 'Save';
