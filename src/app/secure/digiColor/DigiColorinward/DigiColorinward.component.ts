@@ -475,8 +475,8 @@ export class DigiColorinwardComponent implements OnInit {
     if (data && data.selectedItem.nameofFastness) {
       const filterTestMethoList = this.testMethodDataSource.filter((da: any) => da.nameofFastness == data.selectedItem.nameofFastness);
       let ids = filterTestMethoList.map((o: any) => o.testMethod)
-      // ids = ids.sort((a: any, b: any) => a.testMethod > b.testMethod ? 1 : -1);
-      this.testMethodList = filterTestMethoList.filter(({ testMethod }: any, index: any) => !ids.includes(testMethod, index + 1))
+      this.testMethodList = filterTestMethoList.filter(({ testMethod }: any, index: any) => !ids.includes(testMethod, index + 1));
+      this.testMethodList = this.testMethodList.sort((a: any, b: any) => (a.testMethod < b.testMethod) ? -1 : 1);
     }
   }
   nameofMethodValueChanged(data: any) {
