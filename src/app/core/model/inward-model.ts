@@ -1,7 +1,7 @@
 export class InwardDataModel {
     public caseId = '';
     public shadeNameNoForEdit = '';
-    public shadeNoName: any=[];
+    public shadeNoName: any = [];
     public customerName = '';
     public consigneeCode = '';
     public inwardDateTime = new Date();
@@ -26,10 +26,11 @@ export class InwardDataModel {
     public substrate = '';
     public fabricQuality = '';
     public ratio = '';
-    public shadeId= '';
-    public competitorName= '';
-    public itemCategory= 'DYES';
-    public productName= '';
-    public competitorNameForProduct= '';
-    public customerRequirement= ''
+    public shadeId = '';
+    public competitorName = '';
+    public itemCategory = 'DYES';
+    public productName = '';
+    public competitorNameForProduct = '';
+    public customerRequirement = ''
+    public RemainingShadeIdValue: any;
 };

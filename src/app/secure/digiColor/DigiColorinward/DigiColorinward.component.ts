@@ -474,7 +474,8 @@ export class DigiColorinwardComponent implements OnInit {
   nameofFastnessValueChanged(data: any) {
     if (data && data.selectedItem.nameofFastness) {
       const filterTestMethoList = this.testMethodDataSource.filter((da: any) => da.nameofFastness == data.selectedItem.nameofFastness);
-      const ids = filterTestMethoList.map((o: any) => o.testMethod)
+      let ids = filterTestMethoList.map((o: any) => o.testMethod)
+      // ids = ids.sort((a: any, b: any) => a.testMethod > b.testMethod ? 1 : -1);
       this.testMethodList = filterTestMethoList.filter(({ testMethod }: any, index: any) => !ids.includes(testMethod, index + 1))
     }
   }
@@ -540,15 +541,16 @@ export class DigiColorinwardComponent implements OnInit {
 
   shadeidValueChanged(dat: any) {
     if (dat && dat.value) {
-      const tempForShadeId = this.InwardDataModel.shadeNoName + ',' + dat.value.toString();
-      const tempForShadeNoName = tempForShadeId.split(',');
-      this.InwardDataModel.shadeNoName = tempForShadeNoName;
+      // const tempForShadeId = this.InwardDataModel.shadeNoName + ',' + dat.value.toString();
+      // const tempForShadeNoName = tempForShadeId.split(',');
+      // this.InwardDataModel.shadeNoName = tempForShadeNoName;
+      this.InwardDataModel.RemainingShadeIdValue = dat.value.toString();
     }
   }
   FirstShadeIdValueChanged(dat: any) {
     if (dat && dat.selectedItem.shadeid) {
       const shadeid = (dat.selectedItem.shadeid);
-      this.InwardDataModel.shadeNoName = shadeid.split();
+      this.InwardDataModel.shadeNoName = shadeid;
       this.RemainingshadeNameIddata = this.shadeNameIddata.filter((da: any) => da.shadeid != dat.selectedItem.shadeid);
     }
   }
@@ -730,6 +732,12 @@ export class DigiColorinwardComponent implements OnInit {
           data.product = data.product.toString();
         }
       });
+    }
+    if (!this.InwardDataModel.RemainingShadeIdValue) {
+      this.InwardDataModel.shadeNoName = this.InwardDataModel.shadeNoName.split(',');
+    } else {
+      this.InwardDataModel.shadeNoName = this.InwardDataModel.shadeNoName + ',' + this.InwardDataModel.RemainingShadeIdValue;
+      this.InwardDataModel.shadeNoName = this.InwardDataModel.shadeNoName.split(',');
     }
     data.competitorData = this.competitorDataSource;
     if (this.customerSubStrate.length > 0 && this.customerContactDetails.length > 0) {
