@@ -69,6 +69,7 @@
           <div *ngIf="showOption1RecipeData">
             <div class="option-right-side-info-bx">
               <h3 *ngIf="moreThanOnePredctionOption">Option 1</h3>
+              <h3 *ngIf="!moreThanOnePredctionOption">Predciton</h3>
               <span>
                 <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp1"
                   (click)="remarkPopoUpOpen1(PredictionRemarkOp1)"></i>
@@ -282,6 +283,7 @@
           <div *ngIf="showOption1ShadeMatching">
             <div class="option-right-side-info-bx">
               <h3 *ngIf="moreThanOneMatchingOption">Option 1</h3>
+              <h3 *ngIf="!moreThanOneMatchingOption">Matching</h3>
               <span>
                 <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp1"
                   (click)="remarkPopoUpOpen1(MatchingRemarkOp1)"></i>
