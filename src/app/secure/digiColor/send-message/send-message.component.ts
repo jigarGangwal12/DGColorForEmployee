@@ -180,7 +180,9 @@ export class SendMessageComponent implements OnInit {
       {
         headerName: 'Consignee Code',
         field: 'consigneeCode',
-        filterParams: { applyMiniFilterWhileTyping: true }
+        filterParams: { applyMiniFilterWhileTyping: true },
+        minWidth: 125,
+        maxWidth: 125
       },
       {
         headerName: 'Consignee Name',
@@ -190,7 +192,9 @@ export class SendMessageComponent implements OnInit {
       {
         headerName: 'Agent Code',
         field: 'agentCode',
-        filterParams: { applyMiniFilterWhileTyping: true }
+        filterParams: { applyMiniFilterWhileTyping: true },
+        minWidth: 125,
+        maxWidth: 125
       },
       {
         headerName: 'Agent Name',
@@ -200,6 +204,8 @@ export class SendMessageComponent implements OnInit {
       {
         headerName: 'Recipe Prediction Send SMS',
         field: 'isMessageSended',
+        minWidth: 80,
+        maxWidth: 80,
         valueFormatter: (data: any) => {
           if (data.value == true)
             return '✓';
@@ -210,6 +216,8 @@ export class SendMessageComponent implements OnInit {
       {
         headerName: 'Shade Matching Send SMS',
         field: 'isShadeMatchingMessageSent',
+        minWidth: 80,
+        maxWidth: 80,
         valueFormatter: (data: any) => {
           if (data.value == true)
             return '✓';
