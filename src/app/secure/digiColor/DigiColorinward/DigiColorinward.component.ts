@@ -130,6 +130,7 @@ export class DigiColorinwardComponent implements OnInit {
   customerReuirement: any = [];
   countForEmailIdCheck: any = 0;
   RemainingshadeNameIddata: any;
+  aa: any;
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent
     , public InwardDataModel: InwardDataModel,
   ) {
@@ -422,7 +423,12 @@ export class DigiColorinwardComponent implements OnInit {
         this.productFunction = res.table3;
 
         this.getallPendingSampleId();
-
+        this.aa = {
+          selectedItem: {
+            name: 'DYES'
+          },
+        }
+        this.itemCategoryValueChangedCompetitor(this.aa);
       });
   }
   getallPendingSampleId() {
@@ -887,8 +893,13 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   itemCategoryValueChangedCompetitor(aa: any) {
-    this.InwardDataModel.itemCategory = aa.value;
-    this.filterCompetitorByItemCategory = this.competitorNameDataSource.filter((data: any) => data.segment == aa.value);
+    if (aa && aa.selectedItem && aa.selectedItem.name) {
+      debugger
+      this.InwardDataModel.itemCategory = aa.selectedItem.name;
+    }
+    if (this.competitorNameDataSource) {
+      this.filterCompetitorByItemCategory = this.competitorNameDataSource.filter((data: any) => data.segment == aa.selectedItem.name);
+    }
   }
 
   customerRequirementValueChange(event: any) {

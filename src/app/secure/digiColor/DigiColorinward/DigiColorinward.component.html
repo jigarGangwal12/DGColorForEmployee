@@ -453,19 +453,20 @@
                         </dxo-pager>
                         <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
                         <dxo-paging [pageSize]="5"></dxo-paging>
-                        <dxi-column dataField="itemCategory" [width]='180' caption="Segment" [allowFiltering]="false"
-                          [allowSorting]="false" [allowGrouping]="false" editCellTemplate="itemCategoryCellTemplate"
-                          [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
+                        <!-- <dxi-column dataField="itemCategory" [width]='180' caption="Segment" [allowFiltering]="false"
+                         [allowSorting]="false" [allowGrouping]="false"
+                          editCellTemplate="itemCategoryCellTemplate" [cellTemplate]="cellTemplate"
+                          [showInColumnChooser]="false" [allowHeaderFiltering]="false">
                           <dxo-lookup [dataSource]="itemCategoryDataSource" valueExpr="name" displayExpr="name">
                           </dxo-lookup>
                         </dxi-column>
                         <div *dxTemplate="let cellInfo of 'itemCategoryCellTemplate'">
-                          <dx-select-box [dataSource]="itemCategoryDataSource" [(value)]="cellInfo.value"
+                          <dx-select-box [dataSource]="itemCategoryDataSource"
                             (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
                             (onSelectionChanged)="itemCategoryValueChanged($event)" displayExpr="name" valueExpr="name"
                             placeholder="Select ItemCategory">
                           </dx-select-box>
-                        </div>
+                        </div> -->
                         <dxi-column dataField="competitorName" caption="Competitor" [allowFiltering]="false"
                           [allowSorting]="false" [allowGrouping]="false" editCellTemplate="competitorNameCellTemplate"
                           [width]='170' [cellTemplate]="cellTemplate" [showInColumnChooser]="false"
@@ -514,12 +515,6 @@
                           </dxo-lookup>
                         </dxi-column>
                         <div *dxTemplate="let cellInfo of 'productNameCellTemplate'">
-                          <!-- <dx-select-box [dataSource]="filterProductByCompetitor" [(value)]="cellInfo.value"
-                            (onValueChanged)="cellInfo.setValue($event.value)" [searchEnabled]="true"
-                            (onSelectionChanged)="competitorValueChanged($event)" displayExpr="productName"
-                            valueExpr="productName" placeholder="Select Competitor">
-                          </dx-select-box> -->
-
                           <dx-tag-box [items]="filterProductByCompetitor" [(value)]="cellInfo.value"
                             (onValueChanged)="cellInfo.setValue($event.value)" displayExpr="productName"
                             valueExpr="productName" [showSelectionControls]="true" [searchEnabled]="true"
@@ -1148,7 +1143,7 @@
                         </dxo-pager>
                         <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
                         <dxo-paging [pageSize]="5"></dxo-paging>
-                        <dxi-column dataField="itemCategory" [width]='180' caption="Segment" [allowFiltering]="false"
+                        <!-- <dxi-column dataField="itemCategory" [width]='180' caption="Segment" [allowFiltering]="false"
                           [allowSorting]="false" [allowGrouping]="false" editCellTemplate="itemCategoryCellTemplate"
                           [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
                           <dxo-lookup [dataSource]="itemCategoryDataSource" valueExpr="name" displayExpr="name">
@@ -1160,7 +1155,7 @@
                             (onSelectionChanged)="itemCategoryValueChanged($event)" displayExpr="name" valueExpr="name"
                             placeholder="Select ItemCategory">
                           </dx-select-box>
-                        </div>
+                        </div> -->
                         <dxi-column dataField="competitorName" caption="Competitor" [allowFiltering]="false"
                           [allowSorting]="false" [allowGrouping]="false" editCellTemplate="competitorNameCellTemplate"
                           [cellTemplate]="cellTemplate" [showInColumnChooser]="false" [allowHeaderFiltering]="false">
@@ -1213,14 +1208,12 @@
                             (onSelectionChanged)="competitorValueChanged($event)" displayExpr="productName"
                             valueExpr="productName" placeholder="Select Competitor">
                           </dx-select-box> -->
-
                           <dx-tag-box [items]="filterProductByCompetitor" [(value)]="cellInfo.value"
                             (onValueChanged)="cellInfo.setValue($event.value)" displayExpr="productName"
                             valueExpr="productName" [showSelectionControls]="true" [searchEnabled]="true"
                             noDataText="No data found" placeholder="Select Product" [maxDisplayedTags]="5"
                             [showClearButton]="true">
                           </dx-tag-box>
-
                         </div>
                         <!-- <dxi-column dataField="year2122ActualQtyPM" caption="21-22 Actual Qty P/M"></dxi-column>
                         <dxi-column dataField="year2223EstimateQtyPM" caption="22-23 Estimate Qty P/M"></dxi-column> -->
@@ -1584,8 +1577,8 @@
               <div class="">
                 <span>
                   <dx-select-box Id="case" [dataSource]="itemCategoryDataSource" [searchEnabled]="true"
-                    displayExpr="name" valueExpr="name" placeholder="Select ItemCategory"
-                    (onValueChanged)="itemCategoryValueChangedCompetitor($event)">
+                    [value]="InwardDataModel.itemCategory" displayExpr="name" valueExpr="name"
+                    placeholder="Select ItemCategory" (onSelectionChanged)="itemCategoryValueChangedCompetitor($event)">
                   </dx-select-box>
                 </span>
               </div>
