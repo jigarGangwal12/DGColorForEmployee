@@ -71,7 +71,7 @@
               <h3 *ngIf="moreThanOnePredctionOption">Option 1</h3>
               <h3 *ngIf="!moreThanOnePredctionOption">Predciton</h3>
               <span>
-                <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp1"
+                <i class="fa fa-solid fa-comment" style="cursor: pointer;" *ngIf="PredictionRemarkOp1"
                   (click)="remarkPopoUpOpen1(PredictionRemarkOp1)"></i>
               </span>
             </div>
@@ -122,7 +122,7 @@
             <div class="option-right-side-info-bx">
               <h3>Option 2</h3>
               <span>
-                <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp2"
+                <i class="fa fa-solid fa-comment"style="cursor: pointer;" *ngIf="PredictionRemarkOp2"
                   (click)="remarkPopoUpOpen1(PredictionRemarkOp2)"></i>
               </span>
             </div>
@@ -172,7 +172,7 @@
             <div class="option-right-side-info-bx">
               <h3>Option 3</h3>
               <span>
-                <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp3"
+                <i class="fa fa-solid fa-comment" style="cursor: pointer;" *ngIf="PredictionRemarkOp3"
                   (click)="remarkPopoUpOpen1(PredictionRemarkOp3)"></i>
               </span>
             </div>
@@ -222,7 +222,7 @@
             <div class="option-right-side-info-bx">
               <h3>Option 4</h3>
               <span>
-                <i class="fa fa-solid fa-comment" *ngIf="PredictionRemarkOp4"
+                <i class="fa fa-solid fa-comment" style="cursor: pointer;" *ngIf="PredictionRemarkOp4"
                   (click)="remarkPopoUpOpen1(PredictionRemarkOp4)"></i>
               </span>
             </div>
@@ -285,7 +285,7 @@
               <h3 *ngIf="moreThanOneMatchingOption">Option 1</h3>
               <h3 *ngIf="!moreThanOneMatchingOption">Matching</h3>
               <span>
-                <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp1"
+                <i class="fa fa-solid fa-comment" style="cursor: pointer;" *ngIf="MatchingRemarkOp1"
                   (click)="remarkPopoUpOpen1(MatchingRemarkOp1)"></i>
               </span>
             </div>
@@ -323,7 +323,7 @@
             <div class="option-right-side-info-bx">
               <h3>Option 2</h3>
               <span>
-                <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp2"
+                <i class="fa fa-solid fa-comment" style="cursor: pointer;" *ngIf="MatchingRemarkOp2"
                   (click)="remarkPopoUpOpen1(MatchingRemarkOp2)"></i>
               </span>
             </div>
@@ -361,7 +361,7 @@
             <div class="option-right-side-info-bx">
               <h3>Option 3</h3>
               <span>
-                <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp3"
+                <i class="fa fa-solid fa-comment" style="cursor: pointer;" *ngIf="MatchingRemarkOp3"
                   (click)="remarkPopoUpOpen1(MatchingRemarkOp3)"></i>
               </span>
             </div>
@@ -399,7 +399,7 @@
             <div class="option-right-side-info-bx">
               <h3>Option 4</h3>
               <span>
-                <i class="fa fa-solid fa-comment" *ngIf="MatchingRemarkOp4"
+                <i class="fa fa-solid fa-comment" style="cursor: pointer;" *ngIf="MatchingRemarkOp4"
                   (click)="remarkPopoUpOpen1(MatchingRemarkOp4)"></i>
               </span>
             </div>
@@ -431,7 +431,6 @@
             </table>
           </div>
           <!-- End Shade Matching Option 4 -->
-
         </div>
         <!-- <div *ngIf="!shadeMatchingAvilable">
           <span>
@@ -439,9 +438,7 @@
           </span>
         </div> -->
         <!-- End Shade Matching -->
-
       </div>
-
     </dx-accordion>
 
     <dx-popup id="shade-maching-popup" class="shade-maching-popup-width" [width]="popUpWidth" [height]="750"
@@ -517,14 +514,12 @@
                   <tr>
                     <th>Name of Fastness</th>
                     <th>Test Method</th>
-                    <!-- <th>Dry OR Wet</th> -->
                     <th>Target Rating</th>
                     <th style="text-align: center;">Remark</th>
                   </tr>
                   <tr *ngFor="let fastness of fastnessData">
                     <td>{{fastness.nameoffastness}}</td>
                     <td>{{fastness.testMethod}}</td>
-                    <!-- <td>{{fastness.dryorWet}}</td> -->
                     <td>{{fastness.targetRating}}</td>
                     <td style="text-align: center;"><i *ngIf="fastness.remark" style="cursor: pointer;"
                         class="fa fa-info-circle tabs-up" (click)="onClickGetRemarks(fastness)"></i></td>
@@ -812,8 +807,8 @@
                         </tr>
                       </table>
                     </td>
-                    <td class="color_code_Width_65" style="padding: 0px !important; position: relative; border-left: 0px !important;border-right: 1px solid #d3d3d3 !important;
-                border-top: 1px solid #d3d3d3 !important;">
+                    <td class="color_code_Width_65" style="padding: 0px !important; position: relative; border-left: 0px !important;
+                    border-right: 1px solid #d3d3d3 !important;border-top: 1px solid #d3d3d3 !important;">
                       <table class="subtable-right" style="border: 0px !important;" cell-spacing="0" border="0">
                         <tr>
                           <td style="border: 0px !important; text-align:center;padding: 3px 0px 0px 0px !important;">

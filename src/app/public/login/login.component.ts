@@ -139,6 +139,7 @@ export class LoginComponent {
       return;
     } else {
       var UserId = ((localStorage.getItem("UserId")));
+      this.authenticating = true;
       this.http.post(environment.authUrl + '/LogIn/LogInUserNameValidate', this.user).subscribe(
         (response: any) => {
 
@@ -148,6 +149,7 @@ export class LoginComponent {
             });
 
           }
+
           if (response !== "") {
             var objUser = response;
             if (environment.authUrl === 'http://219.65.56.59:8595/api/api/') {

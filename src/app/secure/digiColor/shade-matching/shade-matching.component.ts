@@ -220,7 +220,7 @@ export class ShadeMatchingComponent implements OnInit {
   selectedfilterCaseId: string = '';
   selectedStatusValue: string = '';
 
- //remarks for prediction
+  //remarks for prediction
   remarkPredictionOp1: any;
   remarkPredictionOp2: any;
   remarkPredictionOp3: any;
@@ -243,7 +243,7 @@ export class ShadeMatchingComponent implements OnInit {
   PredictionRemarkOp2: boolean = false;
   PredictionRemarkOp3: boolean = false;
   PredictionRemarkOp4: boolean = false;
-  
+
   remarkPopupVisible1: boolean = false;
   Remarks: any;
   MatchingRemarkOp1: any;
@@ -429,7 +429,7 @@ export class ShadeMatchingComponent implements OnInit {
     this.SelectedConsigneeCode = shadeDetail.consigneeCode;
     this.SelectedConsigneeName = shadeDetail.consigneeName;
     this.getPoupupPredictionData(1, shadeDetail.shadeid);
-    if(shadeDetail.customerRequirement == 'Recipe Prediction')
+    if (shadeDetail.customerRequirement == 'Recipe Prediction')
       this.shadeMatchingBtn = false;
     else
       this.shadeMatchingBtn = true;
@@ -501,7 +501,7 @@ export class ShadeMatchingComponent implements OnInit {
     this.chkShadeMatchingOption4 = false;
 
     this.popupMoreThanOneOptionPrediction = false;
-    this.popupMoreThanOneOptionMatching  = false;
+    this.popupMoreThanOneOptionMatching = false;
     this.shadeMatchingDataNotAvailable = false;
     this.predictionDataNotAvailabe = false;
     // this.router.navigate(["/digicolor/shadeMatching/"]);
@@ -523,6 +523,7 @@ export class ShadeMatchingComponent implements OnInit {
       shadeId: data.shadeid
     }
     this.shadeId = data.shadeid;
+    debugger
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GerRecipeANDLabTesingParamter, dt)
       .subscribe((res: any) => {
         if (res.table.length > 0) {
@@ -535,6 +536,14 @@ export class ShadeMatchingComponent implements OnInit {
           if (maxValueOftrail >= 1) {
             this.showOption1RecipeData = true;
             this.receipeOptionData1 = res.table.filter((par: any) => par.predictionOption == 1);
+            this.receipeOptionData1.forEach((element: any) => {
+              if (element.uom == 'g/l') {
+                element.recipe = parseFloat(element.recipe).toFixed(2);
+              }
+              else if (element.uom == '%') {
+                element.recipe = parseFloat(element.recipe).toFixed(4);
+              }
+            });
             this.rgbCodeOption1 = this.receipeOptionData1[0].rgbCode;
             // this.Metameric1 = this.receipeOptionData1[0].primaryMetameric + "/" + this.receipeOptionData1[0].secondaryMetameric + "/" + this.receipeOptionData1[0].tertiaryMetameric;
             if (this.receipeOptionData1 && this.receipeOptionData1[0].matamerismByDataColor && this.receipeOptionData1[0].matamerismByDataColor != null && this.receipeOptionData1[0].matamerismByDataColor != undefined) {
@@ -551,6 +560,14 @@ export class ShadeMatchingComponent implements OnInit {
             this.moreThanOnePredctionOption = true;
             this.showOption2RecipeData = true;
             this.receipeOptionData2 = res.table.filter((par: any) => par.predictionOption == 2);
+            this.receipeOptionData2.forEach((element: any) => {
+              if (element.uom == 'g/l') {
+                element.recipe = parseFloat(element.recipe).toFixed(2);
+              }
+              else if (element.uom == '%') {
+                element.recipe = parseFloat(element.recipe).toFixed(4);
+              }
+            });
             this.rgbCodeOption2 = this.receipeOptionData2[0].rgbCode;
             // this.Metameric2 = this.receipeOptionData2[0].primaryMetameric + "/" + this.receipeOptionData2[0].secondaryMetameric + "/" + this.receipeOptionData2[0].tertiaryMetameric;
             if (this.receipeOptionData2 && this.receipeOptionData2[0].matamerismByDataColor && this.receipeOptionData2[0].matamerismByDataColor != null && this.receipeOptionData2[0].matamerismByDataColor != undefined) {
@@ -566,6 +583,14 @@ export class ShadeMatchingComponent implements OnInit {
           if (maxValueOftrail >= 3) {
             this.showOption3RecipeData = true;
             this.receipeOptionData3 = res.table.filter((par: any) => par.predictionOption == 3);
+            this.receipeOptionData3.forEach((element: any) => {
+              if (element.uom == 'g/l') {
+                element.recipe = parseFloat(element.recipe).toFixed(2);
+              }
+              else if (element.uom == '%') {
+                element.recipe = parseFloat(element.recipe).toFixed(4);
+              }
+            });
             this.rgbCodeOption3 = this.receipeOptionData3[0].rgbCode;
             //this.Metameric3 = this.receipeOptionData3[0].primaryMetameric + "/" + this.receipeOptionData3[0].secondaryMetameric + "/" + this.receipeOptionData3[0].tertiaryMetameric;
             if (this.receipeOptionData3 && this.receipeOptionData3[0].matamerismByDataColor && this.receipeOptionData3[0].matamerismByDataColor != null && this.receipeOptionData3[0].matamerismByDataColor != undefined) {
@@ -581,6 +606,14 @@ export class ShadeMatchingComponent implements OnInit {
           if (maxValueOftrail >= 4) {
             this.showOption4RecipeData = true;
             this.receipeOptionData4 = res.table.filter((par: any) => par.predictionOption == 4);
+            this.receipeOptionData4.forEach((element: any) => {
+              if (element.uom == 'g/l') {
+                element.recipe = parseFloat(element.recipe).toFixed(2);
+              }
+              else if (element.uom == '%') {
+                element.recipe = parseFloat(element.recipe).toFixed(4);
+              }
+            });
             this.rgbCodeOption4 = this.receipeOptionData4[0].rgbCode;
             //this.Metameric4 = this.receipeOptionData4[0].primaryMetameric + "/" + this.receipeOptionData4[0].secondaryMetameric + "/" + this.receipeOptionData4[0].tertiaryMetameric;
             if (this.receipeOptionData4 && this.receipeOptionData4[0].matamerismByDataColor && this.receipeOptionData4[0].matamerismByDataColor != null && this.receipeOptionData4[0].matamerismByDataColor != undefined) {
@@ -599,7 +632,7 @@ export class ShadeMatchingComponent implements OnInit {
         }
 
         this.labPredictionParameter = res.table1;
-        if(res && res.table1.length > 0) {
+        if (res && res.table1.length > 0) {
           this.process = res.table1[0].process;
           this.dyesRange = res.table1[0].dyesRange;
           this.dischargability = res.table1[0].dischargability;
@@ -618,7 +651,16 @@ export class ShadeMatchingComponent implements OnInit {
           this.shadeMatchingAllData = res.table3.filter((par: any) => par.trail == 1);
           if (maxValueOftrail >= 1) {
             this.showOption1ShadeMatching = true;
+
             this.shadeMatchingOption1Data = res.table3.filter((par: any) => par.trail == 1);
+            this.shadeMatchingOption1Data.forEach((element: any) => {
+              if (element.recunit == 'g/l') {
+                element.recipe = parseFloat(element.recipe).toFixed(2);
+              }
+              else if (element.recunit == '%') {
+                element.recipe = parseFloat(element.recipe).toFixed(4);
+              }
+            });
             this.rgbshadeMatchingOption1 = this.shadeMatchingOption1Data[0].rgbHexaCode;
             this.MatchingRemarkOp1 = this.shadeMatchingOption1Data[0].remarks;
           } else {
@@ -628,6 +670,14 @@ export class ShadeMatchingComponent implements OnInit {
             this.moreThanOneMatchingOption = true;
             this.showOption2ShadeMatching = true;
             this.shadeMatchingOption2Data = res.table3.filter((par: any) => par.trail == 2);
+            this.shadeMatchingOption2Data.forEach((element: any) => {
+              if (element.recunit == 'g/l') {
+                element.recipe = parseFloat(element.recipe).toFixed(2);
+              }
+              else if (element.recunit == '%') {
+                element.recipe = parseFloat(element.recipe).toFixed(4);
+              }
+            });
             this.rgbshadeMatchingOption2 = this.shadeMatchingOption2Data[0].rgbHexaCode;
             this.MatchingRemarkOp2 = this.shadeMatchingOption2Data[0].remarks;
           } else {
@@ -636,6 +686,14 @@ export class ShadeMatchingComponent implements OnInit {
           if (maxValueOftrail >= 3) {
             this.showOption3ShadeMatching = true;
             this.shadeMatchingOption3Data = res.table3.filter((par: any) => par.trail == 3);
+            this.shadeMatchingOption3Data.forEach((element: any) => {
+              if (element.recunit == 'g/l') {
+                element.recipe = parseFloat(element.recipe).toFixed(2);
+              }
+              else if (element.recunit == '%') {
+                element.recipe = parseFloat(element.recipe).toFixed(4);
+              }
+            });
             this.rgbshadeMatchingOption3 = this.shadeMatchingOption3Data[0].rgbHexaCode;
             this.MatchingRemarkOp3 = this.shadeMatchingOption3Data[0].remarks;
           } else {
@@ -644,6 +702,14 @@ export class ShadeMatchingComponent implements OnInit {
           if (maxValueOftrail >= 4) {
             this.showOption4ShadeMatching = true;
             this.shadeMatchingOption4Data = res.table3.filter((par: any) => par.trail == 4);
+            this.shadeMatchingOption4Data.forEach((element: any) => {
+              if (element.recunit == 'g/l') {
+                element.recipe = parseFloat(element.recipe).toFixed(2);
+              }
+              else if (element.recunit == '%') {
+                element.recipe = parseFloat(element.recipe).toFixed(4);
+              }
+            });
             this.rgbshadeMatchingOption4 = this.shadeMatchingOption4Data[0].rgbHexaCode;
             this.MatchingRemarkOp4 = this.shadeMatchingOption4Data[0].remarks;
           } else {
@@ -722,6 +788,7 @@ export class ShadeMatchingComponent implements OnInit {
     const dt = {
       shadeId: shadeId
     }
+    debugger
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GerRecipeANDLabTesingParamter, dt)
       .subscribe((res: any) => {
         this.labPredictionParameter = res.table1;
@@ -755,7 +822,7 @@ export class ShadeMatchingComponent implements OnInit {
     this.apiService.getAll(API_CONSTANTS.DigiColor.ShadeMatching.GetShadeIdDetailFromJayChemical, dt)
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
-          
+
           this.FilterDataAfterGetRecipe(res.table, 'fromJayChemical');
           this.predictionDataNotAvailabe = false
           this.showUpdatebtnInrecipePrediction = true;
@@ -816,13 +883,13 @@ export class ShadeMatchingComponent implements OnInit {
       if (this.popUpPredictionOption1Data && this.popUpPredictionOption1Data[0].lightsource && this.popUpPredictionOption1Data[0].lightsource != null && this.popUpPredictionOption1Data[0].lightsource != undefined) {
         this.lightSourcePoupup1 = this.popUpPredictionOption1Data[0].lightsource.slice(0, -5);
       }
-      if(this.popUpPredictionOption1Data[0].isShowToCustomer == true){
+      if (this.popUpPredictionOption1Data[0].isShowToCustomer == true) {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 1) {
             element.isShowToCustomer = 1;
           }
         });
-      }else{
+      } else {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 1) {
             element.isShowToCustomer = 0;
@@ -847,13 +914,13 @@ export class ShadeMatchingComponent implements OnInit {
       if (this.popUpPredictionOption2Data && this.popUpPredictionOption2Data[0].lightsource && this.popUpPredictionOption2Data[0].lightsource != null && this.popUpPredictionOption2Data[0].lightsource != undefined) {
         this.lightSourcePoupup2 = this.popUpPredictionOption2Data[0].lightsource.slice(0, -5);
       }
-      if(this.popUpPredictionOption2Data[0].isShowToCustomer == true){
+      if (this.popUpPredictionOption2Data[0].isShowToCustomer == true) {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 2) {
             element.isShowToCustomer = 1;
           }
         });
-      }else{
+      } else {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 2) {
             element.isShowToCustomer = 0;
@@ -877,13 +944,13 @@ export class ShadeMatchingComponent implements OnInit {
       if (this.popUpPredictionOption3Data && this.popUpPredictionOption3Data[0].lightsource && this.popUpPredictionOption3Data[0].lightsource != null && this.popUpPredictionOption3Data[0].lightsource != undefined) {
         this.lightSourcePoupup3 = this.popUpPredictionOption3Data[0].lightsource.slice(0, -5);
       }
-      if(this.popUpPredictionOption3Data[0].isShowToCustomer == true){
+      if (this.popUpPredictionOption3Data[0].isShowToCustomer == true) {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 3) {
             element.isShowToCustomer = 1;
           }
         });
-      }else{
+      } else {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 3) {
             element.isShowToCustomer = 0;
@@ -907,13 +974,13 @@ export class ShadeMatchingComponent implements OnInit {
       if (this.popUpPredictionOption4Data && this.popUpPredictionOption4Data[0].lightsource && this.popUpPredictionOption4Data[0].lightsource != null && this.popUpPredictionOption4Data[0].lightsource != undefined) {
         this.lightSourcePoupup4 = this.popUpPredictionOption4Data[0].lightsource.slice(0, -5);
       }
-      if(this.popUpPredictionOption4Data[0].isShowToCustomer == true){
+      if (this.popUpPredictionOption4Data[0].isShowToCustomer == true) {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 4) {
             element.isShowToCustomer = 1;
           }
         });
-      }else{
+      } else {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 4) {
             element.isShowToCustomer = 0;
@@ -1013,13 +1080,13 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption1 = this.popUpShadeMatchingOption1Data[0].rgbHexaCode;
         this.chkShadeMatchingOption1 = this.popUpShadeMatchingOption1Data[0].isShowToCustomer;
         this.remarkMatchingOp1 = this.popUpShadeMatchingOption1Data[0].remarks;
-        if(this.popUpShadeMatchingOption1Data[0].isShowToCustomer == true){
+        if (this.popUpShadeMatchingOption1Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 1) {
               element.isShowToCustomer = 1;
             }
           });
-        }else{
+        } else {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 1) {
               element.isShowToCustomer = 0;
@@ -1037,13 +1104,13 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption2 = this.popUpShadeMatchingOption2Data[0].rgbHexaCode;
         this.chkShadeMatchingOption2 = this.popUpShadeMatchingRgbCodeOption2[0].isShowToCustomer;
         this.remarkMatchingOp2 = this.popUpShadeMatchingOption2Data[0].remarks;
-        if(this.popUpShadeMatchingRgbCodeOption2[0].isShowToCustomer == true){
+        if (this.popUpShadeMatchingRgbCodeOption2[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 2) {
               element.isShowToCustomer = 1;
             }
           });
-        }else{
+        } else {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 2) {
               element.isShowToCustomer = 0;
@@ -1060,13 +1127,13 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption3 = this.popUpShadeMatchingOption3Data[0].rgbHexaCode;
         this.chkShadeMatchingOption3 = this.popUpShadeMatchingRgbCodeOption3[0].isShowToCustomer;
         this.remarkMatchingOp3 = this.popUpShadeMatchingOption3Data[0].remarks;
-        if(this.popUpShadeMatchingRgbCodeOption3[0].isShowToCustomer == true){
+        if (this.popUpShadeMatchingRgbCodeOption3[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 3) {
               element.isShowToCustomer = 1;
             }
           });
-        }else{
+        } else {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 3) {
               element.isShowToCustomer = 0;
@@ -1083,13 +1150,13 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption4 = this.popUpShadeMatchingOption4Data[0].rgbHexaCode;
         this.chkShadeMatchingOption4 = this.popUpShadeMatchingRgbCodeOption4[0].isShowToCustomer;
         this.remarkMatchingOp4 = this.popUpShadeMatchingOption4Data[0].remarks;
-        if(this.popUpShadeMatchingRgbCodeOption4[0].isShowToCustomer == true){
+        if (this.popUpShadeMatchingRgbCodeOption4[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 4) {
               element.isShowToCustomer = 1;
             }
           });
-        }else{
+        } else {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 4) {
               element.isShowToCustomer = 0;
@@ -1225,7 +1292,7 @@ export class ShadeMatchingComponent implements OnInit {
     }
   }
   UpdateRecipePrecdictionData(popUpPredictionAllData: any) {
-    
+
     this.getRemarksDataforPrediction(popUpPredictionAllData);
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
@@ -1237,16 +1304,16 @@ export class ShadeMatchingComponent implements OnInit {
         });
     }
   }
-  getRemarksDataforPrediction(popUpPredictionAllData: any){
+  getRemarksDataforPrediction(popUpPredictionAllData: any) {
     const maxValueOftrail = Math.max(...popUpPredictionAllData.map((o: any) => o.trail), 0);
-     if(maxValueOftrail >= 1){
-      if(this.remarkPredictionOp1 !== ""){
+    if (maxValueOftrail >= 1) {
+      if (this.remarkPredictionOp1 !== "") {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 1) {
             element.remarks = this.remarkPredictionOp1;
           }
         });
-      }else{
+      } else {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 1) {
             element.remarks = '';
@@ -1254,16 +1321,16 @@ export class ShadeMatchingComponent implements OnInit {
         });
       }
     }
-    
+
     // For Option 2
-    if(maxValueOftrail >= 2){
-      if(this.remarkPredictionOp2 !== ""){
+    if (maxValueOftrail >= 2) {
+      if (this.remarkPredictionOp2 !== "") {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 2) {
             element.remarks = this.remarkPredictionOp2;
           }
         });
-      }else{
+      } else {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 2) {
             element.remarks = '';
@@ -1271,51 +1338,51 @@ export class ShadeMatchingComponent implements OnInit {
         });
       }
     }
-  
-     // For Option 3
-     if(maxValueOftrail >= 3){
-      if(this.remarkPredictionOp3 !== ""){
+
+    // For Option 3
+    if (maxValueOftrail >= 3) {
+      if (this.remarkPredictionOp3 !== "") {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 3) {
             element.remarks = this.remarkPredictionOp3;
           }
         });
-      }else{
+      } else {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 3) {
             element.remarks = '';
           }
         });
       }
-     }
-  
-     // For Option 4
-     if(maxValueOftrail >= 4){
-      if(this.remarkPredictionOp4 !== ""){
+    }
+
+    // For Option 4
+    if (maxValueOftrail >= 4) {
+      if (this.remarkPredictionOp4 !== "") {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 4) {
             element.remarks = this.remarkPredictionOp4;
           }
         });
-      }else{
+      } else {
         this.popUpPredictionAllData.forEach((element: any) => {
           if (element.trail == 4) {
             element.remarks = '';
           }
         });
       }
-     } 
+    }
   }
-  getRemarksDataforMatching(popUpShadeMatchingAllData: any){
+  getRemarksDataforMatching(popUpShadeMatchingAllData: any) {
     const maxValueOftrail = Math.max(...popUpShadeMatchingAllData.map((o: any) => o.trail), 0);
-     if(maxValueOftrail >= 1){
-      if(this.remarkMatchingOp1 !== ""){
+    if (maxValueOftrail >= 1) {
+      if (this.remarkMatchingOp1 !== "") {
         this.popUpShadeMatchingAllData.forEach((element: any) => {
           if (element.trail == 1) {
             element.remarks = this.remarkMatchingOp1;
           }
         });
-      }else{
+      } else {
         this.popUpShadeMatchingAllData.forEach((element: any) => {
           if (element.trail == 1) {
             element.remarks = '';
@@ -1323,16 +1390,16 @@ export class ShadeMatchingComponent implements OnInit {
         });
       }
     }
-    
+
     // For Option 2
-    if(maxValueOftrail >= 2){
-      if(this.remarkMatchingOp2 !== ""){
+    if (maxValueOftrail >= 2) {
+      if (this.remarkMatchingOp2 !== "") {
         this.popUpShadeMatchingAllData.forEach((element: any) => {
           if (element.trail == 2) {
             element.remarks = this.remarkMatchingOp2;
           }
         });
-      }else{
+      } else {
         this.popUpShadeMatchingAllData.forEach((element: any) => {
           if (element.trail == 2) {
             element.remarks = '';
@@ -1340,41 +1407,41 @@ export class ShadeMatchingComponent implements OnInit {
         });
       }
     }
-  
-     // For Option 3
-     if(maxValueOftrail >= 3){
-      if(this.remarkMatchingOp3 !== ""){
+
+    // For Option 3
+    if (maxValueOftrail >= 3) {
+      if (this.remarkMatchingOp3 !== "") {
         this.popUpShadeMatchingAllData.forEach((element: any) => {
           if (element.trail == 3) {
             element.remarks = this.remarkMatchingOp3;
           }
         });
-      }else{
+      } else {
         this.popUpShadeMatchingAllData.forEach((element: any) => {
           if (element.trail == 3) {
             element.remarks = '';
           }
         });
       }
-     }
-  
-     // For Option 4
-     if(maxValueOftrail >= 4){
-      if(this.remarkMatchingOp4 !== ""){
+    }
+
+    // For Option 4
+    if (maxValueOftrail >= 4) {
+      if (this.remarkMatchingOp4 !== "") {
         this.popUpShadeMatchingAllData.forEach((element: any) => {
           if (element.trail == 4) {
             element.remarks = this.remarkMatchingOp4;
           }
         });
-      }else{
+      } else {
         this.popUpShadeMatchingAllData.forEach((element: any) => {
           if (element.trail == 4) {
             element.remarks = '';
           }
         });
       }
-     }
-     
+    }
+
   }
   UpdateRecipeAfterUpdatedRecipeFromDataColor(popUpPredictionAllData: any) {
     if (popUpPredictionAllData) {
@@ -1466,7 +1533,7 @@ export class ShadeMatchingComponent implements OnInit {
   }
 
   SaveShadeMatching(popUpShadeMatchingAllData: any, selectedColorGamut: any) {
-    
+
     this.getRemarksDataforMatching(popUpShadeMatchingAllData);
     if (popUpShadeMatchingAllData) {
       this.disableShadeMatchingUpdateButton = true;
@@ -1481,14 +1548,14 @@ export class ShadeMatchingComponent implements OnInit {
         });
     }
   }
-  UpdateShadeMatchingData(popUpShadeMatchingAllData: any,selectedColorGamut: any) { 
-    
+  UpdateShadeMatchingData(popUpShadeMatchingAllData: any, selectedColorGamut: any) {
+
     this.getRemarksDataforMatching(popUpShadeMatchingAllData);
     if (popUpShadeMatchingAllData) {
-      this.disableUpdateButton = true; 
+      this.disableUpdateButton = true;
       popUpShadeMatchingAllData.forEach((element: any) => {
         element.colourGamut = selectedColorGamut;
-      });   
+      });
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UpdateShadeMatchingRecipe, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
@@ -1521,10 +1588,10 @@ export class ShadeMatchingComponent implements OnInit {
       this.selectedfilterCaseId = '';
       if (this.selectedStatusValue !== "") {
         this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.statusForRecipePrediction == this.selectedStatusValue);
-      }else{
+      } else {
         this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter;
       }
-      
+
     }
   }
 
@@ -1558,33 +1625,33 @@ export class ShadeMatchingComponent implements OnInit {
           this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus == 'Prediction');
         }
       }
-      else if(event.value == 3){
+      else if (event.value == 3) {
         this.selectedStatusValue = 'Matching';
-        if(this.selectedfilterCaseId !== ""){
+        if (this.selectedfilterCaseId !== "") {
           this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus.trim() == 'Matching' && par.caseId == this.selectedfilterCaseId);
-        }else{
+        } else {
           this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.shadeStatus.trim() == 'Matching');
         }
       }
     }
     else {
       this.selectedStatusValue = '';
-      if(this.selectedfilterCaseId !== "") {
+      if (this.selectedfilterCaseId !== "") {
         this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter.filter((par: any) => par.caseId == this.selectedfilterCaseId);
       }
-      else{
+      else {
         this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter;
       }
     }
   }
-  remarkPopoUpOpen1(remark: any){
+  remarkPopoUpOpen1(remark: any) {
     this.remarkPopupVisible1 = true;
-    if(remark){
+    if (remark) {
       this.Remarks = remark;
     }
 
   }
-  remarkPopupClose1(event: any){
+  remarkPopupClose1(event: any) {
     this.Remarks = '';
     this.remarkPopupVisible1 = false;
   }
