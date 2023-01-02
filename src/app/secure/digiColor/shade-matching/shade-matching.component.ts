@@ -502,6 +502,8 @@ export class ShadeMatchingComponent implements OnInit {
 
     this.popupMoreThanOneOptionPrediction = false;
     this.popupMoreThanOneOptionMatching  = false;
+    this.shadeMatchingDataNotAvailable = false;
+    this.predictionDataNotAvailabe = false;
     // this.router.navigate(["/digicolor/shadeMatching/"]);
 
   }
