@@ -250,6 +250,10 @@ export class ShadeMatchingComponent implements OnInit {
   MatchingRemarkOp2: any;
   MatchingRemarkOp3: any;
   MatchingRemarkOp4: any;
+  lightSourceCount: any = 0;
+  lightSourceCount2: any = 0;
+  lightSourceCount3: any = 0;
+  lightSourceCount4: any = 0;
 
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.isShowPopOver = false;
@@ -523,7 +527,6 @@ export class ShadeMatchingComponent implements OnInit {
       shadeId: data.shadeid
     }
     this.shadeId = data.shadeid;
-    debugger
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GerRecipeANDLabTesingParamter, dt)
       .subscribe((res: any) => {
         if (res.table.length > 0) {
@@ -545,12 +548,32 @@ export class ShadeMatchingComponent implements OnInit {
               }
             });
             this.rgbCodeOption1 = this.receipeOptionData1[0].rgbCode;
-            // this.Metameric1 = this.receipeOptionData1[0].primaryMetameric + "/" + this.receipeOptionData1[0].secondaryMetameric + "/" + this.receipeOptionData1[0].tertiaryMetameric;
+            if (this.receipeOptionData1 && this.receipeOptionData1[0].lightsourceByDataColor && this.receipeOptionData1[0].lightsourceByDataColor != null && this.receipeOptionData1[0].lightsourceByDataColor != undefined) {
+              let templightSourceDataColor1 = this.receipeOptionData1[0].lightsourceByDataColor.slice(0, -5);
+              let lightVar1 = templightSourceDataColor1.split('/');
+              this.lightSourceDataColor1 = ''
+              this.lightSourceCount = 0;
+              lightVar1.forEach((element: any) => {
+                if (element.length != 5) {
+                  this.lightSourceCount = this.lightSourceCount + 1;
+                  if (this.lightSourceDataColor1 != '') {
+                    this.lightSourceDataColor1 = this.lightSourceDataColor1 + '/' + element
+                  } else {
+                    this.lightSourceDataColor1 = element
+                  }
+                }
+              });
+            }
             if (this.receipeOptionData1 && this.receipeOptionData1[0].matamerismByDataColor && this.receipeOptionData1[0].matamerismByDataColor != null && this.receipeOptionData1[0].matamerismByDataColor != undefined) {
               this.Metameric1 = this.receipeOptionData1[0].matamerismByDataColor.slice(0, -6);
-            }
-            if (this.receipeOptionData1 && this.receipeOptionData1[0].lightsourceByDataColor && this.receipeOptionData1[0].lightsourceByDataColor != null && this.receipeOptionData1[0].lightsourceByDataColor != undefined) {
-              this.lightSourceDataColor1 = this.receipeOptionData1[0].lightsourceByDataColor.slice(0, -5);
+              if (this.lightSourceCount == 2) {
+                this.Metameric1 = this.Metameric1.slice(0, -7)
+              }
+              if (this.lightSourceCount == 1) {
+                this.Metameric1 = this.Metameric1.slice(0, -14)
+              }
+              console.log(this.lightSourceDataColor1);
+              // console.log(this.lightSourceCount);
             }
             this.PredictionRemarkOp1 = this.receipeOptionData1[0].remarks;
           } else {
@@ -569,13 +592,32 @@ export class ShadeMatchingComponent implements OnInit {
               }
             });
             this.rgbCodeOption2 = this.receipeOptionData2[0].rgbCode;
-            // this.Metameric2 = this.receipeOptionData2[0].primaryMetameric + "/" + this.receipeOptionData2[0].secondaryMetameric + "/" + this.receipeOptionData2[0].tertiaryMetameric;
+            if (this.receipeOptionData2 && this.receipeOptionData2[0].lightsourceByDataColor && this.receipeOptionData2[0].lightsourceByDataColor != null && this.receipeOptionData2[0].lightsourceByDataColor != undefined) {
+              let templightSourceDataColor1 = this.receipeOptionData2[0].lightsourceByDataColor.slice(0, -5);
+              let lightVar1 = templightSourceDataColor1.split('/');
+              this.lightSourceDataColor2 = ''
+              this.lightSourceCount2 = 0;
+              lightVar1.forEach((element: any) => {
+                if (element.length != 5) {
+                  this.lightSourceCount2 = this.lightSourceCount2 + 1;
+                  if (this.lightSourceDataColor2 != '') {
+                    this.lightSourceDataColor2 = this.lightSourceDataColor2 + '/' + element
+                  } else {
+                    this.lightSourceDataColor2 = element
+                  }
+                }
+              });
+            }
             if (this.receipeOptionData2 && this.receipeOptionData2[0].matamerismByDataColor && this.receipeOptionData2[0].matamerismByDataColor != null && this.receipeOptionData2[0].matamerismByDataColor != undefined) {
               this.Metameric2 = this.receipeOptionData2[0].matamerismByDataColor.slice(0, -6);
+              if (this.lightSourceCount2 == 2) {
+                this.Metameric2 = this.Metameric2.slice(0, -7)
+              }
+              if (this.lightSourceCount2 == 1) {
+                this.Metameric2 = this.Metameric2.slice(0, -14)
+              }
             }
-            if (this.receipeOptionData2 && this.receipeOptionData2[0].lightsourceByDataColor && this.receipeOptionData2[0].lightsourceByDataColor != null && this.receipeOptionData2[0].lightsourceByDataColor != undefined) {
-              this.lightSourceDataColor2 = this.receipeOptionData2[0].lightsourceByDataColor.slice(0, -5);
-            }
+
             this.PredictionRemarkOp2 = this.receipeOptionData2[0].remarks;
           } else {
             this.showOption2RecipeData = false;
@@ -592,13 +634,32 @@ export class ShadeMatchingComponent implements OnInit {
               }
             });
             this.rgbCodeOption3 = this.receipeOptionData3[0].rgbCode;
-            //this.Metameric3 = this.receipeOptionData3[0].primaryMetameric + "/" + this.receipeOptionData3[0].secondaryMetameric + "/" + this.receipeOptionData3[0].tertiaryMetameric;
+            if (this.receipeOptionData3 && this.receipeOptionData3[0].lightsourceByDataColor && this.receipeOptionData3[0].lightsourceByDataColor != null && this.receipeOptionData3[0].lightsourceByDataColor != undefined) {
+              let templightSourceDataColor1 = this.receipeOptionData3[0].lightsourceByDataColor.slice(0, -5);
+              let lightVar1 = templightSourceDataColor1.split('/');
+              this.lightSourceDataColor3 = ''
+              this.lightSourceCount3 = 0;
+              lightVar1.forEach((element: any) => {
+                if (element.length != 5) {
+                  this.lightSourceCount3 = this.lightSourceCount3 + 1;
+                  if (this.lightSourceDataColor3 != '') {
+                    this.lightSourceDataColor3 = this.lightSourceDataColor3 + '/' + element
+                  } else {
+                    this.lightSourceDataColor3 = element
+                  }
+                }
+              });
+            }
             if (this.receipeOptionData3 && this.receipeOptionData3[0].matamerismByDataColor && this.receipeOptionData3[0].matamerismByDataColor != null && this.receipeOptionData3[0].matamerismByDataColor != undefined) {
               this.Metameric3 = this.receipeOptionData3[0].matamerismByDataColor.slice(0, -6);
+              if (this.lightSourceCount3 == 2) {
+                this.Metameric3 = this.Metameric3.slice(0, -7)
+              }
+              if (this.lightSourceCount2 == 1) {
+                this.Metameric3 = this.Metameric3.slice(0, -14)
+              }
             }
-            if (this.receipeOptionData3 && this.receipeOptionData3[0].lightsourceByDataColor && this.receipeOptionData3[0].lightsourceByDataColor != null && this.receipeOptionData3[0].lightsourceByDataColor != undefined) {
-              this.lightSourceDataColor3 = this.receipeOptionData3[0].lightsourceByDataColor.slice(0, -5);
-            }
+
             this.PredictionRemarkOp3 = this.receipeOptionData3[0].remarks;
           } else {
             this.showOption3RecipeData = false;
@@ -615,12 +676,29 @@ export class ShadeMatchingComponent implements OnInit {
               }
             });
             this.rgbCodeOption4 = this.receipeOptionData4[0].rgbCode;
-            //this.Metameric4 = this.receipeOptionData4[0].primaryMetameric + "/" + this.receipeOptionData4[0].secondaryMetameric + "/" + this.receipeOptionData4[0].tertiaryMetameric;
+            if (this.receipeOptionData4 && this.receipeOptionData4[0].lightsourceByDataColor && this.receipeOptionData4[0].lightsourceByDataColor != null && this.receipeOptionData4[0].lightsourceByDataColor != undefined) {
+              let templightSourceDataColor1 = this.receipeOptionData4[0].lightsourceByDataColor.slice(0, -5);
+              let lightVar1 = templightSourceDataColor1.split('/');
+              this.lightSourceDataColor4 = ''
+              lightVar1.forEach((element: any) => {
+                if (element.length != 5) {
+                  this.lightSourceCount4 = this.lightSourceCount4 + 1;
+                  if (this.lightSourceDataColor4 != '') {
+                    this.lightSourceDataColor4 = this.lightSourceDataColor4 + '/' + element
+                  } else {
+                    this.lightSourceDataColor4 = element
+                  }
+                }
+              });
+            }
             if (this.receipeOptionData4 && this.receipeOptionData4[0].matamerismByDataColor && this.receipeOptionData4[0].matamerismByDataColor != null && this.receipeOptionData4[0].matamerismByDataColor != undefined) {
               this.Metameric4 = this.receipeOptionData4[0].matamerismByDataColor.slice(0, -6);
-            }
-            if (this.receipeOptionData4 && this.receipeOptionData4[0].lightsourceByDataColor && this.receipeOptionData4[0].lightsourceByDataColor != null && this.receipeOptionData4[0].lightsourceByDataColor != undefined) {
-              this.lightSourceDataColor4 = this.receipeOptionData4[0].lightsourceByDataColor.slice(0, -5);
+              if (this.lightSourceCount4 == 2) {
+                this.Metameric4 = this.Metameric4.slice(0, -7)
+              }
+              if (this.lightSourceCount2 == 1) {
+                this.Metameric4 = this.Metameric4.slice(0, -14)
+              }
             }
             this.PredictionRemarkOp4 = this.receipeOptionData4[0].remarks;
           } else {
@@ -788,7 +866,6 @@ export class ShadeMatchingComponent implements OnInit {
     const dt = {
       shadeId: shadeId
     }
-    debugger
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GerRecipeANDLabTesingParamter, dt)
       .subscribe((res: any) => {
         this.labPredictionParameter = res.table1;

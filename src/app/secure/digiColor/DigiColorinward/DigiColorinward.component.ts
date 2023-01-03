@@ -894,7 +894,6 @@ export class DigiColorinwardComponent implements OnInit {
 
   itemCategoryValueChangedCompetitor(aa: any) {
     if (aa && aa.selectedItem && aa.selectedItem.name) {
-      debugger
       this.InwardDataModel.itemCategory = aa.selectedItem.name;
     }
     if (this.competitorNameDataSource) {
