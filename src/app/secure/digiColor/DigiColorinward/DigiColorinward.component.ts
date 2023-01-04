@@ -755,7 +755,13 @@ export class DigiColorinwardComponent implements OnInit {
           this.disablesubbtn = false;
           notify({ message: 'Inward Entry SuccessFully ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
           this.router.navigate(["/digicolor/inward/"]);
-          this.sendSMS(data);
+          this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.CheckAllInwardSubmitedByCaseId,{caseId: data.caseId})
+            .subscribe((res: any) => {
+              if(res.status == 1){
+                this.sendSMS(data);
+              }
+            });
+          
         });
     }
     else {

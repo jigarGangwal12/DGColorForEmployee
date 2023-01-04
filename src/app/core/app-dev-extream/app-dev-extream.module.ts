@@ -15,6 +15,7 @@ import { DxDropDownBoxModule } from 'devextreme-angular/ui/drop-down-box';
 import { DxTreeListModule } from 'devextreme-angular/ui/tree-list';
 import { DxTagBoxModule } from 'devextreme-angular/ui/tag-box';
 import { DxNumberBoxModule } from 'devextreme-angular/ui/number-box';
+import { DxFileUploaderModule } from 'devextreme-angular/ui/file-uploader';
 import {
   DxAccordionModule, 
 } from 'devextreme-angular/ui/accordion';
@@ -60,7 +61,8 @@ import { DxFormModule } from 'devextreme-angular/ui/form';
     DxAutocompleteModule
     ,DxTemplateModule
     ,DxSliderModule,
-    DxAccordionModule
+    DxAccordionModule,
+    DxFileUploaderModule
   ],
   declarations: [],
   exports: [
@@ -91,7 +93,8 @@ import { DxFormModule } from 'devextreme-angular/ui/form';
     DxAutocompleteModule
     ,DxTemplateModule
     ,DxSliderModule,
-    DxAccordionModule
+    DxAccordionModule,
+    DxFileUploaderModule
   ]
 })
 export class AppDevExtreamModule { }
