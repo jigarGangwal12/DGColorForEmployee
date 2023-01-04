@@ -131,7 +131,7 @@ export class DigiColorinwardComponent implements OnInit {
   countForEmailIdCheck: any = 0;
   RemainingshadeNameIddata: any;
   aa: any;
-  notShowSbnOrUpdateBtn: boolean =false;
+  notShowSbnOrUpdateBtn: boolean =true;
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent
     , public InwardDataModel: InwardDataModel,
   ) {
@@ -631,10 +631,11 @@ export class DigiColorinwardComponent implements OnInit {
     this.InwardDataModel.caseId = consigneeDetail[0].caseId;
     this.InwardDataModel.consigneeCode = consigneeDetail[0].consigneeCode + ' - ' + consigneeDetail[0].consigneeName;
     this.InwardDataModel.saveOrSubmit = 'Update';
-    if (da.data.status.trim() == 'Inward') {
-      this.notShowSbnOrUpdateBtn = true;
-    } else {
+      // this.notShowSbnOrUpdateBtn = false;
+    if (da.data.status.trim() == 'Open') {
       this.notShowSbnOrUpdateBtn = false;
+    } else {
+      this.notShowSbnOrUpdateBtn = true;
     }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit,
       { caseId: this.InwardDataModel.caseId, shadeId: consigneeDetail[0].shadeid, caseIdSharedIdGroup: consigneeDetail[0].caseIdSharedIdGroup })
@@ -775,6 +776,7 @@ export class DigiColorinwardComponent implements OnInit {
 
   }
   UpdateInwardData(data: any) {
+    debugger
     if (!data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -790,7 +792,7 @@ export class DigiColorinwardComponent implements OnInit {
         else if (element.mobileNumber.length != 10) {
           this.count++;
         }
-        else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && element.emailIdNotProvided) {
+        else if ((element.emailId == null || element.emailId == '' || element.emailId == undefined) && !element.emailIdNotProvided) {
           this.countForEmailIdCheck++;
         }
         else {
