@@ -131,6 +131,7 @@ export class DigiColorinwardComponent implements OnInit {
   countForEmailIdCheck: any = 0;
   RemainingshadeNameIddata: any;
   aa: any;
+  notShowSbnOrUpdateBtn: boolean =false;
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent
     , public InwardDataModel: InwardDataModel,
   ) {
@@ -631,56 +632,57 @@ export class DigiColorinwardComponent implements OnInit {
     this.InwardDataModel.consigneeCode = consigneeDetail[0].consigneeCode + ' - ' + consigneeDetail[0].consigneeName;
     this.InwardDataModel.saveOrSubmit = 'Update';
     if (da.data.status.trim() == 'Inward') {
-      this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit,
-        { caseId: this.InwardDataModel.caseId, shadeId: consigneeDetail[0].shadeid, caseIdSharedIdGroup: consigneeDetail[0].caseIdSharedIdGroup })
-        .subscribe((res: any) => {
-          this.InwardDataModel.address1 = res.table[0].address1;
-          this.InwardDataModel.address2 = res.table[0].address2;
-          this.InwardDataModel.consigneeCity = res.table[0].city;
-          this.InwardDataModel.consigneeState = res.table[0].cosigneeState;
-          this.InwardDataModel.customerType = res.table[0].customerType;
-          this.InwardDataModel.inquiryDateTime = res.table[0].createdDate;
-          this.customerReuirement = res.table[0].customerRequirement.split(',');
-          this.InwardDataModel.shadeId = res.table1[0].shadeid;
-          this.InwardDataModel.shadeNameNoForEdit = res.table1[0].shadeName + ' - ' + res.table1[0].shadeid;
-          // this.customerSubStrate = res.table3;
-          this.InwardDataModel.substrate = res.table3[0].typeofIndustries1;
-          this.InwardDataModel.fabricQuality = res.table3[0].uom;
-          this.InwardDataModel.ratio = res.table3[0].ratio;
-          this.customerContactDetails = res.table2;
-          if (this.customerContactDetails && this.customerContactDetails.length > 0) {
-            let filterReportTrue = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
-            filterReportTrue.forEach((element: any) => {
-              this.selectedRowDataContactDetail.push(element.id);
-            });
-          }
-          // res.table6.forEach((element: any) => {
-          //   element.productName = element.productName.split(',');
-          // });
-          this.competitorDataSource = res.table6;
-          this.customerFastnessDataSource = res.table4;
-          this.InwardDataModel.process = res.table5[0].process;
-          this.InwardDataModel.dischargeability = res.table5[0].dischargability;
-          this.InwardDataModel.primarylightSource = res.table5[0].lightSourcePrimary;
-          this.InwardDataModel.secondarylightSource = res.table5[0].lightSourceSecondary;
-          this.InwardDataModel.tertiarylightSource = res.table5[0].lightSourceTertiary;
-          this.InwardDataModel.inwardDateTime = res.table5[0].createdDate;
-          this.InwardDataModel.remarks = res.table5[0].sampleRemarks;
-          this.InwardDataModel.dyesRange = res.table5[0].dyesRange;
-          this.InwardDataModel.submitedby = res.table5[0].submitedBy + ' - ' + res.table5[0].submitedByEmpname;
-        },
-          err => {
-            if (err.status == 500)
-              console.log(err)
-            this.loadingVisible = false;
-            // check error status code is 500, if so, do some action
-          });
-      this.showR2Grid = true;
-      this.showR3Grid = false;
-      this.editShadeid = true;
+      this.notShowSbnOrUpdateBtn = true;
     } else {
-      notify({ message: 'Prediction alredy done now data can not be change.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 500 }, 'error', 2000);
+      this.notShowSbnOrUpdateBtn = false;
     }
+    this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit,
+      { caseId: this.InwardDataModel.caseId, shadeId: consigneeDetail[0].shadeid, caseIdSharedIdGroup: consigneeDetail[0].caseIdSharedIdGroup })
+      .subscribe((res: any) => {
+        this.InwardDataModel.address1 = res.table[0].address1;
+        this.InwardDataModel.address2 = res.table[0].address2;
+        this.InwardDataModel.consigneeCity = res.table[0].city;
+        this.InwardDataModel.consigneeState = res.table[0].cosigneeState;
+        this.InwardDataModel.customerType = res.table[0].customerType;
+        this.InwardDataModel.inquiryDateTime = res.table[0].createdDate;
+        this.customerReuirement = res.table[0].customerRequirement.split(',');
+        this.InwardDataModel.shadeId = res.table1[0].shadeid;
+        this.InwardDataModel.shadeNameNoForEdit = res.table1[0].shadeName + ' - ' + res.table1[0].shadeid;
+        // this.customerSubStrate = res.table3;
+        this.InwardDataModel.substrate = res.table3[0].typeofIndustries1;
+        this.InwardDataModel.fabricQuality = res.table3[0].uom;
+        this.InwardDataModel.ratio = res.table3[0].ratio;
+        this.customerContactDetails = res.table2;
+        if (this.customerContactDetails && this.customerContactDetails.length > 0) {
+          let filterReportTrue = this.customerContactDetails.filter((da: any) => da.isReportSend == true);
+          filterReportTrue.forEach((element: any) => {
+            this.selectedRowDataContactDetail.push(element.id);
+          });
+        }
+        // res.table6.forEach((element: any) => {
+        //   element.productName = element.productName.split(',');
+        // });
+        this.competitorDataSource = res.table6;
+        this.customerFastnessDataSource = res.table4;
+        this.InwardDataModel.process = res.table5[0].process;
+        this.InwardDataModel.dischargeability = res.table5[0].dischargability;
+        this.InwardDataModel.primarylightSource = res.table5[0].lightSourcePrimary;
+        this.InwardDataModel.secondarylightSource = res.table5[0].lightSourceSecondary;
+        this.InwardDataModel.tertiarylightSource = res.table5[0].lightSourceTertiary;
+        this.InwardDataModel.inwardDateTime = res.table5[0].createdDate;
+        this.InwardDataModel.remarks = res.table5[0].sampleRemarks;
+        this.InwardDataModel.dyesRange = res.table5[0].dyesRange;
+        this.InwardDataModel.submitedby = res.table5[0].submitedBy + ' - ' + res.table5[0].submitedByEmpname;
+      },
+        err => {
+          if (err.status == 500)
+            console.log(err)
+          this.loadingVisible = false;
+          // check error status code is 500, if so, do some action
+        });
+    this.showR2Grid = true;
+    this.showR3Grid = false;
+    this.editShadeid = true;
   }
 
   SaveInwardData(data: any) {

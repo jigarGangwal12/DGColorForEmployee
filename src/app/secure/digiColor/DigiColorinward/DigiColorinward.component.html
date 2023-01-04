@@ -66,6 +66,7 @@
               <dxo-scrolling mode="standard">
                 <!-- or "virtual" | "infinite" -->
               </dxo-scrolling>
+              <dxo-header-filter [visible]="true"></dxo-header-filter>
               <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
               <dxo-selection mode="multiple" showCheckBoxesMode="always"></dxo-selection>
               <dxi-column [allowHeaderFiltering]="false" dataField="shadeId" caption="Shade Id"
@@ -322,7 +323,7 @@
           <div class="">
             <div class="col-md-12 p-0">
               <div class="inward_boxs_Div_Width">
-                <div class="col-md-12 col-xl-9 ipad-pading-cont-details">
+                <div class="col-md-12 col-xl-12 ipad-pading-cont-details">
                   <div class="" style="margin-top: 10px">
                     <h3>Report Submission</h3>
                   </div>
@@ -728,25 +729,21 @@
                                 (onSelectionChanged)="InwardcaseIdValueChanged($event)" placeholder="Select Case Id"
                                 [showClearButton]="true" [searchEnabled]="true">
                               </dx-select-box> -->
-
                               <dx-tag-box class="inq-date-time-box" Id="case" placeholder="Select Shade No"
                                 [dataSource]="RemainingshadeNameIddata" displayExpr="shadeNameId" valueExpr="shadeid"
                                 [showSelectionControls]="true" (onValueChanged)="shadeidValueChanged($event)"
                                 noDataText="No data found" [maxDisplayedTags]="5" applyValueMode="instantly"
                                 [showClearButton]="true"></dx-tag-box>
-
                             </span>
                           </div>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
           <!-- <div class="">
             <h3>Customer Details </h3>
           </div>
@@ -769,11 +766,9 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div> -->
-
           <div class=" Margin_Top_Inward">
             <div class="col-md-12 p-0">
               <div class="submit_class shadowbox inward_boxs_Div" style="height: 110px; margin-bottom: 16px;
@@ -1020,7 +1015,7 @@
           <div class="">
             <div class="col-md-12 p-0">
               <div class="inward_boxs_Div_Width">
-                <div class="col-md-12 col-xl-9 ipad-pading-cont-details">
+                <div class="col-md-12 col-xl-12 ipad-pading-cont-details">
                   <div class="" style="margin-top: 10px">
                     <h3>Report Submission</h3>
                   </div>
@@ -1417,12 +1412,12 @@
           </div>
         </div>
         <div class="main_pop mb-2">
-          <span *ngIf="InwardDataModel.saveOrSubmit != 'Update' &&  !disablesubbtn">
+          <span *ngIf="InwardDataModel.saveOrSubmit != 'Update' &&  !disablesubbtn && !notShowSbnOrUpdateBtn">
             <dx-button class="submitbtn" stylingMode="contained" text="Submit" type="normal" [width]="130"
               (click)="SaveInwardData(InwardDataModel)">
             </dx-button>
           </span>
-          <span *ngIf="InwardDataModel.saveOrSubmit == 'Update' &&  !disablesubbtn">
+          <span *ngIf="InwardDataModel.saveOrSubmit == 'Update' &&  !disablesubbtn && !notShowSbnOrUpdateBtn">
             <dx-button class="submitbtn" stylingMode="contained" text="Update" type="normal" [width]="130"
               (click)="UpdateInwardData(InwardDataModel)">
             </dx-button>

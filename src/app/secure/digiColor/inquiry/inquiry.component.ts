@@ -258,9 +258,8 @@ export class InquiryComponent implements OnInit {
       return;
     }
     data.customerContactDetail = this.consigneeContactDetail;
-
     data.createdBy = this.UserId;
-    if (!data.inquiryType || !data.scanMode || !data.inquiryBy || !data.requirementValue || !data.ConsumerName
+    if (!data.inquiryType || !data.scanMode || !data.inquiryBy || !data.requirementValue
       || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.assignToRunner) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -294,7 +293,7 @@ export class InquiryComponent implements OnInit {
   UpdateInquiryDataForm(data: any, da: any) {
     data.saveOrSubmit = da;
     data.createdBy = this.UserId;
-    if (!data.ConsumerName || !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.requirementValue) {
+    if ( !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.requirementValue) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
