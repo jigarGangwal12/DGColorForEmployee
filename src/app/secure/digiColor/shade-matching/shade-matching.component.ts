@@ -572,8 +572,6 @@ export class ShadeMatchingComponent implements OnInit {
               if (this.lightSourceCount == 1) {
                 this.Metameric1 = this.Metameric1.slice(0, -14)
               }
-              console.log(this.lightSourceDataColor1);
-              // console.log(this.lightSourceCount);
             }
             this.PredictionRemarkOp1 = this.receipeOptionData1[0].remarks;
           } else {
@@ -1044,7 +1042,6 @@ export class ShadeMatchingComponent implements OnInit {
       this.popUpRgbCodeOption4 = this.popUpPredictionOption4Data[0].rgbHexaCode;
       this.chkOption4 = this.popUpPredictionOption4Data[0].isShowToCustomer;
       this.remarkPredictionOp4 = this.popUpPredictionOption4Data[0].remarks;
-      //this.MetamericPopup4 = this.popUpPredictionOption4Data[0].primarymetamerism + "/" + this.popUpPredictionOption4Data[0].secondarymetamerism + "/" + this.popUpPredictionOption4Data[0].thirdmetamerism;
       if (this.popUpPredictionOption4Data && this.popUpPredictionOption4Data[0].matamerism && this.popUpPredictionOption4Data[0].matamerism != null && this.popUpPredictionOption4Data[0].matamerism != undefined) {
         this.MetamericPopup4 = this.popUpPredictionOption4Data[0].matamerism.slice(0, -6);
       }
@@ -1179,9 +1176,10 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption2 = true;
         this.popUpShadeMatchingOption2Data = res.table.filter((par: any) => par.trail == 2);
         this.popUpShadeMatchingRgbCodeOption2 = this.popUpShadeMatchingOption2Data[0].rgbHexaCode;
-        this.chkShadeMatchingOption2 = this.popUpShadeMatchingRgbCodeOption2[0].isShowToCustomer;
+        debugger
+        this.chkShadeMatchingOption2 = this.popUpShadeMatchingOption2Data[0].isShowToCustomer;
         this.remarkMatchingOp2 = this.popUpShadeMatchingOption2Data[0].remarks;
-        if (this.popUpShadeMatchingRgbCodeOption2[0].isShowToCustomer == true) {
+        if (this.popUpShadeMatchingOption2Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 2) {
               element.isShowToCustomer = 1;
@@ -1202,9 +1200,9 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption3 = true;
         this.popUpShadeMatchingOption3Data = res.table.filter((par: any) => par.trail == 3);
         this.popUpShadeMatchingRgbCodeOption3 = this.popUpShadeMatchingOption3Data[0].rgbHexaCode;
-        this.chkShadeMatchingOption3 = this.popUpShadeMatchingRgbCodeOption3[0].isShowToCustomer;
+        this.chkShadeMatchingOption3 = this.popUpShadeMatchingOption3Data[0].isShowToCustomer;
         this.remarkMatchingOp3 = this.popUpShadeMatchingOption3Data[0].remarks;
-        if (this.popUpShadeMatchingRgbCodeOption3[0].isShowToCustomer == true) {
+        if (this.popUpShadeMatchingOption3Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 3) {
               element.isShowToCustomer = 1;
@@ -1225,9 +1223,9 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption4 = true;
         this.popUpShadeMatchingOption4Data = res.table.filter((par: any) => par.trail == 4);
         this.popUpShadeMatchingRgbCodeOption4 = this.popUpShadeMatchingOption4Data[0].rgbHexaCode;
-        this.chkShadeMatchingOption4 = this.popUpShadeMatchingRgbCodeOption4[0].isShowToCustomer;
+        this.chkShadeMatchingOption4 = this.popUpShadeMatchingOption4Data[0].isShowToCustomer;
         this.remarkMatchingOp4 = this.popUpShadeMatchingOption4Data[0].remarks;
-        if (this.popUpShadeMatchingRgbCodeOption4[0].isShowToCustomer == true) {
+        if (this.popUpShadeMatchingOption4Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 4) {
               element.isShowToCustomer = 1;
@@ -1610,7 +1608,6 @@ export class ShadeMatchingComponent implements OnInit {
   }
 
   SaveShadeMatching(popUpShadeMatchingAllData: any, selectedColorGamut: any) {
-
     this.getRemarksDataforMatching(popUpShadeMatchingAllData);
     if (popUpShadeMatchingAllData) {
       this.disableShadeMatchingUpdateButton = true;
@@ -1626,7 +1623,6 @@ export class ShadeMatchingComponent implements OnInit {
     }
   }
   UpdateShadeMatchingData(popUpShadeMatchingAllData: any, selectedColorGamut: any) {
-
     this.getRemarksDataforMatching(popUpShadeMatchingAllData);
     if (popUpShadeMatchingAllData) {
       this.disableUpdateButton = true;
@@ -1668,7 +1664,6 @@ export class ShadeMatchingComponent implements OnInit {
       } else {
         this.GetAllLabPredictionData = this.GetAllLabPredictionDataForFilter;
       }
-
     }
   }
 

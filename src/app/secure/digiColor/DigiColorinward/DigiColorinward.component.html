@@ -1417,7 +1417,6 @@
               (click)="SaveInwardData(InwardDataModel)">
             </dx-button>
           </span>
-          {{notShowSbnOrUpdateBtn}} --dis {{disablesubbtn}}
           <span *ngIf="InwardDataModel.saveOrSubmit == 'Update' &&  !disablesubbtn && !notShowSbnOrUpdateBtn">
             <dx-button class="submitbtn" stylingMode="contained" text="Update" type="normal" [width]="130"
               (click)="UpdateInwardData(InwardDataModel)">
@@ -1613,11 +1612,6 @@
           </span>
         </div>
       </div>
-
     </div>
-
   </div>
-
-
-
 </dx-popup>

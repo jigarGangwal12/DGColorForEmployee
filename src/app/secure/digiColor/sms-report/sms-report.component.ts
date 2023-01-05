@@ -23,7 +23,7 @@ export class SmsReportComponent implements OnInit {
       .subscribe((res: any) => {
         this.smsReportData = JSON.stringify(res);
         debugger
-        this.smsReportData =  res.substring(1,res.length - 1); 
+        this.smsReportData =  res.getReportData.substring(1,res.getReportData.length - 1); 
         
       });
   }

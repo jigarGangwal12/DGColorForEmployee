@@ -131,7 +131,7 @@ export class DigiColorinwardComponent implements OnInit {
   countForEmailIdCheck: any = 0;
   RemainingshadeNameIddata: any;
   aa: any;
-  notShowSbnOrUpdateBtn: boolean =true;
+  notShowSbnOrUpdateBtn: boolean =false;
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent
     , public InwardDataModel: InwardDataModel,
   ) {
@@ -513,11 +513,13 @@ export class DigiColorinwardComponent implements OnInit {
       this.showR1Grid = true;
       this.showR3Grid = false;
       this.showR2Grid = false;
+      this.notShowSbnOrUpdateBtn = false;
     }
     if (page == 'R3') {
       this.showR3Grid = true;
       this.showR1Grid = false;
       this.showR2Grid = false;
+      this.notShowSbnOrUpdateBtn = false;
     }
   }
   MapSampleDatatoCaseIdDataForm(da: any) {
@@ -631,8 +633,8 @@ export class DigiColorinwardComponent implements OnInit {
     this.InwardDataModel.caseId = consigneeDetail[0].caseId;
     this.InwardDataModel.consigneeCode = consigneeDetail[0].consigneeCode + ' - ' + consigneeDetail[0].consigneeName;
     this.InwardDataModel.saveOrSubmit = 'Update';
-      // this.notShowSbnOrUpdateBtn = false;
-    if (da.data.status.trim() == 'Open') {
+      this.notShowSbnOrUpdateBtn = false;
+    if (da.data.status.trim() == 'Inward' || da.data.status.trim() == 'Open') {
       this.notShowSbnOrUpdateBtn = false;
     } else {
       this.notShowSbnOrUpdateBtn = true;

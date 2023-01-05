@@ -292,8 +292,9 @@ export class InquiryComponent implements OnInit {
   }
   UpdateInquiryDataForm(data: any, da: any) {
     data.saveOrSubmit = da;
+    debugger
     data.createdBy = this.UserId;
-    if ( !data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.requirementValue) {
+    if (!data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.requirementValue) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
     }
@@ -389,7 +390,7 @@ export class InquiryComponent implements OnInit {
           this.inquiryForm.contactPersonNo = res.table[0].contactNo;
           this.inquiryForm.caseId = res.table[0].caseId;
           this.inquiryForm.remarks = res.table[0].remark;
-
+          // this.inquiryForm.requirement = res.table[0].customerRequirement.split(',');
           // this.inquiryForm.requirement = [];
           // var array = res.table[0].customerRequirement.split(',');
           // for (let i = 0; i < array.length; i++) {
@@ -430,7 +431,7 @@ export class InquiryComponent implements OnInit {
   }
   customerRequirementValueChange(da: any) {
     if (da && da.value) {
-
+      debugger
       this.inquiryForm.requirementValue = da.value.toString();
     }
 
