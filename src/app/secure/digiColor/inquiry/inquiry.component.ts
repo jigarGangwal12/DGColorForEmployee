@@ -286,6 +286,8 @@ export class InquiryComponent implements OnInit {
       });
   }
   SendSMS(data: any) {
+    debugger
+    data.consumerName = data.consumerName.substring(0,34);
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.SMSSendForPostInquiryFormData, data)
       .subscribe((res: any) => {
       });
