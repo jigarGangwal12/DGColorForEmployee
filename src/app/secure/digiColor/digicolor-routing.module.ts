@@ -13,6 +13,7 @@ import { DigiColorAdminPanelComponent } from './digiColor-admin-panel/digiColor-
 import { OutwardMatchingComponent } from './outward-matching/outward-matching.component';
 import { ShadeMatchingComponent } from './shade-matching/shade-matching.component';
 import { SendMessageComponent } from './send-message/send-message.component';
+import { SmsReportComponent } from './sms-report/sms-report.component';
 
 const routes: Routes = [
     {
@@ -37,7 +38,10 @@ const routes: Routes = [
         path: 'shadeMatching', component: ShadeMatchingComponent, pathMatch: 'full'
     },
     {
-      path: 'SendMessage', component: SendMessageComponent, pathMatch: 'full'
+        path: 'SendMessage', component: SendMessageComponent, pathMatch: 'full'
+    },
+    {
+        path: 'smsReport', component: SmsReportComponent, pathMatch: 'full'
     },
 ];
 
@@ -58,7 +62,8 @@ const routes: Routes = [
         DigiColorAdminPanelComponent,
         OutwardMatchingComponent,
         ShadeMatchingComponent,
-        SendMessageComponent
+        SendMessageComponent,
+        SmsReportComponent
     ],
     exports: [RouterModule],
     schemas: [
