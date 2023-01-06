@@ -64,7 +64,8 @@ export let API_CONSTANTS = {
             SendMailToCustomerForShadeMatching: 'DigiColor/SendMailToCustomerForShadeMatching'
         },
         SMSReport:{
-            GetSMSReport: 'DigiColor/GetSMSReport'
+            GetSMSReport: 'DigiColor/GetSMSReport',
+            ReSendSMS: 'DigiColor/ReSendSMS'
         }
 
     }

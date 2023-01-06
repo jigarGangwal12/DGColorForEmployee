@@ -1,0 +1,19 @@
+.main_pop {
+    float: right;
+    margin-top: 6px;
+}
+
+::ng-deep .red-text {
+    color: #ed5565 !important;
+    font-weight: 600 !important;
+}
+
+::ng-deep .green-text {
+    color: #1AB394 !important;
+    font-weight: 600 !important;
+}
+
+::ng-deep .blue-text {
+    color: #1C84C6 !important;
+    font-weight: 600 !important;
+}

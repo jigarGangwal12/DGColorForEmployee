@@ -1,3 +1,19 @@
+<div class="header-dropdown">
+    <span class="headerDropdownMenu col-md-3 ">
+        <div class="dx-field-label" style="font-size:15px; color:#fff">From Date</div>
+        <div class="dx-field-value">
+            <dx-date-box [value]="fromDate" type="date" (onValueChanged)="fromDateValueChange($event)">
+            </dx-date-box>
+        </div>
+    </span>
+    <span class="headerDropdownMenu col-md-3 ">
+        <div class="dx-field-label" style="font-size:15px; color:#fff">To Date</div>
+        <div class="dx-field-value">
+            <dx-date-box [value]="toDate" type="date" (onValueChanged)="toDateValueChange($event)">
+            </dx-date-box>
+        </div>
+    </span>
+</div>
 <div class="container-fluid margin-top-none">
     <div class="bradcrum-link-left-side">
         <ul>
@@ -18,13 +34,49 @@
     </div>
 </div>
 <div class="grid-container sendSmsMainSectionScroll">
-    <div class="body-right-top-search-sec">
-        <input type="text" id="filter-text-box" placeholder="Search" 
-            autocomplete="off" />
+    <div class="shadowbox_inquiry">
+        <div class="col-md-12 col-md-padi-left-none">
+            <dx-data-grid id="reSendSMSList" [dataSource]="smsReportFinalData" [allowColumnResizing]="true"
+                [wordWrapEnabled]="true" [allowColumnReordering]="true" [showBorders]="true"
+                style="height: calc(100vh - 150px);" (onSelectionChanged)="selectionChangedHandler($event)">
+                <dxo-editing mode="cell" [allowDeleting]="false"></dxo-editing>
+                <dxo-paging [enabled]="false"></dxo-paging>
+                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                <dxo-selection mode="multiple" [showCheckBoxesMode]="checkBoxesMode"></dxo-selection>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10,20,50]" [showNavigationButtons]="true"
+                    [showInfo]="true">
+                </dxo-pager>
+                <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true">
+                </dxo-search-panel>
+                <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+                <dxo-column-chooser [enabled]="true" mode="dragAndDrop">
+                </dxo-column-chooser>
+                <dxi-column dataField="Recipient" caption="Recipient" [width]="92"></dxi-column>
+                <dxi-column dataField="SenderId" caption="Sender Id" [width]="92"></dxi-column>
+                <dxi-column dataField="Text" caption="SMS Text"></dxi-column>
+                <dxi-column dataField="Status" caption="Status" [width]="92" cellTemplate="statusCellTemplate">
+                </dxi-column>
+                <div *dxTemplate="let cell of 'statusCellTemplate'">
+                    <span
+                        [class]="(cell.data.Status == 'Fail') ? 'red-text' : ''  || (cell.data.Status == 'Sent') ? 'green-text' : '' || (cell.data.Status == 'Delivered') ? 'blue-text' : ''">
+                        {{ cell.text }}</span>
+                </div>
+                <dxi-column dataField="CreatedDate" dataType="datetime" [format]="{ type: 'dd/MM/yy hh:mm' }"
+                    [width]="110" caption="Created Datetime">
+                </dxi-column>
+                <dxi-column dataField="DeliveryDate" dataType="datetime" [format]="{ type: 'dd/MM/yy hh:mm' }"
+                    [width]="110" caption="Delivery Datetime">
+                </dxi-column>
+            </dx-data-grid>
+            <div class="main_pop">
+                <dx-button class="button" *ngIf="!disableReSendSMS" stylingMode="contained" text="Re-Send SMS"
+                    type="normal" [width]="150" (click)="onReSendSMSClick()"
+                    style="width: 150px;border: 1px solid #3d667a !important;background: #3d667a !important;transition: 0.3s;color: #fff;">
+                </dx-button>
+            </div>
+        </div>
     </div>
-   <div>
-    Grid Heree
-   </div>
 </div>
-
-
+<dx-load-panel #loadPanel shadingColor="rgba(0,0,0,0.4)" [(visible)]="loadingVisible" [showIndicator]="true"
+    [showPane]="true" [shading]="true" [closeOnOutsideClick]="false">
+</dx-load-panel>
