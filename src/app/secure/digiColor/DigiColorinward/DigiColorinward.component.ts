@@ -778,7 +778,7 @@ export class DigiColorinwardComponent implements OnInit {
 
   }
   UpdateInwardData(data: any) {
-    debugger
+    
     if (!data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;

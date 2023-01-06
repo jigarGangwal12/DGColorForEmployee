@@ -1176,7 +1176,7 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption2 = true;
         this.popUpShadeMatchingOption2Data = res.table.filter((par: any) => par.trail == 2);
         this.popUpShadeMatchingRgbCodeOption2 = this.popUpShadeMatchingOption2Data[0].rgbHexaCode;
-        debugger
+        
         this.chkShadeMatchingOption2 = this.popUpShadeMatchingOption2Data[0].isShowToCustomer;
         this.remarkMatchingOp2 = this.popUpShadeMatchingOption2Data[0].remarks;
         if (this.popUpShadeMatchingOption2Data[0].isShowToCustomer == true) {

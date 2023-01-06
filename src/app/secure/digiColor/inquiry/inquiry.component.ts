@@ -286,7 +286,7 @@ export class InquiryComponent implements OnInit {
       });
   }
   SendSMS(data: any) {
-    debugger
+    
     data.consumerName = data.consumerName.substring(0,34);
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.SMSSendForPostInquiryFormData, data)
       .subscribe((res: any) => {
@@ -294,7 +294,7 @@ export class InquiryComponent implements OnInit {
   }
   UpdateInquiryDataForm(data: any, da: any) {
     data.saveOrSubmit = da;
-    debugger
+    
     data.createdBy = this.UserId;
     if (!data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.requirementValue) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
@@ -433,7 +433,7 @@ export class InquiryComponent implements OnInit {
   }
   customerRequirementValueChange(da: any) {
     if (da && da.value) {
-      debugger
+      
       this.inquiryForm.requirementValue = da.value.toString();
     }
 
