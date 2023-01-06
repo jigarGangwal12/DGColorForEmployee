@@ -122,7 +122,7 @@
             <div class="option-right-side-info-bx">
               <h3>Option 2</h3>
               <span>
-                <i class="fa fa-solid fa-comment"style="cursor: pointer;" *ngIf="PredictionRemarkOp2"
+                <i class="fa fa-solid fa-comment" style="cursor: pointer;" *ngIf="PredictionRemarkOp2"
                   (click)="remarkPopoUpOpen1(PredictionRemarkOp2)"></i>
               </span>
             </div>
@@ -624,6 +624,8 @@
                     <span>
                       <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkPredictionOp1">
                       </dx-text-box>
+
+
                     </span>
                   </div>
                 </div>
@@ -924,6 +926,22 @@
                     <span>
                       <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkMatchingOp1">
                       </dx-text-box>
+                      <div id="fileuploader-container">
+                        <dx-file-uploader [(value)]="ShadeMatchingPdfOption1" selectButtonText="Select File"
+                          (onUploaded)="onScanPicsend($event)" [showFileList]="false"
+                          (onUploadStarted)="uploadStart(popUpShadeMatchingAllData,$event, '1')" [maxFileSize]="9000000"
+                          labelText="" accept="pdf*" uploadMode="instantly">
+                        </dx-file-uploader>
+                        <br>
+                        <div class="browse-link-text-doted">
+                          <span *ngIf="UpdateAttachments">
+                            <span *ngFor="let item of GetUploadedFiles(); let index = index ">
+                              <a title="Download" target="_blank" href="{{item.path}}">{{ item.name }}</a>&nbsp;&nbsp;
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+
                     </span>
                   </div>
                 </div>
@@ -979,6 +997,21 @@
                     <span>
                       <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkMatchingOp2">
                       </dx-text-box>
+                      <div id="fileuploader-container">
+                        <dx-file-uploader [(value)]="ShadeMatchingPdfOption2" selectButtonText="Select File"
+                          (onUploaded)="onScanPicsend($event)" [showFileList]="false"
+                          (onUploadStarted)="uploadStart(popUpShadeMatchingAllData,$event, '2')" [maxFileSize]="9000000"
+                          labelText="" accept="pdf*" uploadMode="instantly">
+                        </dx-file-uploader>
+                        <br>
+                        <div class="browse-link-text-doted">
+                          <span *ngIf="UpdateAttachments">
+                            <span *ngFor="let item of GetUploadedFiles(); let index = index ">
+                              <a title="Download" target="_blank" href="{{item.path}}">{{ item.name }}</a>&nbsp;&nbsp;
+                            </span>
+                          </span>
+                        </div>
+                      </div>
                     </span>
                   </div>
                 </div>
@@ -1033,6 +1066,21 @@
                     <span>
                       <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkMatchingOp3">
                       </dx-text-box>
+                      <div id="fileuploader-container">
+                        <dx-file-uploader [(value)]="ShadeMatchingPdfOption3" selectButtonText="Select File"
+                          (onUploaded)="onScanPicsend($event)" [showFileList]="false"
+                          (onUploadStarted)="uploadStart(popUpShadeMatchingAllData,$event, '3')" [maxFileSize]="9000000"
+                          labelText="" accept="pdf*" uploadMode="instantly">
+                        </dx-file-uploader>
+                        <br>
+                        <div class="browse-link-text-doted">
+                          <span *ngIf="UpdateAttachments">
+                            <span *ngFor="let item of GetUploadedFiles(); let index = index ">
+                              <a title="Download" target="_blank" href="{{item.path}}">{{ item.name }}</a>&nbsp;&nbsp;
+                            </span>
+                          </span>
+                        </div>
+                      </div>
                     </span>
                   </div>
                 </div>
@@ -1087,6 +1135,21 @@
                     <span>
                       <dx-text-box Id="case1" placeholder="Enter Remark" [(value)]="remarkMatchingOp4">
                       </dx-text-box>
+                      <div id="fileuploader-container">
+                        <dx-file-uploader [(value)]="ShadeMatchingPdfOption4" selectButtonText="Select File"
+                          (onUploaded)="onScanPicsend($event)" [showFileList]="false"
+                          (onUploadStarted)="uploadStart(popUpShadeMatchingAllData,$event, '4')" [maxFileSize]="9000000"
+                          labelText="" accept="*" uploadMode="instantly">
+                        </dx-file-uploader>
+                        <br>
+                        <div class="browse-link-text-doted">
+                          <span *ngIf="UpdateAttachments">
+                            <span *ngFor="let item of GetUploadedFiles(); let index = index ">
+                              <a title="Download" target="_blank" href="{{item.path}}">{{ item.name }}</a>&nbsp;&nbsp;
+                            </span>
+                          </span>
+                        </div>
+                      </div>
                     </span>
                   </div>
                 </div>
@@ -1102,7 +1165,7 @@
                 <span *ngIf="!predictionDataNotAvailabe && getUpdatedShadeMatchingFromDataColor">
                   <dx-button *ngIf="disableUpdateButton" class="submitbtn popup-update-btn-getfromDataColor"
                     text="Update Record" type="normal"
-                    (click)="UpdateShadeMatchingAfterUpdatedRecipeFromDataColor(popUpShadeMatchingAllData)">
+                    (click)="UpdateShadeMatchingAfterUpdatedRecipeFromDataColor(popUpShadeMatchingAllData,selectedColorGamut)">
                   </dx-button>
                 </span>
                 <span

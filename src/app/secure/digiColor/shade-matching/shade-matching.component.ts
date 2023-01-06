@@ -254,8 +254,14 @@ export class ShadeMatchingComponent implements OnInit {
   lightSourceCount2: any = 0;
   lightSourceCount3: any = 0;
   lightSourceCount4: any = 0;
-
-  constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent) {
+  ShadeMatchingPdfOption1: any = [];
+  ShadeMatchingPdfOption2: any = [];
+  ShadeMatchingPdfOption3: any = [];
+  ShadeMatchingPdfOption4: any = [];
+  UpdateAttachments: any[] = [];
+  filespushData: any[] = [];
+  DownloadPath: any = 'http://219.65.56.59/api/api/DGColorDocument/';
+  constructor(public apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.isShowPopOver = false;
     this.ScreenSizeWidth = window.innerWidth;
     if (this.ScreenSizeWidth >= 1366) {
@@ -1176,7 +1182,7 @@ export class ShadeMatchingComponent implements OnInit {
         this.poupShowShadeMatchingOption2 = true;
         this.popUpShadeMatchingOption2Data = res.table.filter((par: any) => par.trail == 2);
         this.popUpShadeMatchingRgbCodeOption2 = this.popUpShadeMatchingOption2Data[0].rgbHexaCode;
-        
+
         this.chkShadeMatchingOption2 = this.popUpShadeMatchingOption2Data[0].isShowToCustomer;
         this.remarkMatchingOp2 = this.popUpShadeMatchingOption2Data[0].remarks;
         if (this.popUpShadeMatchingOption2Data[0].isShowToCustomer == true) {
@@ -1614,6 +1620,7 @@ export class ShadeMatchingComponent implements OnInit {
       popUpShadeMatchingAllData.forEach((element: any) => {
         element.colourGamut = selectedColorGamut;
       });
+
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.Insert_Shade_Matching, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
           this.disableShadeMatchingUpdateButton = false;
@@ -1629,6 +1636,7 @@ export class ShadeMatchingComponent implements OnInit {
       popUpShadeMatchingAllData.forEach((element: any) => {
         element.colourGamut = selectedColorGamut;
       });
+
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UpdateShadeMatchingRecipe, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
@@ -1637,9 +1645,98 @@ export class ShadeMatchingComponent implements OnInit {
         });
     }
   }
-  UpdateShadeMatchingAfterUpdatedRecipeFromDataColor(popUpShadeMatchingAllData: any) {
+  GetUploadedFiles(): any[] {
+    // const filesd[];
+    this.filespushData = [];
+    this.UpdateAttachments.forEach(element => {
+      const file_value = element;
+      const file_name = element.substring(19, element.length);
+      const fileObj = {};
+      fileObj['path'] = this.DownloadPath + file_value;
+      fileObj['name'] = file_name;
+      this.filespushData.push(fileObj);
+    });
+    return this.filespushData;
+  }
+  uploadStart(popUpShadeMatchingAllData: any, da: any, option: any) {
+    if (option == 1) {
+      const filesToUpload = <File[]>this.ShadeMatchingPdfOption1;
+      const formData = new FormData();
+      filesToUpload.forEach(element => {
+        formData.append('file', element, element.name);
+      });
+
+      this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
+        .subscribe((res: any) => {
+          this.UpdateAttachments = (res).split('|');
+          popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 1) {
+              element.fileUploadName = res;
+            }
+          });
+        });
+    }
+    if (option == 2) {
+      const filesToUpload = <File[]>this.ShadeMatchingPdfOption1;
+      const formData = new FormData();
+      filesToUpload.forEach(element => {
+        formData.append('file', element, element.name);
+      });
+
+      this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
+        .subscribe((res: any) => {
+          this.UpdateAttachments = (res).split('|');
+          popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 2) {
+              element.fileUploadName = res;
+            }
+          });
+        });
+    }
+    if (option == 3) {
+      const filesToUpload = <File[]>this.ShadeMatchingPdfOption1;
+      const formData = new FormData();
+      filesToUpload.forEach(element => {
+        formData.append('file', element, element.name);
+      });
+
+      this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
+        .subscribe((res: any) => {
+          this.UpdateAttachments = (res).split('|');
+          popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 3) {
+              element.fileUploadName = res;
+            }
+          });
+        });
+    }
+    if (option == 4) {
+      const filesToUpload = <File[]>this.ShadeMatchingPdfOption1;
+      const formData = new FormData();
+      filesToUpload.forEach(element => {
+        formData.append('file', element, element.name);
+      });
+
+      this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
+        .subscribe((res: any) => {
+          this.UpdateAttachments = (res).split('|');
+          popUpShadeMatchingAllData.forEach((element: any) => {
+            if (element.trail == 4) {
+              element.fileUploadName = res;
+            }
+          });
+        });
+    }
+  }
+
+  onScanPicsend(data: any) {
+  }
+  UpdateShadeMatchingAfterUpdatedRecipeFromDataColor(popUpShadeMatchingAllData: any, selectedColorGamut: any) {
     if (popUpShadeMatchingAllData) {
       this.disableUpdateButton = true;
+      popUpShadeMatchingAllData.forEach((element: any) => {
+        element.colourGamut = selectedColorGamut;
+      });
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.InsertShadeMatchingAfterLatestGetFromDataColor, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;

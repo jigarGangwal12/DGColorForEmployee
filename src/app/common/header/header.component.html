@@ -12,7 +12,7 @@
               <dx-list #list [dataSource]="menuContentItem.subMenu" [height]="300" [searchEnabled]="true"
                 searchExpr="Name" searchMode="contains">
                 <div *dxTemplate="let data of 'item'" (click)="onVisible($event)">
-                  <div *ngIf="data.routing"> <a href="javascript:void();" [routerLink]="data.routing">
+                  <div *ngIf="data.routing" [routerLink]="data.routing"> <a>
                       {{ data.Name }}</a>
                   </div>
                   <div *ngIf="!data.routing">{{ data.Name }}</div>

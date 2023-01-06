@@ -52,7 +52,8 @@ export let API_CONSTANTS = {
             UpdateShadeMatchingRecipe: 'DigiColor/UpdateShadeMatchingRecipe',
             InsertRecipePredictionAfterLatestGetFromDataColor: 'DigiColor/InsertRecipePredictionAfterLatestGetFromDataColor',
             InsertShadeMatchingAfterLatestGetFromDataColor: 'DigiColor/InsertShadeMatchingAfterLatestGetFromDataColor',
-            Get_All_Color_Gamut: 'DigiColor/GetAllColorGamut'
+            Get_All_Color_Gamut: 'DigiColor/GetAllColorGamut',
+            UploadShadeMatchingPdf: 'DigiColor/UploadAttachments',
         },
         SendMessage:{
             getDigicolorInwardDetailForSendSMS: 'DigiColor/getDigicolorInwardDetailForSendSMS',

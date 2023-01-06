@@ -2,12 +2,12 @@
   <ul>
     <!-- logout -->
     <li>
-      <a href="javascript:void();" class="login_border" (click)="logout()"><i class="fa fa-sign-out"></i></a>
+      <a  class="login_border" (click)="logout()"><i class="fa fa-sign-out"></i></a>
     </li>
     <!-- logout -->
     <!-- Open Menu -->
     <li>
-      <a href="javascript:void();" class="login_border" (click)="OnClickViewMenu()"><i class="fa fa-bars"></i></a>
+      <a  class="login_border" (click)="OnClickViewMenu()"><i class="fa fa-bars" style="cursor: pointer;"></i></a>
     </li>
     <!-- Open Menu -->
   </ul>
@@ -32,7 +32,7 @@
         searchMode="contains" pageLoadMode="scrollBottom">
         <div *dxTemplate="let data of 'item'" (click)="onVisible($event)" class="DigiColor_Menu_Bdr">
           <div *ngIf="data.routing">
-            <a href="javascript:void();" (click)="OnClickViewMenu()" [routerLink]="data.routing">
+            <a  (click)="OnClickViewMenu()" [routerLink]="data.routing">
               {{ data.Name }}
             </a>
           </div>
