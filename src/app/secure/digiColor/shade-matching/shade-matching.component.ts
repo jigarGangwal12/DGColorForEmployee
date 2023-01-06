@@ -260,7 +260,7 @@ export class ShadeMatchingComponent implements OnInit {
   ShadeMatchingPdfOption4: any = [];
   UpdateAttachments: any[] = [];
   filespushData: any[] = [];
-  DownloadPath: any = 'http://219.65.56.59/api/api/DGColorDocument/';
+  DownloadPath: any = 'http://219.65.56.59:8595/api/DGColorDocument/';
   constructor(public apiService: ApiService, private router: Router, private secure: SecureComponent) {
     this.isShowPopOver = false;
     this.ScreenSizeWidth = window.innerWidth;
@@ -1100,6 +1100,7 @@ export class ShadeMatchingComponent implements OnInit {
           this.shadeMatchingDataNotAvailable = false
           this.showUpdatebtnInShadeMatching = true;
           this.filter.colorGamutSelected = res.table[0].colourGamut;
+
         } else {
           this.showUpdatebtnInShadeMatching = false;
           this.GetShadeMatchingDataFromDataColorData(this.ShadeIdforPassinDataColor);
@@ -1160,6 +1161,10 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption1 = this.popUpShadeMatchingOption1Data[0].rgbHexaCode;
         this.chkShadeMatchingOption1 = this.popUpShadeMatchingOption1Data[0].isShowToCustomer;
         this.remarkMatchingOp1 = this.popUpShadeMatchingOption1Data[0].remarks;
+        if (this.popUpShadeMatchingOption1Data[0].fileUploadedName) {
+          this.UpdateAttachments = this.popUpShadeMatchingOption1Data[0].fileUploadedName.split('|');
+        }
+
         if (this.popUpShadeMatchingOption1Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 1) {
