@@ -930,11 +930,11 @@
                         <dx-file-uploader [(value)]="ShadeMatchingPdfOption1" selectButtonText="Select File"
                           (onUploaded)="onScanPicsend($event)" [showFileList]="false"
                           (onUploadStarted)="uploadStart(popUpShadeMatchingAllData,$event, '1')" [maxFileSize]="9000000"
-                          labelText="" accept="pdf*" uploadMode="instantly">
+                          labelText="Option 1" accept="pdf*" uploadMode="instantly">
                         </dx-file-uploader>
                         <br>
                         <div class="browse-link-text-doted">
-                          <span *ngIf="UpdateAttachments">
+                          <span *ngIf="UpdateAttachmentsOption1">
                             <span *ngFor="let item of GetUploadedFiles(); let index = index ">
                               <a title="Download" target="_blank" href="{{item.path}}">{{ item.name }}</a>&nbsp;&nbsp;
                             </span>
@@ -1005,8 +1005,8 @@
                         </dx-file-uploader>
                         <br>
                         <div class="browse-link-text-doted">
-                          <span *ngIf="UpdateAttachments">
-                            <span *ngFor="let item of GetUploadedFiles(); let index = index ">
+                          <span *ngIf="UpdateAttachmentsOption2">
+                            <span *ngFor="let item of GetUploadedFilesOption2(); let index = index ">
                               <a title="Download" target="_blank" href="{{item.path}}">{{ item.name }}</a>&nbsp;&nbsp;
                             </span>
                           </span>
@@ -1074,8 +1074,8 @@
                         </dx-file-uploader>
                         <br>
                         <div class="browse-link-text-doted">
-                          <span *ngIf="UpdateAttachments">
-                            <span *ngFor="let item of GetUploadedFiles(); let index = index ">
+                          <span *ngIf="UpdateAttachmentsOption3">
+                            <span *ngFor="let item of GetUploadedFilesOption3(); let index = index ">
                               <a title="Download" target="_blank" href="{{item.path}}">{{ item.name }}</a>&nbsp;&nbsp;
                             </span>
                           </span>
@@ -1143,8 +1143,8 @@
                         </dx-file-uploader>
                         <br>
                         <div class="browse-link-text-doted">
-                          <span *ngIf="UpdateAttachments">
-                            <span *ngFor="let item of GetUploadedFiles(); let index = index ">
+                          <span *ngIf="UpdateAttachmentsOption4">
+                            <span *ngFor="let item of GetUploadedFilesOption4(); let index = index ">
                               <a title="Download" target="_blank" href="{{item.path}}">{{ item.name }}</a>&nbsp;&nbsp;
                             </span>
                           </span>
