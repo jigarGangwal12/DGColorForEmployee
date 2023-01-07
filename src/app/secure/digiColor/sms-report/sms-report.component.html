@@ -2,14 +2,14 @@
     <span class="headerDropdownMenu col-md-3 ">
         <div class="dx-field-label" style="font-size:15px; color:#fff">From Date</div>
         <div class="dx-field-value">
-            <dx-date-box [value]="fromDate" type="date" (onValueChanged)="fromDateValueChange($event)">
+            <dx-date-box [value]="fromDate" type="date" (onValueChanged)="fromDateValueChange($event)"  displayFormat="dd-MM-yyyy">
             </dx-date-box>
         </div>
     </span>
     <span class="headerDropdownMenu col-md-3 ">
         <div class="dx-field-label" style="font-size:15px; color:#fff">To Date</div>
         <div class="dx-field-value">
-            <dx-date-box [value]="toDate" type="date" (onValueChanged)="toDateValueChange($event)">
+            <dx-date-box [value]="toDate" type="date" (onValueChanged)="toDateValueChange($event)"  displayFormat="dd-MM-yyyy">
             </dx-date-box>
         </div>
     </span>

@@ -3,6 +3,8 @@ import notify from 'devextreme/ui/notify';
 import { API_CONSTANTS } from '../../../constants/api-constants';
 import { ApiService } from '../../../core/services/api.service';
 import { Router } from '@angular/router';
+import 'rxjs/add/observable/interval';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-sms-report',
   templateUrl: './sms-report.component.html',
@@ -21,12 +23,18 @@ export class SmsReportComponent implements OnInit {
   checkBoxesMode = 'always';
   disableReSendSMS: boolean = false;
   loadingVisible: boolean = false;
+  userName: any;
+  
 
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
+    this.userName = localStorage.getItem('UserName');
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.getSMSReport();
+    Observable.interval(50000)
+    .subscribe((val) => { this.getSMSReport(); });
+
   }
 
   getSMSReport() {
@@ -40,11 +48,17 @@ export class SmsReportComponent implements OnInit {
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.SMSReport.GetSMSReport, dt)
       .subscribe((res: any) => {
         this.smsReportData = JSON.parse(res.getReportData);
-        this.smsReportFinalData = this.smsReportData.data.filter((par: any) => par.TemplateId == '1207166987942256080' || par.TemplateId == '1207166987930466583' || par.TemplateId == '1207166979251570904' || par.TemplateId == '1207166979294395439' || par.TemplateId == '1207166979257063681'
-          || par.TemplateId == '1207166979313658622' || par.TemplateId == '1207166979304297607' || par.TemplateId == '1207166987920818847' || par.TemplateId == '1207166987925973028' || par.TemplateId == '1207166987945829541'
-          || par.TemplateId == '1207167082238473391' || par.TemplateId == '1207167082244548733' || par.TemplateId == '1207167145033299243' || par.TemplateId == '1207167213975458818' || par.TemplateId == '1207167283492548257'
-          || par.TemplateId == '1207167283488041630' || par.TemplateId == '1207167283482408492' || par.TemplateId == '1207167283477656737' || par.TemplateId == '1207167283469804720');
-          this.loadingVisible = false;
+        if (this.userName !== 'admin2') {
+          this.smsReportFinalData = this.smsReportData.data.filter((par: any) => par.TemplateId == '1207166987942256080' || par.TemplateId == '1207166987930466583' || par.TemplateId == '1207166979251570904' || par.TemplateId == '1207166979294395439' || par.TemplateId == '1207166979257063681'
+            || par.TemplateId == '1207166979313658622' || par.TemplateId == '1207166979304297607' || par.TemplateId == '1207166987920818847' || par.TemplateId == '1207166987925973028' || par.TemplateId == '1207166987945829541'
+            || par.TemplateId == '1207167082238473391' || par.TemplateId == '1207167082244548733' || par.TemplateId == '1207167145033299243' || par.TemplateId == '1207167213975458818' || par.TemplateId == '1207167283492548257'
+            || par.TemplateId == '1207167283488041630' || par.TemplateId == '1207167283482408492' || par.TemplateId == '1207167283477656737' || par.TemplateId == '1207167283469804720');
+        }
+        else {
+          this.smsReportFinalData = this.smsReportData.data;
+        }
+
+        this.loadingVisible = false;
       });
   }
 
@@ -61,11 +75,16 @@ export class SmsReportComponent implements OnInit {
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.SMSReport.GetSMSReport, dt)
       .subscribe((res: any) => {
         this.smsReportData = JSON.parse(res.getReportData);
-        this.smsReportFinalData = this.smsReportData.data.filter((par: any) => par.TemplateId == '1207166987942256080' || par.TemplateId == '1207166987930466583' || par.TemplateId == '1207166979251570904' || par.TemplateId == '1207166979294395439' || par.TemplateId == '1207166979257063681'
-          || par.TemplateId == '1207166979313658622' || par.TemplateId == '1207166979304297607' || par.TemplateId == '1207166987920818847' || par.TemplateId == '1207166987925973028' || par.TemplateId == '1207166987945829541'
-          || par.TemplateId == '1207167082238473391' || par.TemplateId == '1207167082244548733' || par.TemplateId == '1207167145033299243' || par.TemplateId == '1207167213975458818' || par.TemplateId == '1207167283492548257'
-          || par.TemplateId == '1207167283488041630' || par.TemplateId == '1207167283482408492' || par.TemplateId == '1207167283477656737' || par.TemplateId == '1207167283469804720');
-          this.loadingVisible = false;
+        if (this.userName !== 'admin2') {
+          this.smsReportFinalData = this.smsReportData.data.filter((par: any) => par.TemplateId == '1207166987942256080' || par.TemplateId == '1207166987930466583' || par.TemplateId == '1207166979251570904' || par.TemplateId == '1207166979294395439' || par.TemplateId == '1207166979257063681'
+            || par.TemplateId == '1207166979313658622' || par.TemplateId == '1207166979304297607' || par.TemplateId == '1207166987920818847' || par.TemplateId == '1207166987925973028' || par.TemplateId == '1207166987945829541'
+            || par.TemplateId == '1207167082238473391' || par.TemplateId == '1207167082244548733' || par.TemplateId == '1207167145033299243' || par.TemplateId == '1207167213975458818' || par.TemplateId == '1207167283492548257'
+            || par.TemplateId == '1207167283488041630' || par.TemplateId == '1207167283482408492' || par.TemplateId == '1207167283477656737' || par.TemplateId == '1207167283469804720');
+        }
+        else {
+          this.smsReportFinalData = this.smsReportData.data;
+        }
+        this.loadingVisible = false;
       });
   }
   toDateValueChange(event: any) {
@@ -80,12 +99,18 @@ export class SmsReportComponent implements OnInit {
     }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.SMSReport.GetSMSReport, dt)
       .subscribe((res: any) => {
+        debugger
         this.smsReportData = JSON.parse(res.getReportData);
-        this.smsReportFinalData = this.smsReportData.data.filter((par: any) => par.TemplateId == '1207166987942256080' || par.TemplateId == '1207166987930466583' || par.TemplateId == '1207166979251570904' || par.TemplateId == '1207166979294395439' || par.TemplateId == '1207166979257063681'
-          || par.TemplateId == '1207166979313658622' || par.TemplateId == '1207166979304297607' || par.TemplateId == '1207166987920818847' || par.TemplateId == '1207166987925973028' || par.TemplateId == '1207166987945829541'
-          || par.TemplateId == '1207167082238473391' || par.TemplateId == '1207167082244548733' || par.TemplateId == '1207167145033299243' || par.TemplateId == '1207167213975458818' || par.TemplateId == '1207167283492548257'
-          || par.TemplateId == '1207167283488041630' || par.TemplateId == '1207167283482408492' || par.TemplateId == '1207167283477656737' || par.TemplateId == '1207167283469804720');
-          this.loadingVisible = false;
+        if (this.userName !== 'admin2') {
+          this.smsReportFinalData = this.smsReportData.data.filter((par: any) => par.TemplateId == '1207166987942256080' || par.TemplateId == '1207166987930466583' || par.TemplateId == '1207166979251570904' || par.TemplateId == '1207166979294395439' || par.TemplateId == '1207166979257063681'
+            || par.TemplateId == '1207166979313658622' || par.TemplateId == '1207166979304297607' || par.TemplateId == '1207166987920818847' || par.TemplateId == '1207166987925973028' || par.TemplateId == '1207166987945829541'
+            || par.TemplateId == '1207167082238473391' || par.TemplateId == '1207167082244548733' || par.TemplateId == '1207167145033299243' || par.TemplateId == '1207167213975458818' || par.TemplateId == '1207167283492548257'
+            || par.TemplateId == '1207167283488041630' || par.TemplateId == '1207167283482408492' || par.TemplateId == '1207167283477656737' || par.TemplateId == '1207167283469804720');
+        }
+        else {
+          this.smsReportFinalData = this.smsReportData.data;
+        }
+        this.loadingVisible = false;
       });
   }
 
