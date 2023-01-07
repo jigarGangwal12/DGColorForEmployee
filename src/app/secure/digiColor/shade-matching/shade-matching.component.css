@@ -768,11 +768,11 @@ i {
 
 ::ng-deep #fileuploader-container {
   border: 1px solid #d3d3d3;
-  margin: 20px 20px 0 20px;
+  margin: 19px 0px 0 0px;
 }
 .browse-link-text-doted {
   float: left;
-  margin-top: 0px;
+  margin-top: -30px;
   width: 100%;
-  padding-left: 21px;
+  padding-left: 11px;
 }

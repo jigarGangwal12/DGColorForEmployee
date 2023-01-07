@@ -258,7 +258,10 @@ export class ShadeMatchingComponent implements OnInit {
   ShadeMatchingPdfOption2: any = [];
   ShadeMatchingPdfOption3: any = [];
   ShadeMatchingPdfOption4: any = [];
-  UpdateAttachments: any[] = [];
+  UpdateAttachmentsOption1: any[] = [];
+  UpdateAttachmentsOption2: any[] = [];
+  UpdateAttachmentsOption3: any[] = [];
+  UpdateAttachmentsOption4: any[] = [];
   filespushData: any[] = [];
   DownloadPath: any = 'http://219.65.56.59:8595/api/DGColorDocument/';
   constructor(public apiService: ApiService, private router: Router, private secure: SecureComponent) {
@@ -1162,9 +1165,8 @@ export class ShadeMatchingComponent implements OnInit {
         this.chkShadeMatchingOption1 = this.popUpShadeMatchingOption1Data[0].isShowToCustomer;
         this.remarkMatchingOp1 = this.popUpShadeMatchingOption1Data[0].remarks;
         if (this.popUpShadeMatchingOption1Data[0].fileUploadedName) {
-          this.UpdateAttachments = this.popUpShadeMatchingOption1Data[0].fileUploadedName.split('|');
+          this.UpdateAttachmentsOption1 = this.popUpShadeMatchingOption1Data[0].fileUploadedName.split('|');
         }
-
         if (this.popUpShadeMatchingOption1Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 1) {
@@ -1190,6 +1192,9 @@ export class ShadeMatchingComponent implements OnInit {
 
         this.chkShadeMatchingOption2 = this.popUpShadeMatchingOption2Data[0].isShowToCustomer;
         this.remarkMatchingOp2 = this.popUpShadeMatchingOption2Data[0].remarks;
+          if (this.popUpShadeMatchingOption2Data[0].fileUploadedName) {
+          this.UpdateAttachmentsOption2 = this.popUpShadeMatchingOption2Data[0].fileUploadedName.split('|');
+        }
         if (this.popUpShadeMatchingOption2Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 2) {
@@ -1213,6 +1218,9 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption3 = this.popUpShadeMatchingOption3Data[0].rgbHexaCode;
         this.chkShadeMatchingOption3 = this.popUpShadeMatchingOption3Data[0].isShowToCustomer;
         this.remarkMatchingOp3 = this.popUpShadeMatchingOption3Data[0].remarks;
+        if (this.popUpShadeMatchingOption3Data[0].fileUploadedName) {
+          this.UpdateAttachmentsOption3 = this.popUpShadeMatchingOption3Data[0].fileUploadedName.split('|');
+        }
         if (this.popUpShadeMatchingOption3Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 3) {
@@ -1236,6 +1244,9 @@ export class ShadeMatchingComponent implements OnInit {
         this.popUpShadeMatchingRgbCodeOption4 = this.popUpShadeMatchingOption4Data[0].rgbHexaCode;
         this.chkShadeMatchingOption4 = this.popUpShadeMatchingOption4Data[0].isShowToCustomer;
         this.remarkMatchingOp4 = this.popUpShadeMatchingOption4Data[0].remarks;
+        if (this.popUpShadeMatchingOption4Data[0].fileUploadedName) {
+          this.UpdateAttachmentsOption4 = this.popUpShadeMatchingOption4Data[0].fileUploadedName.split('|');
+        }
         if (this.popUpShadeMatchingOption4Data[0].isShowToCustomer == true) {
           this.popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 4) {
@@ -1653,7 +1664,46 @@ export class ShadeMatchingComponent implements OnInit {
   GetUploadedFiles(): any[] {
     // const filesd[];
     this.filespushData = [];
-    this.UpdateAttachments.forEach(element => {
+    this.UpdateAttachmentsOption1.forEach(element => {
+      const file_value = element;
+      const file_name = element.substring(19, element.length);
+      const fileObj = {};
+      fileObj['path'] = this.DownloadPath + file_value;
+      fileObj['name'] = file_name;
+      this.filespushData.push(fileObj);
+    });
+    return this.filespushData;
+  }
+  GetUploadedFilesOption2(): any[] {
+    // const filesd[];
+    this.filespushData = [];
+    this.UpdateAttachmentsOption2.forEach(element => {
+      const file_value = element;
+      const file_name = element.substring(19, element.length);
+      const fileObj = {};
+      fileObj['path'] = this.DownloadPath + file_value;
+      fileObj['name'] = file_name;
+      this.filespushData.push(fileObj);
+    });
+    return this.filespushData;
+  }
+  GetUploadedFilesOption3(): any[] {
+    // const filesd[];
+    this.filespushData = [];
+    this.UpdateAttachmentsOption3.forEach(element => {
+      const file_value = element;
+      const file_name = element.substring(19, element.length);
+      const fileObj = {};
+      fileObj['path'] = this.DownloadPath + file_value;
+      fileObj['name'] = file_name;
+      this.filespushData.push(fileObj);
+    });
+    return this.filespushData;
+  }
+  GetUploadedFilesOption4(): any[] {
+    // const filesd[];
+    this.filespushData = [];
+    this.UpdateAttachmentsOption4.forEach(element => {
       const file_value = element;
       const file_name = element.substring(19, element.length);
       const fileObj = {};
@@ -1673,7 +1723,7 @@ export class ShadeMatchingComponent implements OnInit {
 
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
         .subscribe((res: any) => {
-          this.UpdateAttachments = (res).split('|');
+          this.UpdateAttachmentsOption1 = (res).split('|');
           popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 1) {
               element.fileUploadName = res;
@@ -1690,7 +1740,7 @@ export class ShadeMatchingComponent implements OnInit {
 
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
         .subscribe((res: any) => {
-          this.UpdateAttachments = (res).split('|');
+          this.UpdateAttachmentsOption2 = (res).split('|');
           popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 2) {
               element.fileUploadName = res;
@@ -1707,7 +1757,7 @@ export class ShadeMatchingComponent implements OnInit {
 
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
         .subscribe((res: any) => {
-          this.UpdateAttachments = (res).split('|');
+          this.UpdateAttachmentsOption3 = (res).split('|');
           popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 3) {
               element.fileUploadName = res;
@@ -1724,7 +1774,7 @@ export class ShadeMatchingComponent implements OnInit {
 
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
         .subscribe((res: any) => {
-          this.UpdateAttachments = (res).split('|');
+          this.UpdateAttachmentsOption4 = (res).split('|');
           popUpShadeMatchingAllData.forEach((element: any) => {
             if (element.trail == 4) {
               element.fileUploadName = res;
