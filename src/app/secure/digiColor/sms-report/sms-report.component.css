@@ -17,3 +17,19 @@
     color: #1C84C6 !important;
     font-weight: 600 !important;
 }
+.sms-report-hdr-date{
+    margin-left: 5px !important;
+}
+.fromDate-hdr{
+    font-size: 15px !important;
+    color: #fff !important;
+    padding: 3px !important;
+    width: auto !important;
+    margin-right: 8px !important;
+}
+.FromDate-box{
+    float: left !important; margin-top: -2px !important;
+}
+.FromDate-box .dx-texteditor.dx-editor-outlined {
+    border: 1px solid #607d8b !important;
+}
