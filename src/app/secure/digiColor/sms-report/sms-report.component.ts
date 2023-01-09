@@ -3,6 +3,7 @@ import notify from 'devextreme/ui/notify';
 import { API_CONSTANTS } from '../../../constants/api-constants';
 import { ApiService } from '../../../core/services/api.service';
 import { Router } from '@angular/router';
+import { SecureComponent } from '../../secure.component';
 // import 'rxjs/add/observable/interval';
 // import { Observable } from 'rxjs';
 @Component({
@@ -26,9 +27,10 @@ export class SmsReportComponent implements OnInit {
   userName: any;
 
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private apiService: ApiService, private router: Router,private secure: SecureComponent) { }
 
   ngOnInit(): void {
+    this.secure.showHideLogo = false;
     this.userName = localStorage.getItem('UserName');
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.getSMSReport();
