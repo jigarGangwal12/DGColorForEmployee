@@ -1,18 +1,25 @@
 <div class="header-dropdown">
-    <span class="headerDropdownMenu">
-        <div class="dx-field-label fromDate-hdr">From Date</div>
-        <div class="dx-field-value FromDate-box">
-            <dx-date-box [value]="fromDate" type="date" (onValueChanged)="fromDateValueChange($event)"  displayFormat="dd-MM-yyyy">
+    <span class="headerDropdownMenu col-md-3 ">
+        <div class="dx-field-label" style="font-size:15px; color:#fff">From Date</div>
+        <div class="dx-field-value">
+            <dx-date-box [value]="fromDate" type="date" (onValueChanged)="fromDateValueChange($event)"
+                displayFormat="dd-MM-yyyy">
             </dx-date-box>
         </div>
     </span>
-    <span class="headerDropdownMenu sms-report-hdr-date">
-        <div class="dx-field-label fromDate-hdr">To Date</div>
-        <div class="dx-field-value FromDate-box">
-            <dx-date-box [value]="toDate" type="date" (onValueChanged)="toDateValueChange($event)"  displayFormat="dd-MM-yyyy">
+    <span class="headerDropdownMenu col-md-3 ">
+        <div class="dx-field-label" style="font-size:15px; color:#fff">To Date</div>
+        <div class="dx-field-value">
+            <dx-date-box [value]="toDate" type="date" (onValueChanged)="toDateValueChange($event)"
+                displayFormat="dd-MM-yyyy">
             </dx-date-box>
         </div>
     </span>
+    <!-- <span class="headerDropdownMenu col-md-3 ">
+        <dx-button class="button" stylingMode="contained" text="Get Location" type="normal" [width]="150" (click)="getLocation()">
+        </dx-button>
+    </span> -->
+
 </div>
 <div class="container-fluid margin-top-none">
     <div class="bradcrum-link-left-side">
