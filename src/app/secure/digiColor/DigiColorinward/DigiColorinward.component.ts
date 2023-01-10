@@ -131,7 +131,7 @@ export class DigiColorinwardComponent implements OnInit {
   countForEmailIdCheck: any = 0;
   RemainingshadeNameIddata: any;
   aa: any;
-  notShowSbnOrUpdateBtn: boolean =false;
+  notShowSbnOrUpdateBtn: boolean = false;
   constructor(private apiService: ApiService, private router: Router, private secure: SecureComponent
     , public InwardDataModel: InwardDataModel,
   ) {
@@ -349,9 +349,15 @@ export class DigiColorinwardComponent implements OnInit {
           shadeId: params.data.shadeid,
           caseIdSharedIdGroup: params.data.caseIdSharedIdGroup
         }
-        this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit, data).subscribe((res: any) => {
-          params.successCallback(res.table3);
-        })
+        var a = window.navigator.onLine;
+        if (a == false) {
+          notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+          return;
+        } else {
+          this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit, data).subscribe((res: any) => {
+            params.successCallback(res.table3);
+          });
+        }
       }
     } as IDetailCellRendererParams;
 
@@ -386,9 +392,15 @@ export class DigiColorinwardComponent implements OnInit {
           shadeId: params.data.shadeid,
           caseIdSharedIdGroup: params.data.caseIdSharedIdGroup
         }
-        this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit, data).subscribe((res: any) => {
-          params.successCallback(res.table4);
-        })
+        var a = window.navigator.onLine;
+        if (a == false) {
+          notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+          return;
+        } else {
+          this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit, data).subscribe((res: any) => {
+            params.successCallback(res.table4);
+          });
+        }
       }
     } as IDetailCellRendererParams;
     //this.detailCellRendererParams as GetDetailRowDataParams;
@@ -411,9 +423,11 @@ export class DigiColorinwardComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.windowHeight = (window.innerHeight) - 80;
     this.windowHeight = this.windowHeight + 'px';
+    debugger
 
   }
   getUserList() {
+
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorUserId, { empCode: this.EmpCode })
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0 && res.table[0].digiColorUserId) {
@@ -433,6 +447,11 @@ export class DigiColorinwardComponent implements OnInit {
       });
   }
   getallPendingSampleId() {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     // this.loadingVisible = true;
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetAllpendingSampleMappingData, { digicolorUserId: this.digiColorUserId, empCode: this.EmpCode, })
       .subscribe((res: any) => {
@@ -442,6 +461,11 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   getCaseIdByEmpCode() {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetCaseIdByEmpCodeData, { empCode: this.EmpCode, userRole: this.userRole })
       .subscribe((res: any) => {
         this.caseIdData = res.table;
@@ -467,6 +491,11 @@ export class DigiColorinwardComponent implements OnInit {
     // this.samppleDataForMaping = this.allSampleidForMapping.filter((data: any) => data.customerId == this.filterdata[0].consigneeCode);
   }
   getCustomerSubstrate() {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetCustomerSubstrate, '')
       .subscribe((res: any) => {
         this.customerSubStrateData = res.table;
@@ -523,7 +552,11 @@ export class DigiColorinwardComponent implements OnInit {
     }
   }
   MapSampleDatatoCaseIdDataForm(da: any) {
-
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.disablesubbtn = true;
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.MapSampleIdWithCaseId, this.selectedRowData)
       .subscribe((res: any) => {
@@ -588,6 +621,11 @@ export class DigiColorinwardComponent implements OnInit {
     this.InwardDataModel.requirement = da.value;
   }
   InwardcaseIdValueChanged(data: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     if (data.selectedItem) {
       this.shadeNameIddata = [];
       this.shadeNameIddata = this.shadeNameId.filter((da: any) => da.consigneeCode == data.selectedItem.consigneeCode);
@@ -633,11 +671,16 @@ export class DigiColorinwardComponent implements OnInit {
     this.InwardDataModel.caseId = consigneeDetail[0].caseId;
     this.InwardDataModel.consigneeCode = consigneeDetail[0].consigneeCode + ' - ' + consigneeDetail[0].consigneeName;
     this.InwardDataModel.saveOrSubmit = 'Update';
-      this.notShowSbnOrUpdateBtn = false;
+    this.notShowSbnOrUpdateBtn = false;
     if (da.data.status.trim() == 'Inward' || da.data.status.trim() == 'Open') {
       this.notShowSbnOrUpdateBtn = false;
     } else {
       this.notShowSbnOrUpdateBtn = true;
+    }
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
     }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.GetDigiColorInwardDataForEdit,
       { caseId: this.InwardDataModel.caseId, shadeId: consigneeDetail[0].shadeid, caseIdSharedIdGroup: consigneeDetail[0].caseIdSharedIdGroup })
@@ -689,6 +732,11 @@ export class DigiColorinwardComponent implements OnInit {
   }
 
   SaveInwardData(data: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     if (!data.caseId || data.shadeNoName.length == 0 || !data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -750,6 +798,7 @@ export class DigiColorinwardComponent implements OnInit {
       this.InwardDataModel.shadeNoName = this.InwardDataModel.shadeNoName + ',' + this.InwardDataModel.RemainingShadeIdValue;
       this.InwardDataModel.shadeNoName = this.InwardDataModel.shadeNoName.split(',');
     }
+
     data.competitorData = this.competitorDataSource;
     if (this.customerSubStrate.length > 0 && this.customerContactDetails.length > 0) {
       this.disablesubbtn = true;
@@ -758,13 +807,13 @@ export class DigiColorinwardComponent implements OnInit {
           this.disablesubbtn = false;
           notify({ message: 'Inward Entry SuccessFully ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'success', 2000);
           this.router.navigate(["/digicolor/inward/"]);
-          this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.CheckAllInwardSubmitedByCaseId,{caseId: data.caseId})
+          this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inward_Form.CheckAllInwardSubmitedByCaseId, { caseId: data.caseId })
             .subscribe((res: any) => {
-              if(res.status == 1){
+              if (res.status == 1) {
                 this.sendSMS(data);
               }
             });
-          
+
         });
     }
     else {
@@ -772,13 +821,21 @@ export class DigiColorinwardComponent implements OnInit {
     }
   }
   sendSMS(data: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      return;
+    }
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inward_Form.SMSSendForPostInwardFormData, data)
       .subscribe((res: any) => {
       });
 
   }
   UpdateInwardData(data: any) {
-    
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     if (!data.substrate || !data.process || !data.dischargeability || !data.primarylightSource) {
       notify({ message: 'Please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
       return;
@@ -879,6 +936,11 @@ export class DigiColorinwardComponent implements OnInit {
     this.addCompetitorpopupVisible = false;
   }
   SaveCompetitorData(data: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     if (data.competitorName) {
       this.disablesubbtn = true;
       data.competitorName = data.competitorName.toUpperCase();
@@ -893,6 +955,11 @@ export class DigiColorinwardComponent implements OnInit {
 
   SaveCompetitorProductData(data: any) {
     if (data.productName) {
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.disablesubbtn = true;
       data.productName = data.productName.toUpperCase();
       data['SubmitedByForCompetitor'] = data.submitedby.split('-')[0].trim();
@@ -919,6 +986,11 @@ export class DigiColorinwardComponent implements OnInit {
     }
   }
   OnReportSubmissionDeleted(data: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.DeleteContactDetailById, { id: data.data.id })
       .subscribe((res: any) => {
 

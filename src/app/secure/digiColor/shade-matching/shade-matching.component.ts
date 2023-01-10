@@ -408,6 +408,11 @@ export class ShadeMatchingComponent implements OnInit {
   }
 
   getAllConsginee() {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.Get_All_Consginee, '')
       .subscribe((res: any) => {
         this.allConsigneeData = res.table;
@@ -416,6 +421,11 @@ export class ShadeMatchingComponent implements OnInit {
 
   getAllLabPrediction() {
     // this.loadingVisible = true;
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GetAllCustomerDataForShadeMatching, '')
       .subscribe((res: any) => {
         this.GetAllLabPredictionDataForFilter = res.table;
@@ -517,6 +527,17 @@ export class ShadeMatchingComponent implements OnInit {
     this.popupMoreThanOneOptionMatching = false;
     this.shadeMatchingDataNotAvailable = false;
     this.predictionDataNotAvailabe = false;
+
+    this.ShadeMatchingPdfOption1 = [];
+    this.ShadeMatchingPdfOption2 = [];
+    this.ShadeMatchingPdfOption3 = [];
+    this.ShadeMatchingPdfOption4 = [];
+    
+    this.UpdateAttachmentsOption1 = [];
+    this.UpdateAttachmentsOption2 = [];
+    this.UpdateAttachmentsOption3 = [];
+    this.UpdateAttachmentsOption4 = [];
+
     // this.router.navigate(["/digicolor/shadeMatching/"]);
 
   }
@@ -536,6 +557,11 @@ export class ShadeMatchingComponent implements OnInit {
       shadeId: data.shadeid
     }
     this.shadeId = data.shadeid;
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GerRecipeANDLabTesingParamter, dt)
       .subscribe((res: any) => {
         if (res.table.length > 0) {
@@ -850,6 +876,11 @@ export class ShadeMatchingComponent implements OnInit {
 
   getAllColorGamut() {
     this.allColorGamutData = [];
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(API_CONSTANTS.DigiColor.ShadeMatching.Get_All_Color_Gamut, '')
       .subscribe((res: any) => {
         this.allColorGamutData = res.table;
@@ -872,6 +903,11 @@ export class ShadeMatchingComponent implements OnInit {
     this.loadingVisible = true;
     const dt = {
       shadeId: shadeId
+    }
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
     }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GerRecipeANDLabTesingParamter, dt)
       .subscribe((res: any) => {
@@ -903,6 +939,11 @@ export class ShadeMatchingComponent implements OnInit {
 
   GetShadeIdDetailFromJayChemicalData(dt: any) {
     this.ShadeIdforPassinDataColor = dt;
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(API_CONSTANTS.DigiColor.ShadeMatching.GetShadeIdDetailFromJayChemical, dt)
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
@@ -918,6 +959,11 @@ export class ShadeMatchingComponent implements OnInit {
   }
 
   GetShadeIdDetailFromDataColorData(dt: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(API_CONSTANTS.DigiColor.ShadeMatching.Get_ShadeId_Detail_For_OutwardPrediction, dt)
       .subscribe((res: any) => {
         if (res.table4 && res.table4.length > 0) {
@@ -1096,6 +1142,11 @@ export class ShadeMatchingComponent implements OnInit {
 
   GetShadeMatchingetailFromJayChemicalData(dt: any) {
     this.ShadeIdforPassinDataColor = dt;
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GetShadeMatchingDataFromJayChemical, dt)
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
@@ -1115,6 +1166,11 @@ export class ShadeMatchingComponent implements OnInit {
   }
   GetShadeMatchingDataFromDataColorData(dt: any) {
     this.ShadeIdforPassinDataColor = dt;
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GetShadeMatchingDataFromDataColor, dt)
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
@@ -1192,7 +1248,7 @@ export class ShadeMatchingComponent implements OnInit {
 
         this.chkShadeMatchingOption2 = this.popUpShadeMatchingOption2Data[0].isShowToCustomer;
         this.remarkMatchingOp2 = this.popUpShadeMatchingOption2Data[0].remarks;
-          if (this.popUpShadeMatchingOption2Data[0].fileUploadedName) {
+        if (this.popUpShadeMatchingOption2Data[0].fileUploadedName) {
           this.UpdateAttachmentsOption2 = this.popUpShadeMatchingOption2Data[0].fileUploadedName.split('|');
         }
         if (this.popUpShadeMatchingOption2Data[0].isShowToCustomer == true) {
@@ -1282,6 +1338,11 @@ export class ShadeMatchingComponent implements OnInit {
   getProductInfoDetail(consgineeCode: any) {
     this.loadingVisible = true;
     this.ProductPurchaseInfo = [];
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.ShadeMatching.GerCustomerProductPurchase, { consigneeCode: consgineeCode })
       .subscribe((res: any) => {
         this.ProductPurchaseInfo = res.table;
@@ -1380,6 +1441,11 @@ export class ShadeMatchingComponent implements OnInit {
     this.getRemarksDataforPrediction(popUpPredictionAllData);
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.InsertRecipePrediction, this.popUpPredictionAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
@@ -1393,6 +1459,11 @@ export class ShadeMatchingComponent implements OnInit {
     this.getRemarksDataforPrediction(popUpPredictionAllData);
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UpdateRecipePrediction, this.popUpPredictionAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
@@ -1543,6 +1614,11 @@ export class ShadeMatchingComponent implements OnInit {
   UpdateRecipeAfterUpdatedRecipeFromDataColor(popUpPredictionAllData: any) {
     if (popUpPredictionAllData) {
       this.disableUpdateButton = true;
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.InsertRecipePredictionAfterLatestGetFromDataColor, this.popUpPredictionAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
@@ -1636,7 +1712,11 @@ export class ShadeMatchingComponent implements OnInit {
       popUpShadeMatchingAllData.forEach((element: any) => {
         element.colourGamut = selectedColorGamut;
       });
-
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.Insert_Shade_Matching, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
           this.disableShadeMatchingUpdateButton = false;
@@ -1652,7 +1732,11 @@ export class ShadeMatchingComponent implements OnInit {
       popUpShadeMatchingAllData.forEach((element: any) => {
         element.colourGamut = selectedColorGamut;
       });
-
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UpdateShadeMatchingRecipe, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;
@@ -1720,7 +1804,11 @@ export class ShadeMatchingComponent implements OnInit {
       filesToUpload.forEach(element => {
         formData.append('file', element, element.name);
       });
-
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
         .subscribe((res: any) => {
           this.UpdateAttachmentsOption1 = (res).split('|');
@@ -1732,12 +1820,16 @@ export class ShadeMatchingComponent implements OnInit {
         });
     }
     if (option == 2) {
-      const filesToUpload = <File[]>this.ShadeMatchingPdfOption1;
+      const filesToUpload = <File[]>this.ShadeMatchingPdfOption2;
       const formData = new FormData();
       filesToUpload.forEach(element => {
         formData.append('file', element, element.name);
       });
-
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
         .subscribe((res: any) => {
           this.UpdateAttachmentsOption2 = (res).split('|');
@@ -1749,12 +1841,16 @@ export class ShadeMatchingComponent implements OnInit {
         });
     }
     if (option == 3) {
-      const filesToUpload = <File[]>this.ShadeMatchingPdfOption1;
+      const filesToUpload = <File[]>this.ShadeMatchingPdfOption3;
       const formData = new FormData();
       filesToUpload.forEach(element => {
         formData.append('file', element, element.name);
       });
-
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
         .subscribe((res: any) => {
           this.UpdateAttachmentsOption3 = (res).split('|');
@@ -1766,12 +1862,16 @@ export class ShadeMatchingComponent implements OnInit {
         });
     }
     if (option == 4) {
-      const filesToUpload = <File[]>this.ShadeMatchingPdfOption1;
+      const filesToUpload = <File[]>this.ShadeMatchingPdfOption4;
       const formData = new FormData();
       filesToUpload.forEach(element => {
         formData.append('file', element, element.name);
       });
-
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.UploadShadeMatchingPdf, formData)
         .subscribe((res: any) => {
           this.UpdateAttachmentsOption4 = (res).split('|');
@@ -1792,6 +1892,11 @@ export class ShadeMatchingComponent implements OnInit {
       popUpShadeMatchingAllData.forEach((element: any) => {
         element.colourGamut = selectedColorGamut;
       });
+      var a = window.navigator.onLine;
+      if (a == false) {
+        notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+        return;
+      }
       this.apiService.post(API_CONSTANTS.DigiColor.ShadeMatching.InsertShadeMatchingAfterLatestGetFromDataColor, this.popUpShadeMatchingAllData)
         .subscribe((res: any) => {
           this.disableUpdateButton = false;

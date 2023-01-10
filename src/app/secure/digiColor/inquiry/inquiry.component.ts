@@ -87,6 +87,11 @@ export class InquiryComponent implements OnInit {
   }
 
   getAgentListData() {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.Getconsigneecustomer_DetailData, '')
       .subscribe((res: any) => {
         this.cosigneeNameCodeList = res.table1;
@@ -166,6 +171,11 @@ export class InquiryComponent implements OnInit {
   }
 
   GetConsigneeDetails(data: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetConsigneeAddressDetails, { consigneeCode: data })
       .subscribe((res: any) => {
         this.consigneeContactDetail = res.table1;
@@ -223,6 +233,11 @@ export class InquiryComponent implements OnInit {
   }
 
   SaveInquiryDataForm(data: any, da: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     data.saveOrSubmit = da;
     let isreportSendClickorNot = this.consigneeContactDetail.filter((da: any) => da.isReportSend == true);
     if (isreportSendClickorNot.length == 0) {
@@ -271,6 +286,7 @@ export class InquiryComponent implements OnInit {
       data.assignToRunner = tempassignToRunnerCode;
       this.disablesubbtn = true;
     }
+
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.PostInquiryFormData, data)
       .subscribe((res: any) => {
         this.disablesubbtn = false;
@@ -286,15 +302,23 @@ export class InquiryComponent implements OnInit {
       });
   }
   SendSMS(data: any) {
-    
-    data.consumerName = data.consumerName.substring(0,34);
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
+    data.consumerName = data.consumerName.substring(0, 34);
     this.apiService.post(this.API_CONSTANTS.DigiColor.Inquiry_Form.SMSSendForPostInquiryFormData, data)
       .subscribe((res: any) => {
       });
   }
   UpdateInquiryDataForm(data: any, da: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     data.saveOrSubmit = da;
-    
     data.createdBy = this.UserId;
     if (!data.addressForVisit || !data.cityForVisit || !data.stateCodeForVisit || !data.postCodeForVisit || !data.requirementValue) {
       notify({ message: 'please fill all Mandtory field ', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
@@ -364,6 +388,11 @@ export class InquiryComponent implements OnInit {
   }
 
   GetallInquiryListData() {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetAllInquiryData, '')
       .subscribe((res: any) => {
         this.showR1Grid = false;
@@ -378,6 +407,11 @@ export class InquiryComponent implements OnInit {
   }
 
   getInqGridDataListbyId(val: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.GetDataByCaseIdData, { caseid: val })
       .subscribe((res: any) => {
         if (res.table && res.table.length > 0) {
@@ -433,12 +467,17 @@ export class InquiryComponent implements OnInit {
   }
   customerRequirementValueChange(da: any) {
     if (da && da.value) {
-      
+
       this.inquiryForm.requirementValue = da.value.toString();
     }
 
   }
   OnReportSubmissionDeleted(data: any) {
+    var a = window.navigator.onLine;
+    if (a == false) {
+      notify({ message: 'Your Internet Connection is not available. please connect Internet.', position: { at: 'center', my: 'center', offset: '0 -25' }, width: 300 }, 'error', 2000);
+      return;
+    }
     this.apiService.getAll(this.API_CONSTANTS.DigiColor.Inquiry_Form.DeleteContactDetailById, { id: data.data.id })
       .subscribe((res: any) => {
       });
